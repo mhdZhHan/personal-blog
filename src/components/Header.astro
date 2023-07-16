@@ -1,0 +1,91 @@
+<header class="header wrapper">
+    <div class="header__container">
+        <a class="header__container__logo" href="/">
+            <div class="header__container__logo__logo-container">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke-width="1.5" stroke-linecap="round" 
+                    stroke-linejoin="round">
+                    <path d="M0 0h24v24H0z" stroke="none">
+                        </path><rect x="3" y="12" width="6" height="8" rx="1">
+                        </rect><rect x="9" y="8" width="6" height="12" rx="1">
+                        </rect><rect x="15" y="4" width="6" height="16" rx="1">
+                        </rect><path d="M4 20h14">
+                    </path>
+                </svg>
+                Mohammed's Blog
+            </div>
+        </a>
+
+        <nav class="header__container__menu">
+            <ul>
+                <li><a href="#">Blogs</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Donate</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<style lang="scss">
+    .header {
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+            gap: .75rem;
+
+            @media all and (max-width: 640px) {
+                flex-direction: column;
+                justify-content: initial;
+                align-items: initial;
+            }
+            .header__container__logo {
+                display: block;
+                .header__container__logo__logo-container {
+                    color: transparent;
+                    font-weight: 700;
+                    font-size: 1.25rem;
+                    line-height: 1.75rem;
+
+                    background: var(--text-gradient);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+
+                    display: flex;
+                    align-items: center;
+
+                    svg {
+                        display: block;
+                        stroke: #0891b2;
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        margin-right: .25rem;
+                        vertical-align: middle;
+                    }
+                }
+            }
+
+            .header__container__menu {
+                ul {
+                    list-style: none;
+                    font-weight: 500;
+
+                    display: flex;
+                    column-gap: .75rem;
+                    li {
+                        a {
+                            color: var(--text-color);
+                            &:hover {
+                                color: rgb(255 255 255 / 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+</style>

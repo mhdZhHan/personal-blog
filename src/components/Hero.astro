@@ -1,0 +1,84 @@
+<section id="hero">
+    <div class="wrapper">
+        <div class="hero-container">
+            <div class="hero-container__left">
+                <h1 class="section-title">Hi there, I'm <span>Mohammed</span> 👋</h1>
+                <p>
+                    I am Mohammed, a self-taught programmer who loves to make & tinker with things
+                </p>
+
+                <ul class="hero-container__left__socil-medias">
+                    <li><a href="#">
+                        <img src="/images/twitter-icon.png" alt="twitter" />
+                    </a></li>
+                    <li><a href="#">
+                        <img src="/images/twitter-icon.png" alt="instagram" />
+                    </a></li>
+                    <li><a href="#">
+                        <img src="/images/twitter-icon.png" alt="linkdin" />
+                    </a></li>
+                    <li><a href="#">
+                        <img src="/images/twitter-icon.png" alt="github" />
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="hero-container__right">
+                <img src="/images/avatar.svg" alt="avatar" loading="lazy" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    .hero-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 6rem;
+
+        @media all and (max-width: 768px) {
+            flex-direction: column;
+            justify-content: initial;
+            column-gap: normal;
+        }
+        .hero-container__left {
+            h1 {
+                span {
+                    color: transparent;
+                    background: var(--text-gradient);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                }
+            }
+
+            p {
+                line-height: 2.25rem;
+                font-size: 1.25rem;
+                margin-top: 1.5rem;
+            }
+            .hero-container__left__socil-medias {
+                display: flex;
+                gap: .25rem;
+                margin-top: .75rem;
+                li a {
+                    display: block;
+                    img {
+                        display: block;
+                        width: 3rem;
+                        height: 3rem;
+
+                    }
+                }
+            }
+        }
+        .hero-container__right {
+            flex-shrink: 0;
+            img {
+                display: block;
+                width: 16rem;
+                height: 20rem;
+            }
+        }
+    }
+</style>

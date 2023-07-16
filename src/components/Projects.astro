@@ -1,0 +1,181 @@
+<section id="projects">
+    <div class="wrapper">
+        <div class="projects-head">
+            <h3 class="section-sub-title">
+                Recent <span>Projects</span>
+            </h3>
+        </div>
+
+        <ul class="projects-container">
+            <li class="projects-container__project">
+                <div class="projects-container__project__thumbnail-container">
+                    <img src="/images/project-maps.png" alt="thumbnail" />
+                </div>
+
+                <div class="projects-container__project__content">
+                    <div class="projects-container__project__content__haed">
+                        <a href="#" class="project-title">Hello world</a>
+
+                        <ul class="project-tags">
+                            <li class="astro"><a href="#">#astro</a></li>
+                            <li class="blog"><a href="#">#blog</a></li>
+                            <li class="css"><a href="#">#css</a></li>
+                            <li class="js"><a href="#">#javascript</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="projects-container__project__content__body">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Deserunt, mollitia corporis veniam ex ipsum dignissimos.
+                        </p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="projects-container__project">
+                <div class="projects-container__project__thumbnail-container">
+                    <img src="/images/project-web-design.png" alt="thumbnail" />
+                </div>
+
+                <div class="projects-container__project__content">
+                    <div class="projects-container__project__content__haed">
+                        <a href="#" class="project-title">Hello world</a>
+
+                        <ul class="project-tags">
+                            <li class="astro"><a href="#">#astro</a></li>
+                            <li class="blog"><a href="#">#blog</a></li>
+                            <li class="css"><a href="#">#css</a></li>
+                            <li class="js"><a href="#">#javascript</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="projects-container__project__content__body">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Deserunt, mollitia corporis veniam ex ipsum dignissimos.
+                        </p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="projects-container__project">
+                <div class="projects-container__project__thumbnail-container">
+                    <img src="/images/project-fire.png" alt="thumbnail" />
+                </div>
+
+                <div class="projects-container__project__content">
+                    <div class="projects-container__project__content__haed">
+                        <a href="#" class="project-title">Hello world</a>
+
+                        <ul class="project-tags">
+                            <li class="astro"><a href="#">#astro</a></li>
+                            <li class="blog"><a href="#">#blog</a></li>
+                            <li class="css"><a href="#">#css</a></li>
+                            <li class="js"><a href="#">#javascript</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="projects-container__project__content__body">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Deserunt, mollitia corporis veniam ex ipsum dignissimos.
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<style lang="scss">
+    .projects-head {
+        h3 {
+            span {
+                color: transparent;
+                background: var(--text-gradient);
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+        }
+    }
+
+    .projects-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        .projects-container__project {
+            display: flex;
+            align-items: center;
+            column-gap: 2rem;
+
+            padding: .75rem;
+            border-radius: .375rem;
+            background: var(--secondary);
+
+            @media all and (max-width: 768px) {
+                flex-direction: column;
+            }
+            .projects-container__project__thumbnail-container {
+                flex-shrink: 0;
+                img {
+                    display: block;
+                    width: 9rem;
+                    height: 9rem;
+                    object-fit: contain;
+                }
+            }
+
+            .projects-container__project__content {
+                .projects-container__project__content__haed {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    row-gap: .5rem;
+
+                    @media all and (max-width: 768px) {
+                        flex-direction: column;
+                    }
+                    .project-title {
+                        display: block;
+                        font-weight: 600;
+                        font-size: 1.25rem;
+                        line-height: 1.75rem;
+                        color: inherit;
+
+                        &:hover {
+                            color: var(--tertiary);
+                        }
+                    }
+
+                    .project-tags {
+                        display: flex;
+                        gap: .5rem;
+                        margin-left: .75rem;
+                        li  {
+                            padding: .25rem .5rem;
+                            border-radius: .375rem;
+                            background-color: aqua;
+                            color: #000;
+                            a {
+                                display: block;
+                                font-weight: 600;
+                                font-size: .75rem;
+                                line-height: 1rem;
+                                text-transform: capitalize;
+                                color: inherit;
+                            }
+                        }
+                    }
+                }
+
+                .projects-container__project__content__body {
+                    p {
+                        margin-top: .75rem;
+                        color: var(--gray);
+                    }
+                }
+            }
+        }
+    }
+</style>

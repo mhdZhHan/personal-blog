@@ -21,11 +21,14 @@ const { title } = Astro.props
 	</body>
 </html>
 
-<style is:global>
+<style is:global lang="scss">
 	:root {
 		--primary: rgb(15 23 42 / 1);
+		--secondary: rgb(30 41 59 / 1);
+		--tertiary: rgb(34 211 238 / 1);
 		--text-color: rgb(243 244 246 / 1);
-		--text-gradient: linear-gradient(to bottom right,#0ea5e9, #22d3ee, rgb(14 165 233 / 0));
+		--gray: rgb(156 163 175 / 1);
+		--text-gradient: linear-gradient(to bottom right, #0ea5e9, #22d3ee, rgb(14 165 233 / 0));
 		
 		--accent: 124, 58, 237;
 		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
@@ -66,6 +69,65 @@ const { title } = Astro.props
 	}
 
 	.section-sub-title {
+		font-weight: 700;
+		font-size: 1.5rem;
+		line-height: 2rem;
+		margin-bottom: 1.5rem;
+	}
 
+	// Tags color
+	.astro, .Astro {
+		background: #da62c4 !important;
+		color: #fff !important;
+	}
+
+	.js, .javascript, .Javascript {
+		background-color: #f0db4f !important;
+		color: #12181a !important;
+	}
+
+	.react, .React {
+		background-color: #61DBFB !important;
+		color: #12181a !important;
+	}
+
+	.python, .py, .Python {
+		background-color: #306998 !important;
+		color: #fff !important;
+	}
+
+	.html, .HTML {
+		background-color: #E34C26 !important;
+		color: #12181a !important;
+	}
+
+	.css, .CSS {
+		background-color: #2965f1 !important;
+		color: #fff !important;
+	}
+
+	.scss, .SCSS, .sass, .SASS {
+		background-color: #c69 !important;
+		color: #12181a !important;
+	}
+
+	.node, .nodejs, .Nodejs, .NodeJs {
+		background-color: #3c873a !important;
+		color: #fff !important;
+	}
+
+	.django, .Django {
+		color: #fff;
+		background: #092e20;
+	}
+
+	.postgresql, .postgres, .Postgres, .Postgresql {
+		color: #fff;
+		background: #31648c;
+	}
+
+	.blogger, .Blogger {
+		color: #092e20;
+		background: tomato;
 	}
 </style>

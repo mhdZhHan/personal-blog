@@ -1,4 +1,9 @@
 ---
+import Header from '../components/common/Header.astro'
+import Newsletter from '../components/common/Newsletter.astro'
+import Footer from '../components/common/Footer.astro'
+
+
 interface Props {
 	title: string
 }
@@ -17,7 +22,10 @@ const { title } = Astro.props
 		<title>{title}</title>
 	</head>
 	<body>
+		<Header />
 		<slot />
+		<Newsletter />
+		<Footer />
 	</body>
 </html>
 

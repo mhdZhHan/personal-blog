@@ -24,11 +24,12 @@
     }
     a {
         display: block;
+        overflow: hidden;
         color: inherit;
         text-decoration: inherit;
         background-color: var(--secondary);
-        border-radius: .375rem;
-        overflow: hidden;
+        border-radius: .4rem;
+        border: 2px solid var(--border-color);
         .post-card__thumbnail-container {
             position: relative;
             padding-bottom: calc(2 / 3 * 100%);
@@ -50,6 +51,7 @@
             padding-left: .75rem;
             padding-right: .75rem;
             .title {
+                color: var(--title-text);
                 font-weight: 600;
                 font-size: 1.25rem;
                 line-height: 1.75rem;

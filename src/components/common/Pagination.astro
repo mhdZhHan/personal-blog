@@ -5,13 +5,13 @@ const { prevUrl, nextUrl } = Astro.props
 <div class="pagination-container">
     {
         prevUrl && (
-            <a href={nextUrl}>← Newer Posts</a>
+            <a href={prevUrl}>← Newer Posts</a>
         )
     }
 
     {
         nextUrl && (
-            <a href={prevUrl}>Older Posts →</a>
+            <a href={nextUrl}>Older Posts →</a>
         )
     }
 </div>

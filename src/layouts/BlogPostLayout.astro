@@ -1,16 +1,81 @@
 ---
-import '../styles/fonts.scss'
-import '../styles/tags.scss'
-
 import Layout from './Layout.astro'
 
-interface Props {
-	title: string
-}
-
-const { title } = Astro.props
+const { frontmatter } = Astro.props
+const { title, pubDate, image } = frontmatter
 ---
 
-<Layout title='hello'>
+<Layout title={frontmatter.title}>
+    <section id="blog-post">
+        <div class="wrapper">
+            <div class="wrapper">
+                <div class="blog-post-head">
+                    <h1 class="blog-post-head__title">{title}</h1>
+                    <div class="blog-post-head__meta">
+                        <span class="blog-post-head__meta__author">Mohammed</span>
+                        <span class="blog-post-head__meta__date">{pubDate}</span>
+                    </div>
+                </div>
+    
+                <div class="blog-post-body">
+                    <div class="blog-post-body__thumbnail">
+                        <img src={image.url} alt={title} loading="lazy" />
+                    </div>
 
+                    <div class="blog-post-body__content">
+                        <slot />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </Layout>
+
+<style lang="scss">
+    .blog-post-head {
+        .blog-post-head__title {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .blog-post-head__meta {
+            font-size: .875rem;
+            line-height: 1.25rem;
+            color: var(--gray);
+            text-align: center;
+            margin-top: .5rem;
+            .blog-post-head__meta__author {
+
+            }
+            .blog-post-head__date {
+
+            }
+        }
+    }
+
+    .blog-post-body {
+        max-width: 65ch;
+        margin: 1.25rem auto;
+        .blog-post-body__thumbnail {
+            position: relative;
+            padding-bottom: calc(2 / 3 * 100%);
+            margin: 0 auto;
+            img {
+                display: block;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+
+                position: absolute;
+                inset: 0;
+                border-radius: .5rem;
+            }
+        }
+        .blog-post-body__content {
+            margin-top: 2rem;
+            color: var(--text-color);
+            max-width: 65ch;
+        }
+    }
+</style>

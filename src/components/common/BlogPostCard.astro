@@ -1,9 +1,10 @@
 ---
-const { title, description, pubDate, image } = Astro.props
+const { title, description, pubDate, image, url } = Astro.props
+console.log('Hello',Astro.props)
 ---
 
 <li class="post-card">
-    <a href="#">
+    <a href={url}>
         <div class="post-card__thumbnail-container">
             <img src={image.url} alt={title} />
         </div>

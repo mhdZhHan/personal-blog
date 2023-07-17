@@ -41,17 +41,17 @@ const tags = [...new Set(posts.map((post) => post.frontmatter.tags).flat())];
         .tags-container__tags {
             display: flex;
             flex-wrap: wrap;
-            gap: .5rem;
+            gap: 1rem;
             margin-left: .75rem;
             .tags-container__tags__tag {
-                padding: .25rem .5rem;
-                border-radius: .375rem;
-                background-color: aqua;
-                color: #000;
+                padding: 0.3rem 1rem;
+                border-radius: 0.2rem;
+                background-color: #454e56;
+                color: var(--title-text);
                 a {
                     display: block;
                     font-weight: 600;
-                    font-size: .75rem;
+                    font-size: 1rem;
                     line-height: 1rem;
                     text-transform: capitalize;
                     color: inherit;

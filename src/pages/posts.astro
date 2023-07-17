@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro'
+import BlogPostCard from '../components/common/BlogPostCard.astro'
+import Pagination from '../components/common/Pagination.astro'
+---
+
+<Layout title="mohammedsh blog | Posts">
+    <section id="blogs">
+        <div class="wrapper">
+            <div class="blogs-head">
+                <h1 class="blogs-head__title">Blog Posts</h1>
+                <p class="blogs-head__sub-title">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+            </div>
+
+            <ul class="blog-posts">
+                <BlogPostCard />
+                <BlogPostCard />
+                <BlogPostCard />
+                <BlogPostCard />
+                <BlogPostCard />
+                <BlogPostCard />
+            </ul>
+
+            <div class="blogs-footer">
+                <Pagination />
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+    .blogs-head {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        .blogs-head__title {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+        }
+        .blogs-head__sub-title {
+            margin-top: .75rem;
+            color: var(--gray);
+        }
+    }
+
+    .blog-posts {
+        padding: 1.5rem 0;
+        display: grid;
+        grid-template-columns: repeat(3,minmax(0,1fr));
+        gap: 1.5rem;
+
+        @media all and (max-width: 768px) {
+            grid-template-columns: repeat(1,minmax(0,1fr));
+        }
+    }
+
+    .blogs-footer {
+        padding: 1.5rem 0;
+    }
+</style>

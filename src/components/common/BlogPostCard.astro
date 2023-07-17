@@ -1,0 +1,66 @@
+<li class="post-card">
+    <a href="#">
+        <div class="post-card__thumbnail-container">
+            <img src="/images/image-post2.jpeg" alt="" />
+        </div>
+
+        <div class="post-card__body">
+            <h2 class="title">Hello world post1</h2>
+            <span class="date">Feb 6, 2020</span>
+            <p class="body-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Tenetur vero esse non molestias eos excepturi.
+            </p>
+        </div>
+    </a>
+</li>
+
+<style lang="scss">
+.post-card {
+    a {
+        display: block;
+        color: inherit;
+        text-decoration: inherit;
+        background-color: var(--secondary);
+        border-radius: .375rem;
+        overflow: hidden;
+        .post-card__thumbnail-container {
+            position: relative;
+            padding-bottom: calc(2 / 3 * 100%);
+            img {
+                display: block;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+
+                position: absolute;
+                inset: 0;
+            }
+        }
+
+        .post-card__body {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            padding-top: 1rem;
+            padding-left: .75rem;
+            padding-right: .75rem;
+            .title {
+                font-weight: 600;
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+            }
+            .date {
+                display: block;
+                font-size: .75rem;
+                line-height: 1rem;
+                color: var(--gray);
+            }
+            .body-text {
+                font-size: .875rem;
+                line-height: 1.25rem;
+                margin-top: .5rem;
+            }
+        }
+    }
+}
+</style>

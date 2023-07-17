@@ -5,7 +5,7 @@ import Projects from '../components/home/Projects.astro'
 import Posts from '../components/home/Posts.astro'
 
 // utils
-import { sortByDate } from '../utils/Posts'
+import { sortByDate } from '../utils'
 
 const posts = await Astro.glob("./posts/*.md")
 const sortedPosts = sortByDate(posts);

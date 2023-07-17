@@ -4,7 +4,7 @@ import BlogPostCard from '../../components/common/BlogPostCard.astro'
 import Pagination from '../../components/common/Pagination.astro'
 
 // utils
-import { sortByDate } from '../../utils/Posts'
+import { sortByDate } from '../../utils'
 
 export async function getStaticPaths({ paginate }) {
     const posts = await Astro.glob("../posts/*.md")

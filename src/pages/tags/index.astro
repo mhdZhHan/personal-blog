@@ -40,6 +40,7 @@ const tags = [...new Set(posts.map((post) => post.frontmatter.tags).flat())];
     .tags-container {
         .tags-container__tags {
             display: flex;
+            flex-wrap: wrap;
             gap: .5rem;
             margin-left: .75rem;
             .tags-container__tags__tag {

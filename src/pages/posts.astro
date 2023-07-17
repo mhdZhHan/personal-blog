@@ -2,6 +2,19 @@
 import Layout from '../layouts/Layout.astro'
 import BlogPostCard from '../components/common/BlogPostCard.astro'
 import Pagination from '../components/common/Pagination.astro'
+
+// utils
+import { sortByDate } from '../utils/Posts'
+
+export async function getStaticPaths({ paginate }) {
+    const posts = await Astro.glob("../pages/posts/*.md")
+    const sortedPosts = sortByDate(posts)
+
+    // Return a paginated collection of paths for all posts
+    return paginate(sortedPosts, { pageSize: 6 })
+}
+
+const { page } = Astro.props
 ---
 
 <Layout title="mohammedsh blog | Posts">
@@ -16,15 +29,12 @@ import Pagination from '../components/common/Pagination.astro'
 
             <ul class="blog-posts">
                 <BlogPostCard />
-                <BlogPostCard />
-                <BlogPostCard />
-                <BlogPostCard />
-                <BlogPostCard />
-                <BlogPostCard />
             </ul>
 
             <div class="blogs-footer">
-                <Pagination />
+                {page.data.map((post) => (
+                    <Pagination />
+                ))}
             </div>
         </div>
     </section>

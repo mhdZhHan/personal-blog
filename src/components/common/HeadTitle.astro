@@ -1,0 +1,38 @@
+---
+const { t1, t2, url } = Astro.props
+---
+
+<div class="head-title">
+    <h3 class="section-sub-title">
+        {t1} <span>{t2}</span>
+    </h3>
+
+    <div class="view-all">
+        <a href={url}>View all Posts →</a>
+    </div>
+</div>
+
+<style lang="scss">
+    .head-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .view-all {
+            font-size: .875rem;
+            line-height: 1.25rem;
+            a {
+                transition: all .2s ease-in;
+                display: block;
+                font-size: inherit;
+                color: inherit;
+                font-weight: 700;
+                font-size: 1rem;
+
+                &:hover {
+                    color: var(--primary);
+                }
+            }
+        }
+    }
+</style>

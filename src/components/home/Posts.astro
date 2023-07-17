@@ -1,22 +1,21 @@
 ---
-import BlogPostCard from "../common/BlogPostCard.astro";
+import BlogPostCard from "../common/BlogPostCard.astro"
+import HeadTitle from '../common/HeadTitle.astro'
+
+const { posts } = Astro.props
 ---
 <section id="posts">
     <div class="wrapper">
-        <div class="posts-head">
-            <h3 class="section-sub-title">
-                Recent <span>Posts</span>
-            </h3>
-
-            <div class="view-all">
-                <a href="/posts">View all Posts →</a>
-            </div>
-        </div>
+        <HeadTitle t1="Recent" t2="Projects" url="/projects" />
 
         <ul class="posts-container">
-            <BlogPostCard />
-            <BlogPostCard />
-            <BlogPostCard />
+            {
+                posts.map((post) => (
+                    <BlogPostCard 
+                        {...post.frontmatter}/
+                    />
+                ))
+            }
         </ul>
     </div>
 </section>

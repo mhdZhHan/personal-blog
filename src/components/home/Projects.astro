@@ -1,19 +1,11 @@
 ---
 import ProjectCard from '../projects/ProjectCard.astro'
+import HeadTitle from '../common/HeadTitle.astro'
 ---
 
 <section id="projects">
     <div class="wrapper">
-        <div class="projects-head">
-            <h3 class="section-sub-title">
-                Recent <span>Projects</span>
-            </h3>
-
-            <div class="view-all">
-                <a href="/projects">View all Posts →</a>
-            </div>
-        </div>
-
+        <HeadTitle t1="Recent" t2="Projects" url="/projects" />
         <ul class="projects-container">
             <ProjectCard />
             <ProjectCard />
@@ -23,29 +15,6 @@ import ProjectCard from '../projects/ProjectCard.astro'
 </section>
 
 <style lang="scss">
-    .projects-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .view-all {
-            font-size: .875rem;
-            line-height: 1.25rem;
-            a {
-                transition: all .2s ease-in;
-                display: block;
-                font-size: inherit;
-                color: inherit;
-                font-weight: 700;
-                font-size: 1rem;
-
-                &:hover {
-                    color: var(--primary);
-                }
-            }
-        }
-    }
-
     .projects-container {
         display: flex;
         flex-direction: column;

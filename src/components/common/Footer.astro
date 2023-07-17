@@ -1,9 +1,31 @@
 <footer>
     <div class="wrapper">
-
+        <div class="footer-content">
+            <p>
+                Copyright © 2023 Mohammed’s Blog Created with 
+                <a href="https://astro.build/" class="astro-label" target="_blank">astro</a> 
+                by Mohammed.
+            </p>
+        </div>
     </div>
 </footer>
 
 <style lang="scss">
+    .footer-content {
+        padding-top: 1.25rem;
+        border-color: rgb(75 85 99 / 1);
+        border-top-width: 1px;
+        border-top-style: solid;
+        p {
+            font-size: .875rem;
+            line-height: 1.25rem;
+            a {
+                font-size: inherit;
+                line-height: inherit;
+                &.astro-lebel {
 
+                }
+            }
+        }
+    }
 </style>

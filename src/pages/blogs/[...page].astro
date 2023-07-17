@@ -39,7 +39,10 @@ page.data.map((post) => {
             </ul>
 
             <div class="blogs-footer">
-                <Pagination />
+                <Pagination 
+                    prevUrl={page.url.prev}
+                    nextUrl={page.url.next}
+                />
             </div>
         </div>
     </section>

@@ -7,7 +7,7 @@ author: "Mohammed"
 image:
   url: "/images/image-post.jpeg"
   alt: "The Astro logo with the word One."
-tags: ["astro", "blogging", "learning in public"]
+tags: ["astro", "blogging", "learning in public", "go", "c", "java"]
 ---
 
 # My First Blog Post

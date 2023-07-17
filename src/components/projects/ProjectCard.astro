@@ -1,0 +1,110 @@
+<li class="project-card">
+    <div class="project-card__thumbnail-container">
+        <img src="/images/project-maps.png" alt="thumbnail" />
+    </div>
+
+    <div class="project-card__content">
+        <div class="project-card__content__haed">
+            <a href="#" class="project-title">Hello world</a>
+
+            <ul class="project-tags">
+                <li class="astro"><a href="#">#astro</a></li>
+                <li class="blog"><a href="#">#blog</a></li>
+                <li class="css"><a href="#">#css</a></li>
+                <li class="js"><a href="#">#javascript</a></li>
+            </ul>
+        </div>
+
+        <div class="project-card__content__body">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Deserunt, mollitia corporis veniam ex ipsum dignissimos.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Deserunt, mollitia corporis veniam ex ipsum dignissimos.
+            </p>
+        </div>
+    </div>
+</li>
+
+<style lang="scss">
+    .project-card {
+        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
+
+        display: flex;
+        align-items: center;
+        column-gap: 2rem;
+
+        padding: .75rem;
+        border-radius: .375rem;
+        background: var(--secondary);
+
+        @media all and (max-width: 768px) {
+            flex-direction: column;
+        }
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
+        }
+        .project-card__thumbnail-container {
+            flex-shrink: 0;
+            img {
+                display: block;
+                width: 9rem;
+                height: 9rem;
+                object-fit: contain;
+            }
+        }
+
+        .project-card__content {
+            .project-card__content__haed {
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                row-gap: .5rem;
+
+                @media all and (max-width: 768px) {
+                    flex-direction: column;
+                }
+                .project-title {
+                    display: block;
+                    font-weight: 600;
+                    font-size: 1.25rem;
+                    line-height: 1.75rem;
+                    color: inherit;
+
+                    &:hover {
+                        color: var(--tertiary);
+                    }
+                }
+
+                .project-tags {
+                    display: flex;
+                    gap: .5rem;
+                    margin-left: .75rem;
+                    li  {
+                        padding: .25rem .5rem;
+                        border-radius: .375rem;
+                        background-color: aqua;
+                        color: #000;
+                        a {
+                            display: block;
+                            font-weight: 600;
+                            font-size: .75rem;
+                            line-height: 1rem;
+                            text-transform: capitalize;
+                            color: inherit;
+                        }
+                    }
+                }
+            }
+
+            .project-card__content__body {
+                p {
+                    margin-top: .75rem;
+                    color: var(--gray);
+                }
+            }
+        }
+    }
+</style>

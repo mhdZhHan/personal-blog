@@ -17,6 +17,11 @@
 
 <style lang="scss">
 .post-card {
+    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
+    }
     a {
         display: block;
         color: inherit;

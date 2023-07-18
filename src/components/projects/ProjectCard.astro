@@ -1,136 +1,117 @@
 ---
-const { name, description, tags, source_code_link, image } = Astro.props
+const { name, description, tags, source_code_link } = Astro.props
 ---
 
 <li class="project-card">
-    <div class="project-card__thumbnail-container">
-        {image ? (
-            <img src={image} alt="project-logo" loading="lazy" />
-        ): (
-            <img src="/images/code-dir.png" alt="project-logo" loading="lazy" />
-        )}
-    </div>
+    <h1 class="project-card__title">
+        <span class="repo"><img src="/icons/repo.svg" alt="repo" /></span>
+        <a href="#">{name}</a>
+    </h1>
 
-    <div class="project-card__content">
-        <div class="project-card__content__haed">
-            <a href="#" class="project-title">{name}</a>
+    <p class="project-card__description">{description}</p>
 
-            <ul class="project-tags">
-                {tags.map((tag) => (
-                    <li class={tag}><a href="#">#{tag}</a></li>
-                ))}
-            </ul>
-        </div>
+    <nav class="project-card__links">
+        <a href="" target="_blank">Demo</a>
+        <a href={source_code_link} target="_blank">Code</a>
+    </nav>
 
-        <div class="project-card__content__body">
-            <p>{description}</p>
-        </div>
-    </div>
-
-    <div class="project-links">
-        <a href={source_code_link} class="github" target="_blank">
-            <img src="/images/github_.png" alt="github" />
-        </a>
-    </div>
+    <ul class="project-card__tags">
+        {tags.map((tag) => (
+             <li class="tag">
+                <span class={`label ${tag}`}></span>
+                <a>{tag}</a>
+            </li>
+        ))}
+    </ul>
 </li>
 
 <style lang="scss">
     .project-card {
-        position: relative;
-        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
+        border: 1px solid;
+        border-color: var(--border-color);
+        border-radius: .3rem;
+        padding: .5rem;
 
+        transition: all .15s cubic-bezier(.4,0,.2,1);
+        
         display: flex;
-        align-items: center;
-        column-gap: 2rem;
-
-        padding: .75rem;
-        border-radius: .375rem;
-        background: var(--secondary);
-        border: 2px solid var(--border-color);
-
-        @media all and (max-width: 768px) {
-            flex-direction: column;
-        }
+        flex-direction: column;
+        justify-content: space-between;
 
         &:hover {
-            transform: translateY(-5px);
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
-        }
-        .project-card__thumbnail-container {
-            flex-shrink: 0;
-            img {
-                display: block;
-                width: 7rem;
-                height: 7rem;
-                object-fit: contain;
-            }
+            border-color: var(--primary);
         }
 
-        .project-card__content {
-            .project-card__content__haed {
-                display: flex;
-                align-items: center;
-                flex-direction: row;
-                row-gap: .5rem;
-
-                @media all and (max-width: 768px) {
-                    flex-direction: column;
-                }
-                .project-title {
-                    display: block;
-                    font-weight: 600;
-                    font-size: 1.25rem;
-                    line-height: 1.75rem;
-                    color: var(--title-text);
-
-                    &:hover {
-                        color: var(--primary);
-                    }
-                }
-
-                .project-tags {
-                    display: flex;
-                    gap: .5rem;
-                    margin-left: .75rem;
-                    li  {
-                        padding: .25rem .5rem;
-                        border-radius: 0.2rem;
-                        background-color: #454e56;
-                        color: var(--title-text);
-                        a {
-                            display: block;
-                            font-weight: 600;
-                            font-size: .75rem;
-                            line-height: 1rem;
-                            text-transform: capitalize;
-                            color: inherit;
-                        }
-                    }
-                }
-            }
-
-            .project-card__content__body {
-                p {
-                    margin-top: .75rem;
-                    color: var(--gray);
-                }
-            }
-        }
-
-        .project-links {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-
+        .project-card__title {
             display: flex;
             align-items: center;
+            margin-bottom: .4rem;
+
             a {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--primary);
+            }
+
+            span {
                 display: block;
+                margin-right: .8rem;
                 img {
                     display: block;
-                    width: 1.5rem;
-                    height: 1.5rem;
-                    object-fit: contain;
+                    filter: invert(1);
+                }
+            }
+        }
+
+        .project-card__description {
+            font-size: 1rem;
+            margin-bottom: .4rem;
+        }
+
+        .project-card__links {
+            width: 100%;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            margin-bottom: .4rem;
+            a {
+                display: block;
+                margin-right: 0;
+                padding: 0 .7rem;
+                border: 3px solid transparent;
+
+                font-size: .9rem;
+                font-weight: 600;
+                color: var(--primary);
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .project-card__tags {
+            display: flex;
+            align-items: center;
+            .tag {
+                margin-right: .9rem;
+
+                display: flex;
+                align-items: center;
+                span.label {
+                    display: block;
+                    width: .7rem;
+                    height: .7rem;
+                    border-radius: 50%;
+                    margin-right: .60rem;
+                    background-color: #531042;
+                }
+                a {
+                    display: block;
+                    font-size: .9rem;
+                    font-weight: 600;
+                    color: var(--primary);
                 }
             }
         }

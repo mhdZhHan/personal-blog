@@ -13,6 +13,7 @@ const { posts } = Astro.props
                 posts.map((post) => (
                     <BlogPostCard 
                         {...post.frontmatter}
+                        url={post.url}
                     />
                 ))
             }

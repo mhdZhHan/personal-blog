@@ -32,8 +32,9 @@ page.data.map((post) => {
 
             <ul class="blog-posts">
                 {page.data.map((post) => (
-                    <BlogPostCard 
+                    <BlogPostCard s
                         {...post.frontmatter}
+                        url={post.url}
                     />
                 ))}
             </ul>

@@ -7,7 +7,7 @@ import Posts from '../components/home/Posts.astro'
 // utils
 import { sortByDate } from '../utils'
 
-const posts = await Astro.glob("./posts/*.md")
+const posts = await Astro.glob("./posts/*.mdx")
 const sortedPosts = sortByDate(posts);
 const lastThreePosts = sortedPosts.slice(0, 3)
 ---

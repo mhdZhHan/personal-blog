@@ -7,7 +7,7 @@ import Pagination from '../../components/common/Pagination.astro'
 import { sortByDate } from '../../utils'
 
 export async function getStaticPaths({ paginate }) {
-    const posts = await Astro.glob("../posts/*.md")
+    const posts = await Astro.glob("../posts/*.mdx")
     const sortedPosts = sortByDate(posts)
 
     // Return a paginated collection of paths for all posts

@@ -22,29 +22,6 @@ const { posts } = Astro.props
 </section>
 
 <style lang="scss">
-    .posts-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .view-all {
-            font-size: .875rem;
-            line-height: 1.25rem;
-            a {
-                transition: all .2s ease-in;
-                display: block;
-                font-size: inherit;
-                color: inherit;
-                font-weight: 700;
-                font-size: 1rem;
-
-                &:hover {
-                    color: var(--primary);
-                }
-            }
-        }
-    }
-
     .posts-container {
         display: grid;
         grid-template-columns: repeat(3,minmax(0,1fr));

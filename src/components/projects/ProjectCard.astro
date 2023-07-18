@@ -1,3 +1,7 @@
+---
+const { name, description, tags, source_code_link } = Astro.props
+---
+
 <li class="project-card">
     <div class="project-card__thumbnail-container">
         <img src="/images/project-maps.png" alt="thumbnail" />
@@ -5,23 +9,17 @@
 
     <div class="project-card__content">
         <div class="project-card__content__haed">
-            <a href="#" class="project-title">Hello world</a>
+            <a href="#" class="project-title">{name}</a>
 
             <ul class="project-tags">
-                <li class="astro"><a href="#">#astro</a></li>
-                <li class="blog"><a href="#">#blog</a></li>
-                <li class="css"><a href="#">#css</a></li>
-                <li class="js"><a href="#">#javascript</a></li>
+                {tags.map((tag) => (
+                    <li class={tag}><a href="#">#{tag}</a></li>
+                ))}
             </ul>
         </div>
 
         <div class="project-card__content__body">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Deserunt, mollitia corporis veniam ex ipsum dignissimos.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Deserunt, mollitia corporis veniam ex ipsum dignissimos.
-            </p>
+            <p>{description}</p>
         </div>
     </div>
 </li>

@@ -5,9 +5,9 @@ const { name, description, tags, source_code_link, image } = Astro.props
 <li class="project-card">
     <div class="project-card__thumbnail-container">
         {image ? (
-            <img src={image} alt="project-logo" />
+            <img src={image} alt="project-logo" loading="lazy" />
         ): (
-            <img src="/images/code-dir.png" alt="project-logo" />
+            <img src="/images/code-dir.png" alt="project-logo" loading="lazy" />
         )}
     </div>
 
@@ -26,10 +26,17 @@ const { name, description, tags, source_code_link, image } = Astro.props
             <p>{description}</p>
         </div>
     </div>
+
+    <div class="project-links">
+        <a href={source_code_link} class="github" target="_blank">
+            <img src="/images/github_.png" alt="github" />
+        </a>
+    </div>
 </li>
 
 <style lang="scss">
     .project-card {
+        position: relative;
         transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
 
         display: flex;
@@ -106,6 +113,24 @@ const { name, description, tags, source_code_link, image } = Astro.props
                 p {
                     margin-top: .75rem;
                     color: var(--gray);
+                }
+            }
+        }
+
+        .project-links {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+
+            display: flex;
+            align-items: center;
+            a {
+                display: block;
+                img {
+                    display: block;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    object-fit: contain;
                 }
             }
         }

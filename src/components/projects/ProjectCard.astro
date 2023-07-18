@@ -1,5 +1,5 @@
 ---
-const { name, description, tags, source_code_link } = Astro.props
+const { name, description, tags, source_code_link, demo_link } = Astro.props
 ---
 
 <li class="project-card">
@@ -11,8 +11,8 @@ const { name, description, tags, source_code_link } = Astro.props
     <p class="project-card__description">{description}</p>
 
     <nav class="project-card__links">
-        <a href="" target="_blank">Demo</a>
-        <a href={source_code_link} target="_blank">Code</a>
+        {demo_link && <a href={demo_link} target="_blank">Demo</a>}
+        {source_code_link && <a href={source_code_link} target="_blank">Code</a>}
     </nav>
 
     <ul class="project-card__tags">

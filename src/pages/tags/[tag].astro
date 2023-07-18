@@ -1,36 +1,69 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-// import BlogPost from "../../components/BlogPost.astro";
+
+import BlogPostCard from "../../components/common/BlogPostCard.astro"
 
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob("../posts/*.mdx");
+    const allPosts = await Astro.glob("../posts/*.mdx")
 
-  const uniqueTags = [
-    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
-  ];
+    const uniqueTags = [
+        ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+    ]
 
-  return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post) =>
-      post.frontmatter.tags.includes(tag)
-    );
-    return {
-      params: { tag },
-      props: { posts: filteredPosts },
-    };
-  });
+    return uniqueTags.map((tag) => {
+        const filteredPosts = allPosts.filter((post) =>
+            post.frontmatter.tags.includes(tag)
+        )
+
+        return {
+            params: { tag },
+            props: { posts: filteredPosts },
+        }
+    })
 }
 
-const { tag } = Astro.params;
-const { posts } = Astro.props;
+const { tag } = Astro.params
+const { posts } = Astro.props
 ---
 
 <Layout title='hello'>
-  <p>Posts tagged with {tag}</p>
-  <ul>
-    <!-- {
-      posts.map((post) => (
-        <BlogPost url={post.url} title={post.frontmatter.title} />
-      ))
-    } -->
-  </ul>
+    <section id={`${posts}-posts`}>
+        <div class="wrapper">
+            <div class="posts-head">
+                <h3 class={`section-title ${tag}`}>All {tag} related posts</h3>
+            </div>
+    
+            <ul class="posts-container">
+                {
+                    posts.map((post) => (
+                        <BlogPostCard 
+                            {...post.frontmatter}
+                            url={post.url}
+                        />
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
 </Layout>
+
+<style lang="scss">
+    .posts-head {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 2rem;
+        h3 {
+            text-transform: capitalize;
+        }
+    }
+
+    .posts-container {
+        display: grid;
+        grid-template-columns: repeat(3,minmax(0,1fr));
+        gap: 1.5rem;
+
+        @media all and (max-width: 768px) {
+            grid-template-columns: repeat(1,minmax(0,1fr));
+        }
+    }
+</style>

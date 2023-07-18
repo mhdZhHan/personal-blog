@@ -26,21 +26,21 @@ const { page } = Astro.props
                 </p>
             </div>
 
-            <!-- <ul class="blog-posts">
+            <ul class="blog-posts">
                 {page.data.map((post) => (
                     <BlogPostCard s
                         {...post.frontmatter}
                         url={post.url}
                     />
                 ))}
-            </ul> -->
+            </ul>
 
-            <!-- <div class="blogs-footer">
+            <div class="blogs-footer">
                 <Pagination 
                     prevUrl={page.url.prev}
                     nextUrl={page.url.next}
                 />
-            </div> -->
+            </div>
         </div>
     </section>
 </Layout>

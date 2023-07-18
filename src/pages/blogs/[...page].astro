@@ -7,20 +7,16 @@ import Pagination from '../../components/common/Pagination.astro'
 import { sortByDate } from '../../utils'
 
 export async function getStaticPaths({ paginate }) {
-    const posts = await Astro.glob("../posts/*.mdx")
-    const sortedPosts = sortByDate(posts)
+  const posts = await Astro.glob('./*.mdx')
+  const sortedPosts = sortByDate(posts)
 
-    // Return a paginated collection of paths for all posts
-    return paginate(sortedPosts, { pageSize: 6 })
+  return paginate(sortedPosts, { pageSize: 6 })
 }
 
 const { page } = Astro.props
-page.data.map((post) => {
-    console.log(post.frontmatter)
-})
 ---
 
-<Layout title="mohammedsh blog | Posts">
+<Layout title="Mohammed's blog | blogs">
     <section id="blogs">
         <div class="wrapper">
             <div class="blogs-head">
@@ -30,21 +26,21 @@ page.data.map((post) => {
                 </p>
             </div>
 
-            <ul class="blog-posts">
+            <!-- <ul class="blog-posts">
                 {page.data.map((post) => (
                     <BlogPostCard s
                         {...post.frontmatter}
                         url={post.url}
                     />
                 ))}
-            </ul>
+            </ul> -->
 
-            <div class="blogs-footer">
+            <!-- <div class="blogs-footer">
                 <Pagination 
                     prevUrl={page.url.prev}
                     nextUrl={page.url.next}
                 />
-            </div>
+            </div> -->
         </div>
     </section>
 </Layout>

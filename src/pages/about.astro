@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Mohammed's blog | About">
+    <section id="about">
+        <div class="wrapper">
+            <div class="about-head">
+                <h1 class="about-head__title">🧑‍🚀 About Me !</h1>
+            </div>
+
+            <div class="about-container">
+                <h3>Hey! 👋 I'm Mohammed</h3>
+                <p>
+                    I'm a self-taught programmer who loves to make & tinker with things. 
+                    I was born on 21th march 2003 (Yes, I'm a 21st century kid). 
+                    I'm currently $age years old and lives in Kerala, India. 
+                    Malayalam (മലയാളം) is my native language. 
+                    I know English, but not really good at it.
+                </p>
+                <p>
+                    started programming in 2018 when I was 15 years old.
+                    16 I love open source because of the collaborative nature and the freedom to hack the software to our use.
+                    I support Free Software, Open Knowledge & Sharing.
+                </p>
+            </div>
+
+            <div class="contact-container">
+                <h1 class="contact-container__title">📭 Contact Me !</h1>
+
+                <form>
+                    <div class="input-container">
+                        <label for="username">Your Name</label>
+
+                        <input
+                            type="text"
+                            autocomplete="off"
+                            placeholder="What's your good name?"
+                            required
+                        />
+                    </div>
+
+                    <div class="input-container">
+                        <label for="username">Your Email</label>
+
+                        <input
+                            type="text"
+                            autocomplete="off"
+                            placeholder="What's your web address?"
+                            required
+                        />
+                    </div>
+
+                    <div class="input-container">
+                        <label for="username">Your Message</label>
+
+                        <textarea
+                            rows="7" 
+                            name='message'
+                            placeholder="What do you want to say?"
+                        />
+                    </div>
+
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+    .about-head {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        .about-head__title {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+            color: var(--title-text);
+        }
+    }
+
+    .about-container {
+        h3 {
+            margin-top: .75rem;
+            margin-bottom: 1.7rem;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+    }
+
+    .contact-container {
+        margin-top: 2rem;
+        .contact-container__title {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+            color: var(--title-text);
+            margin-bottom: 2rem;
+        }
+        .input-container {
+            width: 25rem;
+
+            @media all and (max-width: 480px) {
+                width: 100%;
+            }
+
+            label {
+                display: block;
+                color: var(--title-text);
+                font-weight: 500;
+                font-size: 100%;
+                margin-bottom: 1rem;
+                font-size: 1.3rem;
+            }
+
+
+            input, textarea{
+                outline: none;
+                width: 100%;
+                font-size: 100%;
+                color: var(--text-color);
+                border: 2px solid var(--border-color);
+                background: var(--secondary);
+                padding: 1rem 1.5rem;
+                font-weight: 500;
+                border-radius: 0.5rem;
+                margin-bottom: 1rem;
+                font-size: 1.1rem;
+                font-family: inherit;
+                &:focus {
+                    border-color: var(--primary);
+                }
+            }
+        }
+
+        button {
+            outline: none;
+            border: none;
+            border-radius: 0.75rem;
+            background: var(--secondary);
+            border: 2px solid var(--border-color);
+            font-weight: 700;
+            color: var(--title-text);
+            font-size: 1.1rem;
+
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+
+            width: fit-content;
+            cursor: pointer;
+
+            transition: all 0.2s ease-in;
+
+            &:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+            }
+        }
+    }
+</style>

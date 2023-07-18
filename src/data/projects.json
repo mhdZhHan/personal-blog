@@ -18,9 +18,18 @@
     {
         "name": "Tic Tac Toe Game",
         "description":
-            "🕹️ Simple tic tac toe game return in react native ",
+            "🕹️ Simple tic tac toe game return in react native",
         "tags": ["react", "react native", "app"],
         "image": "",
         "source_code_link": "https://github.com/mohammedshajahan7/tic-tac-toe-react-native"
+    },
+    {
+        "name": "Terminal Portfolio",
+        "description":
+            "Terminal website return in javaScript",
+        "tags": ["html", "css", "javascript"],
+        "image": "",
+        "source_code_link": "https://github.com/mohammedshajahan7/terminal-mohammed.sh",
+        "demo_link": "https://terminal-mohammedsh.vercel.app/"
     }
 ]

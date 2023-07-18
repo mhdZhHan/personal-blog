@@ -4,7 +4,7 @@
         "description":
             "Securely share and safeguard your files with LockBox",
         "tags": ["node", "express", "mongodb"],
-        "image": "",
+        "image": "/images/lock-box.png",
         "source_code_link": "https://github.com/mohammedshajahan7/lock-box"
     },
     {
@@ -12,7 +12,7 @@
         "description":
             "An api for online code compiler return in node js && express",
         "tags": ["node", "express", "mongodb"],
-        "image": "",
+        "image": "/images/project-maps.png",
         "source_code_link": "https://github.com/mohammedshajahan7/execu-code"
     },
     {

@@ -1,5 +1,5 @@
 {
-  "name": "mohammed's blog",
+  "name": "personal-blog",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
+    "@astrojs/vercel": "^3.7.3",
     "astro": "^2.8.3",
     "sass": "^1.63.6"
   }

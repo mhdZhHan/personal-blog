@@ -17,6 +17,14 @@ const { t1, t2, url } = Astro.props
         display: flex;
         align-items: center;
         justify-content: space-between;
+        h3 {
+            span {
+                color: transparent;
+                background: var(--text-gradient);
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+        }
 
         .view-all {
             font-size: .875rem;

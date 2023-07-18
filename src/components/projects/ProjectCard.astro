@@ -1,10 +1,14 @@
 ---
-const { name, description, tags, source_code_link } = Astro.props
+const { name, description, tags, source_code_link, image } = Astro.props
 ---
 
 <li class="project-card">
     <div class="project-card__thumbnail-container">
-        <img src="/images/project-maps.png" alt="thumbnail" />
+        {image ? (
+            <img src={image} alt="project-logo" />
+        ): (
+            <img src="/images/code-dir.png" alt="project-logo" />
+        )}
     </div>
 
     <div class="project-card__content">
@@ -49,8 +53,8 @@ const { name, description, tags, source_code_link } = Astro.props
             flex-shrink: 0;
             img {
                 display: block;
-                width: 9rem;
-                height: 9rem;
+                width: 7rem;
+                height: 7rem;
                 object-fit: contain;
             }
         }

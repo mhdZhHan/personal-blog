@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-const posts = await Astro.glob("../posts/*.mdx");
+const posts = await Astro.glob("../blogs/*.mdx");
 const tags = [...new Set(posts.map((post) => post.frontmatter.tags).flat())];
 ---
 

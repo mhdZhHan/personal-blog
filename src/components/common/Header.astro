@@ -48,13 +48,14 @@
             .header__container__logo {
                 display: block;
                 .header__container__logo__logo-container {
-                    color: transparent;
                     font-weight: 700;
                     font-size: 1.25rem;
                     line-height: 1.75rem;
 
-                    background-clip: text !important;
+                    color: transparent;
                     background: var(--text-gradient);
+                    -webkit-background-clip: text;
+                    background-clip: text;
 
                     display: flex;
                     align-items: center;

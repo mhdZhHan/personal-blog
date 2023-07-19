@@ -27,8 +27,9 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
 
 <style lang="scss">
     .project-card {
-        border: 1px solid;
+        border: 1.5px solid;
         border-color: var(--border-color);
+        border-color: rgba(38,38,38,1);
         border-radius: .3rem;
         padding: .5rem;
 
@@ -40,6 +41,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
 
         &:hover {
             border-color: var(--primary);
+            border-color: rgba(64,64,64,1);
         }
 
         .project-card__title {
@@ -51,6 +53,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
                 font-size: 1.1rem;
                 font-weight: 600;
                 color: var(--primary);
+                color: #2dd4bf;
             }
 
             span {
@@ -85,6 +88,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
                 font-size: .9rem;
                 font-weight: 600;
                 color: var(--primary);
+                color: #2dd4bf;
                 &:last-child {
                     margin-right: 0;
                 }
@@ -111,7 +115,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
                     display: block;
                     font-size: .9rem;
                     font-weight: 600;
-                    color: var(--primary);
+                    color: var(--title-text);
                 }
             }
         }

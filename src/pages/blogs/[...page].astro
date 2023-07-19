@@ -4,11 +4,12 @@ import BlogPostCard from '../../components/common/BlogPostCard.astro'
 import Pagination from '../../components/common/Pagination.astro'
 
 // utils
-import { sortByDate } from '../../utils'
+import { sortByDate, nonDraftPosts } from '../../utils'
 
 export async function getStaticPaths({ paginate }) {
   const posts = await Astro.glob('./*.mdx')
-  const sortedPosts = sortByDate(posts)
+  const nonDraftPosts_ = nonDraftPosts(posts)
+  const sortedPosts = sortByDate(nonDraftPosts_)
 
   return paginate(sortedPosts, { pageSize: 6 })
 }
@@ -28,7 +29,7 @@ const { page } = Astro.props
 
             <ul class="blog-posts">
                 {page.data.map((post) => (
-                    <BlogPostCard s
+                    <BlogPostCard
                         {...post.frontmatter}
                         url={post.url}
                     />

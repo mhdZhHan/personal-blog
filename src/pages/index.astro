@@ -5,10 +5,11 @@ import Projects from '../components/home/Projects.astro'
 import Posts from '../components/home/Posts.astro'
 
 // utils
-import { sortByDate } from '../utils'
+import { sortByDate, nonDraftPosts } from '../utils'
 
 const posts = await Astro.glob("./blogs/*.mdx")
-const sortedPosts = sortByDate(posts);
+const nonDraftPosts_ = nonDraftPosts(posts)
+const sortedPosts = sortByDate(nonDraftPosts_)
 const lastThreePosts = sortedPosts.slice(0, 3)
 ---
 

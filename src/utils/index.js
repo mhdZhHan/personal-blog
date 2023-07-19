@@ -16,3 +16,7 @@ export const sortByDate = (posts) => {
             new Date(a.frontmatter.pubDate).valueOf()
     )
 }
+
+export const nonDraftPosts = (posts) => {
+    return posts.filter((post) => !post.frontmatter.draft)
+}

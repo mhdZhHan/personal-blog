@@ -8,7 +8,7 @@ import vercelEdge from '@astrojs/vercel/edge'
 export default defineConfig({
   integrations: [mdx({
     syntaxHighlight: 'shiki',
-    shikiConfig: { theme: 'nord', wrap: true, langs: [] },
+    shikiConfig: { theme: 'slack-dark', wrap: true, langs: [] },
     remarkPlugins: [ [remarkToc, { heading: "contents"} ] ],
   })],
   output: 'server',

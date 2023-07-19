@@ -1,11 +1,14 @@
-import { defineConfig } from 'astro/config';
-import vercelEdge from '@astrojs/vercel/edge';
+import { defineConfig } from 'astro/config'
 
-import mdx from "@astrojs/mdx";
+import mdx from "@astrojs/mdx"
+import vercelEdge from '@astrojs/vercel/edge'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  integrations: [mdx({
+    syntaxHighlight: 'shiki',
+    shikiConfig: { theme: 'nord' },
+  })],
   output: 'server',
   adapter: vercelEdge(),
-});
+})

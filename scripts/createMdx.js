@@ -19,7 +19,7 @@ draft: false
 pubDate: ${currentDate}
 description: "description..."
 author: "Mohammed"
-image: "/images/posts/"
+image: "/images/blogs/"
 tags: []
 ---
 

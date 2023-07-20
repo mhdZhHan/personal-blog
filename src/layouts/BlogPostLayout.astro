@@ -1,6 +1,7 @@
 ---
-import Layout from './Layout.astro'
 import '../styles/blog-post.scss'
+import Layout from './Layout.astro'
+import Comments from '../components/common/Comments'
 
 const { frontmatter } = Astro.props
 const { title, pubDate, image } = frontmatter
@@ -9,26 +10,26 @@ const { title, pubDate, image } = frontmatter
 <Layout title={frontmatter.title}>
     <section id="blog-post">
         <div class="wrapper">
-            <div class="wrapper">
-                <div class="blog-post-head">
-                    <h1 class="blog-post-head__title">{title}</h1>
-                    <div class="blog-post-head__meta">
-                        <span class="blog-post-head__meta__author">Mohammed, </span>
-                        <span class="blog-post-head__meta__date">{pubDate.slice(0, 10)}</span>
-                    </div>
-                </div>
-    
-                <div class="blog-post-body">
-                    <div class="blog-post-body__thumbnail">
-                        <img src={image} alt={title} loading="lazy" />
-                    </div>
-
-                    <div class="blog-post-body__content">
-                        <slot />
-                    </div>
+            <div class="blog-post-head">
+                <h1 class="blog-post-head__title">{title}</h1>
+                <div class="blog-post-head__meta">
+                    <span class="blog-post-head__meta__author">Mohammed, </span>
+                    <span class="blog-post-head__meta__date">{pubDate.slice(0, 10)}</span>
                 </div>
             </div>
+
+            <div class="blog-post-body">
+                <div class="blog-post-body__thumbnail">
+                    <img src={image} alt={title} loading="lazy" />
+                </div>
+
+                <div class="blog-post-body__content">
+                    <slot />
+                </div>
+            </div>
+            <Comments client:idle />
         </div>
+        
     </section>
 </Layout>
 

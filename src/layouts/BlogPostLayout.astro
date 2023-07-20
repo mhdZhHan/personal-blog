@@ -27,7 +27,10 @@ const { title, pubDate, image } = frontmatter
                     <slot />
                 </div>
             </div>
-            <Comments client:idle />
+
+            <div class="blog-post-comments">
+                <Comments client:idle />
+            </div>
         </div>
         
     </section>
@@ -79,5 +82,10 @@ const { title, pubDate, image } = frontmatter
             color: var(--text-color);
             max-width: 65ch;
         }
+    }
+
+    .blog-post-comments {
+        max-width: 65ch;
+        margin: 1.25rem auto;
     }
 </style>

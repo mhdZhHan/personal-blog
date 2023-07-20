@@ -1,16 +1,21 @@
-import { defineConfig } from "astro/config";
-import mdx from "@astrojs/mdx";
+import { defineConfig } from "astro/config"
+import mdx from "@astrojs/mdx"
+import react from "@astrojs/react"
+
 // import markdownConfig from "./markdown.config"
-import react from "@astrojs/react";
+import tokyoNight from "./tokyo-night.json"
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx({
-    syntaxHighlight: "shiki",
-    shikiConfig: {
-      theme: "slack-dark",
-      wrap: true,
-      langs: []
-    }
-  }), react()]
-});
+    integrations: [
+        mdx({
+            syntaxHighlight: "shiki",
+            shikiConfig: {
+                theme: tokyoNight,
+                wrap: true,
+                langs: [],
+            },
+        }),
+        react(),
+    ],
+})

@@ -4,9 +4,11 @@ const { title, description, pubDate, image, url } = Astro.props
 
 <li class="post-card">
     <a href={url}>
-        <div class="post-card__thumbnail-container">
-            <img src={image} alt={title} />
-        </div>
+        {image && (
+            <div class="post-card__thumbnail-container">
+                <img src={image} alt={title} />
+            </div>
+        )}
 
         <div class="post-card__body">
             <h2 class="title">{title}</h2>
@@ -20,7 +22,6 @@ const { title, description, pubDate, image, url } = Astro.props
 
 <style lang="scss">
 .post-card {
-    height: 100%;
     transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
     &:hover {
         transform: translateY(-5px);
@@ -34,6 +35,7 @@ const { title, description, pubDate, image, url } = Astro.props
         background-color: var(--secondary);
         border-radius: .4rem;
         border: 2px solid var(--border-color);
+
         height: 100%;
         .post-card__thumbnail-container {
             position: relative;
@@ -72,7 +74,9 @@ const { title, description, pubDate, image, url } = Astro.props
                 line-height: 1.25rem;
                 margin-top: .5rem;
 
-                max-height: 4rem;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
                 overflow: hidden;
             }
         }

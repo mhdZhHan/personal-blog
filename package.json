@@ -11,6 +11,7 @@
     "new-post": "node scripts/createMdx.js"
   },
   "dependencies": {
+    "@astrojs/image": "^0.17.2",
     "@astrojs/mdx": "^0.19.7",
     "@astrojs/react": "^2.2.1",
     "@giscus/react": "^2.3.0",

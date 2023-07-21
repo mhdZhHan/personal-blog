@@ -3,13 +3,14 @@ import ProjectCard from '../projects/ProjectCardHome.astro'
 import HeadTitle from '../common/HeadTitle.astro'
 
 import projects from '../../data/projects.json'
+const lastThreeProjects = projects.slice(0, 3)
 ---
 
 <section id="projects">
     <div class="wrapper">
         <HeadTitle t1="Recent" t2="Projects" url="/projects" />
         <ul class="projects-container">
-            {projects.map((project) => (
+            {lastThreeProjects.map((project) => (
                 <ProjectCard 
                     {...project}
                 />

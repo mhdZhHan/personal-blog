@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Mohammed's blog | Donate">
+    <section id="donate">
+        <div class="wrapper">
+            <div class="donate-head">
+                <h1 class="donate-head__title">💰 Donate</h1>
+            </div>
+
+            <div class="donate-container">
+                <p>
+                    To keep my site and projects up and running, there are costs. As a full-time college student, 
+                    I work on projects in my free time. 
+                </p>
+                <p>
+                    So, please consider a donation for my future projects and the maintenance of all my sites & projects. 
+                </p>
+                <p>
+                    If you would like to mention your website or a message to display on 
+                    this page,please send them to me after donation. Every donation will be publicly mentioned here, if you’d like not to, please do contact after. 
+                </p>
+            </div>
+
+            <div class="donate-instructions">
+                <h3>How to donate</h3>
+                <p>
+                    Thank you for considering a donation! Your support means a lot to me and helps me continue my work in the tech world.
+                </p>
+                <p>
+                    You can donate via one of the following methods:
+                </p>
+
+                <ol>
+                    <li>PayPal: 
+                        <a href="https://www.paypal.com/paypalme/mohammedshajahan7">
+                            mohammedshajahan360 [at] gmail [dot] com
+                        </a>
+                    </li>
+                    <!-- <li>Bitcoin: [Bitcoin wallet address]</li>
+                    <li>Ethereum: [Ethereum wallet address]</li> -->
+                </ol>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+    .donate-head {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        .donate-head__title {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+            color: var(--title-text);
+        }
+    }
+
+    .donate-container, .donate-instructions {
+        h3 {
+            margin-top: .75rem;
+            margin-bottom: 1.7rem;
+            // font-size: 1.5rem;
+            color: var(--title-text);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            // font-size: 1.25rem;
+        }
+    }
+</style>

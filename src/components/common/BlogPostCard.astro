@@ -20,6 +20,7 @@ const { title, description, pubDate, image, url } = Astro.props
 
 <style lang="scss">
 .post-card {
+    height: 100%;
     transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
     &:hover {
         transform: translateY(-5px);
@@ -33,6 +34,7 @@ const { title, description, pubDate, image, url } = Astro.props
         background-color: var(--secondary);
         border-radius: .4rem;
         border: 2px solid var(--border-color);
+        height: 100%;
         .post-card__thumbnail-container {
             position: relative;
             padding-bottom: calc(2 / 3 * 100%);

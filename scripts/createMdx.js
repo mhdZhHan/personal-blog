@@ -11,10 +11,12 @@ const createMdxFile = (fileName) => {
     const currentDate = new Date().toISOString().slice(0, 10)
     const filePath = path.join(postsDir, `${currentDate}-${fileName}.mdx`)
 
+    const title = fileName.replace(/-/g, ' ').replace(/\b\w/g, (match) => match.toUpperCase())
+
     // default mdx content 
     const markdownContent = `---
 layout: "../../layouts/BlogPostLayout.astro"
-title: ${fileName}
+title: ${title}
 draft: false
 pubDate: ${currentDate}
 description: "description..."
@@ -23,7 +25,7 @@ image: "/images/blogs/"
 tags: []
 ---
 
-# ${fileName}
+# ${title}
 
 Post content here...
 `

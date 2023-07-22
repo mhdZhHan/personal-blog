@@ -18,6 +18,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "astro": "^2.8.3",
+    "dompurify": "^3.0.5",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "react": "^18.0.0",

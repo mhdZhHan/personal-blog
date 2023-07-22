@@ -1,0 +1,166 @@
+---
+import Layout from '../layouts/Layout.astro'
+import BlogPostCard from '../components/common/BlogPostCard.astro'
+// import Pagination from '../components/common/Pagination.astro'
+---
+
+<Layout title="Mohammed's blog | Search">
+    <section id="blogs" aria-label="Search Results">
+        <div class="wrapper">
+            <div class="blogs-head">
+                <h1 class="blogs-head__title">🧑‍🚀 Search Results !</h1>
+                <p class="blogs-head__sub-title" id="searchReadout"></p>
+
+                <div class="search-box">
+                    <form id="search-form">
+                        <div class="search-box__container">
+                            <input 
+                                type="text" 
+                                name="search" 
+                                id="search"
+                                maxlength="24"
+                                minlength="2"
+                                placeholder="Search" 
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <ul class="blog-posts">
+                <!-- {page.data.map((post) => (
+                    <BlogPostCard
+                        {...post.frontmatter}
+                        url={post.url}
+                    />
+                ))} -->
+            </ul>
+
+            <div class="blogs-footer">
+                <!-- <Pagination 
+                    prevUrl={page.url.prev}
+                    nextUrl={page.url.next}
+                /> -->
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+    .blogs-head {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        .blogs-head__title {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+        }
+        .blogs-head__sub-title {
+            margin-top: .75rem;
+            color: var(--gray);
+        }
+    }
+
+    .search-box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        margin-top: 0.75rem;
+
+        @media all and (max-width: 768px) {
+            justify-content: center;
+        }
+        form {
+            .search-box__container {
+                position: relative;
+
+                input {
+                    border: none;
+                    outline: none;
+                    display: block;
+                    width: 17rem;
+                    height: 2rem;
+                    border-radius: .4rem;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    padding: .3rem .3rem .3rem 2rem;
+                    background-color: var(--secondary);
+                    border: 2px solid var(--border-color);
+                    color: var(--text-color);
+                }
+
+                &::before {
+                    content: "";
+                    background-image: url('/icons/search1.svg');
+                    width: .9rem;
+                    height: .9rem;
+                    display: block;
+                    position: absolute;
+                    left: .7rem;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto 0;
+                }
+            }
+        }
+    }
+
+    .blog-posts {
+        // padding: 1.5rem 0;
+        display: grid;
+        grid-template-columns: repeat(3,minmax(0,1fr));
+        gap: 1.5rem;
+
+        @media all and (max-width: 768px) {
+            grid-template-columns: repeat(1,minmax(0,1fr));
+        }
+    }
+
+    .blogs-footer {
+        padding: 1.5rem 0;
+    }
+</style>
+
+<script>
+    // imports
+    import DOMPurify from 'dompurify'
+
+    // selectors
+    const search = document.querySelector('#search')
+    const searchReadout = document.querySelector('#searchReadout')
+
+    // functions
+    const updateDocumentTitle = (search) => {
+        document.title = search ? `Search results for "${search}"` :
+            `Search the Blog`
+    }
+
+    const updateSearchReadout = (search) => {
+        searchReadout.textContent = search ? `Search results for “${search}”` :
+            ""
+    }
+
+    // event listeners
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = DOMPurify.sanitize(new URLSearchParams(window.location.search).get("q"))
+
+        updateDocumentTitle(urlParams)
+        updateSearchReadout(urlParams)
+
+        search.value = urlParams
+        search.focus()
+    })
+
+    search.addEventListener('input', () => {
+        const searchTerm = DOMPurify.sanitize(search.value)
+
+        updateDocumentTitle(searchTerm)
+        updateSearchReadout(searchTerm)
+
+        search.value = searchTerm
+        search.focus()
+    })
+</script>

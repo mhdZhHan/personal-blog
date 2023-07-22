@@ -1,7 +1,14 @@
 <div class="search-box">
-    <form>
+    <form id="search-form">
         <div class="search-box__container">
-            <input type="text" placeholder="Search" />
+            <input 
+                type="text" 
+                name="search" 
+                id="search"
+                maxlength="24"
+                minlength="2"
+                placeholder="Search" 
+            />
         </div>
     </form>
 </div>
@@ -53,3 +60,22 @@
         }
     }
 </style>
+
+<script>
+    //imports
+    import DOMPurify from 'dompurify'
+
+    const form = document.querySelector('form')
+    form?.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        const formData = new FormData(form)
+        const searchTerm = DOMPurify.sanitize(formData.get("search")?.toString())
+
+        if(!searchTerm || searchTerm.length === 0) return
+
+        const url = new URL('search/', window.location.origin)
+        url.searchParams.set('q', searchTerm)
+        window.location.assign(url.toString())
+    })
+</script>

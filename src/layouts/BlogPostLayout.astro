@@ -5,9 +5,15 @@ import Comments from '../components/common/Comments'
 
 const { frontmatter } = Astro.props
 const { title, pubDate, image } = frontmatter
+
+const pageTitle = `Mohammed's blog | ${frontmatter.title}`
 ---
 
-<Layout title={frontmatter.title}>
+<Layout 
+    title={pageTitle} 
+    description={frontmatter.description} 
+    ogImageUrl={frontmatter.image}
+>
     <section id="blog-post">
         <div class="wrapper">
             <div class="blog-post-head">

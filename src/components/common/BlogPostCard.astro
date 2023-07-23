@@ -3,7 +3,7 @@ const { title, description, pubDate, image, url } = Astro.props
 ---
 
 <li class="post-card">
-    <a href={url}>
+    <a href={`/blog/${url}/`}>
         {image && (
             <div class="post-card__thumbnail-container">
                 <img src={image} alt={title} />
@@ -12,7 +12,7 @@ const { title, description, pubDate, image, url } = Astro.props
 
         <div class="post-card__body">
             <h2 class="title">{title}</h2>
-            <span class="date">{pubDate.slice(0, 10)}</span>
+            <span class="date">{pubDate}</span>
             <p class="body-text">
                 {description}
             </p>

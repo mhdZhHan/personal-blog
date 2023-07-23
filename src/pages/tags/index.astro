@@ -1,8 +1,15 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import { getCollection, CollectionEntry } from 'astro:content'
 
-const posts = await Astro.glob("../blogs/*.mdx");
-const tags = [...new Set(posts.map((post) => post.frontmatter.tags).flat())];
+// layouts
+import Layout from "../../layouts/Layout.astro"
+
+// utils
+import { nonDraftPosts } from '../../utils'
+
+const posts = await getCollection('blog')
+const nonDraftPosts_: CollectionEntry<"blog">[] = nonDraftPosts(posts)
+const tags = [...new Set(nonDraftPosts_.map((post) => post.data.tags).flat())]
 ---
 
 <Layout title="Mohammed's blog | Tags">

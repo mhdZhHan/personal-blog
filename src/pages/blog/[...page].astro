@@ -1,5 +1,10 @@
 ---
+import { getCollection, CollectionEntry } from 'astro:content'
+
+// layout
 import Layout from '../../layouts/Layout.astro'
+
+// components
 import BlogPostCard from '../../components/common/BlogPostCard.astro'
 import Pagination from '../../components/common/Pagination.astro'
 import SearchBox from '../../components/common/SearchBox.astro'
@@ -8,11 +13,11 @@ import SearchBox from '../../components/common/SearchBox.astro'
 import { sortByDate, nonDraftPosts } from '../../utils'
 
 export async function getStaticPaths({ paginate }) {
-  const posts = await Astro.glob('./*.mdx')
-  const nonDraftPosts_ = nonDraftPosts(posts)
-  const sortedPosts = sortByDate(nonDraftPosts_)
+    const posts = await getCollection('blog')
+    const nonDraftPosts_: CollectionEntry<"blog">[] = nonDraftPosts(posts)
+    const sortedPosts = sortByDate(nonDraftPosts_)
 
-  return paginate(sortedPosts, { pageSize: 6 })
+    return paginate(sortedPosts, { pageSize: 6 })
 }
 
 const { page } = Astro.props
@@ -33,8 +38,8 @@ const { page } = Astro.props
             <ul class="blog-posts">
                 {page.data.map((post) => (
                     <BlogPostCard
-                        {...post.frontmatter}
-                        url={post.url}
+                        {...post.data}
+                        url={post.slug}
                     />
                 ))}
             </ul>

@@ -1,18 +1,21 @@
 ---
+import { getCollection } from 'astro:content'
+
+// layout
 import Layout from '../../layouts/Layout.astro'
 
 import BlogPostCard from "../../components/common/BlogPostCard.astro"
 
 export async function getStaticPaths() {
-    const allPosts = await Astro.glob("../blogs/*.mdx")
+    const allPosts = await getCollection('blog')
 
     const uniqueTags = [
-        ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+        ...new Set(allPosts.map((post) => post.data.tags).flat()),
     ]
 
     return uniqueTags.map((tag) => {
         const filteredPosts = allPosts.filter((post) =>
-            post.frontmatter.tags.includes(tag)
+            post.data.tags.includes(tag)
         )
 
         return {
@@ -37,8 +40,8 @@ const { posts } = Astro.props
                 {
                     posts.map((post) => (
                         <BlogPostCard 
-                            {...post.frontmatter}
-                            url={post.url}
+                            {...post.data}
+                            url={post.slug}
                         />
                     ))
                 }

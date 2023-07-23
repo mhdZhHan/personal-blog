@@ -1,4 +1,6 @@
 ---
+import { getCollection, CollectionEntry } from 'astro:content'
+
 import Layout from '../layouts/Layout.astro'
 import Hero from '../components/home/Hero.astro'
 import Projects from '../components/home/Projects.astro'
@@ -7,8 +9,8 @@ import Posts from '../components/home/Posts.astro'
 // utils
 import { sortByDate, nonDraftPosts } from '../utils'
 
-const posts = await Astro.glob("./blogs/*.mdx")
-const nonDraftPosts_ = nonDraftPosts(posts)
+const posts = await getCollection('blog')
+const nonDraftPosts_: CollectionEntry<"blog">[] = nonDraftPosts(posts)
 const sortedPosts = sortByDate(nonDraftPosts_)
 const lastThreePosts = sortedPosts.slice(0, 3)
 ---

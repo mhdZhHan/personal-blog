@@ -12,11 +12,11 @@ export const slugify = (text) => {
 export const sortByDate = (posts) => {
     return posts.sort(
         (a, b) =>
-            new Date(b.frontmatter.pubDate).valueOf() -
-            new Date(a.frontmatter.pubDate).valueOf()
+            new Date(b.data.pubDate).valueOf() -
+            new Date(a.data.pubDate).valueOf()
     )
 }
 
 export const nonDraftPosts = (posts) => {
-    return posts.filter((post) => !post.frontmatter.draft)
+    return posts.filter((post) => !post.data.draft)
 }

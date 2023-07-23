@@ -30,8 +30,8 @@ import BlogPostCard from '../components/common/BlogPostCard.astro'
             <ul class="blog-posts">
                 <!-- {page.data.map((post) => (
                     <BlogPostCard
-                        {...post.frontmatter}
-                        url={post.url}
+                        {...post.data}
+                        url={post.slug}
                     />
                 ))} -->
             </ul>

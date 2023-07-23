@@ -6,14 +6,14 @@ const { posts } = Astro.props
 ---
 <section id="posts">
     <div class="wrapper">
-        <HeadTitle t1="Recent" t2="Posts" url="/blogs" />
+        <HeadTitle t1="Recent" t2="Posts" url="/blog" />
 
         <ul class="posts-container">
             {
                 posts.map((post) => (
                     <BlogPostCard 
-                        {...post.frontmatter}
-                        url={post.url}
+                        {...post.data}
+                        url={post.slug}
                     />
                 ))
             }

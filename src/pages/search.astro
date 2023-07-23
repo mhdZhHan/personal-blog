@@ -27,7 +27,7 @@ import BlogPostCard from '../components/common/BlogPostCard.astro'
                 </div>
             </div>
 
-            <ul class="blog-posts">
+            <ul class="blog-posts" id="searchResults">
                 <!-- {page.data.map((post) => (
                     <BlogPostCard
                         {...post.data}
@@ -127,10 +127,55 @@ import BlogPostCard from '../components/common/BlogPostCard.astro'
 <script>
     // imports
     import DOMPurify from 'dompurify'
+    import Fuse from 'fuse.js'
+
+    let SEARCH_DATA
+
+    let FUSE_INSTANCE
+
+    const FUSE_OPTIONS = {
+        includeScore: true,
+        shouldSort: true,
+        threshold: 0.5,
+        keys: [
+            {
+                name: "title",
+                weight: 1,
+            },
+            {
+                name: "description",
+                weight: 0.75,
+            },
+        ],
+    }
+
+    const SPINNER = `
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="#fff"
+            viewBox="0 0 256 256"
+            id="spinner"
+        >
+            <path d="M140,32V64a12,12,0,0,1-24,0V32a12,12,0,0,1,24,0Zm33.25,62.75a12,12,0,0,0,8.49-3.52L204.37,68.6a12,12,0,0,0-17-17L164.77,74.26a12,12,0,0,0,8.48,20.49ZM224,116H192a12,12,0,0,0,0,24h32a12,12,0,0,0,0-24Zm-42.26,48.77a12,12,0,1,0-17,17l22.63,22.63a12,12,0,0,0,17-17ZM128,180a12,12,0,0,0-12,12v32a12,12,0,0,0,24,0V192A12,12,0,0,0,128,180ZM74.26,164.77,51.63,187.4a12,12,0,0,0,17,17l22.63-22.63a12,12,0,1,0-17-17ZM76,128a12,12,0,0,0-12-12H32a12,12,0,0,0,0,24H64A12,12,0,0,0,76,128ZM68.6,51.63a12,12,0,1,0-17,17L74.26,91.23a12,12,0,0,0,17-17Z"></path>
+            <style>
+                #spinner {
+                    animation: spin 1s linear infinite;
+                }
+                @keyframes spin {
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+            </style>
+        </svg>
+    `
 
     // selectors
     const search = document.querySelector('#search')
     const searchReadout = document.querySelector('#searchReadout')
+    const resultsList = document.querySelector('#searchResults')
 
     // functions
     const updateDocumentTitle = (search) => {
@@ -139,14 +184,60 @@ import BlogPostCard from '../components/common/BlogPostCard.astro'
     }
 
     const updateSearchReadout = (search) => {
-        searchReadout.textContent = search ? `Search results for “${search}”` :
-            ""
+        searchReadout.textContent = search ? `Search results for “${search}”` : ""
+    }
+
+    function updateSearchPageUrl(search) {
+        const url = new URL(window.location.href)
+        url.searchParams.set("q", search)
+        window.history.replaceState(null, "", url)
+    }
+
+    function generateSearchList(results) {
+        return results.map((r) => {
+            const { title, pubDate, slug, description } = r.item
+
+            return `
+                <h1>${title}</h1>
+            `
+        })
+    }
+
+    async function fetchSearchResults(search) {
+        if (search.length === 0) return
+
+        // resultsList.innerHTML = SPINNER
+
+        if(!SEARCH_DATA) {
+            try {
+                const response = await fetch('/search.json')
+
+                if(!response.ok) throw new Error("Something went wrong...")
+
+                const data = response.json()
+                SEARCH_DATA = data
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        if (SEARCH_DATA && !FUSE_INSTANCE) {
+            FUSE_INSTANCE = new Fuse(SEARCH_DATA, FUSE_OPTIONS)
+        }
+
+        if (!FUSE_INSTANCE) return
+        const searchResult = FUSE_INSTANCE.search(search)
+
+		resultsList.innerHTML = searchResult.length > 0
+				? generateSearchList(searchResult)
+				: "No results found…"
     }
 
     // event listeners
     window.addEventListener('DOMContentLoaded', () => {
         const urlParams = DOMPurify.sanitize(new URLSearchParams(window.location.search).get("q"))
 
+        fetchSearchResults(urlParams)
         updateDocumentTitle(urlParams)
         updateSearchReadout(urlParams)
 
@@ -159,6 +250,8 @@ import BlogPostCard from '../components/common/BlogPostCard.astro'
 
         updateDocumentTitle(searchTerm)
         updateSearchReadout(searchTerm)
+        fetchSearchResults(searchTerm)
+        updateSearchPageUrl(searchTerm)
 
         search.value = searchTerm
         search.focus()

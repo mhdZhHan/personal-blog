@@ -1,5 +1,10 @@
 ---
+// utils
+import { simplifyDate } from "../../utils"
+
 const { title, description, pubDate, image, url } = Astro.props
+
+const pubDate_ = simplifyDate(pubDate)
 ---
 
 <li class="post-card">
@@ -12,7 +17,7 @@ const { title, description, pubDate, image, url } = Astro.props
 
         <div class="post-card__body">
             <h2 class="title">{title}</h2>
-            <span class="date">{pubDate}</span>
+            <span class="date">{pubDate_.simplifiedDate}</span>
             <p class="body-text">
                 {description}
             </p>

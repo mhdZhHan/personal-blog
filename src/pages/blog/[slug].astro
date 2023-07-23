@@ -11,7 +11,7 @@ import Layout from '../../layouts/Layout.astro'
 import Comments from '../../components/common/Comments'
 
 // utils
-import { nonDraftPosts } from '../../utils'
+import { nonDraftPosts, simplifyDate } from '../../utils'
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog')
@@ -25,16 +25,18 @@ export async function getStaticPaths() {
     })
 }
 
-// interface Props {
-//     post: CollectionEntry<"blog">
-// }
+interface Props {
+    post: CollectionEntry<"blog">
+}
 
 const { post } = Astro.props
 const { title, pubDate, image, description } = post.data
 
+const pubDate_ = simplifyDate(pubDate)
+
 const { Content } = await post.render()
 
-const pageTitle = `Mohammed's blog | ${post.title}`
+const pageTitle = `Mohammed's blog | ${title}`
 ---
 
 <Layout 
@@ -47,8 +49,8 @@ const pageTitle = `Mohammed's blog | ${post.title}`
             <div class="blog-post-head">
                 <h1 class="blog-post-head__title">{title}</h1>
                 <div class="blog-post-head__meta">
-                    <span class="blog-post-head__meta__author">Mohammed, </span>
-                    <span class="blog-post-head__meta__date">{pubDate}</span>
+                    <span class="blog-post-head__meta__author">Mohammed | </span>
+                    <span class="blog-post-head__meta__date">{pubDate_.simplifiedDate}</span>
                 </div>
             </div>
 

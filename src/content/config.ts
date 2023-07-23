@@ -6,7 +6,7 @@ const blog = defineCollection({
         draft: z.boolean().default(false),
         pubDate: z.date(),
         description: z.string(),
-        author: z.string(),
+        author: z.enum(["Mohammed"]),
         image: z.string().optional(),
         tags: z.array(z.string()),
     }),

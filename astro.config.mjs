@@ -4,11 +4,13 @@ import react from "@astrojs/react";
 
 // import markdownConfig from "./markdown.config"
 import tokyoNight from "./tokyo-night.json";
-
 import image from "@astrojs/image";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://mohammedsh.netlify.app',
   integrations: [mdx({
     syntaxHighlight: "shiki",
     shikiConfig: {
@@ -16,5 +18,5 @@ export default defineConfig({
       wrap: true,
       langs: []
     }
-  }), react(), image()]
+  }), react(), image(), sitemap()]
 });

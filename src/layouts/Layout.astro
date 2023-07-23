@@ -90,14 +90,21 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		box-sizing: border-box;
 	}
 
+	html {
+		scrollbar-gutter: stable;
+	}
+
 	body {
 		color: var(--text-color);
 		background-color: var(--tertiary);
 		// font-family: "GT-Eesti", Arial, Helvetica, sans-serif;
-		// font-family: 'Roboto Mono', monospace;
 		font-family: 'Ubuntu', sans-serif;
 		// font-weight: 500;
 		line-height: 1.5;
+
+		min-height: 100vh;
+		display: grid;
+		grid-template-rows: auto 1fr auto;
 	}
 
 	ul, ol {

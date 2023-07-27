@@ -33,7 +33,23 @@ import Logo from '../svg/Logo'
                 <li><a href="/about">About</a></li>
                 <li><a href="/donate">Donate</a></li>
             </ul>
-            <!-- <ThemToggle /> -->
+
+            <button id="toggle_theme" class="toggle-theme">
+                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                </svg>                    
+            </button>
         </nav>
     </div>
 </header>
@@ -81,6 +97,13 @@ import Logo from '../svg/Logo'
             }
 
             .header__container__menu {
+                display: flex;
+                align-items: center;
+                gap: .7rem;
+
+                @media all and (max-width: 640px) {
+                    justify-content: space-between;
+                }
                 ul {
                     list-style: none;
                     font-weight: 500;
@@ -94,6 +117,22 @@ import Logo from '../svg/Logo'
                                 color: rgb(255 255 255 / 1);
                             }
                         }
+                    }
+                }
+
+                .toggle-theme {
+                    outline: none;
+                    border: none;
+                    background: 0 0;
+                    cursor: pointer;
+                    #sun {
+                        display: var(--sun_icon_visibility);
+                        color: #fff;
+                    }
+
+                    #moon {
+                        display: var(--mon_icon_visibility);
+                        color: #000;
                     }
                 }
             }

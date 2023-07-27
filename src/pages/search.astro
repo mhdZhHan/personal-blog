@@ -195,10 +195,16 @@ import BlogPostCard from '../components/common/BlogPostCard.astro'
 
     function generateSearchList(results) {
         return results.map((r) => {
-            const { title, pubDate, slug, description } = r.item
+            const { title, pubDate, slug, description, image } = r.item
 
-            return `
-                <h1>${title}</h1>
+            return`
+                <BlogPostCard
+                    title="${title}"
+                    pubDate="${pubDate}"
+                    description="${description}"
+                    image="${image}"
+                    url="${slug}"
+                />
             `
         })
     }
@@ -214,8 +220,8 @@ import BlogPostCard from '../components/common/BlogPostCard.astro'
 
                 if(!response.ok) throw new Error("Something went wrong...")
 
-                const data = response.json()
-                SEARCH_DATA = data
+                SEARCH_DATA = await response.json()
+
             } catch (error) {
                 console.error(error)
             }

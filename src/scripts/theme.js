@@ -6,10 +6,8 @@ window.addEventListener('load', ()=>{
     let confirmText = "light mode is currently functional, but we're not satisfied with its performance just yet"
 
     const enableLightMode = ()=>{
-        if (confirm(confirmText)) {
-            document.body.classList.add('light')
-            localStorage.setItem('light', 'enabled')
-        }
+        document.body.classList.add('light')
+        localStorage.setItem('light', 'enabled')
     }
 
     const disableLightMode = () => {
@@ -23,10 +21,9 @@ window.addEventListener('load', ()=>{
 
     darkModeToggle.addEventListener('click', () => {
         darkMode = localStorage.getItem('light')
-        
-        if (darkMode !== 'enabled') {
+        if (darkMode !== 'enabled' && confirm(confirmText)) {
             enableLightMode()
-        } else {  
+        }else {
             disableLightMode()
         }
     })

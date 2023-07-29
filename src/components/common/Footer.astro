@@ -16,10 +16,14 @@
 
 <style lang="scss">
     .footer-content {
+        width: 100%;
+
         padding-top: 1.25rem;
         border-color: rgb(75 85 99 / 1);
         border-top-width: 1px;
         border-top-style: solid;
+        display: flex;
+        flex-direction: column;
         p {
             font-size: .875rem;
             line-height: 1.25rem;
@@ -33,7 +37,7 @@
             }
         }
         a.rss-feed {
-            display: block;
+            display: inline-block;
             text-align: right;
 
             span.text {

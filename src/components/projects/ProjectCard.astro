@@ -28,8 +28,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
 <style lang="scss">
     .project-card {
         border: 1.5px solid;
-        border-color: var(--border-color);
-        border-color: rgba(38,38,38,1);
+        border-color: var(--thin-border-color);
         border-radius: .3rem;
         padding: .5rem;
 
@@ -39,9 +38,11 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
         flex-direction: column;
         justify-content: space-between;
 
+        background-color: var(--tertiary);
+        box-shadow: rgba(0,0,0,.1) 0 4px 6px -1px,rgba(0,0,0,.06) 0 2px 4px -1px;
+
         &:hover {
-            border-color: var(--primary);
-            border-color: rgba(64,64,64,1);
+            border-color: var(--thin-border-hover);
         }
 
         .project-card__title {
@@ -62,7 +63,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
                 margin-right: .8rem;
                 img {
                     display: block;
-                    filter: invert(1);
+                    filter: invert(var(--ld-invert));
                 }
             }
         }

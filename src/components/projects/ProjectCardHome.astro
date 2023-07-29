@@ -29,7 +29,7 @@ const { name, description, tags, source_code_link, image } = Astro.props
 
     <div class="project-links">
         <a href={source_code_link} class="github" target="_blank">
-            <img src="/images/github_.png" alt="github" />
+            <img src="/images/github_.png" alt="github" class="github" />
         </a>
     </div>
 </li>
@@ -44,9 +44,11 @@ const { name, description, tags, source_code_link, image } = Astro.props
         column-gap: 2rem;
 
         padding: .75rem;
-        border-radius: .375rem;
-        background: var(--secondary);
         border: 2px solid var(--border-color);
+        border-radius: .375rem;
+
+        background-color: var(--tertiary);
+        box-shadow: rgba(0,0,0,.1) 0 4px 6px -1px,rgba(0,0,0,.06) 0 2px 4px -1px;
 
         @media all and (max-width: 768px) {
             flex-direction: column;
@@ -54,7 +56,7 @@ const { name, description, tags, source_code_link, image } = Astro.props
 
         &:hover {
             transform: translateY(-5px);
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
+            // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
         }
         .project-card__thumbnail-container {
             flex-shrink: 0;
@@ -131,6 +133,9 @@ const { name, description, tags, source_code_link, image } = Astro.props
                     width: 1.5rem;
                     height: 1.5rem;
                     object-fit: contain;
+                    &.github {
+                        filter: invert(var(--dl-invert));
+                    }
                 }
             }
         }

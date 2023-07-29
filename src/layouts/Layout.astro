@@ -71,32 +71,46 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		--primary: rgb(34 211 238 / 1); 
 		--secondary: rgb(26, 26, 31);
 		--tertiary: rgb(9, 10, 12);
+
 		--title-text: rgb(218, 218, 219);
 		--text-color: rgb(196, 196, 197);
 		--gray: rgb(155, 156, 157);
+		--text-hover: rgb(255 255 255 / 1);
+
 		--border-color: rgb(51, 51, 51);
+		--thin-border-color: rgba(38,38,38,1);
+		--thin-border-hover: rgba(64,64,64,1);
 		--entry: rgb(46, 46, 51);
 		--entry-text: #be4c39;
 
 		--gradient-to: #22d3ee;
 		--gradient-stops: #0ea5e9, var(--gradient-to, rgb(14 165 233 / 0));
 		--text-gradient: linear-gradient(to bottom right,var(--gradient-stops));
+
+		--hover-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
 		
 		--accent: rgb(124, 58, 237);
 		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
 
 		--sun_icon_visibility: block;
 		--mon_icon_visibility: none;
+		--dl-invert: 0;
+		--ld-invert: 1;
 	}
 
 	.light {
 		--primary: rgb(34, 211, 238);
 		--secondary: #f5f5f5;
-		--tertiary: #ffffff;
+		--tertiary: #eef1f0;
+
 		--title-text: #1d1d1d;
-		--text-color: #363636;
-		--gray: #b0b0b0;
+		--text-color: #070808;
+		--gray: #808080;
+		--text-hover: rgba(1, 1, 1, 0.785);
+
 		--border-color: #e0e0e0;
+		--thin-border-color: rgba(229,229,229,1);
+		--thin-border-hover: rgba(212,212,212,1);
 		--entry: #f0f0f0;
 		--entry-text: #be4c39;
 
@@ -104,11 +118,15 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		--gradient-stops: #0ea5e9, var(--gradient-to, rgb(14 165 233 / 0));
 		--text-gradient: linear-gradient(to bottom right,var(--gradient-stops));
 
+		--hover-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
+
 		--accent: #f4511e;
 		--accent-gradient: linear-gradient(45deg, var(--accent), #da62c4 30%, white 60%);
 
 		--sun_icon_visibility: none;
 		--mon_icon_visibility: block;
+		--dl-invert: .7;
+		--ld-invert: 0;
 	}
 
 	*, *::before, *::after {

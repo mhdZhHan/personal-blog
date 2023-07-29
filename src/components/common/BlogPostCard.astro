@@ -30,16 +30,18 @@ const pubDate_ = simplifyDate(pubDate)
     transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
     &:hover {
         transform: translateY(-5px);
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
+        // box-shadow: var(--hover-shadow);
     }
     a {
         display: block;
         overflow: hidden;
         color: inherit;
         text-decoration: inherit;
-        background-color: var(--secondary);
-        border-radius: .4rem;
         border: 2px solid var(--border-color);
+        border-radius: .4rem;
+
+        background-color: var(--tertiary);
+        box-shadow: rgba(0,0,0,.1) 0 4px 6px -1px,rgba(0,0,0,.06) 0 2px 4px -1px;
 
         height: 100%;
         .post-card__thumbnail-container {

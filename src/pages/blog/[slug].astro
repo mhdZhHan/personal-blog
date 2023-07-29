@@ -9,6 +9,7 @@ import Layout from '../../layouts/Layout.astro'
 
 // components
 import Comments from '../../components/common/Comments'
+import TOC from '../../components/common/TOC.astro'
 
 // utils
 import { nonDraftPosts, simplifyDate } from '../../utils'
@@ -34,7 +35,7 @@ const { title, pubDate, image, description } = post.data
 
 const pubDate_ = simplifyDate(pubDate)
 
-const { Content } = await post.render()
+const { Content, headings } = await post.render()
 
 const pageTitle = `Mohammed's blog | ${title}`
 ---
@@ -52,6 +53,10 @@ const pageTitle = `Mohammed's blog | ${title}`
                     <span class="blog-post-head__meta__author">Mohammed | </span>
                     <span class="blog-post-head__meta__date">{pubDate_.simplifiedDate}</span>
                 </div>
+            </div>
+
+            <div class="blog-post-toc">
+                <TOC pageHeadings={headings} />
             </div>
 
             <div class="blog-post-body">

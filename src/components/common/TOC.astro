@@ -1,7 +1,7 @@
 ---
 export type Props = {
     pageHeadings: Array<{ depth: number; text: string; slug: string }>
-};
+}
 
 const { pageHeadings } = Astro.props
 ---
@@ -18,7 +18,7 @@ const { pageHeadings } = Astro.props
                                 {" "}
                                 <a href={`#${h.slug}`}>{h.text}</a>
                             </li>
-                        );
+                        )
                     })
                 }
             </ul>

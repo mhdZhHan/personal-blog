@@ -33,7 +33,14 @@ import Layout from '../layouts/Layout.astro'
                 </p>
 
                 <ol>
-                    <li>PayPal: 
+                    <li><span class="label">UPI:</span> You can send Indian UPI payments to
+                        <span>
+                            hello.mohammedsh@ybl
+                        </span>
+                        (no transaction fees).
+                    </li>
+
+                    <li><span class="label">PayPal:</span> You can send PayPal payments to
                         <a href="https://www.paypal.com/paypalme/mohammedshajahan7">
                             mohammedshajahan360 [at] gmail [dot] com
                         </a>
@@ -70,6 +77,20 @@ import Layout from '../layouts/Layout.astro'
         p {
             margin-bottom: 1.5rem;
             // font-size: 1.25rem;
+        }
+
+        ol {
+            li {
+                margin-bottom: 1rem;
+                .label {
+                    color: var(--title-text);
+                    font-weight: 600;
+                    font-size: 1rem;
+                }
+                span {
+                    color: rgb(34 211 238 / 1);
+                }
+            }
         }
     }
 </style>

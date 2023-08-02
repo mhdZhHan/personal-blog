@@ -27,6 +27,20 @@ import projects from '../data/projects.json'
                     ))}
                 </ul>
             </div>
+
+            <div class="projects-footer">
+                <p>
+                    These are just a few examples of the projects I've enjoyed working on. 
+                    Each one has taught me something valuable and contributed to my growth as a developer.
+                </p>
+
+                <p>
+                    Feel free to explore them on <a href="https://github.com/mohammedshajahan7">Github</a> 
+                    and <a href="https://gitlab.com/mohammedshajahan7">Gitlab</a>, and if you have any questions or feedback, I'd love to hear from you!
+                    <br />
+                    Happy coding! 🚀💻
+                </p>
+            </div>
         </div>
     </section>
 </Layout>
@@ -60,6 +74,18 @@ import projects from '../data/projects.json'
 
             @media all and (max-width: 640px) {
                 grid-template-columns: repeat(1,minmax(0,1fr));
+            }
+        }
+    }
+
+    .projects-footer {
+        width: 100%;
+        margin-top: 1.5rem;
+        p {
+            margin-top: .75rem;
+            color: var(--text-color);
+            a {
+                color: rgb(34 211 238 / 1);
             }
         }
     }

@@ -21,7 +21,8 @@ import Logo from '../svg/Logo'
                     </path>
                 </svg> -->
 
-                <Logo />
+                <!-- <Logo /> -->
+                <img src="/star-boy.svg" alt="star-boy" />
                 Mohammed's Blog
             </div>
         </a>
@@ -85,8 +86,9 @@ import Logo from '../svg/Logo'
                     display: flex;
                     align-items: center;
 
-                    svg {
+                    svg, img {
                         display: block;
+                        filter: invert(var(--dl-invert));
                         stroke: #0891b2;
                         width: 2.5rem;
                         height: 2.5rem;

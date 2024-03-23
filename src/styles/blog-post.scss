@@ -69,34 +69,34 @@
         height: auto;
     }
 
-    code {
-        font-family: "SF Mono", menlo, inconsolata, monospace;
-        font-size: calc(1em - 2px);
-        color: var(--entry-text);
-        background-color: var(--entry);
+    // code {
+    //     font-family: "SF Mono", menlo, inconsolata, monospace;
+    //     font-size: calc(1em - 2px);
+    //     color: var(--entry-text);
+    //     background-color: var(--entry);
 
-        font-weight: 400;
-        padding: .1rem .4em;
-        border-radius: .1rem;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+    //     font-weight: 400;
+    //     padding: .1rem .4em;
+    //     border-radius: .1rem;
+    //     -webkit-font-smoothing: antialiased;
+    //     -moz-osx-font-smoothing: grayscale;
+    // }
 
-    pre {
-        border-radius: 8px !important;
-        margin: 1.2em 0 !important;
-        padding: 1.2em;
-    }
+    // pre {
+    //     border-radius: 8px !important;
+    //     margin: 1.2em 0 !important;
+    //     padding: 1.2em;
+    // }
 
-    pre code {
-        padding: 0;
-        background: initial;
-    }
+    // pre code {
+    //     padding: 0;
+    //     background: initial;
+    // }
 
-    pre code span {
-        font-size: 1rem;
-        line-height: 1.75em;
-    }
+    // pre code span {
+    //     font-size: 1rem;
+    //     line-height: 1.75em;
+    // }
 
     blockquote {
         border-left: 4px solid #cccccc;

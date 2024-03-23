@@ -8,7 +8,6 @@ import '../../styles/blog-post.scss'
 import Layout from '../../layouts/Layout.astro'
 
 // components
-import Comments from '../../components/common/Comments'
 import TOC from '../../components/common/TOC.astro'
 
 // utils
@@ -69,9 +68,9 @@ const pageTitle = `Mohammed's blog | ${title}`
                 </div>
             </div>
 
-            <div class="blog-post-comments">
-                <Comments client:idle />
-            </div>
+            <!-- old is github stuff inshaAllah build my own system later -->
+            <!-- <div class="blog-post-comments">
+            </div> -->
         </div>
         
     </section>

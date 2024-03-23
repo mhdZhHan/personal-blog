@@ -10,7 +10,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mohammedsh.netlify.app',
+  site: 'https://mohammedsh.xyz',
   integrations: [mdx({
     syntaxHighlight: "shiki",
     shikiConfig: {

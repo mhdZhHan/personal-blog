@@ -11,13 +11,13 @@
     "new-post": "node scripts/createMdx.js"
   },
   "dependencies": {
-    "@astrojs/image": "^0.17.2",
-    "@astrojs/mdx": "^0.19.7",
-    "@astrojs/rss": "^2.4.3",
-    "@astrojs/sitemap": "^2.0.1",
-    "astro": "^2.8.3",
-    "dompurify": "^3.0.5",
-    "fuse.js": "^6.6.2",
-    "sass": "^1.63.6"
+    "@astrojs/mdx": "^2.2.1",
+    "@astrojs/rss": "^4.0.5",
+    "@astrojs/sitemap": "^3.1.1",
+    "astro": "^4.5.9",
+    "astro-robots-txt": "^1.0.0",
+    "dompurify": "^3.0.11",
+    "fuse.js": "^7.0.0",
+    "sass": "^1.72.0"
   }
 }

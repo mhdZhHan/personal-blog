@@ -1,4 +1,6 @@
 ---
+import '../../styles/post-card.scss'
+
 // utils
 import { simplifyDate } from "../../utils"
 
@@ -24,69 +26,3 @@ const pubDate_ = simplifyDate(pubDate)
         </div>
     </a>
 </li>
-
-<style lang="scss">
-.post-card {
-    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
-    &:hover {
-        transform: translateY(-5px);
-        // box-shadow: var(--hover-shadow);
-    }
-    a {
-        display: block;
-        overflow: hidden;
-        color: inherit;
-        text-decoration: inherit;
-        border: 2px solid var(--border-color);
-        border-radius: .4rem;
-
-        background-color: var(--tertiary);
-        box-shadow: rgba(0,0,0,.1) 0 4px 6px -1px,rgba(0,0,0,.06) 0 2px 4px -1px;
-
-        height: 100%;
-        .post-card__thumbnail-container {
-            position: relative;
-            padding-bottom: calc(2 / 3 * 100%);
-            img {
-                display: block;
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-
-                position: absolute;
-                inset: 0;
-            }
-        }
-
-        .post-card__body {
-            text-align: center;
-            padding-bottom: 1.5rem;
-            padding-top: 1rem;
-            padding-left: .75rem;
-            padding-right: .75rem;
-            .title {
-                color: var(--title-text);
-                font-weight: 600;
-                font-size: 1.25rem;
-                line-height: 1.75rem;
-            }
-            .date {
-                display: block;
-                font-size: .75rem;
-                line-height: 1rem;
-                color: var(--gray);
-            }
-            .body-text {
-                font-size: .875rem;
-                line-height: 1.25rem;
-                margin-top: .5rem;
-
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 3;
-                overflow: hidden;
-            }
-        }
-    }
-}
-</style>

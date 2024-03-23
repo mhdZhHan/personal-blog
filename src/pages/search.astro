@@ -1,155 +1,158 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import BlogPostCard from '../components/common/BlogPostCard.astro'
-// import Pagination from '../components/common/Pagination.astro'
+import "../styles/post-card.scss"
+
+import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout title="Mohammed's blog | Search">
-    <section id="blogs" aria-label="Search Results">
-        <div class="wrapper">
-            <div class="blogs-head">
-                <h1 class="blogs-head__title">🧑‍🚀 Search Results !</h1>
-                <p class="blogs-head__sub-title" id="searchReadout"></p>
+	<section id="blogs" aria-label="Search Results">
+		<div class="wrapper">
+			<div class="blogs-head">
+				<h1 class="blogs-head__title">🔍 Search Results !</h1>
+				<p class="blogs-head__sub-title" id="searchReadout"></p>
 
-                <div class="search-box">
-                    <form id="search-form">
-                        <div class="search-box__container">
-                            <input 
-                                type="text" 
-                                name="search" 
-                                id="search"
-                                maxlength="24"
-                                minlength="2"
-                                placeholder="Search" 
-                            />
-                        </div>
-                    </form>
-                </div>
-            </div>
+				<div class="search-box">
+					<form id="search-form">
+						<div class="search-box__container">
+							<input
+								type="search"
+								name="search"
+								id="search"
+								maxlength="24"
+								minlength="2"
+								placeholder="Search"
+							/>
+						</div>
+					</form>
+				</div>
+			</div>
 
-            <ul class="blog-posts" id="searchResults">
-                <!-- {page.data.map((post) => (
+			<ul class="blog-posts" id="searchResults">
+				<!-- {page.data.map((post) => (
                     <BlogPostCard
                         {...post.data}
                         url={post.slug}
                     />
                 ))} -->
-            </ul>
+			</ul>
 
-            <div class="blogs-footer">
-                <!-- <Pagination 
+			<div class="blogs-footer">
+				<!-- <Pagination 
                     prevUrl={page.url.prev}
                     nextUrl={page.url.next}
                 /> -->
-            </div>
-        </div>
-    </section>
+			</div>
+		</div>
+	</section>
 </Layout>
 
 <style lang="scss">
-    .blogs-head {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 1.5rem;
-        .blogs-head__title {
-            font-size: 1.875rem;
-            line-height: 2.25rem;
-            font-weight: 700;
-        }
-        .blogs-head__sub-title {
-            margin-top: .75rem;
-            color: var(--gray);
-        }
-    }
+	.blogs-head {
+		width: 100%;
+		text-align: center;
+		margin-bottom: 1.5rem;
+		.blogs-head__title {
+			font-size: 1.875rem;
+			line-height: 2.25rem;
+			font-weight: 700;
+		}
+		.blogs-head__sub-title {
+			margin-top: 0.75rem;
+			color: var(--gray);
+		}
+	}
 
-    .search-box {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+	.search-box {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
 
-        margin-top: 0.75rem;
+		margin-top: 0.75rem;
 
-        @media all and (max-width: 768px) {
-            justify-content: center;
-        }
-        form {
-            .search-box__container {
-                position: relative;
+		@media all and (max-width: 768px) {
+			justify-content: center;
+		}
+		form {
+			.search-box__container {
+				position: relative;
 
-                input {
-                    border: none;
-                    outline: none;
-                    display: block;
-                    width: 17rem;
-                    height: 2rem;
-                    border-radius: .4rem;
-                    font-size: 1rem;
-                    font-weight: 400;
-                    padding: .3rem .3rem .3rem 2rem;
-                    background-color: var(--secondary);
-                    border: 2px solid var(--border-color);
-                    color: var(--text-color);
-                }
+				input {
+					border: none;
+					outline: none;
+					display: block;
+					width: 17rem;
+					height: 2rem;
+					border-radius: 0.4rem;
+					font-size: 1rem;
+					font-weight: 400;
+					padding: 0.3rem 0.3rem 0.3rem 2rem;
+					background-color: var(--secondary);
+					border: 2px solid var(--border-color);
+					color: var(--text-color);
+				}
 
-                &::before {
-                    content: "";
-                    background-image: url('/icons/search1.svg');
-                    width: .9rem;
-                    height: .9rem;
-                    display: block;
-                    position: absolute;
-                    left: .7rem;
-                    top: 0;
-                    bottom: 0;
-                    margin: auto 0;
-                }
-            }
-        }
-    }
+				&::before {
+					content: "";
+					background-image: url("/icons/search1.svg");
+					width: 0.9rem;
+					height: 0.9rem;
+					display: block;
+					position: absolute;
+					left: 0.7rem;
+					top: 0;
+					bottom: 0;
+					margin: auto 0;
+				}
+			}
+		}
+	}
 
-    .blog-posts {
-        // padding: 1.5rem 0;
-        display: grid;
-        grid-template-columns: repeat(3,minmax(0,1fr));
-        gap: 1.5rem;
+	.blog-posts {
+		// padding: 1.5rem 0;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.5rem;
 
-        @media all and (max-width: 768px) {
-            grid-template-columns: repeat(1,minmax(0,1fr));
-        }
-    }
+		@media all and (max-width: 768px) {
+			grid-template-columns: repeat(1, minmax(0, 1fr));
+		}
+	}
 
-    .blogs-footer {
-        padding: 1.5rem 0;
-    }
+	.blogs-footer {
+		padding: 1.5rem 0;
+	}
 </style>
 
 <script>
-    // imports
-    import DOMPurify from 'dompurify'
-    import Fuse from 'fuse.js'
+	// imports
+	import DOMPurify from "dompurify"
+	import Fuse from "fuse.js"
 
-    let SEARCH_DATA
+	// utils
+	import { simplifyDate } from "../utils"
 
-    let FUSE_INSTANCE
+	let SEARCH_DATA
 
-    const FUSE_OPTIONS = {
-        includeScore: true,
-        shouldSort: true,
-        threshold: 0.5,
-        keys: [
-            {
-                name: "title",
-                weight: 1,
-            },
-            {
-                name: "description",
-                weight: 0.75,
-            },
-        ],
-    }
+	let FUSE_INSTANCE
 
-    const SPINNER = `
+	const FUSE_OPTIONS = {
+		includeScore: true,
+		shouldSort: true,
+		threshold: 0.5,
+		keys: [
+			{
+				name: "title",
+				weight: 1,
+			},
+			{
+				name: "description",
+				weight: 0.75,
+			},
+		],
+	}
+
+	const SPINNER = `
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -172,94 +175,115 @@ import BlogPostCard from '../components/common/BlogPostCard.astro'
         </svg>
     `
 
-    // selectors
-    const search = document.querySelector('#search')
-    const searchReadout = document.querySelector('#searchReadout')
-    const resultsList = document.querySelector('#searchResults')
+	// selectors
+	const search = document.querySelector("#search")
+	const searchReadout = document.querySelector("#searchReadout")
+	const resultsList = document.querySelector("#searchResults")
 
-    // functions
-    const updateDocumentTitle = (search) => {
-        document.title = search ? `Search results for "${search}"` :
-            `Search the Blog`
-    }
+	// functions
+	const updateDocumentTitle = (search) => {
+		document.title = search
+			? `Search results for "${search}"`
+			: `Search the Blog`
+	}
 
-    const updateSearchReadout = (search) => {
-        searchReadout.textContent = search ? `Search results for “${search}”` : ""
-    }
+	const updateSearchReadout = (search) => {
+		searchReadout.textContent = search
+			? `Search results for “${search}”`
+			: ""
+	}
 
-    function updateSearchPageUrl(search) {
-        const url = new URL(window.location.href)
-        url.searchParams.set("q", search)
-        window.history.replaceState(null, "", url)
-    }
+	function updateSearchPageUrl(search) {
+		const url = new URL(window.location.href)
+		url.searchParams.set("q", search)
+		window.history.replaceState(null, "", url)
+	}
 
-    function generateSearchList(results) {
-        return results.map((r) => {
-            const { title, pubDate, slug, description, image } = r.item
+	function generateSearchList(results) {
+		return results
+			.map((r) => {
+				const { title, pubDate, slug, description, image } = r.item
 
-            return`
-                <BlogPostCard
-                    title="${title}"
-                    pubDate="${pubDate}"
-                    description="${description}"
-                    image="${image}"
-                    url="${slug}"
-                />
+				return `
+            <li class="post-card">
+                <a href="${slug}">
+                    ${
+						image &&
+						image !== "" &&
+						`
+                        <div class="post-card__thumbnail-container">
+                                <img src="${image}" alt="${title}" />
+                        </div>
+                        `
+					}
+
+                    <div class="post-card__body">
+                        <h2 class="title">${title}</h2>
+                        <span class="date">${simplifyDate(pubDate).simplifiedDate}</span>
+                        <p class="body-text">
+                            ${description}
+                        </p>
+                    </div>
+                </a>
+            </li>
             `
-        })
-    }
+			})
+			.join(" ")
+	}
 
-    async function fetchSearchResults(search) {
-        if (search.length === 0) return
+	async function fetchSearchResults(search) {
+		if (search.length === 0) return
 
-        // resultsList.innerHTML = SPINNER
+		// resultsList.innerHTML = SPINNER
 
-        if(!SEARCH_DATA) {
-            try {
-                const response = await fetch('/search.json')
+		if (!SEARCH_DATA) {
+			try {
+				const response = await fetch("/api/search.json")
 
-                if(!response.ok) throw new Error("Something went wrong...")
+				if (!response.ok) throw new Error("Something went wrong...")
 
-                SEARCH_DATA = await response.json()
+				SEARCH_DATA = await response.json()
+			} catch (error) {
+				console.error(error)
+			}
+		}
 
-            } catch (error) {
-                console.error(error)
-            }
-        }
+		if (SEARCH_DATA && !FUSE_INSTANCE) {
+			FUSE_INSTANCE = new Fuse(SEARCH_DATA, FUSE_OPTIONS)
+		}
 
-        if (SEARCH_DATA && !FUSE_INSTANCE) {
-            FUSE_INSTANCE = new Fuse(SEARCH_DATA, FUSE_OPTIONS)
-        }
+		if (!FUSE_INSTANCE) return
+		const searchResult = FUSE_INSTANCE.search(search)
 
-        if (!FUSE_INSTANCE) return
-        const searchResult = FUSE_INSTANCE.search(search)
-
-		resultsList.innerHTML = searchResult.length > 0
+		resultsList.innerHTML =
+			searchResult.length > 0
 				? generateSearchList(searchResult)
-				: "No results found…"
-    }
+				: "No blogs found…"
+	}
 
-    // event listeners
-    window.addEventListener('DOMContentLoaded', () => {
-        const urlParams = DOMPurify.sanitize(new URLSearchParams(window.location.search).get("q"))
+	// event listeners
+	window.addEventListener("DOMContentLoaded", () => {
+		const urlParams = DOMPurify.sanitize(
+			new URLSearchParams(window.location.search).get("q")
+		)
 
-        fetchSearchResults(urlParams)
-        updateDocumentTitle(urlParams)
-        updateSearchReadout(urlParams)
+		fetchSearchResults(urlParams)
+		updateDocumentTitle(urlParams)
+		updateSearchReadout(urlParams)
 
-        search.value = urlParams
-        search.focus()
-    })
+		search.value = urlParams
+		search.focus()
+	})
 
-    search.addEventListener('input', () => {
-        const searchTerm = DOMPurify.sanitize(search.value)
+	search.addEventListener("input", () => {
+		const searchTerm = DOMPurify.sanitize(search.value)
 
-        updateDocumentTitle(searchTerm)
-        updateSearchReadout(searchTerm)
-        fetchSearchResults(searchTerm)
-        updateSearchPageUrl(searchTerm)
+		updateDocumentTitle(searchTerm)
+		updateSearchReadout(searchTerm)
+		fetchSearchResults(searchTerm)
+		updateSearchPageUrl(searchTerm)
 
-        search.value = searchTerm
-        search.focus()
-    })
+		search.value = searchTerm
+		search.focus()
+	})
 </script>

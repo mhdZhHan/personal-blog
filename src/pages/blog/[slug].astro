@@ -1,32 +1,32 @@
 ---
-import { getCollection, CollectionEntry } from 'astro:content'
+import { getCollection, CollectionEntry } from "astro:content"
 
 // styles
-import '../../styles/blog-post.scss'
+import "../../styles/blog-post.scss"
 
 // layouts
-import Layout from '../../layouts/Layout.astro'
+import Layout from "../../layouts/Layout.astro"
 
 // components
-import TOC from '../../components/common/TOC.astro'
+import TOC from "../../components/common/TOC.astro"
 
 // utils
-import { nonDraftPosts, simplifyDate } from '../../utils'
+import { nonDraftPosts, simplifyDate } from "../../utils"
 
 export async function getStaticPaths() {
-    const posts = await getCollection('blog')
-    const nonDraftPosts_ = nonDraftPosts(posts)
+	const posts = await getCollection("blog")
+	const nonDraftPosts_ = nonDraftPosts(posts)
 
-    return nonDraftPosts_.map((post) => {
-        return {
-            params: { slug: post.slug },
-            props: { post }
-        }
-    })
+	return nonDraftPosts_.map((post) => {
+		return {
+			params: { slug: post.slug },
+			props: { post },
+		}
+	})
 }
 
 interface Props {
-    post: CollectionEntry<"blog">
+	post: CollectionEntry<"blog">
 }
 
 const { post } = Astro.props
@@ -39,93 +39,87 @@ const { Content, headings } = await post.render()
 const pageTitle = `Mohammed's blog | ${title}`
 ---
 
-<Layout 
-    title={pageTitle} 
-    description={description} 
-    ogImageUrl={image}
->
-    <section id="blog-post">
-        <div class="wrapper">
-            <div class="blog-post-head">
-                <h1 class="blog-post-head__title">{title}</h1>
-                <div class="blog-post-head__meta">
-                    <span class="blog-post-head__meta__author">Mohammed | </span>
-                    <span class="blog-post-head__meta__date">{pubDate_.simplifiedDate}</span>
-                </div>
-            </div>
+<Layout title={pageTitle} description={description} ogImageUrl={image}>
+	<section id="blog-post">
+		<div class="wrapper">
+			<div class="blog-post-head">
+				<h1 class="blog-post-head__title">{title}</h1>
+				<div class="blog-post-head__meta">
+					<span class="blog-post-head__meta__author"
+						>Mohammed |
+					</span>
+					<span class="blog-post-head__meta__date"
+						>{pubDate_.simplifiedDate}</span
+					>
+				</div>
+			</div>
 
-            <div class="blog-post-toc">
-                <TOC pageHeadings={headings} />
-            </div>
+			<div class="blog-post-toc">
+				<TOC pageHeadings={headings} />
+			</div>
 
-            <div class="blog-post-body">
-                <div class="blog-post-body__thumbnail">
-                    <img src={image} alt={title} loading="lazy" />
-                </div>
+			<div class="blog-post-body">
+				<div class="blog-post-body__thumbnail">
+					<img src={image} alt={title} loading="lazy" />
+				</div>
 
-                <div class="blog-post-body__content">
-                    <Content />
-                </div>
-            </div>
+				<div class="blog-post-body__content">
+					<Content />
+				</div>
+			</div>
 
-            <!-- old is github stuff inshaAllah build my own system later -->
-            <!-- <div class="blog-post-comments">
+			<!-- old is github stuff inshaAllah build my own system later -->
+			<!-- <div class="blog-post-comments">
             </div> -->
-        </div>
-        
-    </section>
+		</div>
+	</section>
 </Layout>
 
 <style lang="scss">
-    .blog-post-head {
-        .blog-post-head__title {
-            font-size: 1.875rem;
-            line-height: 2.25rem;
-            font-weight: 700;
-            text-align: center;
-        }
-        .blog-post-head__meta {
-            font-size: .875rem;
-            line-height: 1.25rem;
-            color: var(--gray);
-            text-align: center;
-            margin-top: .5rem;
-            .blog-post-head__meta__author {
+	.blog-post-head {
+		.blog-post-head__title {
+			font-size: 1.875rem;
+			line-height: 2.25rem;
+			font-weight: 700;
+			text-align: center;
+		}
+		.blog-post-head__meta {
+			font-size: 0.875rem;
+			line-height: 1.25rem;
+			color: var(--gray);
+			text-align: center;
+			margin-top: 0.5rem;
+			.blog-post-head__meta__author {
+			}
+			.blog-post-head__date {
+			}
+		}
+	}
 
-            }
-            .blog-post-head__date {
+	.blog-post-body {
+		margin: 1.25rem auto;
+		.blog-post-body__thumbnail {
+			margin: 0 auto;
+			border-radius: 0.5rem;
+			img {
+				display: block;
+				object-fit: cover;
+				width: 100%;
+				aspect-ratio: 2 / 1;
 
-            }
-        }
-    }
+				border: 1px solid var(--border-color);
+				border-radius: 0.5rem;
+			}
+		}
+		.blog-post-body__content {
+			margin-top: 2rem;
+			color: var(--text-color);
+			// max-width: 65ch;
+		}
+	}
 
-    .blog-post-body {
-        // max-width: 65ch;
-        margin: 1.25rem auto;
-        .blog-post-body__thumbnail {
-            position: relative;
-            padding-bottom: calc(2 / 3 * 100%);
-            margin: 0 auto;
-            img {
-                display: block;
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-
-                position: absolute;
-                inset: 0;
-                border-radius: .5rem;
-            }
-        }
-        .blog-post-body__content {
-            margin-top: 2rem;
-            color: var(--text-color);
-            // max-width: 65ch;
-        }
-    }
-
-    .blog-post-comments {
-        // max-width: 65ch;
-        margin: 1.25rem auto;
-    }
+	.blog-post-comments {
+		// max-width: 65ch;
+		margin: 1.25rem auto;
+	}
 </style>

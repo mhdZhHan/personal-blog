@@ -4,7 +4,7 @@ import { getCollection } from "astro:content"
 // utils
 import { sortByDate, nonDraftPosts } from '../utils'
 
-export async function get(context) {
+export async function GET(context) {
     const posts = await getCollection("blog")
     const nonDraftPosts_ = nonDraftPosts(posts)
     const sortedPosts = sortByDate(nonDraftPosts_)

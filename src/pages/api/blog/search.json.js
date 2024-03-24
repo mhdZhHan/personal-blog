@@ -1,5 +1,5 @@
 import { getCollection } from "astro:content"
-import { nonDraftPosts } from "../../utils"
+import { nonDraftPosts } from "../../../utils"
 
 async function getPosts() {
 	const blogs = (await getCollection("blog")).sort(

@@ -1,0 +1,71 @@
+<!-- ---
+export const prerender = false
+
+const { like } = Astro.props
+---
+
+<div class="post-like">
+	<button
+		aria-label="Likes for post"
+		aria-pressed="true"
+		id="likeBtn"
+		data-id={like.id}
+	>
+		<span>Likes</span>
+		{like.likes}
+		<span>❤️‍🔥</span>
+	</button>
+</div>
+
+<style lang="scss">
+	.post-like {
+		margin-top: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		button {
+			border: 1px solid var(--border-color);
+			outline: none;
+			background: transparent;
+			color: var(--grey);
+			padding: 8px 16px;
+			border-radius: 4px;
+			cursor: pointer;
+			transition: opacity 0.1s ease;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.25rem;
+
+			&:active {
+				opacity: 0.8;
+			}
+		}
+	}
+</style>
+
+<script>
+	const likeBtn = document.getElementById("likeBtn") as HTMLButtonElement
+
+	// decide whether or not it's disabled on page load
+
+	// if clicked increment
+	likeBtn.addEventListener("click", async () => {
+		try {
+			const req = await fetch(
+				`/api/blog/like/${likeBtn.dataset.id}.json`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ id: likeBtn.dataset.id }),
+				}
+			)
+		} catch (error) {
+			console.log(error)
+		}
+	})
+</script> -->

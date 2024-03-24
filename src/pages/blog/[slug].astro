@@ -1,43 +1,43 @@
 ---
-import { getCollection } from "astro:content"
-import type { CollectionEntry } from "astro:content"
+export const prerender = false
 
 // styles
 import "../../styles/blog-post.scss"
+
+import { getEntry, type CollectionEntry } from "astro:content"
+import { db, eq, Like } from "astro:db"
 
 // layouts
 import Layout from "../../layouts/Layout.astro"
 
 // components
 import TOC from "../../components/common/TOC.astro"
+import LikeBlog from "../../components/blog/LikeBlog.astro"
 
 // utils
 import { nonDraftPosts, simplifyDate } from "../../utils"
 
-export async function getStaticPaths() {
-	const posts = await getCollection("blog")
-	const nonDraftPosts_ = nonDraftPosts(posts)
+// TODO Getting blog
+type Props = CollectionEntry<"blog">
 
-	return nonDraftPosts_.map((post) => {
-		return {
-			params: { slug: post.slug },
-			props: { post },
-		}
-	})
+const { slug } = Astro.params
+if (!slug) {
+	Astro.redirect("/")
 }
 
-interface Props {
-	post: CollectionEntry<"blog">
+const post = await getEntry("blog", slug)
+if (!post) {
+	Astro.redirect("/")
 }
 
-const { post } = Astro.props
 const { title, pubDate, image, description } = post.data
-
-const pubDate_ = simplifyDate(pubDate)
 
 const { Content, headings } = await post.render()
 
 const pageTitle = `Mohammed's blog | ${title}`
+
+// TODO Like data of the current post
+const likes = await db.select().from(Like).where(eq(Like.id, slug))
 ---
 
 <Layout title={pageTitle} description={description} ogImageUrl={image}>
@@ -50,9 +50,11 @@ const pageTitle = `Mohammed's blog | ${title}`
 						>Mohammed |
 					</span>
 					<span class="blog-post-head__meta__date"
-						>{pubDate_.simplifiedDate}</span
+						>{simplifyDate(pubDate).simplifiedDate}</span
 					>
 				</div>
+
+				{likes && <LikeBlog like={likes[0]} />}
 			</div>
 
 			<div class="blog-post-toc">
@@ -90,10 +92,6 @@ const pageTitle = `Mohammed's blog | ${title}`
 			color: var(--gray);
 			text-align: center;
 			margin-top: 0.5rem;
-			.blog-post-head__meta__author {
-			}
-			.blog-post-head__date {
-			}
 		}
 	}
 

@@ -1,5 +1,5 @@
-<!-- ---
-export const prerender = false
+---
+export const prerender = true
 
 const { like } = Astro.props
 ---
@@ -46,7 +46,7 @@ const { like } = Astro.props
 	}
 </style>
 
-<script>
+<!-- <script>
 	const likeBtn = document.getElementById("likeBtn") as HTMLButtonElement
 
 	// decide whether or not it's disabled on page load

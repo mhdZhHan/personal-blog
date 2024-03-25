@@ -1,10 +1,10 @@
 ---
-export const prerender = false
+export const prerender = true
 
 // styles
 import "../../styles/blog-post.scss"
 
-import { getEntry, type CollectionEntry } from "astro:content"
+import { getEntryBySlug, getCollection, type CollectionEntry } from "astro:content"
 import { db, eq, Like } from "astro:db"
 
 // layouts
@@ -20,19 +20,28 @@ import { nonDraftPosts, simplifyDate } from "../../utils"
 // TODO Getting blog
 type Props = CollectionEntry<"blog">
 
+export async function getStaticPaths() {
+    const allPosts = await getCollection('blog');
+    return allPosts.map(post => ({
+        params: {
+            slug: post.slug
+        }
+    }))
+}
+
 const { slug } = Astro.params
 if (!slug) {
 	Astro.redirect("/")
 }
 
-const post = await getEntry("blog", slug)
+const post = await getEntryBySlug("blog", slug!)
 if (!post) {
 	Astro.redirect("/")
 }
 
-const { title, pubDate, image, description } = post.data
+const { title, pubDate, image, description } = post!.data
 
-const { Content, headings } = await post.render()
+const { Content, headings } = await post!.render()
 
 const pageTitle = `Mohammed's blog | ${title}`
 

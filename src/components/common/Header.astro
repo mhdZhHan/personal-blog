@@ -1,12 +1,11 @@
 ---
-// import ThemToggle from "./ThemToggle.astro"
 import Logo from '../svg/Logo'
 ---
 
 <header class="header wrapper">
     <div class="header__container">
-        <a class="header__container__logo" href="/">
-            <div class="header__container__logo__logo-container">
+        <a class="header__logo" href="/">
+            <div class="logo-container">
                 <!-- <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     viewBox="0 0 24 24" 
@@ -27,7 +26,7 @@ import Logo from '../svg/Logo'
             </div>
         </a>
 
-        <nav class="header__container__menu">
+        <nav class="header__menu">
             <ul>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/projects">Projects</a></li>
@@ -71,9 +70,9 @@ import Logo from '../svg/Logo'
                 justify-content: initial;
                 align-items: initial;
             }
-            .header__container__logo {
+            .header__logo {
                 display: block;
-                .header__container__logo__logo-container {
+                .logo-container {
                     font-weight: 700;
                     font-size: 1.25rem;
                     line-height: 1.75rem;
@@ -94,11 +93,13 @@ import Logo from '../svg/Logo'
                         height: 2.5rem;
                         margin-right: .25rem;
                         vertical-align: middle;
+
+                        pointer-events: none;
                     }
                 }
             }
 
-            .header__container__menu {
+            .header__menu {
                 display: flex;
                 align-items: center;
                 gap: .7rem;

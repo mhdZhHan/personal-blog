@@ -83,8 +83,6 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		--border-color: rgb(51, 51, 51);
 		--thin-border-color: rgba(38, 38, 38, 1);
 		--thin-border-hover: rgba(64, 64, 64, 1);
-		--entry: rgb(46, 46, 51);
-		--entry-text: #be4c39;
 
 		--gradient-to: #22d3ee;
 		--gradient-stops: #0ea5e9, var(--gradient-to, rgb(14 165 233 / 0));
@@ -92,15 +90,9 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 			to bottom right,
 			var(--gradient-stops)
 		);
-
-		--hover-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
-
-		--accent: rgb(124, 58, 237);
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			#da62c4 30%,
-			white 60%
+		--text-gradient: linear-gradient(
+			to bottom right,
+			var(--gradient-stops)
 		);
 
 		--sun_icon_visibility: block;
@@ -122,24 +114,12 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		--border-color: #e0e0e0;
 		--thin-border-color: rgba(229, 229, 229, 1);
 		--thin-border-hover: rgba(212, 212, 212, 1);
-		--entry: #f0f0f0;
-		--entry-text: #be4c39;
 
 		--gradient-to: #22d3ee;
 		--gradient-stops: #0ea5e9, var(--gradient-to, rgb(14 165 233 / 0));
 		--text-gradient: linear-gradient(
 			to bottom right,
 			var(--gradient-stops)
-		);
-
-		--hover-shadow: rgba(0, 0, 0, 0.1) 0px 4px 5px 10px;
-
-		--accent: #f4511e;
-		--accent-gradient: linear-gradient(
-			45deg,
-			var(--accent),
-			#da62c4 30%,
-			white 60%
 		);
 
 		--sun_icon_visibility: none;
@@ -165,7 +145,6 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		background-color: var(--tertiary);
 		// font-family: "GT-Eesti", Arial, Helvetica, sans-serif;
 		font-family: "Ubuntu", sans-serif;
-		// font-weight: 500;
 		line-height: 1.5;
 
 		min-height: 100vh;

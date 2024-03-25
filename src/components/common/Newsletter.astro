@@ -1,8 +1,8 @@
-<section id="news-letter">
+<section id="newsletter">
     <div class="wrapper">
-        <div class="news-letter-container">
-            <div class="news-letter-container__left">
-                <div class="news-letter-container__left__head">
+        <div class="newsletter__container">
+            <div class="newsletter__left">
+                <div class="newsletter__head">
                     <h3 class="section-title">Subscribe to my <span>Newsletters</span></h3>
                     <p>
                         Get the latest posts delivered right to your inbox.
@@ -10,9 +10,9 @@
                 </div>
             </div>
 
-            <div class="news-letter-container__right">
+            <div class="newsletter__right">
                 <form action="">
-                    <div class="news-letter-container__right__input-container">
+                    <div class="newsletter__input-container">
                         <input type="text" placeholder="Work Email" />
                         <button type="submit">Subscribe</button>
                     </div>
@@ -23,7 +23,7 @@
 </section>
 
 <style lang="scss">
-    .news-letter-container {
+    .newsletter__container {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -33,12 +33,12 @@
             flex-direction: column;
             align-items: initial;
         }
-        .news-letter-container__left {
+        .newsletter__left {
             width: 58.333333%;
             @media all and (max-width: 640px) {
                 width: auto;
             }
-            .news-letter-container__left__head {
+            .newsletter__head {
                 h3 {
                     span {
                         color: transparent;
@@ -54,13 +54,13 @@
             }
         }
 
-        .news-letter-container__right {
+        .newsletter__right {
             widows: 41.666667%;
             @media all and (max-width: 640px) {
                 width: 100%;
             }
             form {
-                .news-letter-container__right__input-container {
+                .newsletter__input-container {
                     width: 100%;
                     background-color: var(--secondary);
                     border-radius: 9999px;

@@ -12,14 +12,14 @@ import projects from '../data/projects.json'
     <section id="projects">
         <div class="wrapper">
             <div class="projects-head">
-                <h1 class="projects-head__title">🛠️ Projects !</h1>
-                <p class="projects-head__sub-title">
+                <h1 class="projects__title">🛠️ Projects !</h1>
+                <p class="projects__sub-title">
                     Showcase of my selected projects over the years. 
                 </p>
             </div>
 
             <div class="projects-container">
-                <ul class="projects-container__projects">
+                <ul class="projects__projects-list">
                     {projects.map((project) => (
                         <ProjectCard 
                             {...project}
@@ -50,12 +50,12 @@ import projects from '../data/projects.json'
         width: 100%;
         text-align: center;
         margin-bottom: 1.5rem;
-        .projects-head__title {
+        .projects__title {
             font-size: 1.875rem;
             line-height: 2.25rem;
             font-weight: 700;
         }
-        .projects-head__sub-title {
+        .projects__sub-title {
             margin-top: .75rem;
             color: var(--gray);
         }
@@ -63,7 +63,7 @@ import projects from '../data/projects.json'
 
     .projects-container {
         margin-top: 2rem;
-        .projects-container__projects {
+        .projects__projects-list {
             display: grid;
             grid-template-columns: repeat(3,minmax(0,1fr));
             gap: 1rem;

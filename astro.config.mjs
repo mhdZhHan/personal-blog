@@ -20,7 +20,5 @@ export default defineConfig({
 		db(),
 	],
 	output: "hybrid",
-	adapter: vercel({
-		edgeMiddleware: true,
-	}),
+	adapter: vercel(),
 })

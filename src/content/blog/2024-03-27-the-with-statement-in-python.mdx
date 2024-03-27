@@ -1,0 +1,34 @@
+---
+title: The with statement in python
+draft: false
+pubDate: 2023-07-19
+description: "Welcome to my blog, where I'll be sharing my knowledge and experiences with 
+programming and technology. Whether you're an experienced developer or just starting your journey 
+in the world of programming, this blog is for you!"
+author: "Mohammed"
+image: "/images/blogs/books.jpeg"
+tags: ['python', 'programming']
+---
+
+The with statement in python is used for resource management and exception handling. You’d most likely find it when working with file streams. For example, the statement ensures that the file stream process does’t block other processes if an exception is raised, but terminates properly.
+
+The code block below shows the try-finally approach to file stream resource management.
+
+### Python
+
+```python:main.py
+file = open('file-path', 'w')
+try:
+    file.write('Hello world')
+finally:
+    file.close()
+```
+
+Normally, you’d want to use this method for writing to a file, but the with statement offers a cleaner approach:
+
+```python:main.py
+with open('file-path', 'w') as file:
+    file.write('Hello world')
+```
+
+The with statement simplifies our write process to just two lines.

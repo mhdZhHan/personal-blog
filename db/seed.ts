@@ -13,5 +13,6 @@ export default async function seed() {
 			likes: 0,
 		},
 		{ id: "2023-07-19-hello-world", likes: 0 },
+		{ id: "2024-03-27-the-with-statement-in-python", likes: 0 },
 	])
 }

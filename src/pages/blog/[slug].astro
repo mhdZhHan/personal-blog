@@ -4,8 +4,14 @@ export const prerender = true
 // styles
 import "../../styles/blog-post.scss"
 
-import { getEntryBySlug, getCollection, type CollectionEntry } from "astro:content"
+import {
+	getEntryBySlug,
+	getCollection,
+	type CollectionEntry,
+} from "astro:content"
 import { db, eq, Like } from "astro:db"
+
+import { fromMarkdown } from "mdast-util-from-markdown"
 
 // layouts
 import Layout from "../../layouts/Layout.astro"
@@ -13,28 +19,30 @@ import Layout from "../../layouts/Layout.astro"
 // components
 import TOC from "../../components/blog/TOC.astro"
 import LikeBlog from "../../components/blog/LikeBlog.astro"
+import BlogContent from "../../components/mdx/BlogContent.astro"
 
 // utils
 import { nonDraftPosts, simplifyDate } from "../../utils"
 
-// TODO Getting blog
 type Props = CollectionEntry<"blog">
 
 export async function getStaticPaths() {
-    const allPosts = await getCollection('blog');
-    return allPosts.map(post => ({
-        params: {
-            slug: post.slug
-        }
-    }))
+	const allPosts = await getCollection("blog")
+	return allPosts.map((post) => ({
+		params: {
+			slug: post.slug,
+		},
+	}))
 }
 
 const { slug } = Astro.params
+
 if (!slug) {
 	Astro.redirect("/")
 }
 
 const post = await getEntryBySlug("blog", slug!)
+
 if (!post) {
 	Astro.redirect("/")
 }
@@ -43,21 +51,23 @@ const { title, pubDate, image, description } = post!.data
 
 const { Content, headings } = await post!.render()
 
-const pageTitle = `Mohammed's blog | ${title}`
+const tree = fromMarkdown(post.body)
 
 // TODO Like data of the current post
 const likes = await db.select().from(Like).where(eq(Like.id, slug))
 ---
 
-<Layout title={pageTitle} description={description} ogImageUrl={image}>
+<Layout
+	title={`Mohammed's blog | ${title}`}
+	description={description}
+	ogImageUrl={image}
+>
 	<section id="blog-post" class="post">
 		<div class="wrapper">
 			<div class="post__head">
 				<h1 class="post__title">{title}</h1>
 				<div class="post__meta">
-					<span class="post__author"
-						>Mohammed |
-					</span>
+					<span class="post__author">Mohammed | </span>
 					<span class="post__date"
 						>{simplifyDate(pubDate).simplifiedDate}</span
 					>
@@ -76,7 +86,7 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 				</div>
 
 				<div class="post__content">
-					<Content />
+					<BlogContent node={tree} />
 				</div>
 			</div>
 

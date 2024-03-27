@@ -1,0 +1,11 @@
+---
+import { toHast } from "mdast-util-to-hast"
+import { toHtml } from "hast-util-to-html"
+
+const { node, data } = Astro.props
+// const handled_types = ["root", "heading", "paragraph", "image", "code"]
+const handled_types = ["code"]
+const other_type = !handled_types.includes(node.type)
+---
+
+{other_type && <Fragment set:html={toHtml(toHast(node))} />}

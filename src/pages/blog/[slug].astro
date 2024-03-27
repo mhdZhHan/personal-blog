@@ -50,15 +50,15 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 ---
 
 <Layout title={pageTitle} description={description} ogImageUrl={image}>
-	<section id="blog-post">
+	<section id="blog-post" class="post">
 		<div class="wrapper">
-			<div class="blog-post-head">
-				<h1 class="blog-post-head__title">{title}</h1>
-				<div class="blog-post-head__meta">
-					<span class="blog-post-head__meta__author"
+			<div class="post__head">
+				<h1 class="post__title">{title}</h1>
+				<div class="post__meta">
+					<span class="post__author"
 						>Mohammed |
 					</span>
-					<span class="blog-post-head__meta__date"
+					<span class="post__date"
 						>{simplifyDate(pubDate).simplifiedDate}</span
 					>
 				</div>
@@ -66,36 +66,36 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 				{likes && <LikeBlog like={likes[0]} />}
 			</div>
 
-			<div class="blog-post-toc">
+			<div class="post__toc">
 				<TOC pageHeadings={headings} />
 			</div>
 
-			<div class="blog-post-body">
-				<div class="blog-post-body__thumbnail">
+			<div class="post__body">
+				<div class="post__banner">
 					<img src={image} alt={title} loading="lazy" />
 				</div>
 
-				<div class="blog-post-body__content">
+				<div class="post__content">
 					<Content />
 				</div>
 			</div>
 
 			<!-- old is github stuff inshaAllah build my own system later -->
-			<!-- <div class="blog-post-comments">
+			<!-- <div class="post__comments">
             </div> -->
 		</div>
 	</section>
 </Layout>
 
 <style lang="scss">
-	.blog-post-head {
-		.blog-post-head__title {
+	.post__head {
+		.post__title {
 			font-size: 1.875rem;
 			line-height: 2.25rem;
 			font-weight: 700;
 			text-align: center;
 		}
-		.blog-post-head__meta {
+		.post__meta {
 			font-size: 0.875rem;
 			line-height: 1.25rem;
 			color: var(--gray);
@@ -104,9 +104,9 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 		}
 	}
 
-	.blog-post-body {
+	.post__body {
 		margin: 1.25rem auto;
-		.blog-post-body__thumbnail {
+		.post__banner {
 			margin: 0 auto;
 			border-radius: 0.5rem;
 			img {
@@ -119,14 +119,14 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 				border-radius: 0.5rem;
 			}
 		}
-		.blog-post-body__content {
+		.post__content {
 			margin-top: 2rem;
 			color: var(--text-color);
 			// max-width: 65ch;
 		}
 	}
 
-	.blog-post-comments {
+	.post__comments {
 		// max-width: 65ch;
 		margin: 1.25rem auto;
 	}

@@ -1,11 +1,23 @@
 ---
 import { toHast } from "mdast-util-to-hast"
 import { toHtml } from "hast-util-to-html"
+import BreezeWindow from "../common/BreezeWindow.astro"
 
 const { node, data } = Astro.props
 // const handled_types = ["root", "heading", "paragraph", "image", "code"]
-const handled_types = ["code"]
+const handled_types = ["root", "code"]
 const other_type = !handled_types.includes(node.type)
 ---
+
+{
+	node.type == "root" &&
+		node.children.map((node) => <Astro.self node={node} data={data} />)
+}
+
+{
+	node.type == "code" && (
+        <BreezeWindow code={node} />
+	)
+}
 
 {other_type && <Fragment set:html={toHtml(toHast(node))} />}

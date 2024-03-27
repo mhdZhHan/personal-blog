@@ -1,0 +1,91 @@
+<div class="breezeWindow">
+	<div class="breezeWindow__header">
+		<span>Code window</span>
+		<img class="minimize" src="/icons/window_minimize.svg" alt="minimize" />
+		<img class="maximize" src="/icons/window_maximize.svg" alt="maximize" />
+		<img class="close" src="/icons/window_close.svg" alt="close" />
+	</div>
+
+	<div class="breezeWindow__body">
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius cumque
+			dicta minima?
+		</p>
+		<a href="" class="breeze-button">Copy</a>
+		<br />
+	</div>
+</div>
+
+<style lang="scss">
+	.breezeWindow {
+		// max-width: 400px;
+
+		box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
+		border-radius: 2px;
+		margin: 0 auto;
+		border: 1px solid var(--border-color);
+		.breezeWindow__header {
+			// background: #31363B;
+			border-bottom: 1px solid var(--border-color);
+			color: var(--text);
+
+			padding: 10px;
+			height: 30px;
+			width: 100%;
+			border-top-right-radius: 2px;
+			border-top-left-radius: 2px;
+
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			img {
+				width: 22px;
+				height: 22px;
+				position: absolute;
+				top: 4px;
+				border-width: 0;
+				&.minimize {
+					top: 7px;
+					width: 16px;
+					height: 16px;
+					right: 52px;
+				}
+				&.maximize {
+					right: 30px;
+					top: 7px;
+					width: 16px;
+					height: 16px;
+				}
+				&.close {
+					right: 4px;
+				}
+			}
+		}
+
+		.breezeWindow__body {
+			padding: 1rem;
+			width: 100%;
+			// background-color: #232629;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+
+			p {
+				margin: 0;
+			}
+		}
+	}
+
+	.breeze-button {
+		display: inline-block;
+		border: 1px solid var(--border-color);
+		border-radius: 4px;
+		color: var(--text);
+		padding: 6px 12px;
+		transition: all 0.1s linear;
+		margin-top: 1rem;
+		&:hover {
+			border-color: #93cee9;
+		}
+	}
+</style>

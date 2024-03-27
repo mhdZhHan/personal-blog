@@ -13,10 +13,21 @@ export const POST: APIRoute = async ({ params, request }) => {
 		})
 	}
 
-	await db
+	const req = await db
 		.update(Like)
 		.set({ likes: sql`${Like.likes} + 1` })
 		.where(eq(Like.id, id))
+
+
+	console.log(req.rowsAffected)
+		
+
+	if (req.rowsAffected === 0) {
+		await db.insert(Like).values({
+			id,
+			likes: 1,
+		})
+	}
 
 	return new Response(JSON.stringify({}), {
 		status: 200,

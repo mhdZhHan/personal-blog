@@ -5,14 +5,9 @@ const { like } = Astro.props
 ---
 
 <div class="post-like">
-	<button
-		aria-label="Likes for post"
-		aria-pressed="true"
-		id="likeBtn"
-		data-id={like.id}
-	>
+	<button aria-label="Likes for post" id="likeBtn" data-id={like.id}>
 		<span>Likes</span>
-		{like.likes}
+		<span id="likesSpan">{like.likes}</span>
 		<span>❤️‍🔥</span>
 	</button>
 </div>
@@ -46,8 +41,9 @@ const { like } = Astro.props
 	}
 </style>
 
-<!-- <script>
+<script>
 	const likeBtn = document.getElementById("likeBtn") as HTMLButtonElement
+	const likesSpan = document.getElementById("likesSpan") as HTMLSpanElement
 
 	// decide whether or not it's disabled on page load
 
@@ -61,11 +57,15 @@ const { like } = Astro.props
 					headers: {
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify({ id: likeBtn.dataset.id }),
+					body: JSON.stringify({}),
 				}
 			)
+
+			let likes = parseInt(likesSpan.innerText)
+			let updatedLikes = likes + 1
+			likesSpan.innerText = updatedLikes.toString()
 		} catch (error) {
-			console.log(error)
+			// console.log(error)
 		}
 	})
-</script> -->
+</script>

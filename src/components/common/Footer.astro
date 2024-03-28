@@ -1,53 +1,58 @@
 <footer>
-    <div class="wrapper">
-        <div class="footer-content">
-            <p>
-                Copyright © 2023 Mohammed’s Blog Created with 
-                <a href="https://astro.build/" class="astro-label" target="_blank">Astro</a> 
-                by Mohammed.
-            </p>
+	<div class="wrapper">
+		<div class="footer-content">
+			<p>
+				Copyright © 2023 Mohammed’s Blog Created with
+				<a
+					href="https://astro.build/"
+					class="astro-label"
+					target="_blank">Astro</a
+				>
+				by Mohammed.
+			</p>
 
-            <a href="/rss.xml" class="rss-feed">
-                <span class="text">RSS Feed</span>
-            </a>
-        </div>
-    </div>
+			<a href="/rss.xml" class="rss-feed">
+				<span class="text">RSS Feed</span>
+			</a>
+		</div>
+	</div>
 </footer>
 
 <style lang="scss">
-    .footer-content {
-        width: 100%;
+	.footer-content {
+		width: 100%;
 
-        padding-top: 1.25rem;
-        border-color: rgb(75 85 99 / 1);
-        border-top-width: 1px;
-        border-top-style: solid;
-        display: flex;
-        flex-direction: column;
-        p {
-            font-size: .875rem;
-            line-height: 1.25rem;
-            a {
-                display: inline-block;
-                font-size: inherit;
-                line-height: inherit;
-                &.astro-lebel {
+		padding-top: 1.25rem;
+		border-color: rgb(75 85 99 / 1);
+		border-top-width: 1px;
+		border-top-style: solid;
+		display: flex;
+		flex-direction: column;
 
-                }
-            }
-        }
-        a.rss-feed {
-            display: inline-block;
-            text-align: right;
+        font-family: "8-bit_regular";
+		p {
+			font-size: 0.875rem;
+			line-height: 1.25rem;
+			a {
+				display: inline-block;
+				font-size: inherit;
+				line-height: inherit;
+				&.astro-lebel {
+				}
+			}
+		}
+		a.rss-feed {
+			display: inline-block;
+			text-align: right;
 
-            span.text {
-                color: var(--gray);
-                text-decoration: underline;
-                line-height: 1.25rem;
-                &:hover {
-                    color: rgb(255 255 255 / 1);
-                }
-            }
-        }
-    }
+			span.text {
+				color: var(--gray);
+				text-decoration: underline;
+				line-height: 1.25rem;
+				&:hover {
+					color: rgb(255 255 255 / 1);
+				}
+			}
+		}
+	}
 </style>

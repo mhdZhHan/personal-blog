@@ -68,7 +68,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 </html>
 
 <style is:global lang="scss">
-	// @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
+	@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
 
 	:root {
 		--primary: rgb(34 211 238 / 1);
@@ -144,8 +144,8 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 	body {
 		color: var(--text-color);
 		background-color: var(--tertiary);
-		// font-family: "Ubuntu", sans-serif;
-		font-family: "8-bit_regular";
+		font-family: "Ubuntu", sans-serif;
+		// font-family: "8-bit_regular";
 		line-height: 1.5;
 
 		min-height: 100vh;
@@ -190,7 +190,8 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 
 	.section-sub-title {
 		font-weight: 700;
-		font-size: 1.5rem;
+		// font-size: 1.5rem;
+		font-size: 1.3rem;
 		line-height: 2rem;
 		margin-bottom: 1.5rem;
 		color: var(--title-text);

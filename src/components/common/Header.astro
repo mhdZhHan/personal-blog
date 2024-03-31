@@ -1,8 +1,5 @@
 ---
 const currentPath = Astro.url.pathname
-
-console.log(currentPath);
-
 ---
 
 <header class="header wrapper">
@@ -35,30 +32,30 @@ console.log(currentPath);
 				<li>
 					<a
 						class={currentPath === "/" ? "active" : ""}
-						href="/">Root</a
+						href="/">{currentPath}</a
 					>
 				</li>
 				<li>
 					<a
-						class={currentPath === "blog" ? "active" : ""}
+						class={currentPath === "/blog" ? "active" : ""}
 						href="/blog">Blog</a
 					>
 				</li>
 				<li>
 					<a
-						class={currentPath === "projects" ? "active" : ""}
+						class={currentPath === "/projects" ? "active" : ""}
 						href="/projects">Projects</a
 					>
 				</li>
 				<li>
 					<a
-						class={currentPath === "about" ? "active" : ""}
+						class={currentPath === "/about" ? "active" : ""}
 						href="/about">About</a
 					>
 				</li>
 				<li>
 					<a
-						class={currentPath === "donate" ? "active" : ""}
+						class={currentPath === "/donate" ? "active" : ""}
 						href="/donate">Donate</a
 					>
 				</li>

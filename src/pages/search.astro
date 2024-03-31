@@ -27,21 +27,9 @@ import Layout from "../layouts/Layout.astro"
 				</div>
 			</div>
 
-			<ul class="blog-posts" id="searchResults">
-				<!-- {page.data.map((post) => (
-                    <BlogPostCard
-                        {...post.data}
-                        url={post.slug}
-                    />
-                ))} -->
-			</ul>
+			<ul class="blog-posts" id="searchResults"></ul>
 
-			<div class="blogs-footer">
-				<!-- <Pagination 
-                    prevUrl={page.url.prev}
-                    nextUrl={page.url.next}
-                /> -->
-			</div>
+			<div class="blogs-footer"></div>
 		</div>
 	</section>
 </Layout>
@@ -89,7 +77,7 @@ import Layout from "../layouts/Layout.astro"
 					padding: 0.3rem 0.3rem 0.3rem 2rem;
 					background-color: var(--secondary);
 					border: 2px solid var(--border-color);
-					color: var(--text-color);
+					color: var(--text);
 				}
 
 				&::before {

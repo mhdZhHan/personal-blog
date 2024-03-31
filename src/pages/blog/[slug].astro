@@ -19,7 +19,6 @@ import Layout from "../../layouts/Layout.astro"
 // components
 import TOC from "../../components/blog/TOC.astro"
 import LikeBlog from "../../components/blog/LikeBlog.astro"
-import BlogContent from "../../components/mdx/BlogContent.astro"
 
 // utils
 import { nonDraftPosts, simplifyDate } from "../../utils"
@@ -69,7 +68,10 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 				<div class="post__meta">
 					<span class="post__author">Mohammed | </span>
 					<span class="post__date"
-						>{simplifyDate(pubDate).simplifiedDate}</span
+						>{simplifyDate(pubDate).simplifiedDate} | </span
+					>
+					<span class="post__read"
+						>1 Min Read</span
 					>
 				</div>
 
@@ -86,8 +88,8 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 				</div>
 
 				<div class="post__content">
-					<BlogContent node={tree} />
-					<!-- <Content /> -->
+					<!-- <BlogContent node={tree} /> -->
+					<Content />
 				</div>
 			</div>
 
@@ -138,7 +140,7 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 		}
 		.post__content {
 			margin-top: 2rem;
-			color: var(--text-color);
+			color: var(--text);
 			// max-width: 65ch;
 		}
 	}

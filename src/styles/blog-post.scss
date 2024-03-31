@@ -1,158 +1,192 @@
 .post__content {
-    .content-wrapper {
-        margin: 2rem 0;
+	.content-wrapper {
+		margin: 2rem 0;
+		@media all and (max-width: 768px) {
+			margin: 1rem 0;
+		}
+	}
 
-        @media all and (max-width: 768px) {
-            margin: 1rem 0;
-        }
-    }
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		// margin: 1em 0;
+		// line-height: 1.2;
+		color: var(--title);
 
-    h1, h2, h3, h4, h5, h6 {
-        // margin: 1em 0;
-        // line-height: 1.2;
-        color: var(--title-text);
-    }
+		margin: 2rem 0;
+		@media all and (max-width: 768px) {
+			margin: 1rem 0;
+		}
+	}
 
-    h2 {
-        font-size: 34px;
-        @media all and (max-width: 768px) {
-            font-size: 24px;
-        }
-    }
+	h2 {
+		font-size: 34px;
+		@media all and (max-width: 768px) {
+			font-size: 24px;
+		}
+	}
 
-    h3 {
-        font-size: 24px;
-        @media all and (max-width: 768px) {
-            font-size: 18px;
-        }
-    }
+	h3 {
+		font-size: 24px;
+		@media all and (max-width: 768px) {
+			font-size: 18px;
+		}
+	}
 
-    p,
-    ul,
-    ol {
-        // margin: 1.2em 0;
-        color: var(--text-color);
-        font-size: 19px;
-        @media all and (max-width: 768px) {
-            font-size: 16px;
-        }
-    }
+	p,
+	ul,
+	ol {
+		// margin: 1.2em 0;
+		color: var(--text);
+		font-size: 19px;
+		// @media all and (max-width: 768px) {
+		//     font-size: 16px;
+		// }
 
-    ol,
-    ul {
-        list-style: initial;
-        padding-left: 2rem;
-        -webkit-padding-start: 5%;
-        -webkit-padding-end: 5%;
-    }
+		margin: 2rem 0;
+		@media all and (max-width: 768px) {
+			margin: 1rem 0;
+			font-size: 16px;
+		}
+	}
 
-    li {
-        margin: 1rem 0;
-    }
+	ol,
+	ul {
+		list-style: initial;
+		padding-left: 2rem;
+		-webkit-padding-start: 5%;
+		-webkit-padding-end: 5%;
+	}
 
-    // li p {
-    //     margin-bottom: 0.5rem;
-    //     margin-top: 0.5rem;
-    // }
+	li {
+		margin: 1rem 0;
+	}
 
-    a {
-        color: inherit;
-        transition: color linear 0.15s;
-    }
+	// li p {
+	//     margin-bottom: 0.5rem;
+	//     margin-top: 0.5rem;
+	// }
 
-    a:hover {
-        color: var(--primary);
-    }
+	a {
+		color: inherit;
+		transition: color linear 0.15s;
+	}
 
-    p a {
-        text-decoration: none;
-        // box-shadow: inset 0 -0.12em 0 var(--primary);
-        box-shadow: inset 0 -0.12em 0 teal;
-        -webkit-transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
-        transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
-    }
+	a:hover {
+		color: var(--primary);
+	}
 
-    p a:hover {
-        // box-shadow: inset 0 -1.5em 0 var(--primary);
-        box-shadow: inset 0 -1.5em 0 teal;
-        color: #fff;
-    }
+	p a {
+		text-decoration: none;
+		// box-shadow: inset 0 -0.12em 0 var(--primary);
+		box-shadow: inset 0 -0.12em 0 teal;
+		-webkit-transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+	}
 
-    img {
-        max-width: 100%;
-        height: auto;
-    }
+	p a:hover {
+		// box-shadow: inset 0 -1.5em 0 var(--primary);
+		box-shadow: inset 0 -1.5em 0 teal;
+		color: #fff;
+	}
 
-    // code {
-    //     font-family: "SF Mono", menlo, inconsolata, monospace;
-    //     font-size: calc(1em - 2px);
-    //     color: var(--entry-text);
-    //     background-color: var(--entry);
+	img {
+		max-width: 100%;
+		height: auto;
 
-    //     font-weight: 400;
-    //     padding: .1rem .4em;
-    //     border-radius: .1rem;
-    //     -webkit-font-smoothing: antialiased;
-    //     -moz-osx-font-smoothing: grayscale;
-    // }
+		margin: 2rem 0;
+		@media all and (max-width: 768px) {
+			margin: 1rem 0;
+		}
+	}
 
-    // pre {
-    //     border-radius: 8px !important;
-    //     margin: 1.2em 0 !important;
-    //     padding: 1.2em;
-    // }
+	// code {
+	//     font-family: "SF Mono", menlo, inconsolata, monospace;
+	//     font-size: calc(1em - 2px);
+	//     color: var(--entry-text);
+	//     background-color: var(--entry);
 
-    // pre code {
-    //     padding: 0;
-    //     background: initial;
-    // }
+	//     font-weight: 400;
+	//     padding: .1rem .4em;
+	//     border-radius: .1rem;
+	//     -webkit-font-smoothing: antialiased;
+	//     -moz-osx-font-smoothing: grayscale;
+	// }
 
-    // pre code span {
-    //     font-size: 1rem;
-    //     line-height: 1.75em;
-    // }
+	// pre {
+	//     border-radius: 8px !important;
+	//     margin: 1.2em 0 !important;
+	//     padding: 1.2em;
+	// }
 
-    blockquote {
-        border-left: 4px solid #cccccc;
-        font-size: 1.4em;
-        font-style: italic;
-        // margin: 2rem 0;
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
+	// pre code {
+	//     padding: 0;
+	//     background: initial;
+	// }
 
-    blockquote p {
-        padding-bottom: 6px;
-    }
+	// pre code span {
+	//     font-size: 1rem;
+	//     line-height: 1.75em;
+	// }
 
-    blockquote footer {
-        font-size: 1.1rem;
-        text-align: right;
-    }
+	blockquote {
+		border-left: 4px solid #cccccc;
+		font-size: 1.4em;
+		font-style: italic;
+		// margin: 2rem 0;
+		padding-left: 2rem;
+		padding-right: 2rem;
 
-    figure {
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-        -webkit-margin-start: 0;
-        -webkit-margin-end: 0;
-        margin: 0 0 3em 0;
-    }
+		margin: 2rem 0;
+		@media all and (max-width: 768px) {
+			margin: 1rem 0;
+		}
+	}
 
-    table {
-        border-collapse: collapse;
-        font-size: 1.125em;
-        // margin: 2em 0;
-    }
+	blockquote p {
+		padding-bottom: 6px;
+	}
 
-    th {
-        border-bottom: 2px solid #cccccc;
-        padding: 0.4em 0.8em;
-    }
+	blockquote footer {
+		font-size: 1.1rem;
+		text-align: right;
+	}
 
-    td {
-        padding: 0.4em 0.8em;
-    }
+	figure {
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+		-webkit-margin-start: 0;
+		-webkit-margin-end: 0;
+		margin: 0 0 3em 0;
+
+		margin: 2rem 0;
+		@media all and (max-width: 768px) {
+			margin: 1rem 0;
+		}
+	}
+
+	table {
+		border-collapse: collapse;
+		font-size: 1.125em;
+
+		margin: 2rem 0;
+		@media all and (max-width: 768px) {
+			margin: 1rem 0;
+		}
+	}
+
+	th {
+		border-bottom: 2px solid #cccccc;
+		padding: 0.4em 0.8em;
+	}
+
+	td {
+		padding: 0.4em 0.8em;
+	}
 }

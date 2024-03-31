@@ -86,18 +86,15 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 	@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
 
 	:root {
-		--primary: rgb(34 211 238 / 1);
+		--primary:  rgb(45 212 191 / 1);
 		--secondary: rgb(26, 26, 31);
-		--tertiary: rgb(9, 10, 12);
+		--tertiary: rgb(0 0 0 / 1);
 
-		--title-text: rgb(218, 218, 219);
-		--text-color: rgb(196, 196, 197);
+		--title: rgb(218, 218, 219);
+		--text: rgb(196, 196, 197);
 		--gray: rgb(155, 156, 157);
-		--text-hover: rgb(255 255 255 / 1);
 
-		--border-color: rgb(51, 51, 51);
-		--thin-border-color: rgba(38, 38, 38, 1);
-		--thin-border-hover: rgba(64, 64, 64, 1);
+		--border-color: #262626;
 
 		--gradient-to: #22d3ee;
 		--gradient-stops: #0ea5e9, var(--gradient-to, rgb(14 165 233 / 0));
@@ -119,16 +116,13 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 	.light {
 		--primary: rgb(34, 211, 238);
 		--secondary: #f5f5f5;
-		--tertiary: #eef1f0;
+		--tertiary: rgb(255 255 255 / 1);
 
-		--title-text: #1d1d1d;
-		--text-color: #070808;
-		--gray: #808080;
-		--text-hover: rgba(1, 1, 1, 0.785);
+		--title: #1d1d1d;
+		--text: rgb(0 0 0 / 1);
+		--gray: rgb(0 0 0 / 1);
 
 		--border-color: #e0e0e0;
-		--thin-border-color: rgba(229, 229, 229, 1);
-		--thin-border-hover: rgba(212, 212, 212, 1);
 
 		--gradient-to: #22d3ee;
 		--gradient-stops: #0ea5e9, var(--gradient-to, rgb(14 165 233 / 0));
@@ -157,11 +151,10 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 	}
 
 	body {
-		color: var(--text-color);
+		color: var(--text);
 		background-color: var(--tertiary);
 		font-family: "Ubuntu", sans-serif;
-		// font-family: "8-bit_regular";
-		line-height: 1.5;
+		line-height: 1.6;
 
 		min-height: 100vh;
 		display: grid;
@@ -175,7 +168,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 
 	a {
 		text-decoration: none;
-		color: rgb(34 211 238 / 1);
+		color: var(--primary);
 	}
 
 	p {
@@ -194,7 +187,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		// font-size: 1.875rem;
 		font-size: 1.675rem;
 		line-height: 2.25rem;
-		color: var(--title-text);
+		color: var(--title);
 		font-family: "8-bit_bold";
 		span {
 			background-clip: text;
@@ -210,7 +203,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		font-size: 1.3rem;
 		line-height: 2rem;
 		margin-bottom: 1.5rem;
-		color: var(--title-text);
+		color: var(--title);
 		font-family: "8-bit_bold";
 		span {
 			background-clip: text;

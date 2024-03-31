@@ -21,9 +21,9 @@
     "astro-robots-txt": "^1.0.0",
     "dompurify": "^3.0.11",
     "fuse.js": "^7.0.0",
-    "highlight.js": "^11.9.0",
-    "rehype-code-titles": "^1.2.0",
-    "rehype-prism-plus": "^2.0.0",
     "sass": "^1.72.0"
+  },
+  "devDependencies": {
+    "shiki": "^1.2.2"
   }
 }

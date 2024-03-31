@@ -8,7 +8,7 @@ const { like } = Astro.props
 	<button aria-label="Likes for post" id="likeBtn" data-id={like.id}>
 		<span>Likes</span>
 		<span id="likesSpan">{like.likes}</span>
-		<span>❤️‍🔥</span>
+		<span class="heart">❤️‍🔥</span>
 	</button>
 </div>
 
@@ -36,6 +36,11 @@ const { like } = Astro.props
 
 			&:active {
 				opacity: 0.8;
+			}
+
+			.heart {
+				filter: brightness(.4);
+				font-size: 16px;
 			}
 		}
 	}

@@ -3,44 +3,66 @@ const { t1, t2, url } = Astro.props
 ---
 
 <div class="head-title">
-    <h3 class="section-sub-title">
-        {t1} <span>{t2}</span>
-    </h3>
+	<h3 class="section-sub-title">
+		{t1}
+		<span>{t2}</span>
+	</h3>
 
-    <div class="view-all">
-        <a href={url}>View {t2 === "Posts" ? `all` : `more`} {t2} →</a>
-    </div>
+	<div class="view-all">
+		<a href={url}>
+			View {t2 === "Posts" ? `All` : `More`}
+			{t2}
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				stroke-width="2"
+				width="14"
+				height="14"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				fill="none"
+				viewBox="0 0 24 24"
+				aria-hidden="true"
+			>
+				<path d="M5 12h14"></path>
+				<path d="m12 5 7 7-7 7"></path>
+			</svg>
+		</a>
+	</div>
 </div>
 
 <style lang="scss">
-    .head-title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        h3 {
-            span {
-                color: transparent;
-                background: var(--text-gradient);
-                -webkit-background-clip: text;
-                background-clip: text;
-            }
-        }
+	.head-title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		h3 {
+			span {
+				color: transparent;
+				background: var(--text-gradient);
+				-webkit-background-clip: text;
+				background-clip: text;
+			}
+		}
 
-        .view-all {
-            font-size: .875rem;
-            line-height: 1.25rem;
-            a {
-                transition: all .2s ease-in;
-                display: block;
-                font-size: inherit;
-                color: inherit;
-                font-weight: 500;
-                font-size: 1rem;
+		.view-all {
+			font-size: 0.875rem;
+			line-height: 1.25rem;
+			a {
+				transition: all 0.2s ease-in;
+				font-size: inherit;
+				color: inherit;
+				font-weight: 500;
+				font-size: 1rem;
 
-                &:hover {
-                    color: var(--primary);
-                }
-            }
-        }
-    }
+                display: inline-flex;
+                align-items: center;
+                gap: .25rem;
+
+				&:hover {
+					color: var(--primary);
+				}
+			}
+		}
+	}
 </style>

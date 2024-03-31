@@ -6,23 +6,9 @@ const currentPath = Astro.url.pathname
 	<div class="header__container">
 		<a class="header__logo" href="/">
 			<div class="logo-container">
-				<!-- <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke-width="1.5" stroke-linecap="round" 
-                    stroke-linejoin="round">
-                    <path d="M0 0h24v24H0z" stroke="none">
-                        </path><rect x="3" y="12" width="6" height="8" rx="1">
-                        </rect><rect x="9" y="8" width="6" height="12" rx="1">
-                        </rect><rect x="15" y="4" width="6" height="16" rx="1">
-                        </rect><path d="M4 20h14">
-                    </path>
-                </svg> -->
-
 				<!-- <Logo /> -->
 				<img src="/star-boy.svg" alt="star-boy" />
-                <!-- <img src="/star-boy-blue.svg" alt="star-boy" /> -->
+                <!-- <img src="/star-boy-black.svg" alt="star-boy" /> -->
 				Mohammed's Blog
 			</div>
 		</a>
@@ -140,7 +126,6 @@ const currentPath = Astro.url.pathname
 					img {
 						display: block;
 						filter: invert(var(--dl-invert));
-						stroke: #0891b2;
 						width: 2.5rem;
 						height: 2.5rem;
 						margin-right: 0.25rem;
@@ -167,10 +152,10 @@ const currentPath = Astro.url.pathname
 					column-gap: 0.75rem;
 					li {
 						a {
-							color: var(--text-color);
+							color: var(--text);
 							font-weight: 500;
 							&:hover {
-								color: var(--text-hover);
+								color: var(--primary);
 							}
 							&.active {
 								color: var(--primary);

@@ -11,8 +11,8 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
     <p class="project-card__description">{description}</p>
 
     <nav class="project-card__links">
-        {demo_link && <a href={demo_link} target="_blank">Demo</a>}
-        {source_code_link && <a href={source_code_link} target="_blank">Code</a>}
+        {demo_link && <a href={demo_link} target="_blank">Live</a>}
+        {source_code_link && <a href={source_code_link} target="_blank">Source</a>}
     </nav>
 
     <ul class="project-card__tags">
@@ -27,10 +27,10 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
 
 <style lang="scss">
     .project-card {
-        border: 1.5px solid;
-        border-color: var(--thin-border-color);
-        border-radius: .3rem;
+        border: 1px solid var(--border-color);
+        border-radius: .25rem;
         padding: .5rem;
+        color: var(--gray);
 
         transition: all .8s cubic-bezier(.4,0,.2,1);
         
@@ -39,7 +39,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
         justify-content: space-between;
 
         &:hover {
-            border-color: var(--thin-border-hover);
+            border-color: rgba(64, 64, 64, 1);
         }
 
         .project-card__title {
@@ -49,10 +49,9 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
 
             a {
                 font-size: 1.1rem;
-                font-weight: 600;
-                color: var(--primary);
-                // color: #2dd4bf;
-                color: rgb(12, 181, 181);
+                font-weight: 500;
+                color: var(--gray);
+                font-family: "8-bit_regular";
             }
 
             span {
@@ -67,7 +66,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
 
         .project-card__description {
             font-size: 1rem;
-            margin-bottom: .4rem;
+            margin-bottom: .2rem;
         }
 
         .project-card__links {
@@ -85,10 +84,9 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
                 border: 3px solid transparent;
 
                 font-size: .9rem;
-                font-weight: 600;
-                color: var(--primary);
-                // color: #2dd4bf;
-                color: rgb(12, 181, 181);
+                font-weight: 500;
+                color: var(--gray);
+                text-decoration: underline;
                 &:last-child {
                     margin-right: 0;
                 }
@@ -114,8 +112,8 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
                 a {
                     display: block;
                     font-size: .9rem;
-                    font-weight: 600;
-                    color: var(--title-text);
+                    font-weight: 400;
+                    color: var(--gray);
                 }
             }
         }

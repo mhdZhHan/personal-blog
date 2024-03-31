@@ -1,5 +1,5 @@
 ---
-import '../../styles/post-card.scss'
+import "../../styles/post-card.scss"
 
 // utils
 import { simplifyDate } from "../../utils"
@@ -10,19 +10,68 @@ const pubDate_ = simplifyDate(pubDate)
 ---
 
 <li class="post-card">
-    <a href={`/blog/${url}/`}>
-        {image && (
-            <div class="post-card__thumbnail-container">
-                <img src={image} alt={title} />
-            </div>
-        )}
+	<a href={`/blog/${url}/`}>
+		{
+			image && (
+				<div class="post-card__thumbnail-container">
+					<img src={image} alt={title} />
+				</div>
+			)
+		}
 
-        <div class="post-card__body">
-            <h2 class="title">{title}</h2>
-            <span class="date">{pubDate_.simplifiedDate}</span>
-            <p class="body-text">
-                {description}
-            </p>
-        </div>
-    </a>
+		<div class="post-card__body">
+			<h2 class="title">{title}</h2>
+
+			<p class="body-text">
+				{description}
+			</p>
+
+            <div class="box"></div>
+
+			<div class="meta">
+				<div class="date">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						stroke-width="2"
+						width="14"
+						height="14"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						fill="none"
+						viewBox="0 0 24 24"
+						class="shrink-0"
+						aria-hidden="true"
+					>
+						<path d="M8 2v4"></path>
+						<path d="M16 2v4"></path>
+						<rect width="18" height="18" x="3" y="4" rx="2"></rect>
+						<path d="M3 10h18"></path>
+					</svg>
+					<time datetime={pubDate}>{pubDate_.simplifiedDate}</time>
+				</div>
+
+				<div class="read">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						stroke-width="2"
+						width="14"
+						height="14"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						fill="none"
+						viewBox="0 0 24 24"
+						class="shrink-0"
+						aria-hidden="true"
+					>
+						<circle cx="12" cy="12" r="10"></circle>
+						<polyline points="12 6 12 12 16 14"></polyline>
+					</svg>
+
+					<span>5 Min Read</span>
+				</div>
+			</div>
+		</div>
+	</a>
 </li>

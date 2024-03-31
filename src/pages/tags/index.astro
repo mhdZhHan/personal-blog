@@ -54,15 +54,18 @@ const tags = [...new Set(nonDraftPosts_.map((post) => post.data.tags).flat())]
             .tags-container__tags__tag {
                 padding: 0.3rem 1rem;
                 border-radius: 0.2rem;
-                background-color: #454e56;
-                color: var(--title-text);
+                border: 1px solid var(--border-color);
                 a {
                     display: block;
-                    font-weight: 600;
+                    font-weight: 400;
                     font-size: 1rem;
                     line-height: 1rem;
                     text-transform: capitalize;
                     color: inherit;
+
+                    &:hover {
+                        color: var(--title);
+                    }
                 }
             }
         }

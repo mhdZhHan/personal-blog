@@ -69,11 +69,11 @@ import projects from '../data/projects.json'
             grid-template-columns: repeat(3,minmax(0,1fr));
             gap: 1rem;
 
-            @media all and (max-width: 768px){
+            @media all and (max-width: 980px){
                 grid-template-columns: repeat(2,minmax(0,1fr));
             }
 
-            @media all and (max-width: 640px) {
+            @media all and (max-width: 768px) {
                 grid-template-columns: repeat(1,minmax(0,1fr));
             }
         }
@@ -84,9 +84,9 @@ import projects from '../data/projects.json'
         margin-top: 1.5rem;
         p {
             margin-top: .75rem;
-            color: var(--text-color);
+            color: var(--text);
             a {
-                color: rgb(34 211 238 / 1);
+                color: var(--primary);
             }
         }
     }

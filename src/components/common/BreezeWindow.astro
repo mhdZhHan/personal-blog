@@ -1,7 +1,8 @@
 ---
-const { code } = Astro.props
-
-import "highlight.js/styles/atom-one-dark-reasonable.css"
+const code = {
+	lang: "Python",
+	value: `print("Hello world")`,
+}
 ---
 
 <div class="breezeWindow">
@@ -69,23 +70,8 @@ import "highlight.js/styles/atom-one-dark-reasonable.css"
 			@media all and (max-width: 768px) {
 				font-size: 16px;
 			}
-
 			p {
 				margin: 0;
-			}
-
-			pre, code {
-				white-space: pre-wrap;
-				overflow: auto;
-			}
-
-			code {
-				background: inherit;
-				overflow-x: auto;
-				word-break: break-all;
-
-				border-bottom-right-radius: 5px;
-				border-bottom-left-radius: 5px;
 			}
 		}
 	}
@@ -102,17 +88,3 @@ import "highlight.js/styles/atom-one-dark-reasonable.css"
 		}
 	}
 </style>
-
-<script>
-	import hljs from "highlight.js"
-
-	document.addEventListener("DOMContentLoaded", (event) => {
-		const nodes = document.querySelectorAll(
-			".breezeWindow__body pre code"
-		) as NodeListOf<HTMLElement>
-
-		nodes.forEach((node) => {
-			hljs.highlightElement(node)
-		})
-	})
-</script>

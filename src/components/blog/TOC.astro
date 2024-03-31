@@ -52,8 +52,10 @@ const { pageHeadings } = Astro.props
 						color: var(--title-text);
 						font-size: 18px;
 						word-break: break-word;
-						text-decoration: underline;
 						// text-decoration-color: var(--border-color);
+						&:hover {
+							text-decoration: underline;
+						}
 						&.active {
 							color: var(--primary);
 							font-weight: 600;

@@ -101,11 +101,15 @@ const likes = await db.select().from(Like).where(eq(Like.id, slug))
 <style lang="scss">
 	.post__head {
 		.post__title {
-			font-size: 1.875rem;
 			line-height: 2.25rem;
 			font-weight: 700;
 			text-align: center;
 			font-family: "8-bit_bold";
+
+			font-size: 34px;
+			@media all and (max-width: 768px) {
+				font-size: 24px;
+			}
 		}
 		.post__meta {
 			font-size: 0.875rem;

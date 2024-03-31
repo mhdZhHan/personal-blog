@@ -16,8 +16,16 @@ const other_type = !handled_types.includes(node.type)
 
 {
 	node.type == "code" && (
-        <BreezeWindow code={node} />
+		<div class="content-wrapper">
+			<BreezeWindow code={node} />
+		</div>
 	)
 }
 
-{other_type && <Fragment set:html={toHtml(toHast(node))} />}
+{
+	other_type && (
+		<div class="content-wrapper">
+			<Fragment set:html={toHtml(toHast(node))} />
+		</div>
+	)
+}

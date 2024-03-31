@@ -1,27 +1,41 @@
 .post__content {
-    font-size: 100%;
+    .content-wrapper {
+        margin: 2rem 0;
 
-    @media screen and (max-width: 768px) {
-        font-size: 94.2%;
+        @media all and (max-width: 768px) {
+            margin: 1rem 0;
+        }
     }
-
-    @media screen and (max-width: 576px) {
-        font-size: 90%;
-    }
-
 
     h1, h2, h3, h4, h5, h6 {
-        margin: 1em 0;
-        font-weight: 700;
-        line-height: 1.2;
+        // margin: 1em 0;
+        // line-height: 1.2;
         color: var(--title-text);
+    }
+
+    h2 {
+        font-size: 34px;
+        @media all and (max-width: 768px) {
+            font-size: 24px;
+        }
+    }
+
+    h3 {
+        font-size: 24px;
+        @media all and (max-width: 768px) {
+            font-size: 18px;
+        }
     }
 
     p,
     ul,
     ol {
-        margin: 1.2em 0;
+        // margin: 1.2em 0;
         color: var(--text-color);
+        font-size: 19px;
+        @media all and (max-width: 768px) {
+            font-size: 16px;
+        }
     }
 
     ol,
@@ -36,10 +50,10 @@
         margin: 1rem 0;
     }
 
-    li p {
-        margin-bottom: 0.5rem;
-        margin-top: 0.5rem;
-    }
+    // li p {
+    //     margin-bottom: 0.5rem;
+    //     margin-top: 0.5rem;
+    // }
 
     a {
         color: inherit;
@@ -102,7 +116,7 @@
         border-left: 4px solid #cccccc;
         font-size: 1.4em;
         font-style: italic;
-        margin: 2rem 0;
+        // margin: 2rem 0;
         padding-left: 2rem;
         padding-right: 2rem;
     }
@@ -130,7 +144,7 @@
     table {
         border-collapse: collapse;
         font-size: 1.125em;
-        margin: 2em 0;
+        // margin: 2em 0;
     }
 
     th {

@@ -2,7 +2,6 @@
 const { code } = Astro.props
 
 import "highlight.js/styles/atom-one-dark-reasonable.css"
-// import '../../styles/prism/atom-one-dark-reasonable.css.css'
 ---
 
 <div class="breezeWindow">
@@ -14,28 +13,23 @@ import "highlight.js/styles/atom-one-dark-reasonable.css"
 	</div>
 
 	<div class="breezeWindow__body">
-		<!-- <pre><code>{code.value}</code></pre> -->
-		<p class="code">{code.value}</p>
-		<!-- <br />
-		<a href="" class="breeze-button">Copy</a> -->
+		<pre><code>{code.value}</code></pre>
+		<!-- <a href="" class="breeze-button">Copy</a> -->
 	</div>
 </div>
 
 <style lang="scss">
 	.breezeWindow {
-		max-width: 100%;
-
+		position: relative;
 		box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
 		border-radius: 2px;
 		border: 1px solid var(--border-color);
 		.breezeWindow__header {
-			// background: #31363B;
 			border-bottom: 1px solid var(--border-color);
 			color: var(--text);
 
 			padding: 10px;
 			height: 30px;
-			width: 100%;
 			border-top-right-radius: 2px;
 			border-top-left-radius: 2px;
 
@@ -68,21 +62,30 @@ import "highlight.js/styles/atom-one-dark-reasonable.css"
 		}
 
 		.breezeWindow__body {
-			padding: 1.5rem;
-			width: 100%;
-			border-bottom-right-radius: 5px;
-			border-bottom-left-radius: 5px;
 			font-family: monospace;
+			direction: ltr;
 
-			overflow-x: auto;
+			font-size: 18px;
+			@media all and (max-width: 768px) {
+				font-size: 16px;
+			}
+
 			p {
 				margin: 0;
 			}
 
-			.code {
-				font-size: 18px;
-				white-space: pre;
+			pre, code {
+				white-space: pre-wrap;
+				overflow: auto;
+			}
+
+			code {
 				background: inherit;
+				overflow-x: auto;
+				word-break: break-all;
+
+				border-bottom-right-radius: 5px;
+				border-bottom-left-radius: 5px;
 			}
 		}
 	}
@@ -105,7 +108,7 @@ import "highlight.js/styles/atom-one-dark-reasonable.css"
 
 	document.addEventListener("DOMContentLoaded", (event) => {
 		const nodes = document.querySelectorAll(
-			".breezeWindow__body .code"
+			".breezeWindow__body pre code"
 		) as NodeListOf<HTMLElement>
 
 		nodes.forEach((node) => {

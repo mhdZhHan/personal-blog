@@ -1,6 +1,8 @@
 ---
 import "../../styles/post-card.scss"
 
+import { Calendar, Clock4 } from "lucide-astro"
+
 // utils
 import { simplifyDate } from "../../utils"
 
@@ -26,49 +28,16 @@ const pubDate_ = simplifyDate(pubDate)
 				{description}
 			</p>
 
-            <div class="box"></div>
+			<div class="white-space"></div>
 
 			<div class="meta">
 				<div class="date">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						stroke-width="2"
-						width="14"
-						height="14"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						fill="none"
-						viewBox="0 0 24 24"
-						class="shrink-0"
-						aria-hidden="true"
-					>
-						<path d="M8 2v4"></path>
-						<path d="M16 2v4"></path>
-						<rect width="18" height="18" x="3" y="4" rx="2"></rect>
-						<path d="M3 10h18"></path>
-					</svg>
+					<Calendar class="shrink-0" size={14} aria-hidden />
 					<time datetime={pubDate}>{pubDate_.simplifiedDate}</time>
 				</div>
 
 				<div class="read">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						stroke-width="2"
-						width="14"
-						height="14"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						fill="none"
-						viewBox="0 0 24 24"
-						class="shrink-0"
-						aria-hidden="true"
-					>
-						<circle cx="12" cy="12" r="10"></circle>
-						<polyline points="12 6 12 12 16 14"></polyline>
-					</svg>
-
+					<Clock4 class="shrink-0" size={14} aria-hidden />
 					<span>5 Min Read</span>
 				</div>
 			</div>

@@ -1,89 +1,132 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection } from "astro:content"
 import type { CollectionEntry } from "astro:content"
 
+import { Dot } from "lucide-astro"
+
 // layout
-import Layout from '../../layouts/Layout.astro'
+import Layout from "../../layouts/Layout.astro"
 
 // components
-import BlogPostCard from '../../components/blog/BlogPostCard.astro'
-import Pagination from '../../components/common/Pagination.astro'
-import SearchBox from '../../components/search/SearchBox.astro'
+import BlogPostCard from "../../components/blog/BlogPostCard.astro"
+import Pagination from "../../components/common/Pagination.astro"
+import SearchBox from "../../components/search/SearchBox.astro"
 
 // utils
-import { sortByDate, nonDraftPosts } from '../../utils'
+import { sortByDate, nonDraftPosts } from "../../utils"
+
+import { GET as getTotalViews } from "../api/blog/postViews"
 
 export async function getStaticPaths({ paginate }) {
-    const posts = await getCollection('blog')
-    const nonDraftPosts_: CollectionEntry<"blog">[] = nonDraftPosts(posts)
-    const sortedPosts = sortByDate(nonDraftPosts_)
+	const posts = await getCollection("blog")
+	const nonDraftPosts_: CollectionEntry<"blog">[] = nonDraftPosts(posts)
+	const sortedPosts = sortByDate(nonDraftPosts_)
 
-    return paginate(sortedPosts, { pageSize: 6 })
+	return paginate(sortedPosts, { pageSize: 6 })
 }
 
 const { page } = Astro.props
+
+const tags = [...new Set(page.data.flatMap((post) => post.data.tags))].sort()
+
+// @ts-ignore
+const totalViews = await getTotalViews(Astro).then((res) => res.text())
 ---
 
 <Layout title="Mohammed's blog | blogs">
-    <section id="blogs">
-        <div class="wrapper">
-            <div class="blogs-head">
-                <h1 class="blogs-head__title">🧑‍🚀 Latest Blog Posts !</h1>
-                <p class="blogs-head__sub-title">
-                    Explore the Cosmos of Ideas! Latest Blog Posts
-                </p>
+	<section id="blogs">
+		<div class="wrapper">
+			<div class="blogs-head">
+				<h1 class="blogs-head__title">🧑‍🚀 Latest Blog Posts !</h1>
 
-                <SearchBox />
-            </div>
+				<p class="blogs-head__sub-title">
+					Explore the Cosmos of Ideas! Latest Blog Posts
+				</p>
 
-            <ul class="blog-posts">
-                {page.data.map((post) => (
-                    <BlogPostCard
-                        {...post.data}
-                        url={post.slug}
-                    />
-                ))}
-            </ul>
+				<div class="blogs-head__info">
+					<h1>ALL Posts</h1>
 
-            <div class="blogs-footer">
-                <Pagination 
-                    prevUrl={page.url.prev}
-                    nextUrl={page.url.next}
-                />
-            </div>
-        </div>
-    </section>
+					<div class="separator"></div>
+
+					<div class="data">
+						<span class="views">{totalViews} Views</span>
+						<Dot class="shrink-0" size={14} aria-hidden />
+						<span>{page.data.length} Posts</span>
+					</div>
+				</div>
+
+				<SearchBox tags={tags} />
+			</div>
+
+			<ul class="blog-posts">
+				{
+					page.data.map((post) => (
+						<BlogPostCard {...post.data} url={post.slug} />
+					))
+				}
+			</ul>
+
+			<div class="blogs-footer">
+				<Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+			</div>
+		</div>
+	</section>
 </Layout>
 
 <style lang="scss">
-    .blogs-head {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 1.5rem;
-        .blogs-head__title {
-            font-size: 1.875rem;
-            line-height: 2.25rem;
-            font-weight: 700;
-            font-family: "8-bit_bold";
-        }
-        .blogs-head__sub-title {
-            margin-top: .75rem;
-            color: var(--gray);
-        }
-    }
+	.blogs-head {
+		width: 100%;
+		text-align: center;
+		margin-bottom: 1.5rem;
+		.blogs-head__title {
+			font-size: 1.875rem;
+			line-height: 2.25rem;
+			font-weight: 700;
+			font-family: "8-bit_bold";
+		}
 
-    .blog-posts {
-        // padding: 1.5rem 0;
-        display: grid;
-        grid-template-columns: repeat(3,minmax(0,1fr));
-        gap: 1.5rem;
+		.blogs-head__sub-title {
+			margin-top: 0.75rem;
+			color: var(--gray);
+		}
 
-        @media all and (max-width: 768px) {
-            grid-template-columns: repeat(1,minmax(0,1fr));
-        }
-    }
+		.blogs-head__info {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			color: var(--gray);
 
-    .blogs-footer {
-        padding: 1.5rem 0;
-    }
+			margin-top: 3rem;
+			h1 {
+				letter-spacing: 0.05em;
+				line-height: 1;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			.data {
+				display: flex;
+				align-items: center;
+				font-size: 14px;
+				svg {
+					flex-shrink: 0;
+				}
+			}
+		}
+	}
+
+	.blog-posts {
+		// padding: 1.5rem 0;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.5rem;
+
+		@media all and (max-width: 768px) {
+			grid-template-columns: repeat(1, minmax(0, 1fr));
+		}
+	}
+
+	.blogs-footer {
+		padding: 1.5rem 0;
+	}
 </style>

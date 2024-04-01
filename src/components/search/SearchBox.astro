@@ -1,23 +1,14 @@
+---
+import { Search } from "lucide-astro"
+
+const { tags } = Astro.props
+---
+
 <div class="search-box">
 	<form id="search-form">
 		<div class="search-box__container">
 			<div class="search-icon">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					stroke-width="2"
-					width="12"
-					height="12"
-					stroke="currentColor"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					fill="none"
-					viewBox="0 0 24 24"
-					slot="prefix"
-					aria-hidden="true"
-				>
-					<circle cx="11" cy="11" r="8"></circle>
-					<path d="m21 21-4.3-4.3"></path>
-				</svg>
+				<Search slot="prefix" size={12} aria-hidden />
 			</div>
 
 			<input
@@ -50,68 +41,20 @@
 	</form>
 
 	<ul class="search-box__filter">
-		<li>
-			<label>
-				<input aria-label="AI Filter" value="AI" type="checkbox" />
-				<div class="value">AI</div>
-			</label>
-		</li>
-		<li>
-			<label>
-				<input aria-label="Rust Filter" value="Rust" type="checkbox" />
-				<div class="value">Rust</div>
-			</label>
-		</li>
-		<li>
-			<label>
-				<input
-					aria-label="Python Filter"
-					value="Python"
-					type="checkbox"
-				/>
-				<div class="value">Python</div>
-			</label>
-		</li>
-		<li>
-			<label>
-				<input
-					aria-label="Linux Filter"
-					value="Linux"
-					type="checkbox"
-				/>
-				<div class="value">Linux</div>
-			</label>
-		</li>
-		<li>
-			<label>
-				<input
-					aria-label="React Filter"
-					value="React"
-					type="checkbox"
-				/>
-				<div class="value">React</div>
-			</label>
-		</li>
-		<li>
-			<label>
-				<input
-					aria-label="Next js Filter"
-					value="Next js"
-					type="checkbox"
-				/>
-				<div class="value">Next js</div>
-			</label>
-		</li>
-		<li>
-			<label>
-				<input
-					aria-label="Hello world Filter"
-					value="Hello world"
-					type="checkbox"
-				/>
-				<div class="value">Hello world</div>
-			</label>
-		</li>
+		{
+			tags.map((tag) => (
+				<li>
+					<label>
+						<input
+							aria-label={`${tag} Filter`}
+							value={tag}
+							type="checkbox"
+						/>
+						<div class="value">{tag}</div>
+					</label>
+				</li>
+			))
+		}
 	</ul>
 </div>
 
@@ -150,9 +93,8 @@
 				}
 
 				input {
-					border: none;
+					border: 1px solid var(--border-color);
 					outline: none;
-					display: block;
 
 					padding-right: 2.5rem;
 					padding-left: 1.75rem;
@@ -164,7 +106,10 @@
 					flex: 1 1 0%;
 					width: 100%;
 					position: relative;
-					color: inherit;
+
+					&:focus {
+						border-color: var(--primary);
+					}
 				}
 
 				.key {
@@ -213,8 +158,9 @@
 						cursor: pointer;
 						position: absolute;
 						inset: 0;
+						border: 1px solid var(--border-color);
 						&:checked {
-							border: 1px solid #ffffff71;
+							border-color: var(--primary);
 						}
 					}
 					.value {
@@ -227,9 +173,10 @@
 							1
 						);
 						transition-duration: 0.15s;
+						text-transform: capitalize;
 					}
 					input:checked + .value {
-						color: rgb(229 229 229 / 1);
+						color: var(--title);
 					}
 				}
 			}

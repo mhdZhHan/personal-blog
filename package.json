@@ -21,9 +21,11 @@
     "astro-robots-txt": "^1.0.0",
     "dompurify": "^3.0.11",
     "fuse.js": "^7.0.0",
+    "lucide-astro": "^0.363.0",
     "sass": "^1.72.0"
   },
   "devDependencies": {
+    "rehype-pretty-code": "^0.13.1",
     "shiki": "^1.2.2"
   }
 }

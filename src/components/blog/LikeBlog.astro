@@ -5,7 +5,7 @@ const { like } = Astro.props
 ---
 
 <div class="post-like">
-	<button aria-label="Likes for post" id="likeBtn" data-id={like.id}>
+	<button aria-label="Likes for post" id="likeBtn" data-id={like.post}>
 		<span>Likes</span>
 		<span id="likesSpan">{like.likes}</span>
 		<span class="heart">❤️‍🔥</span>

@@ -5,21 +5,31 @@ import robotsTxt from "astro-robots-txt"
 import vercel from "@astrojs/vercel/serverless"
 import db from "@astrojs/db"
 
-import syntaxTheme from "./syntax-theme.json"
+import { createCssVariablesTheme } from "shiki"
+import rehypePrettyCode from "rehype-pretty-code"
 
 // https://astro.build/config
 export default defineConfig({
 	site: "https://mohammedsh.xyz",
+	markdown: {
+		syntaxHighlight: false,
+		rehypePlugins: [
+			[
+				rehypePrettyCode,
+				{ theme: createCssVariablesTheme({ name: "css-variables" }) },
+			],
+		],
+	},
 	integrations: [
-		mdx({
-			shikiConfig: {
-				theme: syntaxTheme,
-			},
+		mdx(),
+		sitemap({ changefreq: "daily", lastmod: new Date() }),
+		robotsTxt({
+			host: true,
+			policy: [{ userAgent: "*", disallow: ["/404"] }],
 		}),
-		sitemap(),
-		robotsTxt(),
+		,
 		db(),
 	],
 	output: "hybrid",
-	adapter: vercel(),
+	adapter: vercel({ webAnalytics: { enabled: true } }),
 })

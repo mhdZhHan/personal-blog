@@ -4,9 +4,11 @@ import type { APIRoute } from "astro"
 import { db, Like, eq, sql } from "astro:db"
 
 export const POST: APIRoute = async ({ params, request }) => {
-	const id = params.id
+	const post = params.post
 
-	if (!id) {
+	console.log(post)
+
+	if (!post) {
 		return new Response(null, {
 			status: 404,
 			statusText: "Not found",
@@ -16,15 +18,14 @@ export const POST: APIRoute = async ({ params, request }) => {
 	const req = await db
 		.update(Like)
 		.set({ likes: sql`${Like.likes} + 1` })
-		.where(eq(Like.id, id))
-
+		.where(eq(Like.post, post))
+		.returning({ likes: Like.likes })
 
 	console.log(req.rowsAffected)
-		
 
 	if (req.rowsAffected === 0) {
 		await db.insert(Like).values({
-			id,
+			post,
 			likes: 1,
 		})
 	}

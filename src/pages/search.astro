@@ -226,7 +226,7 @@ import Layout from "../layouts/Layout.astro"
 
 		if (!SEARCH_DATA) {
 			try {
-				const response = await fetch("/api/search.json")
+				const response = await fetch("/api/blog/search.json")
 
 				if (!response.ok) throw new Error("Something went wrong...")
 

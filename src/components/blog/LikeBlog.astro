@@ -1,13 +1,12 @@
 ---
-export const prerender = true
-
-const { like } = Astro.props
+const { slug, likes } = Astro.props
+const postLikes = likes?.likes ?? 0
 ---
 
 <div class="post-like">
-	<button aria-label="Likes for post" id="likeBtn" data-id={like.post}>
+	<button aria-label="Likes for post" id="likeBtn">
 		<span>Likes</span>
-		<span id="likesSpan">{like.likes}</span>
+		<span id="likesSpan">{postLikes}</span>
 		<span class="heart">❤️‍🔥</span>
 	</button>
 </div>
@@ -39,38 +38,50 @@ const { like } = Astro.props
 			}
 
 			.heart {
-				filter: brightness(.4);
+				filter: brightness(0.4);
 				font-size: 16px;
 			}
 		}
 	}
 </style>
 
-<script>
-	const likeBtn = document.getElementById("likeBtn") as HTMLButtonElement
-	const likesSpan = document.getElementById("likesSpan") as HTMLSpanElement
+<script define:vars={{ slug }}>
+	const likeBtn = document.getElementById("likeBtn")
+	const likesSpan = document.getElementById("likesSpan")
+	const existingLikes = parseInt(likesSpan.textContent)
 
-	// decide whether or not it's disabled on page load
-
-	// if clicked increment
-	likeBtn.addEventListener("click", async () => {
+	// Function to handle like button click
+	const handleLikeButtonClick = async () => {
 		try {
-			const req = await fetch(
-				`/api/blog/like/${likeBtn.dataset.id}.json`,
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({}),
-				}
-			)
+			// Call the API to like/unlike the post
+			const res = await fetch("/api/blog/like", {
+				method: "POST",
+				body: JSON.stringify({ slug }),
+			})
+			if (!res.ok) {
+				throw new Error("Failed to update likes")
+			}
+			const updatedLikesStr = await res.text()
+			const updatedLikes = parseInt(updatedLikesStr)
+			if (isNaN(updatedLikes)) {
+				throw new Error("Invalid like count")
+			}
 
-			let likes = parseInt(likesSpan.innerText)
-			let updatedLikes = likes + 1
-			likesSpan.innerText = updatedLikes.toString()
+			// Update UI based on the response
+			if (likeBtn.classList.contains("liked")) {
+				// If already liked, remove like
+				likeBtn.classList.remove("liked")
+				likesSpan.textContent = (existingLikes - 1).toString()
+			} else {
+				// If not liked, add like
+				likeBtn.classList.add("liked")
+				likesSpan.textContent = (existingLikes + 1).toString()
+			}
 		} catch (error) {
-			// console.log(error)
+			console.error("Error updating likes:", error)
 		}
-	})
+	}
+
+	// Attach click event listener to the like button
+	likeBtn.addEventListener("click", handleLikeButtonClick)
 </script>

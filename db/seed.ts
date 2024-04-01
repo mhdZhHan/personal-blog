@@ -3,11 +3,11 @@ import { db, Like, PostView } from "astro:db"
 
 // https://astro.build/db/seed
 export default async function seed() {
-	await db
-		.insert(Like)
-		.values(
-			(await getCollection("blog")).map((post) => ({ post: post.slug }))
-		)
+	// await db
+	// 	.insert(Like)
+	// 	.values(
+	// 		(await getCollection("blog")).map((post) => ({ post: post.slug }))
+	// 	)
 
 	// PostView
 	await db

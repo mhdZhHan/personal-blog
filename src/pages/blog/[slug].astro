@@ -83,7 +83,7 @@ const likes = await db.select().from(Like).where(eq(Like.post, slug))
 					</div>
 				</div>
 
-				{likes && <LikeBlog like={likes[0]} />}
+				{likes && <LikeBlog slug={slug} likes={likes[0]} />}
 			</div>
 
 			<div class="post__toc">

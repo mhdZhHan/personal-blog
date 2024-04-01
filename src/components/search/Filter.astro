@@ -1,0 +1,20 @@
+---
+const { tags } = Astro.props
+---
+
+<ul class="search-box__filter">
+    {
+        tags.map((tag) => (
+            <li>
+                <label>
+                    <input
+                        aria-label={`${tag} Filter`}
+                        value={tag}
+                        type="checkbox"
+                    />
+                    <div class="value">{tag}</div>
+                </label>
+            </li>
+        ))
+    }
+</ul>

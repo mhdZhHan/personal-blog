@@ -1,6 +1,11 @@
 ---
 import "../styles/post-card.scss"
+import "../styles/search-box.scss"
+
+import { Search } from "lucide-astro"
+
 import Layout from "../layouts/Layout.astro"
+import CommandKey from "../components/search/CommandKey.astro"
 ---
 
 <Layout title="Mohammed's blog | Search">
@@ -13,14 +18,23 @@ import Layout from "../layouts/Layout.astro"
 				<div class="search-box">
 					<form id="search-form">
 						<div class="search-box__container">
+							<div class="search-icon">
+								<Search slot="prefix" size={12} aria-hidden />
+							</div>
+
 							<input
-								type="search"
+								type="text"
 								name="search"
 								id="search"
-								maxlength="24"
-								minlength="2"
-								placeholder="Search"
+								data-post-filter-search=""
+								spellcheck="false"
+								autocomplete="off"
+								placeholder="Search Posts"
 							/>
+
+							<div class="key">
+								<CommandKey />
+							</div>
 						</div>
 					</form>
 				</div>
@@ -49,54 +63,7 @@ import Layout from "../layouts/Layout.astro"
 		}
 	}
 
-	.search-box {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-
-		margin-top: 0.75rem;
-
-		@media all and (max-width: 768px) {
-			justify-content: center;
-		}
-		form {
-			.search-box__container {
-				position: relative;
-
-				input {
-					border: none;
-					outline: none;
-					display: block;
-					width: 17rem;
-					height: 2rem;
-					border-radius: 0.4rem;
-					font-size: 1rem;
-					font-weight: 400;
-					padding: 0.3rem 0.3rem 0.3rem 2rem;
-					background-color: var(--secondary);
-					border: 2px solid var(--border-color);
-					color: var(--text);
-				}
-
-				&::before {
-					content: "";
-					background-image: url("/icons/search1.svg");
-					width: 0.9rem;
-					height: 0.9rem;
-					display: block;
-					position: absolute;
-					left: 0.7rem;
-					top: 0;
-					bottom: 0;
-					margin: auto 0;
-				}
-			}
-		}
-	}
-
 	.search-posts {
-		// padding: 1.5rem 0;
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 1.5rem;
@@ -163,9 +130,11 @@ import Layout from "../layouts/Layout.astro"
     `
 
 	// selectors
-	const search = document.querySelector("#search")
-	const searchReadout = document.querySelector("#searchReadout")
-	const resultsList = document.querySelector("#searchResults")
+	const search = document.querySelector<HTMLInputElement>("#search")
+	const searchReadout =
+		document.querySelector<HTMLParagraphElement>("#searchReadout")
+	const resultsList =
+		document.querySelector<HTMLUListElement>("#searchResults")
 
 	// functions
 	const updateDocumentTitle = (search) => {
@@ -175,7 +144,7 @@ import Layout from "../layouts/Layout.astro"
 	}
 
 	const updateSearchReadout = (search) => {
-		searchReadout.textContent = search
+		searchReadout!.textContent = search
 			? `Search results for “${search}”`
 			: ""
 	}
@@ -257,7 +226,7 @@ import Layout from "../layouts/Layout.astro"
 		if (!FUSE_INSTANCE) return
 		const searchResult = FUSE_INSTANCE.search(search)
 
-		resultsList.innerHTML =
+		resultsList!.innerHTML =
 			searchResult.length > 0
 				? generateSearchList(searchResult)
 				: "No blogs found…"
@@ -273,19 +242,19 @@ import Layout from "../layouts/Layout.astro"
 		updateDocumentTitle(urlParams)
 		updateSearchReadout(urlParams)
 
-		search.value = urlParams
-		search.focus()
+		search!.value = urlParams
+		search!.focus()
 	})
 
-	search.addEventListener("input", () => {
-		const searchTerm = DOMPurify.sanitize(search.value)
+	search!.addEventListener("input", () => {
+		const searchTerm = DOMPurify.sanitize(search!.value)
 
 		updateDocumentTitle(searchTerm)
 		updateSearchReadout(searchTerm)
 		fetchSearchResults(searchTerm)
 		updateSearchPageUrl(searchTerm)
 
-		search.value = searchTerm
-		search.focus()
+		search!.value = searchTerm
+		search!.focus()
 	})
 </script>

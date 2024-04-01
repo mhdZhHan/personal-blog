@@ -1,3 +1,7 @@
+---
+import { Twitter, Github, Linkedin, Instagram } from "lucide-astro"
+---
+
 <section id="hero">
 	<div class="wrapper">
 		<div class="hero-container">
@@ -18,7 +22,8 @@
 							href="https://twitter.com/mhd_zh_han"
 							target="_blank"
 						>
-							<img src="/images/twitter.png" alt="twitter" />
+							<!-- <img src="/images/twitter.png" alt="twitter" /> -->
+							<Twitter class="shrink-0" size={30} aria-hidden />
 						</a>
 					</li>
 					<li>
@@ -26,7 +31,8 @@
 							href="https://www.linkedin.com/in/mohammedshajahan/"
 							target="_blank"
 						>
-							<img src="/images/linkedin.png" alt="linkedin" />
+							<!-- <img src="/images/linkedin.png" alt="linkedin" /> -->
+							<Linkedin class="shrink-0" size={30} aria-hidden />
 						</a>
 					</li>
 					<li>
@@ -34,19 +40,18 @@
 							href="https://www.instagram.com/mhd__zh_han/"
 							target="_blank"
 						>
-							<img src="/images/instagram.png" alt="instagram" />
+							<!-- <img src="/images/instagram.png" alt="instagram" /> -->
+							<Instagram class="shrink-0" size={30} aria-hidden />
 						</a>
 					</li>
 					<li>
-						<a
-							href="https://github.com/mhdzhhan"
-							target="_blank"
-						>
-							<img
+						<a href="https://github.com/mhdzhhan" target="_blank">
+							<!-- <img
 								src="/images/github_.png"
 								alt="github"
 								class="github"
-							/>
+							/> -->
+							<Github class="shrink-0" size={30} aria-hidden />
 						</a>
 					</li>
 				</ul>
@@ -89,10 +94,16 @@
 			}
 			.hero__social-medias {
 				display: flex;
-				gap: 0.25rem;
-				margin-top: 0.75rem;
+				align-items: center;
+				gap: 1rem;
+				margin-top: 1rem;
 				li a {
 					display: block;
+					transition: 0.3s;
+					color: var(--primary);
+					&:hover {
+						opacity: 0.8;
+					}
 					img {
 						display: block;
 						width: 3rem;

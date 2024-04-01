@@ -1,5 +1,9 @@
 {
     "cSpell.enableFiletypes": [
         "astro"
+    ],
+    "cSpell.words": [
+        "FOSS",
+        "lucide"
     ]
 }

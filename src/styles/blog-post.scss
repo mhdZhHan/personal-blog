@@ -103,6 +103,11 @@
 		}
 	}
 
+	code {
+		color: var(--primary);
+		font-family: 'Courier New', Courier, monospace;
+	}
+
 	// code {
 	//     font-family: "SF Mono", menlo, inconsolata, monospace;
 	//     font-size: calc(1em - 2px);
@@ -173,20 +178,22 @@
 
 	table {
 		border-collapse: collapse;
-		font-size: 1.125em;
-
-		margin: 2rem 0;
-		@media all and (max-width: 768px) {
-			margin: 1rem 0;
+		margin: 25px 0;
+		font-size: 0.9em;
+		min-width: 400px;
+		border: 1px solid var(--border-color);
+		tr {
+			color: #ffffff;
+			text-align: left;
+			border-bottom: 1px solid var(--border-color);
+			&:last-of-type {
+				border-bottom: 2px solid var(--border-color);
+			}
 		}
-	}
-
-	th {
-		border-bottom: 2px solid #cccccc;
-		padding: 0.4em 0.8em;
-	}
-
-	td {
-		padding: 0.4em 0.8em;
+		th,
+		td {
+			padding: 12px 15px;
+			border-right: 1px solid var(--border-color);
+		}
 	}
 }

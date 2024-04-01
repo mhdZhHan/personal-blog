@@ -123,6 +123,12 @@ const likes = await db.select().from(Like).where(eq(Like.post, slug))
 			text-align: center;
 			margin-top: 1rem;
 
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: .5rem;
+
 			div {
 				padding: 0 0.5rem;
 				border-radius: 0.25rem;
@@ -137,7 +143,6 @@ const likes = await db.select().from(Like).where(eq(Like.post, slug))
 
 	.post__body {
 		margin: 1.25rem auto;
-		font-family: sans-serif;
 		.post__banner {
 			margin: 0 auto;
 			border-radius: 0.5rem;

@@ -11,6 +11,7 @@ import rehypePrettyCode from "rehype-pretty-code"
 // https://astro.build/config
 export default defineConfig({
 	site: "https://mohammedsh.xyz",
+
 	markdown: {
 		syntaxHighlight: false,
 		rehypePlugins: [
@@ -20,6 +21,7 @@ export default defineConfig({
 			],
 		],
 	},
+
 	integrations: [
 		mdx(),
 		sitemap({ changefreq: "daily", lastmod: new Date() }),
@@ -30,6 +32,7 @@ export default defineConfig({
 		,
 		db(),
 	],
+	
 	output: "hybrid",
 	adapter: vercel({ webAnalytics: { enabled: true } }),
 })

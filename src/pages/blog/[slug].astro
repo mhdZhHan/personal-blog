@@ -163,6 +163,7 @@ const likes = await db.select().from(Like).where(eq(Like.post, slug))
 </style>
 
 <script define:vars={{ slug }}>
+	// views api
 	fetch("/api/blog/postViews", {
 		method: "PUT",
 		body: JSON.stringify({ slug }),

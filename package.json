@@ -5,14 +5,15 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "astro build",
+		"build": "astro build && pagefind --site .vercel/output/static",
 		"preview": "astro preview",
 		"astro": "astro",
 		"new-post": "node scripts/createMdx.js"
 	},
 	"dependencies": {
 		"@astrojs/db": "^0.9.4",
-		"astro": "^4.5.9"
+		"astro": "^4.5.9",
+		"pagefind": "^1.1.0"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "^2.2.1",

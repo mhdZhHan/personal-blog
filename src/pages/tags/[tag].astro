@@ -42,6 +42,7 @@ const { posts } = Astro.props
                         <BlogPostCard 
                             {...post.data}
                             url={post.slug}
+                            post={post}
                         />
                     ))
                 }

@@ -6,9 +6,11 @@ import { Calendar, Clock4 } from "lucide-astro"
 // utils
 import { simplifyDate } from "../../utils"
 
-const { title, description, pubDate, image, url } = Astro.props
+const { title, description, pubDate, image, url, post } = Astro.props
 
 const pubDate_ = simplifyDate(pubDate)
+
+const { remarkPluginFrontmatter } = await post.render()
 ---
 
 <li class="post-card">
@@ -38,7 +40,7 @@ const pubDate_ = simplifyDate(pubDate)
 
 				<div class="read">
 					<Clock4 class="shrink-0" size={14} aria-hidden />
-					<span>5 Min Read</span>
+					<span>{remarkPluginFrontmatter.readingTime} Min Read</span>
 				</div>
 			</div>
 		</div>

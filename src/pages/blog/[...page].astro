@@ -61,7 +61,11 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 			<ul class="blog-posts">
 				{
 					page.data.map((post) => (
-						<BlogPostCard {...post.data} url={post.slug} />
+						<BlogPostCard
+							{...post.data}
+							url={post.slug}
+							post={post}
+						/>
 					))
 				}
 			</ul>

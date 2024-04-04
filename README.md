@@ -1,6 +1,6 @@
 # mohammedsh.xyz
 
-Welcome to Mohammed's Personal Blog repository! This blog is built using Astro, a modern static site generator for building fast websites with React. It serves as Mohammed's platform for sharing his journey in programming and technology, as well as showcasing some of his top projects.
+Welcome to my Personal Blog repository! This blog is built using Astro, a modern static site generator for building fast websites with Javascript. It serves as my platform for sharing my journey in programming and technology, as well as showcasing some of my top projects.
 
 ## Overview
 

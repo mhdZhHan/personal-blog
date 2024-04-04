@@ -90,7 +90,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 
 	:root {
 		--primary: rgb(45 212 191 / 1);
-		--secondary: rgb(26, 26, 31);
+		--secondary: rgb(23 23 23 /1);
 		--tertiary: rgb(0 0 0 / 1);
 
 		// --title: rgb(218, 218, 219);
@@ -209,6 +209,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		flex: 1 1 0%;
 		width: 100%;
 		height: 1px;
+		background-color: var(--secondary);
 	}
 
 	.section-title {

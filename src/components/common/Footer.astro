@@ -2,13 +2,13 @@
 	<div class="wrapper">
 		<div class="footer-content">
 			<p>
-				Copyright © 2023 Mohammed’s Blog Created with
+				©{new Date().getFullYear()} Mohammed’s Blog - All Rights Reserved.
+				Built with
 				<a
 					href="https://astro.build/"
 					class="astro-label"
 					target="_blank">Astro</a
 				>
-				by Mohammed.
 			</p>
 
 			<a href="/rss.xml" class="rss-feed">
@@ -29,7 +29,7 @@
 		display: flex;
 		flex-direction: column;
 
-        font-family: "8-bit_regular";
+		font-family: "8-bit_regular";
 		p {
 			font-size: 0.875rem;
 			line-height: 1.25rem;
@@ -51,7 +51,7 @@
 				text-decoration-color: var(--border-color);
 				line-height: 1.25rem;
 				&:hover {
-					color: rgb(255 255 255 / 1);
+					color: var(--primary);
 				}
 			}
 		}

@@ -1,30 +1,25 @@
----
-const code = {
-	lang: "Python",
-	value: `print("Hello world")`,
-}
----
-
-<div class="breezeWindow">
+<div {...Astro.props} data-clipboard-wrapper class="breezeWindow">
 	<div class="breezeWindow__header">
-		<span>{code.lang.split(":")[1]}</span>
+		<span><slot name="title" /></span>
 		<img class="minimize" src="/icons/window_minimize.svg" alt="minimize" />
 		<img class="maximize" src="/icons/window_maximize.svg" alt="maximize" />
 		<img class="close" src="/icons/window_close.svg" alt="close" />
 	</div>
 
-	<div class="breezeWindow__body">
-		<pre><code>{code.value}</code></pre>
-		<!-- <a href="" class="breeze-button">Copy</a> -->
+	<div data-clipboard-content class="breezeWindow__body">
+		<slot />
 	</div>
 </div>
 
 <style lang="scss">
 	.breezeWindow {
 		position: relative;
-		box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
 		border-radius: 2px;
 		border: 1px solid var(--border-color);
+		margin: 1.25em 0;
+		@media all and (max-width: 768px) {
+			margin: 1rem 0;
+		}
 		.breezeWindow__header {
 			border-bottom: 1px solid var(--border-color);
 			color: var(--text);
@@ -44,6 +39,7 @@ const code = {
 				position: absolute;
 				top: 4px;
 				border-width: 0;
+				margin: 0;
 				&.minimize {
 					top: 7px;
 					width: 16px;
@@ -63,28 +59,12 @@ const code = {
 		}
 
 		.breezeWindow__body {
-			font-family: monospace;
-			direction: ltr;
+			overflow: auto;
+			padding: 1rem;
+			font-size: 1rem;
+			line-height: 2;
 
-			font-size: 18px;
-			@media all and (max-width: 768px) {
-				font-size: 16px;
-			}
-			p {
-				margin: 0;
-			}
-		}
-	}
-
-	.breeze-button {
-		border: 1px solid var(--border-color);
-		border-radius: 4px;
-		color: var(--text);
-		padding: 6px 12px;
-		transition: all 0.1s linear;
-		margin-top: 1rem;
-		&:hover {
-			border-color: #93cee9;
+			font-family: inherit;
 		}
 	}
 </style>

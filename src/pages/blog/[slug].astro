@@ -17,6 +17,7 @@ import Layout from "../../layouts/Layout.astro"
 // components
 import TOC from "../../components/blog/TOC.astro"
 import LikeBlog from "../../components/blog/LikeBlog.astro"
+import CodeBlock from "../../components/blog/CodeBlock.astro"
 
 // utils
 import { nonDraftPosts, simplifyDate } from "../../utils"
@@ -46,7 +47,11 @@ if (!post) {
 
 const { title, pubDate, image, description } = post!.data
 
-const { Content, headings } = await post!.render()
+const {
+	remarkPluginFrontmatter: extras,
+	Content,
+	headings,
+} = await post!.render()
 
 // TODO Like data of the current post
 const likes = await db.select().from(Like).where(eq(Like.post, slug))
@@ -74,7 +79,9 @@ const likes = await db.select().from(Like).where(eq(Like.post, slug))
 
 					<div class="post__read">
 						<Clock4 class="shrink-0" size={14} aria-hidden />
-						<span class="post__read">1 Min Read</span>
+						<span class="post__read"
+							>{extras.readingTime} Min Read</span
+						>
 					</div>
 
 					<div class="post__Views">
@@ -96,7 +103,7 @@ const likes = await db.select().from(Like).where(eq(Like.post, slug))
 				</div>
 
 				<div class="post__content">
-					<Content />
+					<Content components={{ figure: CodeBlock }} />
 				</div>
 			</div>
 		</div>
@@ -127,7 +134,7 @@ const likes = await db.select().from(Like).where(eq(Like.post, slug))
 			align-items: center;
 			justify-content: center;
 			flex-wrap: wrap;
-			gap: .5rem;
+			gap: 0.5rem;
 
 			div {
 				padding: 0 0.5rem;

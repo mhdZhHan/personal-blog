@@ -57,11 +57,13 @@ Markdown supports emojis! 😄🚀
 -   [ ] Master Python
 -   [ ] Build a web app
 
-### Footnotes
+### Blockquotes
 
-Here's a footnote[^1].
+> Here's a blockquote to showcase some important information.
 
-[^1]: This is a footnote.
+### Images
+
+![Tech Image](/images/blogs/trafic.jpg)
 
 ### Abbreviations
 
@@ -82,25 +84,28 @@ Now, let's have some fun with code! Here's a classic "Hello, World!" example in 
 
 ### Python
 
-```python:main.py
+```python title="main.py"
 print("Hello, World!")
 ```
 
 ### JavaScript
 
-```javascript:hello.js
-/**
- * The following code will display an alert with "Hello, World!"
- * when run in the browser
-*/
-alert("Hello, World!")
+```js title="hello.js" showLineNumbers{5}
+console.log("hewwo") // [!code --]
+console.log("hello") // [!code ++]
+console.log("goodbye")
+```
+
+```js title="App.js" /age/#v /name/#v /setAge/#s /setName/#s /50/#i /"Taylor"/#i
+const [age, setAge] = useState(50)
+const [name, setName] = useState("Taylor")
 ```
 
 ### Lets code a for loop in C++
 
 In this tutorial, we will loop through a for loop and print out the values of i
 
-```cpp:main.cpp
+```cpp title="loop.cpp"
 for(int i = 0; i < 10; i++) {
      std::cout << i << std::endl;
 }

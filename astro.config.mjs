@@ -5,8 +5,10 @@ import robotsTxt from "astro-robots-txt"
 import vercel from "@astrojs/vercel/serverless"
 import db from "@astrojs/db"
 
-import { createCssVariablesTheme } from "shiki"
 import rehypePrettyCode from "rehype-pretty-code"
+import { toString } from "mdast-util-to-string"
+import readingTime from "reading-time"
+import { visit } from "unist-util-visit"
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,8 +19,27 @@ export default defineConfig({
 		rehypePlugins: [
 			[
 				rehypePrettyCode,
-				{ theme: createCssVariablesTheme({ name: "css-variables" }) },
+				{
+					theme: "red",
+					keepBackground: false,
+				},
 			],
+
+			() => (tree, vfile) => {
+				const data = vfile.data
+				const payload = Math.round(readingTime(toString(tree)).minutes)
+				data.astro.frontmatter.readingTime = payload
+
+				visit(tree, "element", (node) => {
+					if (
+						node.properties?.["data-rehype-pretty-code-title"] !==
+						""
+					)
+						return
+					node.tagName = "div"
+					node.properties.slot = "title"
+				})
+			},
 		],
 	},
 
@@ -32,7 +53,7 @@ export default defineConfig({
 		,
 		db(),
 	],
-	
+
 	output: "hybrid",
 	adapter: vercel({ webAnalytics: { enabled: true } }),
 })

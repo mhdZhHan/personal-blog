@@ -14,7 +14,7 @@ The code block below shows the try-finally approach to file stream resource mana
 
 ### Python
 
-```python:main.py
+```python title="manifest.py"
 file = open('file-path', 'w')
 try:
     file.write('Hello world')
@@ -24,7 +24,7 @@ finally:
 
 Normally, you’d want to use this method for writing to a file, but the with statement offers a cleaner approach:
 
-```python:main.py
+```python title="manifest.py"
 with open('file-path', 'w') as file:
     file.write('Hello world')
 ```

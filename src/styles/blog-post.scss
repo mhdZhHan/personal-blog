@@ -1,3 +1,19 @@
+html[data-theme="cool"] {
+	code[data-theme*="solarized-light"],
+	code[data-theme*="solarized-light"] span {
+		color: var(--shiki-light);
+		background-color: var(--shiki-light-bg);
+	}
+}
+
+html[data-theme="dark"] {
+	code[data-theme*="synthwave-84"],
+	code[data-theme*="synthwave-84"] span {
+		color: var(--shiki-dark);
+		background-color: var(--shiki-dark-bg);
+	}
+}
+
 .post__content {
 	h1,
 	h2,

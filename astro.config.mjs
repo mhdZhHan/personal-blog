@@ -20,7 +20,10 @@ export default defineConfig({
 			[
 				rehypePrettyCode,
 				{
-					theme: "red",
+					theme: {
+						dark: "synthwave-84",
+						light: "solarized-light",
+					},
 					keepBackground: false,
 				},
 			],

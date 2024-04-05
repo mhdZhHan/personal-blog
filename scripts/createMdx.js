@@ -15,7 +15,6 @@ const createMdxFile = (fileName) => {
 
     // default mdx content 
     const markdownContent = `---
-layout: "../../layouts/BlogPostLayout.astro"
 title: ${title}
 draft: false
 pubDate: ${currentDate}

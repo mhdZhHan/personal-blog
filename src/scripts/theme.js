@@ -1,28 +1,33 @@
-window.addEventListener('load', ()=>{
-    let darkMode = localStorage.getItem('light')
-    
-    const darkModeToggle = document.querySelector('#toggle_theme')
+const storageKey = "theme-preference"
 
-    const enableLightMode = ()=>{
-        document.body.classList.add('light')
-        localStorage.setItem('light', 'enabled')
-    }
+const darkModeToggle = document.querySelector("#toggle_theme")
 
-    const disableLightMode = () => {
-        document.body.classList.remove('light')
-        localStorage.setItem('light', null)
-    }
+const getColorPreference = () => {
+	let preference = localStorage.getItem(storageKey)
 
-    if (darkMode === 'enabled') {
-        enableLightMode()
-    }
+	if (!preference) {
+		preference = window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "cool"
+	}
 
-    darkModeToggle.addEventListener('click', () => {
-        darkMode = localStorage.getItem('light')
-        if (darkMode !== 'enabled') {
-            enableLightMode()
-        }else {
-            disableLightMode()
-        }
-    })
-})
+	return preference
+}
+
+const setPreference = (themeName) => {
+	localStorage.setItem(storageKey, themeName)
+
+	document.firstElementChild.setAttribute("data-theme", themeName)
+}
+
+const togglePreference = () => {
+	setPreference(getColorPreference() === "dark" ? "cool" : "dark")
+}
+
+;(() => {
+	const theme = getColorPreference()
+
+	setPreference(theme)
+})()
+
+darkModeToggle.addEventListener("click", togglePreference)

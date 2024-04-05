@@ -1,5 +1,7 @@
 # build output
 dist/
+
+# dev time
 dev/
 
 # generated types
@@ -27,3 +29,6 @@ pnpm-debug.log*
 
 # vscode
 .vscode
+
+# yarn 
+yarn.lock

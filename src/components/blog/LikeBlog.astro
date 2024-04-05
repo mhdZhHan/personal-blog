@@ -72,6 +72,7 @@ const postLikes = likes?.likes ?? 0
 			} else {
 				likeBtn.classList.add("liked")
 				likesSpan.textContent = parseInt(likesSpan.textContent) + 1
+				likeBtn.disabled = true
 			}
 		} catch (error) {
 			console.error("Error updating likes:", error)

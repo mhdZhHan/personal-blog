@@ -4,8 +4,9 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "astro dev",
+		"dev-db": "astro dev --remote",
 		"start": "astro dev",
-		"build": "astro build && pagefind --site .vercel/output/static",
+		"build": "astro build --remote && pagefind --site .vercel/output/static",
 		"preview": "astro preview",
 		"astro": "astro",
 		"new": "node scripts/createMdx.js"

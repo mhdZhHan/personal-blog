@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename)
 
 const createMdxFile = (fileName) => {
     const projectRoot = path.join(__dirname, '..');
-    const postsDir = path.join(projectRoot, "src", "pages", "blogs")
+    const postsDir = path.join(projectRoot, "src", "content", "blog")
     const currentDate = new Date().toISOString().slice(0, 10)
     const filePath = path.join(postsDir, `${currentDate}-${fileName}.mdx`)
 

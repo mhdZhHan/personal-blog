@@ -8,7 +8,7 @@
 		"build": "astro build && pagefind --site .vercel/output/static",
 		"preview": "astro preview",
 		"astro": "astro",
-		"new-post": "node scripts/createMdx.js"
+		"new": "node scripts/createMdx.js"
 	},
 	"dependencies": {
 		"@astrojs/db": "^0.9.4",

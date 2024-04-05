@@ -7,7 +7,7 @@ import {
 	getCollection,
 	type CollectionEntry,
 } from "astro:content"
-import { db, eq, Like } from "astro:db"
+// import { db, eq, Like } from "astro:db"
 
 import { Eye, Calendar, Clock4, User } from "lucide-astro"
 
@@ -54,7 +54,7 @@ const {
 } = await post!.render()
 
 // TODO Like data of the current post
-const likes = await db.select().from(Like).where(eq(Like.post, slug))
+// const likes = await db.select().from(Like).where(eq(Like.post, slug))
 ---
 
 <Layout
@@ -90,7 +90,7 @@ const likes = await db.select().from(Like).where(eq(Like.post, slug))
 					</div>
 				</div>
 
-				{likes && <LikeBlog slug={slug} likes={likes[0]} />}
+				<!-- {likes && <LikeBlog slug={slug} likes={likes[0]} />} -->
 			</div>
 
 			<div class="post__toc">

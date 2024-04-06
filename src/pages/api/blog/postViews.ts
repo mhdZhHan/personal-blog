@@ -9,24 +9,36 @@ const viewsFormatter = Intl.NumberFormat("en", {
 	notation: "compact",
 	maximumFractionDigits: 1,
 })
+
 const slugSchema = z
 	.string()
 	.refine(async (slug) => !!getEntry("blog", slug.trim()))
-
 
 export const PUT: APIRoute = async ({ request }) => {
 	const payload = await z
 		.object({ slug: slugSchema })
 		.safeParseAsync(await request.json())
+
 	if (!payload.success) return new Response("Bad Request", { status: 400 })
 
-	const [rs] = await db
-		.update(PostView)
-		.set({ views: sql`${PostView.views} + 1` })
+	const postExists = await db
+		.select()
+		.from(PostView)
 		.where(eq(PostView.post, payload.data.slug))
-		.returning({ views: PostView.views })
 
-	return new Response(rs?.views?.toString() ?? null, { status: 200 })
+	if (postExists[0]) {
+		const [rs] = await db
+			.update(PostView)
+			.set({ views: sql`${PostView.views} + 1` })
+			.where(eq(PostView.post, payload.data.slug))
+			.returning({ views: PostView.views })
+
+		return new Response(rs?.views?.toString() ?? null, { status: 200 })
+	} else {
+		await db.insert(PostView).values({ post: payload.data.slug, views: 1 })
+
+		return new Response("1", { status: 200 })
+	}
 }
 
 export const GET: APIRoute = async () => {

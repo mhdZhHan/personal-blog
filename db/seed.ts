@@ -10,9 +10,9 @@ export default async function seed() {
 	// 	)
 
 	// PostView
-	await db
-		.insert(PostView)
-		.values(
-			(await getCollection("blog")).map((post) => ({ post: post.slug }))
-		)
+	// await db
+	// 	.insert(PostView)
+	// 	.values(
+	// 		(await getCollection("blog")).map((post) => ({ post: post.slug }))
+	// 	)
 }

@@ -58,7 +58,9 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 				<SearchBox tags={tags} />
 			</div>
 
-			<ul class="blog-posts">
+			<ul class="blog-posts hidden" data-searched-posts></ul>
+
+			<ul class="blog-posts" data-static-posts>
 				{
 					page.data.map((post) => (
 						<BlogPostCard
@@ -128,9 +130,88 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 		@media all and (max-width: 768px) {
 			grid-template-columns: repeat(1, minmax(0, 1fr));
 		}
+		&.hidden {
+			display: none;
+		}
 	}
 
 	.blogs-footer {
 		padding: 1.5rem 0;
 	}
 </style>
+
+<script define:vars={{ blogs: page.data }}>
+	const executeSearch = (search, activeTags) => {
+		const searchQuery = search.toLowerCase().trim()
+
+		const filteredPosts = blogs.filter((post) => {
+			const isVisible =
+				(searchQuery === "" ||
+					post.data.title.toLowerCase().includes(searchQuery) ||
+					post.data.description
+						.toLowerCase()
+						.includes(searchQuery)) &&
+				(activeTags.length === 0 ||
+					activeTags.some((tag) => post.data.tags.includes(tag)))
+
+			return isVisible
+		})
+
+		if (searchQuery === "" && activeTags.length === 0) {
+			return []
+		}
+
+		return filteredPosts
+	}
+
+	const searchFilter = document.querySelector("[data-post-filter-search]")
+	const tagsFilter = document.querySelector("[data-post-filter-tags]")
+	const staticPosts = document.querySelector("[data-static-posts]")
+	const searchedPosts = document.querySelector("[data-searched-posts]")
+	// const noPostsFound = document.querySelector("[data-no-posts-found]")
+
+	const activeTags = []
+
+	searchFilter.oninput = () => requestSearch()
+
+	tagsFilter.querySelectorAll("input").forEach((tag) => {
+		tag.onchange = () => {
+			if (tag.checked) {
+				activeTags.push(tag.value)
+			} else {
+				const index = activeTags.indexOf(tag.value)
+
+				if (index !== -1) {
+					activeTags.splice(index, 1)
+				}
+			}
+
+			requestSearch()
+		}
+	})
+
+	function requestSearch() {
+		const payload = executeSearch(
+			searchFilter.value,
+			Array.from(activeTags)
+		)
+
+		searchedPosts.innerHTML = ""
+
+		if (payload.length) {
+			staticPosts.classList.add("hidden")
+			searchedPosts.classList.remove("hidden")
+		} else {
+			staticPosts.classList.remove("hidden")
+			searchedPosts.classList.add("hidden")
+		}
+
+		payload.forEach((post) => {
+			searchedPosts.innerHTML += `
+            <li>
+				<h1>${post.data.title}</h1>
+            </li>
+        `
+		})
+	}
+</script>

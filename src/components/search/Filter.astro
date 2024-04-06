@@ -2,7 +2,7 @@
 const { tags } = Astro.props
 ---
 
-<ul class="search-box__filter">
+<ul data-post-filter-tags class="search-box__filter">
     {
         tags.map((tag) => (
             <li>

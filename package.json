@@ -6,15 +6,14 @@
 		"dev": "astro dev",
 		"dev-db": "astro dev --remote",
 		"start": "astro dev",
-		"build": "astro build --remote && pagefind --site .vercel/output/static",
+		"build": "astro build --remote",
 		"preview": "astro preview",
 		"astro": "astro",
 		"new": "node scripts/createMdx.js"
 	},
 	"dependencies": {
 		"@astrojs/db": "^0.9.4",
-		"astro": "^4.5.9",
-		"pagefind": "^1.1.0"
+		"astro": "^4.5.9"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "^2.2.1",

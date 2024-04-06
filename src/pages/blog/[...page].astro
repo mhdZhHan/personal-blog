@@ -8,7 +8,7 @@ import { Dot } from "lucide-astro"
 import Layout from "../../layouts/Layout.astro"
 
 // components
-import BlogPostCard from "../../components/blog/BlogPostCard.astro"
+import PostCard from "../../components/blog/PostCard.astro"
 import Pagination from "../../components/common/Pagination.astro"
 import SearchBox from "../../components/search/SearchBox.astro"
 
@@ -63,11 +63,7 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 			<ul class="blog-posts" data-static-posts>
 				{
 					page.data.map((post) => (
-						<BlogPostCard
-							{...post.data}
-							url={post.slug}
-							post={post}
-						/>
+						<PostCard {...post.data} url={post.slug} post={post} />
 					))
 				}
 			</ul>
@@ -206,10 +202,42 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 			searchedPosts.classList.add("hidden")
 		}
 
-		payload.forEach((post) => {
+		payload.forEach(async (post) => {
+			const { image, title, description, pubDate } = post.data
+
 			searchedPosts.innerHTML += `
-            <li>
-				<h1>${post.data.title}</h1>
+            <li class="post-card">
+				<a href="${post.slug}">
+					${
+						image &&
+						image !== "" &&
+						`
+						<div class="post-card__thumbnail-container">
+							<img src="${image}" alt="${title}" />
+						</div>
+					`
+					}
+
+					<div class="post-card__body">
+						<h2 class="title">${title}</h2>
+
+						<p class="body-text">${description}</p>
+
+						<div class="white-space"></div>
+
+						<div class="meta">
+							<div class="date">
+								<Calendar class="shrink-0" size="{14}" aria-hidden />
+								<time datetime="${pubDate}">${pubDate}</time>
+							</div>
+
+							<div class="read">
+								<Clock4 class="shrink-0" size="{14}" aria-hidden />
+								<span>{remarkPluginFrontmatter.readingTime} Min Read</span>
+							</div>
+						</div>
+					</div>
+				</a>
             </li>
         `
 		})

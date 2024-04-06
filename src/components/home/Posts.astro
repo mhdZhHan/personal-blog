@@ -1,5 +1,5 @@
 ---
-import BlogPostCard from "../blog/BlogPostCard.astro"
+import PostCard from "../blog/PostCard.astro"
 import HeadTitle from "../common/HeadTitle.astro"
 
 const { posts } = Astro.props
@@ -12,7 +12,7 @@ const { posts } = Astro.props
 		<ul class="posts-container">
 			{
 				posts.map((post) => (
-					<BlogPostCard {...post.data} url={post.slug} post={post} />
+					<PostCard {...post.data} url={post.slug} post={post} />
 				))
 			}
 		</ul>

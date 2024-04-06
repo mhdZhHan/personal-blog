@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content'
 // layout
 import Layout from '../../layouts/Layout.astro'
 
-import BlogPostCard from "../../components/blog/BlogPostCard.astro"
+import PostCard from "../../components/blog/PostCard.astro"
 
 export async function getStaticPaths() {
     const allPosts = await getCollection('blog')
@@ -39,7 +39,7 @@ const { posts } = Astro.props
             <ul class="posts-container">
                 {
                     posts.map((post) => (
-                        <BlogPostCard 
+                        <PostCard 
                             {...post.data}
                             url={post.slug}
                             post={post}

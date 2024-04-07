@@ -16,7 +16,16 @@ const PostView = defineTable({
 	},
 })
 
+const User = defineTable({
+	columns: {
+		id: column.number({ primaryKey: true }),
+		fullName: column.text(),
+		email: column.text({ unique: true }),
+		password: column.text(),
+	},
+})
+
 // https://astro.build/db/config
 export default defineDb({
-	tables: { Like, PostView },
+	tables: { Like, PostView, User },
 })

@@ -6,7 +6,9 @@
         "FOSS",
         "lucide",
         "nord",
+        "prerender",
         "rehype",
-        "Signup"
+        "Signup",
+        "typeof"
     ]
 }

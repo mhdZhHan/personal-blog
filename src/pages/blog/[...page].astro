@@ -58,6 +58,11 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 				<SearchBox tags={tags} />
 			</div>
 
+			<!-- <div class="no-posts hidden" data-no-posts-found>
+				<h2>No Posts Found</h2>
+				<p>No posts matched the search criteria.</p>
+			</div> -->
+
 			<ul class="blog-posts hidden" data-searched-posts></ul>
 
 			<ul class="blog-posts" data-static-posts>
@@ -131,115 +136,22 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 		}
 	}
 
+	.no-posts {
+		margin-top: 1.5rem;
+		text-align: center;
+
+		h2 {
+			font-weight: 700;
+		}
+
+		p {
+			color: var(--text);
+		}
+	}
+
 	.blogs-footer {
 		padding: 1.5rem 0;
 	}
 </style>
 
-<script define:vars={{ blogs: page.data }}>
-	const executeSearch = (search, activeTags) => {
-		const searchQuery = search.toLowerCase().trim()
-
-		const filteredPosts = blogs.filter((post) => {
-			const isVisible =
-				(searchQuery === "" ||
-					post.data.title.toLowerCase().includes(searchQuery) ||
-					post.data.description
-						.toLowerCase()
-						.includes(searchQuery)) &&
-				(activeTags.length === 0 ||
-					activeTags.some((tag) => post.data.tags.includes(tag)))
-
-			return isVisible
-		})
-
-		if (searchQuery === "" && activeTags.length === 0) {
-			return []
-		}
-
-		return filteredPosts
-	}
-
-	const searchFilter = document.querySelector("[data-post-filter-search]")
-	const tagsFilter = document.querySelector("[data-post-filter-tags]")
-	const staticPosts = document.querySelector("[data-static-posts]")
-	const searchedPosts = document.querySelector("[data-searched-posts]")
-	// const noPostsFound = document.querySelector("[data-no-posts-found]")
-
-	const activeTags = []
-
-	searchFilter.oninput = () => requestSearch()
-
-	tagsFilter.querySelectorAll("input").forEach((tag) => {
-		tag.onchange = () => {
-			if (tag.checked) {
-				activeTags.push(tag.value)
-			} else {
-				const index = activeTags.indexOf(tag.value)
-
-				if (index !== -1) {
-					activeTags.splice(index, 1)
-				}
-			}
-
-			requestSearch()
-		}
-	})
-
-	function requestSearch() {
-		const payload = executeSearch(
-			searchFilter.value,
-			Array.from(activeTags)
-		)
-
-		searchedPosts.innerHTML = ""
-
-		if (payload.length) {
-			staticPosts.classList.add("hidden")
-			searchedPosts.classList.remove("hidden")
-		} else {
-			staticPosts.classList.remove("hidden")
-			searchedPosts.classList.add("hidden")
-		}
-
-		payload.forEach(async (post) => {
-			const { image, title, description, pubDate } = post.data
-
-			searchedPosts.innerHTML += `
-            <li class="post-card">
-				<a href="${post.slug}">
-					${
-						image &&
-						image !== "" &&
-						`
-						<div class="post-card__thumbnail-container">
-							<img src="${image}" alt="${title}" />
-						</div>
-					`
-					}
-
-					<div class="post-card__body">
-						<h2 class="title">${title}</h2>
-
-						<p class="body-text">${description}</p>
-
-						<div class="white-space"></div>
-
-						<div class="meta">
-							<div class="date">
-								<Calendar class="shrink-0" size="{14}" aria-hidden />
-								<time datetime="${pubDate}">${pubDate}</time>
-							</div>
-
-							<div class="read">
-								<Clock4 class="shrink-0" size="{14}" aria-hidden />
-								<span>{remarkPluginFrontmatter.readingTime} Min Read</span>
-							</div>
-						</div>
-					</div>
-				</a>
-            </li>
-        `
-		})
-	}
-</script>
+<script src="../../scripts/search.js"></script>

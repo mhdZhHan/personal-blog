@@ -1,20 +1,31 @@
 import { getCollection } from "astro:content"
-import { nonDraftPosts } from "../../../utils"
+import readingTime from "reading-time"
+
+import { nonDraftPosts, markdownToPlainText } from "../../../utils"
 
 async function getPosts() {
 	const blogs = (await getCollection("blog")).sort(
 		(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 	)
 
-	return nonDraftPosts(blogs).map((post) => ({
-		slug: post.slug,
-		title: post.data.title,
-		description: post.data.description,
-		image: post.data.image,
-		tags: post.data.tags,
-		author: post.data.author,
-		pubDate: post.data.pubDate,
-	}))
+	const posts = nonDraftPosts(blogs).map((post) => {
+		const content = markdownToPlainText(post.body)
+
+		const { minutes } = readingTime(content)
+
+		return {
+			slug: post.slug,
+			title: post.data.title,
+			description: post.data.description,
+			image: post.data.image,
+			tags: post.data.tags,
+			author: post.data.author,
+			pubDate: post.data.pubDate,
+			readingTime: Math.ceil(minutes),
+		}
+	})
+
+	return posts
 }
 
 export async function GET({}) {

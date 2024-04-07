@@ -14,7 +14,7 @@ const { pageHeadings } = Astro.props
 				{
 					pageHeadings.map((h) => {
 						return (
-							<li id="tocItem">
+							<li id="tocItem" aria-label={h.text}>
 								{" "}
 								<a href={`#${h.slug}`}>{h.text}</a>
 							</li>

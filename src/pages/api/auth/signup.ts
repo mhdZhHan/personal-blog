@@ -59,7 +59,7 @@ export const POST: APIRoute = async ({ request }) => {
 				JSON.stringify({
 					message: "User created successfully",
 				}),
-				{ status: 201 }
+				{ status: 200 }
 			)
 		} else {
 			// If the Content-Type header is not application/json

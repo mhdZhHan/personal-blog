@@ -13,7 +13,9 @@
 	},
 	"dependencies": {
 		"@astrojs/db": "^0.9.4",
-		"astro": "^4.5.9"
+		"astro": "^4.5.9",
+		"firebase": "^10.10.0",
+		"firebase-admin": "^12.0.0"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "^2.2.1",
@@ -24,6 +26,7 @@
 		"astro-robots-txt": "^1.0.0",
 		"bcryptjs": "^2.4.3",
 		"dompurify": "^3.0.11",
+		"firebase-tools": "^13.7.1",
 		"lucide-astro": "^0.363.0",
 		"mdast-util-to-string": "^4.0.0",
 		"reading-time": "^1.5.0",

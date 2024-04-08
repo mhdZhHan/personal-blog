@@ -1,7 +1,10 @@
 import { PASSWORD_REGEX, EMAIL_REGEX } from "../utils"
 
+import { authWithGithub } from "../config/firebase"
+
 const signupForm = document.getElementById("idSignupForm") || null
 const loginForm = document.getElementById("idLoginForm") || null
+const githubAuth = document.querySelector("#githubAuth") || null
 
 async function handleSignup(event) {
 	event.preventDefault()
@@ -101,6 +104,40 @@ function handleLogin(event) {
 	}
 }
 
+function handleGithubAuth(event) {
+	event.preventDefault()
+
+	authWithGithub()
+		.then((user) => {
+			const formData = {
+				access_token: user?.accessToken,
+			}
+
+			fetch("/api/auth/github", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			})
+				.then((response) => {
+					if (response.ok) {
+						console.log("Login successful")
+						// TODO redirect
+					}
+				})
+				.catch((error) => {
+					console.error("Login error:", error)
+				})
+		})
+		.catch((error) => {
+			toast.error("trouble login through github")
+			console.log(error)
+		})
+}
+
 signupForm && signupForm.addEventListener("submit", handleSignup)
 
 loginForm && loginForm.addEventListener("submit", handleLogin)
+
+githubAuth && githubAuth.addEventListener("click", handleGithubAuth)

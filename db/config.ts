@@ -22,6 +22,7 @@ const User = defineTable({
 		fullName: column.text(),
 		email: column.text({ unique: true }),
 		password: column.text(),
+		githubAuth: column.boolean({ default: false }),
 	},
 })
 

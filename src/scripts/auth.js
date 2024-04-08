@@ -19,7 +19,7 @@ async function handleSignup(event) {
 	// validation
 	if (!fullName) {
 		console.log("Enter your full name")
-	} else if (fullName || fullName.length < 3) {
+	} else if (fullName && fullName.length < 3) {
 		console.log("Full name must be at least 3 letter long")
 	} else if (!email) {
 		console.log("Enter email")

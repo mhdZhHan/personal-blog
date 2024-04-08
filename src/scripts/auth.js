@@ -17,7 +17,9 @@ async function handleSignup(event) {
 	const { fullName, email, password } = formData
 
 	// validation
-	if (!fullName || fullName.length < 3) {
+	if (!fullName) {
+		console.log("Enter your full name")
+	} else if (fullName || fullName.length < 3) {
 		console.log("Full name must be at least 3 letter long")
 	} else if (!email) {
 		console.log("Enter email")
@@ -39,7 +41,7 @@ async function handleSignup(event) {
 
 			if (response.ok) {
 				console.log("User created successfully")
-				// Redirect the user to the login page or any other appropriate page
+				// TODO Redirect
 			} else if (response.status === 409) {
 				console.log("Email already exists")
 			} else {
@@ -62,7 +64,7 @@ function handleLogin(event) {
 		formData[key] = value
 	}
 
-	const { fullName, email, password } = formData
+	const { email, password } = formData
 
 	// validation
 	if (!email) {
@@ -74,7 +76,28 @@ function handleLogin(event) {
 			"Password should be 6 to 20 characters long with a numeric,1 lowercase and 1 uppercase letters"
 		)
 	} else {
-		console.log("Form Data:", formData)
+		fetch("/api/auth/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email, password }),
+		})
+			.then((response) => {
+				if (response.ok) {
+					console.log("Login successful")
+					// TODO redirect
+				} else if (response.status === 404) {
+					console.log("No user found with this email")
+				} else if (response.status === 401) {
+					console.log("Password is incorrect")
+				} else {
+					console.error("Login failed:", response.statusText)
+				}
+			})
+			.catch((error) => {
+				console.error("Login error:", error)
+			})
 	}
 }
 

@@ -1,16 +1,23 @@
 import type { APIRoute } from "astro"
 import { User, db, eq } from "astro:db"
 
-import admin from "firebase-admin"
+import type { ServiceAccount } from "firebase-admin"
+import { initializeApp, cert, getApps } from "firebase-admin/app"
+
 import { getAuth } from "firebase-admin/auth"
 
 import serviceAccount from "../../../../personal-blog-firebase-key.json"
 
 export const prerender = false
 
-admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
-})
+const activeApps = getApps()
+
+export const app =
+	activeApps.length === 0
+		? initializeApp({
+				credential: cert(serviceAccount as ServiceAccount),
+		  })
+		: activeApps[0]
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
@@ -22,12 +29,12 @@ export const POST: APIRoute = async ({ request }) => {
 			getAuth()
 				.verifyIdToken(access_token)
 				.then(async (decodedUser) => {
-					const { email, name } = decodedUser
+					const { email, name, picture } = decodedUser
 
 					const existingUser = await db
 						.select()
 						.from(User)
-						.where(eq(User.email, email))
+						.where(eq(User.email, email as string))
 
 					if (existingUser[0]) {
 						// login
@@ -42,8 +49,8 @@ export const POST: APIRoute = async ({ request }) => {
 					} else {
 						// User does not exist, sign up the user
 						await db.insert(User).values({
-							fullName: name,
-							email,
+							fullName: name as string,
+							email: email as string,
 							githubAuth: true,
 						})
 

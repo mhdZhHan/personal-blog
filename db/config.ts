@@ -21,7 +21,7 @@ const User = defineTable({
 		id: column.number({ primaryKey: true }),
 		fullName: column.text(),
 		email: column.text({ unique: true }),
-		password: column.text(),
+		password: column.text({ optional: true }),
 		githubAuth: column.boolean({ default: false }),
 	},
 })

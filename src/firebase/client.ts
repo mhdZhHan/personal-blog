@@ -18,7 +18,7 @@ const auth = getAuth()
 const provider = new GithubAuthProvider()
 
 export const authWithGithub = async () => {
-	let user
+	let user: unknown
 
 	await signInWithPopup(auth, provider)
 		.then((response) => {

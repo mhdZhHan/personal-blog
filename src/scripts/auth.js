@@ -1,6 +1,6 @@
 import { PASSWORD_REGEX, EMAIL_REGEX } from "../utils"
 
-import { authWithGithub } from "../config/firebase"
+import { authWithGithub } from "../firebase/client.ts"
 
 const signupForm = document.getElementById("idSignupForm") || null
 const loginForm = document.getElementById("idLoginForm") || null

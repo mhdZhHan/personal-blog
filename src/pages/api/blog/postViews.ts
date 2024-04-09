@@ -1,9 +1,9 @@
+export const prerender = false
+
 import type { APIRoute } from "astro"
 import { getEntry, z } from "astro:content"
 import { PostView, db, eq, sql } from "astro:db"
 import { sum } from "drizzle-orm"
-
-export const prerender = false
 
 const viewsFormatter = Intl.NumberFormat("en", {
 	notation: "compact",

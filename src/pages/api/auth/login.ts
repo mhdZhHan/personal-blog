@@ -1,10 +1,10 @@
+export const prerender = false
+
 import type { APIRoute } from "astro"
 import { User, db, eq } from "astro:db"
 import bcrypt from "bcryptjs"
 
 import { EMAIL_REGEX } from "../../../utils"
-
-export const prerender = false
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request }) => {
 			// Compare hashed password
 			const passwordMatch = await bcrypt.compare(
 				password,
-				existingUser[0].password
+				existingUser[0].password as string
 			)
 
 			if (!passwordMatch) {

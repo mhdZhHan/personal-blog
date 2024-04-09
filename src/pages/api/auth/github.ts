@@ -1,3 +1,5 @@
+export const prerender = false
+
 import type { APIRoute } from "astro"
 import { User, db, eq } from "astro:db"
 
@@ -7,8 +9,6 @@ import { initializeApp, cert, getApps } from "firebase-admin/app"
 import { getAuth } from "firebase-admin/auth"
 
 import serviceAccount from "../../../../personal-blog-firebase-key.json"
-
-export const prerender = false
 
 const activeApps = getApps()
 

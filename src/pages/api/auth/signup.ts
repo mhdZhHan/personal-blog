@@ -1,11 +1,11 @@
+export const prerender = false
+
 import type { APIRoute } from "astro"
 import { User, db, eq } from "astro:db"
 
 import bcrypt from "bcryptjs"
 
 import { PASSWORD_REGEX, EMAIL_REGEX } from "../../../utils"
-
-export const prerender = false
 
 export const POST: APIRoute = async ({ request }) => {
 	try {

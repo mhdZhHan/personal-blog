@@ -1,8 +1,8 @@
+export const prerender = false
+
 import type { APIRoute } from "astro"
 import { getEntry, z } from "astro:content"
 import { Like, db, eq, sql } from "astro:db"
-
-export const prerender = false
 
 const slugSchema = z
 	.string()

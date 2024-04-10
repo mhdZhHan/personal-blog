@@ -1,0 +1,59 @@
+---
+title: How To Fix Zsh Icons In Visual Studio Code Terminal ?
+draft: false
+pubDate: 2024-04-09
+description: "Learn how to restore missing Zsh icons in the Visual Studio Code terminal on Manjaro and ArchLinux."
+author: "Mohammed"
+image: "/images/blogs/konsole.webp"
+tags: ["kde", "linux", "zsh", "vscode", "manjaro"]
+---
+
+Hey folks! So, I've been tinkering around with my Manjaro system running KDE Plasma, and I noticed something strange when I fired up Visual Studio Code for coding. You see, Manjaro comes with Zsh as the default terminal, and I'm a big fan of its features. But when I started using Zsh in Visual Studio Code, I ran into a problem – the cool icons that usually appear in the terminal were missing! It turns out, this isn't just a problem on my Manjaro setup; it's something that can happen on other systems too. But don't worry, I've done some sleuthing and found a fix. Let me show you how to get those Zsh icons back in Visual Studio Code.
+
+![Screenshot: Vscode Terminal (zsh) Icon Missing](/images/blogs/vscode-zsh-missing-icon.png)
+
+## Solution
+
+I'm using Manjaro with (KDE) and this solution worked for me:
+
+1. **Install the Meslo Nerd Font:**
+
+    - For Manjaro and Arch based distro's:
+        ```bash title="Konsole"
+        sudo pacman -S ttf-meslo-nerd-font-powerlevel10k
+        ```
+    - For Ubuntu and Debian based distro's:
+        ```bash title="Konsole"
+        sudo apt-get install fonts-meslo
+        ```
+
+> **For Other Linux Distributions:**
+> The installation process may vary slightly depending on your Linux distribution. However, you can typically install the Meslo Nerd Font using your package manager. Simply search for "fonts-meslo" or "ttf-meslo-nerd-font-powerlevel10k" and install it. Once installed, follow the same steps mentioned above to configure the font settings in Visual Studio Code.
+
+2. **Configure Vscode Font Settings:**
+   To ensure that Visual Studio Code displays the Zsh icons correctly, follow these steps:
+
+    - Open Visual Studio Code.
+    - Navigate to `Terminal > Integrated: Font Family`.
+    - Set the font family to "MesloLGS NF".
+
+![Screenshot: Configuring Vscode Terminal Font Family](/images/blogs/vscode-terminal-font-changing.png)
+
+3. **Alternatively, Change Font Settings Directly in settings.json:**
+   You can also change it directly in the `settings.json` file located in the `.config/Code/User` directory. Look for the property `terminal.integrated.fontFamily`.
+
+    ```json title="settings.json"
+    "terminal.integrated.fontFamily": "MesloLGS NF"
+    ```
+
+4. **Restart Visual Studio Code:**
+   After making the font changes, restart Visual Studio Code.
+
+5. **Enjoy Your Enhanced Terminal Experience:**
+   Your terminal font should now correctly display the Zsh icons!
+
+![Screenshot: Enhanced Terminal Experience](/images/blogs/vscode-zsh-missing-icon-fixed.png)
+
+Moreover, this method will also work for macOS users, although the font installation process might differ slightly.
+
+Happy vscoding! 🚀

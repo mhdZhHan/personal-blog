@@ -1,4 +1,5 @@
 import { PASSWORD_REGEX, EMAIL_REGEX } from "../lib/index.js"
+// import { updateUserData } from "../lib/userState.ts"
 
 import { authWithGithub } from "../firebase/client.ts"
 
@@ -45,6 +46,7 @@ async function handleSignup(event) {
 			if (response.ok) {
 				console.log("User created successfully")
 				// TODO Redirect
+				// updateUserData({ type: "LOGIN", payload: { access_token: "some_token" } })
 			} else if (response.status === 409) {
 				console.log("Email already exists")
 			} else {

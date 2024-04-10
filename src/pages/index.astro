@@ -8,7 +8,7 @@ import Projects from '../components/home/Projects.astro'
 import Posts from '../components/home/Posts.astro'
 
 // utils
-import { sortByDate, nonDraftPosts } from '../utils'
+import { sortByDate, nonDraftPosts } from '../lib'
 
 // getting blogs
 const posts = await getCollection('blog')

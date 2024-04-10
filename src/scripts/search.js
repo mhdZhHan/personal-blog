@@ -76,7 +76,7 @@ async function requestSearch() {
 
         searchedPosts.innerHTML += `
         <li class="post-card">
-            <a href="${post.slug}" aria-label="${title}. ${description}">
+            <a href="/blog/${post.slug}" aria-label="${title}. ${description}">
                 ${
                     image &&
                     image !== "" &&

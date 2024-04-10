@@ -63,6 +63,9 @@ html[data-theme="dark"] {
 		-webkit-padding-start: 5%;
 		-webkit-padding-end: 5%;
 	}
+	ol {
+		list-style: decimal;
+	}
 
 	li {
 		margin: 1rem 0;

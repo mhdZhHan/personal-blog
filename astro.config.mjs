@@ -21,8 +21,8 @@ export default defineConfig({
 				rehypePrettyCode,
 				{
 					theme: {
-						dark: "synthwave-84",
-						light: "solarized-light",
+						dark: "vitesse-dark",
+						light: "vitesse-light",
 					},
 					keepBackground: false,
 				},

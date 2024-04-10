@@ -1,14 +1,14 @@
 html[data-theme="cool"] {
-	code[data-theme*="solarized-light"],
-	code[data-theme*="solarized-light"] span {
+	code[data-theme*="vitesse-light"],
+	code[data-theme*="vitesse-light"] span {
 		color: var(--shiki-light);
 		background-color: var(--shiki-light-bg);
 	}
 }
 
 html[data-theme="dark"] {
-	code[data-theme*="synthwave-84"],
-	code[data-theme*="synthwave-84"] span {
+	code[data-theme*="vitesse-dark"],
+	code[data-theme*="vitesse-dark"] span {
 		color: var(--shiki-dark);
 		background-color: var(--shiki-dark-bg);
 	}
@@ -199,7 +199,7 @@ html[data-theme="dark"] {
 			border-top-left-radius: 0.25rem;
 			border-bottom-left-radius: 0.25rem;
 			border-right: 1px solid var(--border-color);
-			background-color: rgb(23 23 23);
+			background-color: var(--text);
 			content: "";
 		}
 

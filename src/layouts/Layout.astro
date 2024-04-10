@@ -74,6 +74,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 
 		<!-- javascript's -->
 		<script src="../scripts/theme.js"></script>
+		<script src="/src/lib/userState.ts"></script>
 
 		<title>{title ? title : `Mohammed's blog`}</title>
 	</head>
@@ -85,18 +86,16 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 	</body>
 </html>
 
-<script src="/src/lib/userState.ts"></script>
-
 <style is:global lang="scss">
 	@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
 
 	:root {
-		--primary: rgb(45 212 191 / 1);
+		--primary: #F42547;
 		--secondary: rgb(23 23 23 /1);
 		--tertiary: rgb(0 0 0 / 1);
 
-		--gradient-to: #22d3ee;
-		--gradient-stops: #0ea5e9, var(--gradient-to, rgb(14 165 233 / 0));
+		--gradient-to: #F42547;
+		--gradient-stops: #b51c61, var(--gradient-to, rgb(14 165 233 / 0));
 		--text-gradient: linear-gradient(
 			to bottom right,
 			var(--gradient-stops)

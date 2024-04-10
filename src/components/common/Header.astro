@@ -10,7 +10,7 @@ const currentPath = Astro.url.pathname
 			<div class="logo-container">
 				<!-- <Logo /> -->
 				<img src="/star-boy.svg" alt="star-boy" />
-                <!-- <img src="/star-boy-black.svg" alt="star-boy" /> -->
+				<!-- <img src="/star-boy-black.svg" alt="star-boy" /> -->
 				Mohammed's Blog
 			</div>
 		</a>
@@ -18,9 +18,8 @@ const currentPath = Astro.url.pathname
 		<nav class="header__menu">
 			<ul>
 				<li>
-					<a
-						class={currentPath === "/" ? "active" : ""}
-						href="/">Root</a
+					<a class={currentPath === "/" ? "active" : ""} href="/"
+						>Root</a
 					>
 				</li>
 				<li>
@@ -50,7 +49,6 @@ const currentPath = Astro.url.pathname
 			</ul>
 
 			<button id="toggle_theme" class="toggle-theme">
-
 				<SunMoon size={22} id="sun" aria-hidden />
 				<MoonStar size={22} id="moon" aria-hidden />
 			</button>
@@ -118,6 +116,12 @@ const currentPath = Astro.url.pathname
 
 					display: flex;
 					column-gap: 0.75rem;
+
+					padding: 0.5rem 0.75rem;
+					background: transparent;
+					border-radius: 999px;
+					box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+					border: 1px solid var(--border-color);
 					li {
 						a {
 							color: var(--text);

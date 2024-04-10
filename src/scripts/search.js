@@ -1,4 +1,4 @@
-import { simplifyDate } from "../utils"
+import { simplifyDate } from "../lib"
 
 const executeSearch = async (search, activeTags) => {
     const searchQuery = search.toLowerCase().trim()

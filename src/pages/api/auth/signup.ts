@@ -5,7 +5,7 @@ import { User, db, eq } from "astro:db"
 
 import bcrypt from "bcryptjs"
 
-import { PASSWORD_REGEX, EMAIL_REGEX } from "../../../utils"
+import { PASSWORD_REGEX, EMAIL_REGEX } from "../../../lib"
 
 export const POST: APIRoute = async ({ request }) => {
 	try {

@@ -1,4 +1,4 @@
-import { PASSWORD_REGEX, EMAIL_REGEX } from "../utils"
+import { PASSWORD_REGEX, EMAIL_REGEX } from "../lib/index.js"
 
 import { authWithGithub } from "../firebase/client.ts"
 

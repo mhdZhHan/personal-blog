@@ -147,6 +147,8 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 	html {
 		scrollbar-gutter: stable;
 		overflow-x: hidden;
+
+		height: 100%;
 	}
 
 	body {
@@ -155,9 +157,10 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		font-family: "Ubuntu", sans-serif;
 		line-height: 1.6;
 
-		min-height: 100vh;
-		display: grid;
-		grid-template-rows: auto 1fr auto;
+		// min-height: 100%;
+		height: 100%;
+		// display: grid;
+		// grid-template-rows: auto 1fr auto;
 	}
 
 	input,

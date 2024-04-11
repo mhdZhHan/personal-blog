@@ -1,7 +1,7 @@
-import { PASSWORD_REGEX, EMAIL_REGEX } from "../lib/index.js"
+import { PASSWORD_REGEX, EMAIL_REGEX } from "@lib/index.js"
 // import { updateUserData } from "../lib/userState.ts"
 
-import { authWithGithub } from "../firebase/client.ts"
+import { authWithGithub } from "@firebase/client.ts"
 
 const signupForm = document.getElementById("idSignupForm") || null
 const loginForm = document.getElementById("idLoginForm") || null

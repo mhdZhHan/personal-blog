@@ -5,7 +5,7 @@ import { User, db, eq } from "astro:db"
 
 import { getAuth } from "firebase-admin/auth"
 
-import { app } from "../../../firebase/server.ts"
+import { app } from "@firebase/server.ts"
 
 
 export const POST: APIRoute = async ({ request }) => {

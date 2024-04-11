@@ -2,9 +2,9 @@
 import { getCollection } from "astro:content"
 
 // layout
-import Layout from "../../layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro"
 
-import PostCard from "../../components/blog/PostCard.astro"
+import PostCard from "@components/blog/PostCard.astro"
 
 export async function getStaticPaths() {
 	const allPosts = await getCollection("blog")

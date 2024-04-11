@@ -2,13 +2,13 @@
 import { getCollection, type CollectionEntry } from 'astro:content'
 
 // components
-import Layout from '../layouts/Layout.astro'
-import Hero from '../components/home/Hero.astro'
-import Projects from '../components/home/Projects.astro'
-import Posts from '../components/home/Posts.astro'
+import Layout from '@layouts/Layout.astro'
+import Hero from '@components/home/Hero.astro'
+import Projects from '@components/home/Projects.astro'
+import Posts from '@components/home/Posts.astro'
 
 // utils
-import { sortByDate, nonDraftPosts } from '../lib'
+import { sortByDate, nonDraftPosts } from '@lib/index'
 
 // getting blogs
 const posts = await getCollection('blog')

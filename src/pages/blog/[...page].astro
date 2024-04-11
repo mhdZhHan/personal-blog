@@ -5,17 +5,17 @@ import type { CollectionEntry } from "astro:content"
 import { Dot } from "lucide-astro"
 
 // layout
-import Layout from "../../layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro"
 
 // components
-import PostCard from "../../components/blog/PostCard.astro"
-import Pagination from "../../components/common/Pagination.astro"
-import SearchBox from "../../components/search/SearchBox.astro"
+import PostCard from "@components/blog/PostCard.astro"
+import Pagination from "@components/common/Pagination.astro"
+import SearchBox from "@components/search/SearchBox.astro"
 
 // utils
-import { sortByDate, nonDraftPosts } from "../../lib"
+import { sortByDate, nonDraftPosts } from "@lib/index"
 
-import { GET as getTotalViews } from "../api/blog/postViews"
+import { GET as getTotalViews } from "@api/blog/postViews"
 
 export async function getStaticPaths({ paginate }) {
 	const posts = await getCollection("blog")

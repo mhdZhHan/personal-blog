@@ -2,7 +2,7 @@ import rss from "@astrojs/rss"
 import { getCollection } from "astro:content"
 
 // utils
-import { sortByDate, nonDraftPosts } from '../lib'
+import { sortByDate, nonDraftPosts } from '@lib/index'
 
 export async function GET(context) {
     const posts = await getCollection("blog")

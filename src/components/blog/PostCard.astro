@@ -1,10 +1,10 @@
 ---
-import "../../styles/post-card.scss"
+import "@styles/post-card.scss"
 
 import { Calendar, Clock4 } from "lucide-astro"
 
 // utils
-import { simplifyDate } from "../../lib"
+import { simplifyDate } from "@lib/index"
 
 const { title, description, pubDate, image, url, post } = Astro.props
 

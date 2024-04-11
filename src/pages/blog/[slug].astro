@@ -1,6 +1,6 @@
 ---
 // styles
-import "../../styles/blog-post.scss"
+import "@styles/blog-post.scss"
 
 import {
 	getEntryBySlug,
@@ -12,15 +12,15 @@ import {
 import { Eye, Calendar, Clock4, User } from "lucide-astro"
 
 // layouts
-import Layout from "../../layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro"
 
 // components
-import TOC from "../../components/blog/TOC.astro"
-import LikeBlog from "../../components/blog/LikeBlog.astro"
-import CodeBlock from "../../components/blog/CodeBlock.astro"
+import TOC from "@components/blog/TOC.astro"
+import LikeBlog from "@components/blog/LikeBlog.astro"
+import CodeBlock from "@components/blog/CodeBlock.astro"
 
 // utils
-import { nonDraftPosts, simplifyDate } from "../../lib"
+import { nonDraftPosts, simplifyDate } from "@lib/index.js"
 
 type Props = CollectionEntry<"blog">
 

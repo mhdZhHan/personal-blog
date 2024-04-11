@@ -3,10 +3,10 @@ import { getCollection } from "astro:content"
 import type { CollectionEntry } from "astro:content"
 
 // layouts
-import Layout from "../../layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro"
 
 // utils
-import { nonDraftPosts } from "../../lib"
+import { nonDraftPosts } from "@lib/index"
 
 const posts = await getCollection("blog")
 const nonDraftPosts_: CollectionEntry<"blog">[] = nonDraftPosts(posts)

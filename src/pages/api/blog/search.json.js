@@ -1,7 +1,7 @@
 import { getCollection } from "astro:content"
 import readingTime from "reading-time"
 
-import { nonDraftPosts, markdownToPlainText } from "../../../lib"
+import { nonDraftPosts, markdownToPlainText } from "@lib/index"
 
 async function getPosts() {
 	const blogs = (await getCollection("blog")).sort(

@@ -20,6 +20,11 @@
 	form {
 		width: 80%;
 		max-width: 400px;
+
+		@media all and (max-width: 480px) {
+			width: 100%;
+			max-width: 100%;
+		}
 	}
 }
 
@@ -50,6 +55,10 @@
 	justify-content: center;
 	width: 90%;
 	gap: 1rem;
+
+	@media all and (max-width: 480px) {
+		width: 100%;
+	}
 }
 
 .separator-container {

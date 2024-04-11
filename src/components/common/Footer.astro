@@ -9,10 +9,19 @@ import { Rss } from "lucide-astro"
 				©{new Date().getFullYear()} Mohammed’s Blog - All Rights Reserved.
 			</p>
 
-			<a href="/rss.xml" class="rss-feed">
-				<!-- <span class="text">RSS Feed</span> -->
-				<Rss size="16" />
-			</a>
+			<ul class="nav">
+				<li>
+					<a href="/auth/signup/">Login</a>
+				</li>
+				<li>
+					<a href="/auth/login/">Signup</a>
+				</li>
+				<li>
+					<a href="/rss.xml/" class="rss-feed">
+						<Rss size="16" />
+					</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </footer>
@@ -36,25 +45,29 @@ import { Rss } from "lucide-astro"
 			font-size: 0.875rem;
 			line-height: 1.25rem;
 		}
-		a.rss-feed {
-			display: block;
-			text-align: right;
-			color: var(--gray);
-			transition: all 0.2s ease;
 
-			&:hover {
-				color: var(--primary);
+		.nav {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+
+			a {
+				display: block;
+				color: var(--gray);
+				transition: all 0.2s ease;
+
+				color: var(--gray);
+				font-size: 14px;
+				font-family: "Ubuntu", sans-serif;
+				font-weight: 500;
+				svg {
+					margin-top: 0.4rem;
+				}
+
+				&:hover {
+					color: var(--primary);
+				}
 			}
-
-			// span.text {
-			// 	color: var(--gray);
-			// 	text-decoration: underline;
-			// 	text-decoration-color: var(--border-color);
-			// 	line-height: 1.25rem;
-			// 	&:hover {
-			// 		color: var(--primary);
-			// 	}
-			// }
 		}
 	}
 </style>

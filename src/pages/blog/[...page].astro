@@ -11,7 +11,6 @@ import Layout from "../../layouts/Layout.astro"
 import PostCard from "../../components/blog/PostCard.astro"
 import Pagination from "../../components/common/Pagination.astro"
 import SearchBox from "../../components/search/SearchBox.astro"
-import ChangeDir from '../../components/common/ChangeDir.astro'
 
 // utils
 import { sortByDate, nonDraftPosts } from "../../lib"
@@ -77,8 +76,6 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 			<div class="blogs-footer">
 				<Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
 			</div>
-
-			<ChangeDir />
 		</div>
 	</section>
 </Layout>

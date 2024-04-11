@@ -4,7 +4,6 @@ import type { CollectionEntry } from "astro:content"
 
 // layouts
 import Layout from "../../layouts/Layout.astro"
-import ChangeDir from "../../components/common/ChangeDir.astro"
 
 // utils
 import { nonDraftPosts } from "../../lib"
@@ -32,8 +31,6 @@ const tags = [...new Set(nonDraftPosts_.map((post) => post.data.tags).flat())]
 					}
 				</ul>
 			</div>
-
-			<ChangeDir />
 		</div>
 	</section>
 </Layout>

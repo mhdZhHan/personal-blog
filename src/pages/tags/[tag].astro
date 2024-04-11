@@ -5,7 +5,6 @@ import { getCollection } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
 
 import PostCard from "../../components/blog/PostCard.astro"
-import ChangeDir from "../../components/common/ChangeDir.astro"
 
 export async function getStaticPaths() {
 	const allPosts = await getCollection("blog")
@@ -46,8 +45,6 @@ const { posts } = Astro.props
 					))
 				}
 			</ul>
-
-			<ChangeDir />
 		</div>
 	</section>
 </Layout>

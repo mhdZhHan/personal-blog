@@ -2,23 +2,29 @@
 import { ChevronRight } from "lucide-astro"
 ---
 
-<button id="changeDir" class="change-directory">
-	<ChevronRight size="16" />
-	<span>cd ..</span>
-</button>
+<div class="cd">
+	<div class="wrapper">
+		<button id="changeDir" class="change-directory">
+			<ChevronRight size="16" />
+			<span>cd ..</span>
+		</button>
+	</div>
+</div>
 
 <style lang="scss">
+	.cd {
+		.wrapper {
+			padding: 0;
+		}
+	}
 	#changeDir {
 		display: flex;
 		align-items: baseline;
 		gap: 0.25rem;
 
 		background: transparent;
-		margin-top: 1.5rem;
-
 		cursor: pointer;
 		transition: all 0.2s ease;
-
 		span {
 			display: block;
 			letter-spacing: 2px;

@@ -18,7 +18,7 @@ import Layout from "../../layouts/Layout.astro"
 import TOC from "../../components/blog/TOC.astro"
 import LikeBlog from "../../components/blog/LikeBlog.astro"
 import CodeBlock from "../../components/blog/CodeBlock.astro"
-import ScrollTop from "../../components/common/ScrollTop.astro"
+import ChangeDir from "../../components/common/ChangeDir.astro"
 
 // utils
 import { nonDraftPosts, simplifyDate } from "../../lib"
@@ -105,9 +105,9 @@ const {
 					<Content components={{ figure: CodeBlock }} />
 				</div>
 			</div>
-		</div>
 
-		<ScrollTop />
+			<ChangeDir />
+		</div>
 	</section>
 </Layout>
 

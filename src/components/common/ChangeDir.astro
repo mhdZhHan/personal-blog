@@ -1,0 +1,57 @@
+---
+import { ChevronRight } from "lucide-astro"
+---
+
+<button id="changeDir" class="change-directory">
+	<ChevronRight size="16" />
+	<span>cd ..</span>
+</button>
+
+<style lang="scss">
+	#changeDir {
+		display: flex;
+		align-items: baseline;
+		gap: 0.25rem;
+
+		background: transparent;
+		margin-top: 1.5rem;
+
+		cursor: pointer;
+		transition: all 0.2s ease;
+
+		span {
+			display: block;
+			letter-spacing: 2px;
+			transition: all 0.2s ease;
+			position: relative;
+
+			&::before {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 1px;
+				opacity: 0;
+				background-color: var(--primary);
+				transition: all 0.3s ease;
+			}
+
+			&:hover::before {
+				opacity: 1;
+			}
+		}
+
+		&:hover {
+			color: var(--primary);
+		}
+	}
+</style>
+
+<script is:inline>
+	const changeDir = document.getElementById("changeDir")
+
+	changeDir.addEventListener("click", () => {
+		window.history.back()
+	})
+</script>

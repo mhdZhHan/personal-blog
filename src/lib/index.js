@@ -57,7 +57,7 @@ export function markdownToPlainText(markdownContent) {
 	markdownContent = markdownContent.replace(/^\s*[-*+]\s+(.*)$/gm, "$1\n")
 	markdownContent = markdownContent.replace(/^\s*\d+\.\s+(.*)$/gm, "$1\n")
 
-	// Remove blockquotes
+	// Remove blockquote
 	markdownContent = markdownContent.replace(/^\s*>.*$/gm, "")
 
 	// Remove horizontal rules

@@ -56,4 +56,16 @@ import Popup from "@components/common/Popup.astro"
 	</section>
 </Layout>
 
+<script>
+	import { state } from "@lib/userState.ts"
+
+	window.addEventListener("DOMContentLoaded", () => {
+		const { access_token } = state.userData
+
+		if (access_token) {
+			return (window.location.href = "/")
+		}
+	})
+</script>
+
 <script src="@scripts/auth.js"></script>

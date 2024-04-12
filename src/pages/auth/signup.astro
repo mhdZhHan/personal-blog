@@ -46,7 +46,11 @@ import Popup from "@components/common/Popup.astro"
 						<hr />
 					</div>
 
-					<button type="button" class="auth-btn github-btn" id="githubAuth">
+					<button
+						type="button"
+						class="auth-btn github-btn"
+						id="githubAuth"
+					>
 						<Github />
 						continue with github
 					</button>
@@ -62,5 +66,17 @@ import Popup from "@components/common/Popup.astro"
 		</div>
 	</section>
 </Layout>
+
+<script>
+	import { state } from "@lib/userState.ts"
+
+	window.addEventListener("DOMContentLoaded", () => {
+		const { access_token } = state.userData
+
+		if (access_token) {
+			return (window.location.href = "/")
+		}
+	})
+</script>
 
 <script src="@scripts/auth.js"></script>

@@ -5,6 +5,7 @@ import { User, db, eq } from "astro:db"
 import bcrypt from "bcryptjs"
 
 import { EMAIL_REGEX } from "@lib/index"
+import { userData } from "@lib/getUserData"
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
@@ -40,7 +41,8 @@ export const POST: APIRoute = async ({ request }) => {
 			// Success response
 			return new Response(
 				JSON.stringify({
-					message: "Login successful",
+					status: 200,
+					user: userData(existingUser[0]),
 				}),
 				{ status: 200 }
 			)

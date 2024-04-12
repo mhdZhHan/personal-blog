@@ -1,11 +1,26 @@
 import { PASSWORD_REGEX, EMAIL_REGEX } from "@lib/index.js"
-// import { updateUserData } from "../lib/userState.ts"
+import { updateUserData } from "@lib/userState.ts"
 
 import { authWithGithub } from "@firebase/client.ts"
 
 const signupForm = document.getElementById("idSignupForm") || null
 const loginForm = document.getElementById("idLoginForm") || null
 const githubAuth = document.querySelector("#githubAuth") || null
+const popupModel = document.querySelector("#popupModel") || null
+
+// function fro toasting
+function toast(msg, route) {
+	popupModel.textContent = msg
+
+	popupModel.style.display = "block"
+
+	setTimeout(function () {
+		if (route) {
+			window.location.href = route
+		}
+		popupModel.style.display = "none"
+	}, 1000)
+}
 
 async function handleSignup(event) {
 	event.preventDefault()
@@ -22,15 +37,15 @@ async function handleSignup(event) {
 
 	// validation
 	if (!fullName) {
-		console.log("Enter your full name")
+		toast("Enter your full name")
 	} else if (fullName && fullName.length < 3) {
-		console.log("Full name must be at least 3 letter long")
+		toast("Full name must be at least 3 letter long")
 	} else if (!email) {
-		console.log("Enter email")
+		toast("Enter email")
 	} else if (email && !EMAIL_REGEX.test(email)) {
-		console.log("Email is invalid")
+		toast("Email is invalid")
 	} else if (!PASSWORD_REGEX.test(password)) {
-		console.log(
+		toast(
 			"Password should be 6 to 20 characters long with a numeric,1 lowercase and 1 uppercase letters"
 		)
 	} else {
@@ -44,13 +59,15 @@ async function handleSignup(event) {
 			})
 
 			if (response.ok) {
-				console.log("User created successfully")
-				// TODO Redirect
-				// updateUserData({ type: "LOGIN", payload: { access_token: "some_token" } })
+				const { user } = await response.json()
+
+				updateUserData({ type: "LOGIN", payload: user })
+
+				toast("Account created 🚀", "/")
 			} else if (response.status === 409) {
-				console.log("Email already exists")
+				toast("Email already exists")
 			} else {
-				console.log("Failed to create user")
+				toast("Failed to create user try again")
 			}
 		} catch (error) {
 			console.error("Error creating user:", error)
@@ -73,11 +90,11 @@ function handleLogin(event) {
 
 	// validation
 	if (!email) {
-		console.log("Enter email")
+		toast("Enter email")
 	} else if (email && !EMAIL_REGEX.test(email)) {
-		console.log("Email is invalid")
+		toast("Email is invalid")
 	} else if (!PASSWORD_REGEX.test(password)) {
-		console.log(
+		toast(
 			"Password should be 6 to 20 characters long with a numeric,1 lowercase and 1 uppercase letters"
 		)
 	} else {
@@ -88,14 +105,17 @@ function handleLogin(event) {
 			},
 			body: JSON.stringify({ email, password }),
 		})
-			.then((response) => {
+			.then(async (response) => {
 				if (response.ok) {
-					console.log("Login successful")
-					// TODO redirect
+					const { user } = await response.json()
+
+					updateUserData({ type: "LOGIN", payload: user })
+
+					toast("Login successfully 🚀", "/")
 				} else if (response.status === 404) {
-					console.log("No user found with this email")
+					toast("No user found with this email")
 				} else if (response.status === 401) {
-					console.log("Password is incorrect")
+					toast("Password is incorrect")
 				} else {
 					console.error("Login failed:", response.statusText)
 				}
@@ -122,10 +142,13 @@ function handleGithubAuth(event) {
 				},
 				body: JSON.stringify(formData),
 			})
-				.then((response) => {
+				.then(async (response) => {
 					if (response.ok) {
-						console.log("Login successful")
-						// TODO redirect
+						const { user } = await response.json()
+
+						updateUserData({ type: "LOGIN", payload: user })
+
+						toast("Successfully logged in 🚀", "/")
 					}
 				})
 				.catch((error) => {

@@ -1,15 +1,13 @@
-import { getSession, setSession, logoutUser } from "./session"
-
 const createStateContext = (initialUserData) => {
 	let userData = initialUserData
 
 	const setUserData = (newUserData) => {
 		userData = newUserData
-		setSession("user", JSON.stringify(userData))
+		localStorage.setItem("user", JSON.stringify(userData))
 	}
 
-	// Load initial user data from session storage
-	const sessionUserData = JSON.parse(getSession("user") as string)
+	// Load initial user data from local storage
+	const sessionUserData = JSON.parse(localStorage.getItem("user") as string)
 
 	if (sessionUserData) {
 		userData = sessionUserData
@@ -28,7 +26,8 @@ const updateUserData = (action) => {
 	switch (action?.type) {
 		case "LOGOUT":
 			state.setUserData({ access_token: null })
-			logoutUser()
+			// logoutUser()
+			localStorage.clear()
 			break
 		case "LOGIN":
 			state.setUserData(action?.payload)
@@ -39,9 +38,3 @@ const updateUserData = (action) => {
 }
 
 export { updateUserData, state }
-
-// Example usage:
-updateUserData({ type: "LOGIN", payload: { access_token: "some_token" } })
-console.log(state.userData) // Output: { access_token: "some_token" }
-updateUserData({ type: "LOGOUT" })
-console.log(state.userData) // Output: { access_token: null }

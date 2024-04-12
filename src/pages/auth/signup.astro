@@ -5,6 +5,7 @@ import { Mail, KeySquare, Github, User } from "lucide-astro"
 
 import Layout from "@layouts/Layout.astro"
 import InputBox from "@components/common/InputBox.astro"
+import Popup from "@components/common/Popup.astro"
 ---
 
 <Layout title="Mohammed's blog | Login">
@@ -56,8 +57,10 @@ import InputBox from "@components/common/InputBox.astro"
 					</p>
 				</form>
 			</div>
+
+			<Popup />
 		</div>
 	</section>
 </Layout>
 
-<script src="../../scripts/auth.js"></script>
+<script src="@scripts/auth.js"></script>

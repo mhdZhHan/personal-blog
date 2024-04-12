@@ -15,7 +15,8 @@
 		"@astrojs/db": "^0.9.4",
 		"astro": "^4.5.9",
 		"firebase": "^10.10.0",
-		"firebase-admin": "^12.0.0"
+		"firebase-admin": "^12.0.0",
+		"jsonwebtoken": "^9.0.2"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "^2.2.1",

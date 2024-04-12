@@ -6,6 +6,7 @@ import { User, db, eq } from "astro:db"
 import bcrypt from "bcryptjs"
 
 import { PASSWORD_REGEX, EMAIL_REGEX } from "@lib/index"
+import { userData } from "@lib/getUserData"
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
@@ -40,24 +41,31 @@ export const POST: APIRoute = async ({ request }) => {
 			}
 
 			// hashing password
-			const hashedPassword = await bcrypt.hash(password, 10);
+			const hashedPassword = await bcrypt.hash(password, 10)
 
 			// Insert new user
-			const newUser = await db.insert(User).values({
-				fullName,
-				email,
-				password: hashedPassword,
-			})
+			const newUser = await db
+				.insert(User)
+				.values({
+					fullName,
+					email,
+					password: hashedPassword,
+				})
+				.returning({
+					id: User.id,
+					fullName: User.fullName,
+					email: User.email,
+				})
 
 			if (!newUser) {
-				// If failed to insert the user
 				return new Response("Failed to create user", { status: 500 })
 			}
 
 			// Return a success response
 			return new Response(
 				JSON.stringify({
-					message: "User created successfully",
+					status: 200,
+					user: userData(newUser[0]),
 				}),
 				{ status: 200 }
 			)

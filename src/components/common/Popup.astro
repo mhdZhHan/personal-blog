@@ -1,0 +1,39 @@
+<div id="popupModel" class="popup"></div>
+
+<style>
+	.popup {
+		position: fixed;
+		top: 10px;
+		left: 0;
+		right: 0;
+
+		width: fit-content;
+		margin: 0 auto;
+		padding: 10px 20px;
+		text-align: center;
+
+		background-color: var(--secondary);
+		border: 1px solid var(--primary);
+		border-radius: 4px;
+
+		animation: fadeOut 3s forwards;
+		opacity: 1;
+		z-index: 2;
+
+        display: none;
+
+        font-size: 17px;
+        color: var(--primary);
+	}
+
+	@keyframes fadeOut {
+		0% {
+			opacity: 1;
+			display: block;
+		}
+		100% {
+			opacity: 0;
+			display: none;
+		}
+	}
+</style>

@@ -1,9 +1,24 @@
+---
+import { PackageOpen } from "lucide-astro"
+---
+
 <div {...Astro.props} data-clipboard-wrapper class="breezeWindow">
 	<div class="breezeWindow__header">
-		<span><slot name="title" /></span>
-		<img class="minimize" src="/icons/window_minimize.svg" alt="minimize" />
-		<img class="maximize" src="/icons/window_maximize.svg" alt="maximize" />
-		<img class="close" src="/icons/window_close.svg" alt="close" />
+		<span class="icon"><PackageOpen size="19" /></span>
+		<span class="title"><slot name="title" /></span>
+		<div class="window-button">
+			<img
+				class="minimize"
+				src="/icons/window_minimize.svg"
+				alt="minimize"
+			/>
+			<img
+				class="maximize"
+				src="/icons/window_maximize.svg"
+				alt="maximize"
+			/>
+			<img class="close" src="/icons/window_close.svg" alt="close" />
+		</div>
 	</div>
 
 	<div data-clipboard-content class="breezeWindow__body">
@@ -29,29 +44,37 @@
 			border-top-right-radius: 2px;
 			border-top-left-radius: 2px;
 
-			position: relative;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			justify-content: space-between;
+			.icon {
+				cursor: pointer;
+				svg {
+					color: var(--primary);
+				}
+			}
+			.title {
+				color: var(--title);
+			}
+			.window-button {
+				display: flex;
+				align-items: center;
+				gap: 0.25rem;
+			}
 			img {
 				width: 22px;
 				height: 22px;
-				position: absolute;
-				top: 4px;
 				border-width: 0;
 				margin: 0;
 				pointer-events: none;
 				user-select: none;
 				&.minimize {
-					top: 7px;
 					width: 16px;
 					height: 16px;
-					right: 52px;
 					filter: invert(var(--dl-invert));
 				}
 				&.maximize {
-					right: 30px;
-					top: 7px;
 					width: 16px;
 					height: 16px;
 					filter: invert(var(--dl-invert));
@@ -69,6 +92,21 @@
 			line-height: 2;
 
 			font-family: inherit;
+
+			&.hide {
+				display: none;
+			}
 		}
 	}
 </style>
+
+<script>
+	const closeBtn = document.querySelector("#close")
+	const minimizeBtn = document.querySelector("#minimize")
+	const maximizeBtn = document.querySelector("#maximize")
+	const windowBody = document.querySelector("#breezeWindow__body")
+
+	closeBtn?.addEventListener("click", () => {
+		windowBody?.classList.toggle("hide")
+	})
+</script>

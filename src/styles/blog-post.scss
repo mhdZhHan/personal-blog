@@ -113,9 +113,7 @@ html[data-theme="dark"] {
 
 	code {
 		color: var(--primary);
-	}
-
-	code {
+		font-family: "Ubuntu", sans-serif;
 		counter-reset: line;
 	}
 

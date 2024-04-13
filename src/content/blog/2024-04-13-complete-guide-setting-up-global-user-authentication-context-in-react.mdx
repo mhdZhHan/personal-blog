@@ -155,7 +155,7 @@ The `signOutUser` function clears the user data from the global context and loca
 
 To ensure that certain routes are accessible only to authenticated users, we can create a Home component that redirects unauthorized users to the sign-in page:
 
-```jsx
+```jsx title="HomeScreen.jsx"
 import { useEffect } from "react"
 import { Navigate } from "react-router-dom"
 import { useStateContext } from "../../contexts/GlobalContext"

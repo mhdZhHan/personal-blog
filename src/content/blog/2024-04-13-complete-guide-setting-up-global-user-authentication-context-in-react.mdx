@@ -1,0 +1,193 @@
+---
+title: Complete Guide Setting Up Global User Authentication Context In React
+draft: false
+pubDate: 2024-04-13
+description: "Learn how to set up global context for managing user authentication in React applications."
+author: "Mohammed"
+image: "/images/blogs/astro_coder.webp"
+tags: ["react"]
+---
+
+Hey there, React enthusiasts! Today, let's dive into setting up global context for user authentication in your React applications.
+
+As we develop React applications, managing user authentication becomes crucial. With global context, we can efficiently handle authentication state throughout our app without prop drilling. Let's explore how to set up this context.
+
+## Setting Up Global Context
+
+We'll start by creating a global context to manage user authentication state. Here's the code for our context provider:
+
+```jsx title="/src/contexts/GlobalContext.jsx"
+import { createContext, useContext, useState, useEffect } from "react"
+
+// Create a global context for managing user authentication state
+const StateContext = createContext({
+	userData: {},
+	setUserData: () => {},
+	updateUserData: () => {},
+})
+
+// ContextProvider component encapsulates the user authentication state
+export const ContextProvider = ({ children }) => {
+	// Initialize user data state using local storage
+	const [userData, setUserData] = useState(
+		JSON.parse(localStorage.getItem("user_data"))
+	)
+
+	// Function to update user data based on action type
+	const updateUserData = (action) => {
+		switch (action?.type) {
+			case "LOGOUT":
+				setUserData(null)
+				localStorage.removeItem("user_data")
+				break
+			case "LOGIN":
+				localStorage.setItem(
+					"user_data",
+					JSON.stringify(action?.payload)
+				)
+				setUserData(action?.payload)
+				break
+			default:
+				return
+		}
+	}
+
+	// Fetch user data from local storage on component mount
+	useEffect(() => {
+		setUserData(JSON.parse(localStorage.getItem("user_data")))
+	}, [])
+
+	// Provide the user authentication state to child components
+	return (
+		<StateContext.Provider value={{ userData, updateUserData }}>
+			{children}
+		</StateContext.Provider>
+	)
+}
+
+// Custom hook to access the user authentication state
+export const useStateContext = () => useContext(StateContext)
+```
+
+Next, let's integrate our context provider into the root of our React application:
+
+```jsx title="/src/App.jsx"
+import { ContextProvider } from "./contexts/GlobalContext"
+import Routes from "./routes/Routes"
+
+// Wrap the entire application with the ContextProvider to provide access to user authentication state
+const App = () => {
+	return (
+		<ContextProvider>
+			<Routes />
+		</ContextProvider>
+	)
+}
+
+export default App
+```
+
+## Managing Authentication State
+
+With our global context set up, we can easily manage user authentication state throughout our app. Here are some example functions for authentication:
+
+```jsx title="/src/AuthForm.jsx"
+const handleSubmit = (event) => {
+	event.preventDefault()
+
+	// Determine API route based on form type
+	const apiRoute = type === "sign-in" ? "signin" : "signup"
+
+	/**
+	 * Extract form data
+	 * NOTE: Here, `idFormElement` is the id of the form (an alternative to using ref.current)
+	 */
+	const form = new FormData(idFormElement)
+	const formData = {}
+
+	// Convert form data to object
+	for (const [key, value] of form.entries()) {
+		formData[key] = value
+	}
+
+	// Destructure form data
+	const { fullName, email, password } = formData
+
+	// Add your validations
+	if (fullName && fullName.length < 3) {
+		return toast.error("Full name must be at least 3 letters long")
+	}
+
+	// Call the authentication function
+	userAuthThroughApi(apiRoute, formData)
+}
+```
+
+```jsx title="/src/AuthForm.jsx" showLineNumbers{31} /updateUserData/#v /LOGIN/#i
+// Function to authenticate user through API
+const userAuthThroughApi = (apiRoute, formData) => {
+	axios
+		.post(`${import.meta.env.VITE_API_URL}/auth/${apiRoute}`, formData)
+		.then((response) => {
+			// Update user data in global context upon successful login
+			updateUserData({ type: "LOGIN", payload: response?.data?.user })
+		})
+		.catch((error) => {
+			// Display error message if login fails
+			toast.error(error?.response?.data?.message)
+		})
+}
+```
+
+This function, `userAuthThroughApi`, handles user authentication by sending a POST request to the authentication API endpoint. It takes two parameters: apiRoute, which specifies the type of authentication (sign-in or sign-up), and formData, containing user credentials. Upon successful authentication, it updates the user data in the global context. In case of a failed authentication attempt, it displays an error message.
+
+```jsx title="/src/Header.jsx" /updateUserData/#v /LOGOUT/#i
+// Function to sign out user
+const signOutUser = () => {
+	// Clear user data from global context and local storage
+	updateUserData({ type: "LOGOUT" })
+}
+```
+
+The `signOutUser` function clears the user data from the global context and local storage upon user logout. After clearing the user data, it performs any necessary cleanup actions. In the example, it logs the username for demonstration purposes.
+
+## Adding Protected Routes
+
+To ensure that certain routes are accessible only to authenticated users, we can create a Home component that redirects unauthorized users to the sign-in page:
+
+```jsx
+import { useEffect } from "react"
+import { Navigate } from "react-router-dom"
+import { useStateContext } from "../../contexts/GlobalContext"
+
+const Home = () => {
+	const { userData } = useStateContext()
+
+	return !userData.access_token ? (
+		<Navigate to="/signin" />
+	) : (
+		<div className="container mx-auto">
+			<h1>Welcome to the Home Page!</h1>
+			{/* Add your home page content here */}
+		</div>
+	)
+}
+
+export default Home
+```
+
+> **Note:** In this blog, the handling of registration, private routes, and other related functionalities are presented in a simplified manner for demonstration purposes. You can modify and adapt these components and functions according to your specific requirements and preferred coding style.
+
+## Additional Resources
+
+For those interested in exploring a full-fledged implementation of the concepts discussed in this blog post, I've created a GitHub repository for a MERN (MongoDB, Express.js, React.js, Node.js) blogging website:
+
+[Check out the MERN Blogging Website project on GitHub](https://github.com/mhdZhHan/mern-blogging-website)
+
+Feel free to clone the repository, experiment with the code, and further enhance your understanding of global user authentication context in React applications.
+
+## Conclusion
+
+Setting up global context for user authentication in React provides a robust solution for managing authentication state across your application. With this approach, you can streamline your authentication workflow and build secure, user-friendly React applications.
+
+Happy react-ing! 🚀

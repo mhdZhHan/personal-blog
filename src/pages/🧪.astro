@@ -1,0 +1,61 @@
+---
+import Layout from "@layouts/Layout.astro"
+---
+
+<Layout
+	title="Mohammed's Blog | Demos"
+	description="Mohammed's Personal Lab Explore Interactive Demos"
+>
+	<section id="demos">
+		<div class="wrapper">
+			<div class="demos-head">
+				<h1 class="demos__title">🧪 My Coding Experiments</h1>
+				<p class="demos__sub-title">
+					🔬 Where code molecules collide, sparking
+					creativity and innovation.
+				</p>
+			</div>
+
+			<div class="demos-container">
+				<ul class="demos__demos-list"></ul>
+                <h1 style="text-align:center;color:var(--primary); padding: 20px 0;">Page will under construction</h1>
+			</div>
+
+		</div>
+	</section>
+</Layout>
+
+<style lang="scss">
+	.demos-head {
+		width: 100%;
+		text-align: center;
+		margin-bottom: 1.5rem;
+		.demos__title {
+			font-size: 1.875rem;
+			line-height: 2.25rem;
+			font-weight: 700;
+			font-family: "8-bit_bold";
+		}
+		.demos__sub-title {
+			margin-top: 0.75rem;
+			color: var(--gray);
+		}
+	}
+
+	.demos-container {
+		margin-top: 2rem;
+		.demos__demos-list {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+
+			@media all and (max-width: 980px) {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			@media all and (max-width: 768px) {
+				grid-template-columns: repeat(1, minmax(0, 1fr));
+			}
+		}
+	}
+</style>

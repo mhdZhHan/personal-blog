@@ -1,0 +1,111 @@
+---
+title: How To Install And Manage Multiple Java Versions On Linux
+draft: false
+pubDate: 2024-04-19
+description: "Learn how to effortlessly install and handle multiple Java versions on your Linux system, regardless of your distribution"
+author: "Mohammed"
+image: "/images/blogs/backend.webp"
+tags: []
+---
+Hey fellow tech enthusiasts! Today, we're diving into the world of Java on Linux. Whether you're an Arch aficionado, a Debian devotee, or a Red Hat enthusiast, this guide will walk you through the process of installing and managing multiple Java versions with ease.
+
+## Getting Started
+
+Java is a cornerstone of modern software development, powering everything from enterprise applications to mobile apps. As developers, having access to different Java versions is essential for compatibility testing and ensuring smooth deployment across various environments.
+
+In this guide, we'll cover the steps to set up and manage multiple Java versions on your Linux system. We'll explore methods that work across different Linux distributions, so you're covered no matter which flavor of Linux you prefer.
+
+## Installing Multiple Java Versions
+
+### Arch Linux & based Distros
+
+If you're rocking Arch Linux, you're likely familiar with the power of the Arch User Repository (AUR). Installing multiple Java versions on Arch is a breeze thanks to the AUR's vast collection of packages.
+
+```zsh
+# Use your preferred AUR helper to search for available Java versions
+yay -Ss jdk
+
+# Install the latest available Java version
+sudo pacman -S jdk-openjdk
+
+# Install OpenJDK 17
+sudo pacman -S jdk17-openjdk
+```
+
+### Debian-based Distributions
+
+Debian-based distributions offer straightforward package management through apt. Installing multiple Java versions on Ubuntu or its derivatives involves adding the appropriate repositories and using apt to install the desired Java versions.
+
+```bash
+# Add the AdoptOpenJDK repository
+sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+
+# Update the package index
+sudo apt update
+
+# Install the latest OpenJDK version
+sudo apt install adoptopenjdk-latest-hotspot
+
+# Install OpenJDK 17
+sudo apt install adoptopenjdk-17-hotspot
+```
+
+### Red Hat-based Distributions
+
+Red Hat-based distributions like CentOS utilize the yum package manager. To install multiple Java versions on CentOS, we can leverage repositories like Software Collections (SCL) or third-party repositories such as AdoptOpenJDK.
+
+```bash
+# Enable the Software Collections repository
+sudo yum install centos-release-scl
+
+# Install the latest OpenJDK version from SCL
+sudo yum install java-latest-openjdk
+
+# Install OpenJDK 17 from AdoptOpenJDK
+sudo yum install java-17-openjdk
+```
+
+## Managing Java Versions
+
+Once you have multiple Java versions installed, you'll want to switch between them seamlessly. Tools like update-alternatives (on Debian-based systems) or alternatives (on Red Hat-based systems) allow you to manage default Java versions.
+
+#### To set the default Java version on Debian-based distributions:
+
+```bash
+sudo update-alternatives --config java
+```
+
+This command will prompt you to select the default Java version from the available options.
+
+#### On Red Hat-based distributions, you can use the alternatives command:
+
+```bash
+sudo alternatives --config java
+```
+
+Select the desired Java version from the list presented.
+
+#### For Arch-based distributions,
+
+Managing Java versions is straightforward using the archlinux-java script provided by the java-runtime-common package. To list the available Java environments:
+
+```bash
+# To set the default Java environment
+archlinux-java status
+
+sudo archlinux-java set <java-environment>
+```
+
+Replace `<java-environment>` with the name of the desired Java environment, such as java-11-openjdk or java-8-openjdk.
+
+With these tools, you can easily switch between Java versions as needed for your projects and applications.
+
+> "In this tutorial, I'm showing the examples of installing the latest version of Java and Java 17. You can install which versions you want and set switch versions as needed."
+
+## Conclusion
+
+Congratulations! You've mastered the art of installing and managing multiple Java versions on Linux. Armed with this knowledge, you can confidently tackle any Java-related task, knowing you have the right version at your fingertips.
+
+So go ahead, experiment with different Java versions, explore new features, and keep building amazing software on your Linux machine. 
+
+Happy coding! 🚀

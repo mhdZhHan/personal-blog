@@ -18,6 +18,7 @@ import Layout from "@layouts/Layout.astro"
 import TOC from "@components/blog/TOC.astro"
 import LikeBlog from "@components/blog/LikeBlog.astro"
 import CodeBlock from "@components/blog/CodeBlock.astro"
+import PostComments from "@components/blog/PostComments.astro"
 
 // utils
 import { nonDraftPosts, simplifyDate } from "@lib/index.js"
@@ -103,6 +104,10 @@ const {
 				<div class="post__content">
 					<Content components={{ figure: CodeBlock }} />
 				</div>
+			</div>
+
+			<div class="post__comments">
+				<PostComments />
 			</div>
 		</div>
 	</section>

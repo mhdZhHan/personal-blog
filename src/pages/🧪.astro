@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro"
+import DemosCard from "@components/demos/DemosCard.astro"
 ---
 
 <Layout
@@ -21,12 +22,9 @@ import Layout from "@layouts/Layout.astro"
 			</div>
 
 			<div class="demos-container">
-				<ul class="demos__demos-list"></ul>
-				<h1
-					style="text-align:center;color:var(--primary); padding: 20px 0;"
-				>
-					Page will under construction
-				</h1>
+				<ul class="demos__demos-list">
+					<!-- <DemosCard /> -->
+				</ul>
 			</div>
 		</div>
 	</section>
@@ -52,17 +50,7 @@ import Layout from "@layouts/Layout.astro"
 	.demos-container {
 		margin-top: 2rem;
 		.demos__demos-list {
-			display: grid;
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-			gap: 1rem;
 
-			@media all and (max-width: 980px) {
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-			}
-
-			@media all and (max-width: 768px) {
-				grid-template-columns: repeat(1, minmax(0, 1fr));
-			}
 		}
 	}
 </style>

@@ -1,0 +1,165 @@
+---
+import Layout from "@layouts/Layout.astro"
+---
+
+<Layout title="Mohammed's Blog | Books" description="Mohammed's Books">
+	<section id="books">
+		<div class="wrapper">
+			<div class="book">
+				<header>
+					<div class="book-title">Rust Programming for Beginners</div>
+					<button id="toggleSidebar" class="toggle-sidebar"
+						>&#9776; Menu</button
+					>
+				</header>
+
+				<div class="container">
+					<nav id="sidebar">
+						<ul class="toc">
+							<li><a href="#introduction">Introduction</a></li>
+							<li>
+								<a href="#basics">Basics</a>
+								<ul>
+									<li>
+										<a href="#getting-started"
+											>Getting Started</a
+										>
+									</li>
+									<li><a href="#examples">Examples</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+					<main>
+						<section id="introduction">
+							<h2>Introduction</h2>
+							<p>
+								This section introduces the Rust programming
+								language, covering its history, core philosophy,
+								and the reasons it has become a favorite among
+								systems programmers. Learn why Rust offers a
+								unique approach to system level development,
+								balancing speed, safety, and concurrency.
+							</p>
+						</section>
+
+						<section id="basics">
+							<h2>Basics</h2>
+							<p>
+								Understanding the fundamentals of Rust is
+								crucial for any beginner. This section provides
+								an overview of basic syntax, control flows, data
+								types, and the ownership model that defines
+								memory management in Rust.
+							</p>
+							<section id="getting-started">
+								<h3>Getting Started</h3>
+								<p>
+									Set up your Rust environment, write your
+									first Rust program, and learn how to compile
+									and run it. This segment makes sure you have
+									all the tools you need to start programming
+									with Rust.
+								</p>
+							</section>
+							<section id="examples">
+								<h3>Examples</h3>
+								<p>
+									Review detailed examples that illustrate how
+									to use Rust's syntax in different scenarios.
+									Each example is explained to ensure you
+									understand the practices that make Rust
+									unique and effective.
+								</p>
+							</section>
+						</section>
+					</main>
+				</div>
+
+				<footer>
+					<p>&copy; Learn Rust</p>
+				</footer>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style lang="scss">
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	header {
+		background: #f7e6d5;
+		padding: 10px 20px;
+		text-align: center;
+		border-bottom: 2px solid #d3c1b1;
+	}
+
+	header .book-title {
+		font-size: 24px;
+		margin-bottom: 10px;
+	}
+
+	#sidebar {
+		flex: 1 1 250px;
+		background: #dcd0c0;
+		padding: 20px;
+		height: auto;
+		overflow-y: auto;
+	}
+
+	.toc li {
+		margin-bottom: 10px;
+	}
+
+	.toc a {
+		color: #5c4b37;
+		text-decoration: none;
+		display: block;
+		transition: color 0.3s;
+	}
+
+	.toc a:hover {
+		color: #312920;
+	}
+
+	.toc ul {
+		padding-left: 20px;
+	}
+
+	main {
+		flex: 10 1 60%;
+		padding: 20px;
+		background: #fbf0e4;
+	}
+
+	h2 {
+		border-bottom: 1px solid #d3c1b1;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			flex-direction: column;
+		}
+
+		#sidebar,
+		main {
+			flex-basis: 100%;
+		}
+	}
+
+	footer {
+		background: #f7e6d5;
+		text-align: center;
+		padding: 10px 20px;
+		border-top: 2px solid #d3c1b1;
+		font-size: 14px;
+		color: #5c4b37;
+	}
+
+	footer p {
+		margin: 0;
+	}
+</style>

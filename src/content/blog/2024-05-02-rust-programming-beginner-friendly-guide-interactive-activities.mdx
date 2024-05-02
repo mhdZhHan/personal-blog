@@ -1,0 +1,1336 @@
+---
+title: Rust Programming Beginner Friendly Guide Interactive Activities
+draft: false
+pubDate: 2024-05-02
+description: "description..."
+author: "Mohammed"
+image: "/images/blogs/rusting.jpg"
+tags: ["rust", "book"]
+---
+
+Dive into the world of Rust programming with hands-on activities! This beginner-friendly guide takes you on a journey through Rust's syntax, concepts, and best practices, all while engaging in interactive exercises. From decision-making to data management, you'll explore key topics and solidify your understanding through practical coding challenges. Get ready to level up your Rust skills and embark on a rewarding learning experience!
+
+## Why Rust?
+
+- High-level language features without performance penalties
+- Program behaviors can be enforced at compile time
+- Enhanced program reliability
+- Built-in dependency management, similar to npm
+- Quickly growing ecosystem of libraries
+- Friendly & welcoming developer community
+
+## Technical Rust Goodies
+
+- First-class multithreading
+    - Compiler error to improperly access shared data
+- Type system:
+    - Can uncover bugs at compile time
+    - Makes refactoring simple
+    - Reduces the number of tests needed
+- Module system makes code separation simple
+- Adding a dependency is 1 line in a config file
+- Tooling:
+    - Generate docs, lint code, auto format
+
+## Data Types
+
+- Memory only stores [binary data](https://)
+    - Anything can be represented in binary
+    - Program determines what the binary represents
+- Basic types that are universally useful are provided by the language
+
+## Basic Data Types
+
+- Boolean
+    - true, false
+- Integer
+    - 1, 2, 50, 99, -2
+- Double / Float
+    - 1.1, 5.5, 200.0001, 2.0
+- Character
+    - 'A', 'B', 'c', '6', '$'
+- String
+    - "Hello", "world", "this is a string", "it's 101"
+
+> ♟️ Anything can be represented with binary <br />
+  ♟️ Basic data types are:
+    `boolean`, `integer`, `double & float`, `character`, `string`
+
+## What is a variable?
+
+- Assign data to a temporary memory location
+    - Allows programmer to easily work with memory
+- Can be set to any value & type
+- Immutable by default, but can be mutable
+    - `Immutable`: cannot be changed
+    - `Mutable`: can be changed
+
+> Memory is essentially data; it serves as a space for storing information.
+
+## Examples
+
+```rust
+let number = 2;
+let hello = "hello";
+let x = 'x';
+let my_half = 0.5;
+let mut my_name = "Mohammed";
+let learn_program = true;
+let your_half = my_half;
+```
+
+> 🚀 Variables make it easier to work with data <br />
+  🚀 Variables can be assigned to any value This include other variables <br />
+  🚀 Immutable by default
+
+## What are functions?
+
+- A way to encapsulate program functionality
+    - Optionally accept data
+    - Optionally return data
+- Utilized for code organization
+    - Also makes code easier to read
+
+## Anatomy of a function
+
+### Structure
+```rust
+fn fun_name(parameters: type) -> return_type {
+    return something
+}
+```
+
+### Example
+```rust
+fn add(a: 132, b: i32) -> i32 {
+    a + b
+}
+```
+
+## Using a function
+
+```rust
+fn add(a: 132, b: i32) -> 132 {
+    a + b
+}
+
+let x = add(1, 1);
+let y = add(3, 0);
+let z = add(x, 1);
+```
+
+> ✴️ Functions encapsulate functionality <br />
+✴️ Useful to organize code <br />
+✴️ Can be executed by "calling" the function <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;〽️ Parameters determine what data a function can work with <br />
+✴️ Optionally "returns" data <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;〽️ Data sent back from the function
+
+## The println macro
+
+- Macros expand into additional code
+- println "Prints" (displays) information to the terminal
+- Useful for debugging
+
+```rust
+let x = 101;
+
+println!("hello world");
+println!("{:?}", x);
+println!("{:?} {:?}", x, x);
+println!("the meaning is {:?}", x);
+
+// also use
+println!("{x:?}");
+// and
+println!("{x}");
+```
+
+## Macros use an exclamation point to call/invoke
+
+- Generate additional Rust code
+- Data can be printed using println!:
+    - `{:?}`
+    - `{varname:?}`
+
+## Execution Flow
+
+- Code executed line-by-line
+- Actions are performed & control flow may change
+- Specific conditions can change control flow
+    - ► `if`
+    - ► `else`
+    - ► `else if`
+
+## Example - Nested if..else
+
+```rust
+let a 99;
+if a > 99 {
+    if a > 200 {
+        println! ("Huge number");
+    } else {
+        println! ("Big number");
+    }
+} else {
+    println! ("Small number");
+}
+```
+
+### Example Simple Flow
+
+```rust
++--------+
+| Start  |
++---+----+
+    |                                                           
+    v                                   
++---+------------+
+| Declare x = 1  |
++---+------------+
+    |
+    v                                 let x = 32;
++---+------------+                    let y = 32;
+| Declare y = 2  |                    let z = 32;
++---+------------+
+    |
+    v
++---+------------+
+| Declare x = 3  |
++---+------------+
+    |
+    v
++---+----+
+| End    |
++--------+
+```
+
+### Example if..else
+
+```rust
++-----------------------+
+|        Start          |
++-----------------------+
+         |                                                           
+         v   
+     +----------+
+     |  x = 99  | (Assignment)
+     +----------+
+         |                            let x = 99;
+         v
+     +----------+                     if x > 99 {
+     |  x > 99? | (Decision)              println! ("Big number");
+     +----------+                     } else {
+         |                                println! ("Small number");
+         v                            }
+     /        \
+    Yes        No
+     v        v
++----------+ +----------+
+| Big      | | Small    |
+| number   | | number   |
++----------+ +----------+
+         |
+         v
++-----------------------+
+|        End            |
++-----------------------+
+```
+
+### Example Nested if..else
+
+```rust
++-----------------------+
+|        Start          |
++-----------------------+
+           |
+           v
+      +----------+
+      |  x = 99  | (Assignment)
+      +----------+
+           |
+           v
+      +----------+
+      |  x > 99? | (Decision)
+      +----------+
+        /        \                    let x = 99;
+      Yes         No
+       |           |                  if x > 99 {
+       v           v                      if x > 200 {
++----------+     +----------+                 println! ("Huge number");
+| x > 200? |     | Small    |             } else {
+|(Decision)|     | number   |                 println! ("Big number");
++----------+     +----------+             }
+  /         \               |         } else {
+Yes          No             |             println! ("Small number");
+ |            |             |         }
+ v            v             |
++----------+ +----------+   |
+| Huge     | | Big      |   |
+| number   | | number   |   |
++----------+ +----------+   |
+      |            |        |
+      v            v        |
++-----------------------+   |
+|        End            |<--/
++-----------------------+   
+```
+
+### Example if..else if..else
+
+```rust
++-----------------------+
+|        Start          |
++-----------------------+
+         |
+         v    
+    +----------+
+    |  x = 99  | (Assignment)
+    +----------+
+         |
+         v                                                   
+    +----------+
+    |  x > 200?| (Decision)
+    +----------+
+     /        \                       let x =  99;
+    Yes       No
+     |        |                       if x > 200 {
+     v        v                           println! ("Huge number");
++----------+ +----------+             }else if x > 99 {
+| Huge     | | x > 99?  |                 println! ("Big number");
+| number   | |(Decision)|             } else {
++----------+ +----------+                 println! ("Small number");
+|             /     \                 }
+|            Yes     No     
+|           /         \ 
+|          /           \  
+|   +----------+ +----------+
+|   | Big      | | Small    |
+|   | number   | | number   |
+|   +----------+ +----------+
+|        |            |    
+|        v            v       
+|   +-----------------------+
+\-->|        End            |
+    +-----------------------+
+```
+
+> ✴️ Code executes line-by-line <br />
+✴️ This can be changed using `if` <br />
+✴️ Try to always include `else`, unless there truly is no alternative case
+
+## Repetition
+
+- Called `looping` or `iteration`
+- Multiple types of loops
+ - `loop` infinite loop
+ - `while` conditional loop
+
+### Loop & While loop
+
+```rust
++-----------------------+
+|        Start          |                     // loop
++-----------------------+                     let mut z = 0;
+          |
+          v                                   loop {
+     +----------+                                 if z == 5 {
+     |   z = 0  | (Assignment)                        break;
+     +----------+                                 }
+          |                                       println!("{:?}", z);
+          v                                       z = z + 1;
++-----------------------+<-------------\      }
+|         Loop          | (Loop Start) |
++-----------------------+              |
+          |                            |
+          v                            |
+     +----------+                      |
+     |  Print z | (Output)             |      // while loop
+     +----------+                      |      let mut x = 0;
+          |                            |
+          v                            |      while x != 5 {
+     +----------+                      |          println!("{:?}", x);
+     |  z == 5? | (Decision)           |          x = x + 1;
+     +----------+                      |      }
+        /     \                        |
+       Yes     NO                      |
+      /         \                      |
+     /           \                     |
++-----------+ +-----------+            |
+|  break    | | z = z + 1 |  continue  |
+|           | |(Increment)|----------->/
++-----------+ +-----------+
+        |
+        v  
+     +------------------+
+     |       End        |
+     +------------------+
+```
+
+> ♟️ Repetition can be performed using loops <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;♟️ While loop <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;♟️ Infinite loop <br />
+♟️ Both types of loops can exit using "break"
+
+## Rust installation
+
+### Installing Rust on Linux
+
+1. Install Rustup: Open a terminal and run:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+2. Verify Installation: In the terminal, type `rustc --version` to verify Rust installation. Check Cargo with `cargo --version`.
+
+### Installing Rust on macOS
+
+1. Install with Homebrew: In a terminal, run:
+
+```bash
+brew install rust
+```
+
+2. Verify Installation: In the terminal, type `rustc --version` to verify Rust installation. Check Cargo with `cargo --version`.
+
+## Creating a Rust Project
+
+```bash
+cargo init hello_world
+cd hello_world
+```
+
+**Exploring Project Files:** Inside the project directory, you'll find the following files:
+- `Cargo.toml`: This file contains metadata about the project and its dependencies. You can specify dependencies, project name, version, and other configurations here.
+- `src` directory: This directory contains your project's source code files. The `main.rs` file is the entry point for your Rust application.
+
+## Running a Rust Project
+
+1. **Build the Project:** To compile your Rust project, run the following command in the project directory:
+```bash
+cargo build
+```
+
+This command compiles your project and generates the executable binary file.
+
+2. **Run the Project:** Once the project is built successfully, you can run the executable binary by executing:
+
+```bash
+cargo run
+```
+
+This command builds and executes the project. You'll see the output of your Rust program in the terminal.
+
+## Basic Hello, World! Program
+
+Now let's add the traditional "Hello, World!" program to your Rust project. Open the `main.rs` file located in the `src` directory and replace its contents with the following code.
+
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+This simple program prints "Hello, world!" to the console.
+
+- **Run the Program:** After adding the "Hello, World!" program, you can run it using the `cargo run` command as described above. You should see the "Hello, world!" message printed in the terminal.
+
+```bash
+cargo run
+```
+
+### Output
+```bash
+Hello, world!
+```
+
+> Congratulations! 🎉 You have successfully created a Rust project, built it, and executed it. You can now continue to develop your project by adding more code to the `main.rs` file or by creating additional Rust source files in the `src` directory.
+
+## Code Comments
+
+- Comments are used to explain code in plain language.
+- They help other developers understand your code.
+- Comments are ignored by the compiler.
+- In Rust, single-line comments start with `//`.
+- Multi-line comments start with `/* and end with */`.
+- Prefer clear variable names that express their purpose over using comments.
+- Keep comments concise and use them only when needed to explain complex parts of the code.
+
+```rust
+/* This is the entry point of the 
+   application.
+*/
+fn main() {
+    // Display a message to the user
+    println!("Hello, world!");
+
+    // my favorite color
+    let c = "black"; // avoid
+
+    let my_favorite_color = "black";
+}
+```
+
+## Activity 1: Functions
+
+In this activity, you'll learn how to define and use functions in Rust. Functions are a fundamental building block of Rust programming, allowing you to encapsulate and reuse code.
+
+### Your Task
+
+Before we dive into the details, here's a challenge for you: Try to implement the functionality described below on your own. Once you've given it a shot, you can compare your implementation with the example provided to see how well you did.
+
+### Steps
+- Display First Name: Define a function called `display_first_name` that prints your first name to the console.
+
+- Display Last Name: Define another function called `display_last_name` that prints your last name to the console.
+
+- Call Functions: Call both functions from the `main` function to display your full name.
+
+```rust
+// Define a function to display the first name
+fn display_first_name() {
+    println!("My first name is Mohammed");
+}
+
+// Define a function to display the last name
+fn display_last_name() {
+    println!("My last name is Shajahan");
+}
+
+// Main function
+fn main() {
+    // Call the display_first_name function
+    display_first_name();
+    
+    // Call the display_last_name function
+    display_last_name();
+}
+```
+
+### Output
+
+```bash
+My first name is Mohammed
+My last name is Shajahan
+```
+
+### Try It Yourself
+
+Take a moment to implement the activity on your own. Once you're ready, compile and run your code using Cargo, and observe the output. Then, compare your implementation with the provided example to see how closely they match.
+
+## Basic Arithmetic Operations
+
+In this section, we'll explore the basic arithmetic operations available in Rust. These operations allow you to perform mathematical calculations within your Rust programs.
+
+```rust
+fn main() {
+    let x = 100 + 1;   // Addition (+)
+    let y = 9 - 4;    // Subtraction (-)
+    let z = 5 * 8;   // Multiplication (*)
+    let a = 20 / 5; // Division (/)
+    let b = 10 % 3;// Remainder (Modulus) (%)
+}
+```
+
+### Order of Operations
+
+Just like in math class, Rust follows the order of operations (PEMDAS/BODMAS).
+
+1. **P**arentheses
+2. **E**xponents
+3. **M**ultiplication and **D**ivision (from left to right)
+4. **A**ddition and **S**ubtraction (from left to right)
+
+For example:
+
+```rust
+let result = 10 + 5 * 2; // Rust does multiplication first, then addition
+```
+
+This would give `20`, because `5 * 2` is calculated first (giving `10`), and then `10` is added to `10`.
+
+## Activity 2: Basic Arithmetic Operations
+
+In this activity, you'll practice performing basic arithmetic operations in Rust. Follow the steps below to complete the activity
+
+### Your Task
+
+Try implementing the functionality described below on your own. Once you've completed it, compare your implementation with the example provided.
+
+### Steps
+
+- **Define Addition Function:** Create a function called `add_numbers` that takes two parameters `a` and `b` of type `i32` and returns their sum.
+
+- **Display Result:** Define a function called `display_result` that takes a single parameter `result` of type `i32` and displays it to the console using the println macro with the `"{:?}"` token.
+
+- **Call Functions:** In the `main` function, call the `add_numbers` function with two numbers of your choice and store the result. Then, call the `display_result` function to print the result.
+
+```rust
+// Define a function to add two numbers together
+fn add_numbers(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+// Define a function to display the result
+fn display_result(result: i32) {
+    println!("{:?}", result);
+}
+
+fn main() {
+    // Call the add_numbers function to perform addition
+    let result: i32 = add_numbers(10, 20);
+    
+    // Display the result
+    display_result(result);
+}
+```
+### Output
+
+```
+30
+```
+
+### Your Turn
+
+Take some time to implement the activity on your own. Once you're done, compile and run your code using Cargo. Compare your output with the expected output provided above.
+
+## Control Flow with if & else
+
+In Rust, you can make decisions in your code using `if` and `else` statements. This is super handy when you want your program to do different things based on certain conditions.
+
+### Basic Structure
+
+```rust
+if condition {
+    // Do something if the condition is true
+} else {
+    // Do something else if the condition is false
+}
+```
+Let's say we want to check if someone is old enough to purchase something
+
+```rust
+fn main() {
+    let age = 15;
+    if age >= 21 {
+        println!("Ok to purchase");
+    }else {
+        println!("Cannot purchase");
+    }
+}
+```
+
+- We set `age` to `15`.
+- The `if` statement checks if age is `21` or older.
+- If it is, it prints `"Ok to purchase"`.
+- If not, it prints `"Cannot purchase"`.
+
+## Activity 3.1: Flow Control using if..else
+
+In this activity, you'll practice using the `if..else` statement in Rust to display a message based on the value of a boolean variable.
+
+### Your Task
+
+Your task is to create a Rust program that displays a message based on the value of a boolean variable.
+Steps
+
+- **Define the Boolean Variable:** Create a boolean variable named `my_bool` and set it to either `true` or `false`.
+- **Check the Value:** Use an `if..else` block to check the value of the `my_bool` variable. 
+- **Display Message:** If `my_bool` is `true`, display "Hello". If it's `false`, display "Goodbye".
+
+```rust
+fn main() {
+    // Define the boolean variable
+    let my_bool = true;
+
+    // Check the value and display message
+    if my_bool {
+        println!("Hello");
+    } else {
+        println!("Goodbye");
+    }
+}
+```
+
+### Output
+
+```
+Hello
+```
+
+### Try It Yourself
+
+Implement the activity on your own. Once you're done, compile and run your code using Cargo to see if it produces the expected output.
+
+## Activity 3.2: Flow Control using if..else if..else
+
+In this activity, you'll use the `if..else if..else` statement in Rust to determine which message to display based on the value of a variable.
+
+### Your Task
+
+Your task is to create a Rust program that displays `>5`, `<5`, or `=5` based on the value of a variable.
+Steps
+
+- **Define the Variable:** Create a variable named `x` and set it to any integer value.
+- **Check the Value:** Use an `if..else if..else` block to check the value of the variable `x`.
+- **Display Message:** Display `>5` if `x` is greater than 5, `<5` if `x` is less than 5, and `=5` if `x` is equal to 5.
+
+```rust
+fn main() {
+    let x = 7;
+
+    if x > 5 {
+        println!(">5");
+    } else if x < 5 {
+        println!("<5");
+    } else {
+        println!("=5");
+    }
+}
+```
+
+### Output
+
+```
+>5
+```
+
+### Try It Yourself
+
+Implement the activity on your own. Once you're done, compile and run your code using Cargo to see if it produces the expected output.
+
+## Match
+
+- Add logic to program
+- Similar to if..else
+- Exhaustive
+    - All options must be accounted for
+
+### Example with boolean
+
+```rust
+fn main() {
+    let some_bool = true;
+    match some_bool {
+        true => println! ("its true"),
+        false => println! ("its false"),
+    }
+}
+```
+
+### Example with int
+
+```rust
+fn main() {
+    let some_int = 3;
+    match some_int {
+        1 => println! ("its 1"),
+        2 => println! ("its 2"),
+        3 => println! ("its 3"),
+        => println! ("its something else"),
+    }
+}
+```
+
+### match vs else..if
+
+- `match` will be checked by the compiler
+    - If a new possibility is added, you will be notified when this occurs
+- `else..if` is not checked by the compiler
+    - If a new possibility is added, your code may contain a bug
+
+
+> ♟️ Prefer `match` over `else..if` when working with a single variable <br />
+♟️ `match` considers all possibilities <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;♟️ More robust code <br />
+♟️ Use underscore (`_`) to `match` "anything else" <br />
+
+### Making decisions with match
+
+```rust
+fn main() {
+    let my_name = "Liyana";
+    match my_name {
+        "Liyana" => println! ("that is my name"),
+        "Liviya" => println! ("not my name"),
+        "Ali" => println! ("hello ali"),
+        _ => println! ("nice to meet you!"), // Default pattern for any other value
+    }
+}
+```
+
+- We have a variable `my_name` set to "Liyana".
+- The `match` statement checks `my_name` against specific patterns.
+- If `my_name` matches "Liyana", we print "That's my name!".
+- If it matches "Liviya", we print "That's not my name.".
+- If it matches "Ali", we print "Hello, Ali!".
+- If `my_name` doesn't match any pattern, indicated by `_`, we print "Nice to meet you!".
+
+## Activity 4.1: Decision Making with Match
+
+In this activity, you'll practice using the match expression in Rust to display a message based on the value of a boolean variable.
+
+### Your task
+Your task is to create a Rust program that displays "it's true" if a boolean variable is true and "it's false" if the variable is false.
+
+### Steps
+
+- **Define the Boolean Variable:** Create a boolean variable named `my_bool` and set it to either `true` or `false`.
+- **Use Match Expression:** Utilize a `match` expression to determine which message to display based on the value of the `my_bool` variable.
+- **Display Message:** Inside the `match` expression, print "it's true" if the value is `true` and "it's false" if the value is `false`.
+
+```rust
+fn main() {
+    // Define the boolean variable
+    let my_bool = true;
+
+    // Use match expression to determine the message
+    match my_bool {
+        true => println!("it's true"),
+        false => println!("it's false"),
+    }
+}
+```
+
+### Output
+
+```
+it's true
+```
+
+### Test Your Code
+
+Compile and run your code using Cargo to see if it produces the expected output. If the output matches the expected result, then your implementation is correct! 🏆
+
+## Activity 4.2: Basic match expressions
+
+In this activity, you'll utilize the match expression in Rust to display a message based on the value of an integer variable.
+
+### Your Task
+
+Your task is to create a Rust program that displays "one", "two", "three", or "other" based on whether the value of a variable is 1, 2, 3, or some other number, respectively. 🎯
+
+### Steps
+
+- **Define the Integer Variable:** Create an integer variable named `my_number` and set it to any integer value.
+- **Use Match Expression:** Implement a `match` expression to determine which message to display based on the value of the `my_number` variable.
+- **Display Message:** Inside the `match` expression, print "One" if the value is 1, "Two" if the value is 2, "Three" if the value is 3, and "some other number" for any other value. 🖨️
+
+```rust
+fn main() {
+    // Define the integer variable
+    let my_number = 2;
+
+    // Use match expression to determine the message
+    match my_number {
+        1 => println!("One"),
+        2 => println!("Two"),
+        3 => println!("Three"),
+        _ => println!("some other number"),
+    }
+}
+```
+
+### Output
+
+```
+Two
+```
+
+### Test Your Code
+
+Compile and run your code using Cargo to see if it produces the expected output. If the output matches the expected result, then your implementation is correct! 🏆
+
+## Repetition using loop
+
+In Rust, the loop keyword allows you to create a loop that repeats indefinitely until you explicitly tell it to stop.
+
+```rust
+fn main() {
+    let mut i = 3;    
+    loop {
+        println!("{:?}", i);
+        i = i - 1;      // Decrement i by 1
+        if i == 0 {    // Check if i reached 0
+            break;    // If so, exit the loop
+        }
+    }
+    println!("done!");
+}
+```
+
+- We start with a variable `i` initialized to `3`.
+- Then, we enter an infinite `loop`.
+- Inside the `loop`, we print the current value of `i`.
+- We decrement `i` by    with each iteration of the `loop`.
+- If `i` becomes `0`, we exit the loop using the `break` keyword.
+- After exiting the `loop`, we print "done!" to indicate that the `loop` has finished.
+
+## Activity 5: Looping using the loop statement
+
+In this activity, you'll practice using the `loop` statement in Rust to display numbers from "1" through "4" in the terminal.
+
+### Your Task
+
+Your task is to create a Rust program that prints numbers from "1" through "4" in the terminal using a loop statement.
+
+### Steps
+
+- **Initialize a Mutable Variable:** Create a mutable integer variable named `x` and set its initial value to `1`.
+
+- **Use a Loop Statement:** Utilize a `loop` statement to repeatedly execute a block of code.
+
+- **Print the Variable:** Within the `loop`, print the current value of the variable `x` using `println!("{:?}", x)`.
+
+- **Exit the Loop:** Implement an `if` statement to check if the value of `x` equals `4`. If it does, use the `break` keyword to exit the `loop`.
+
+- **Increment the Variable:** Inside the `loop`, increment the value of `x` by `1` in each iteration using `x += 1`.
+
+```rust
+fn main() {
+    let mut x = 1;
+    loop { 
+        println!("{:?}", x); 
+        if x == 4 {
+            break;
+        }
+        x += 1;
+    }
+}
+```
+
+### Output
+
+```bash
+1
+2
+3
+4
+```
+
+### Test Your Code
+
+Compile and run your code using Cargo to see if it produces the expected output. If the output matches the expected result, then your implementation is correct! 🏆
+
+## Repetition using while loop
+
+The while loop executes a block of code repeatedly as long as a specified condition is true.
+
+```rust
+fn main() {
+    let mut i = 1;
+    while i <= 3 {
+        println!("{:?}", i);
+        i = i + 1;
+    }
+}
+```
+
+- We initialize a mutable variable `i` to `1`.
+- We use a `while` loop to repeat the block of code as long as the condition `i <= 3` is true.
+- Inside the loop, we print the value of `i` and then increment it by `1`.
+- The loop continues until `i` is no longer less than or equal to `3`.
+
+## Activity 6: Counting Down with While Loop
+
+In this activity, you'll practice using a while loop in Rust to count down from 5 to 1 and display the countdown in the terminal.
+
+### Your Task
+
+Your task is to create a Rust program that counts down from 5 to 1 and displays the countdown in the terminal, then prints "done!" when complete.
+
+### Steps
+
+- **Define a Mutable Integer Variable:** Create a mutable integer variable named `counter` and set it to `5`.
+- **Use a While Loop:** Utilize a `while` loop to repeatedly execute a block of code as long as the condition `counter >= 1` is true.
+- **Print the Countdown:** Inside the `while` loop, print the value of `counter`.
+- **Decrement the Counter:** After printing the value of `counter`, decrement it by `1`.
+- **Print "Done!":** After the loop, print "Done!" to indicate that the countdown is complete.
+
+```rust
+fn main() {
+    // Define a mutable integer variable
+    let mut counter = 5;
+
+    // Use a while loop to count down
+    while counter >= 1 {
+        // Print the variable within the while loop
+        println!("{:?}", counter);
+        
+        // Decrement the counter
+        counter -= 1;
+    }
+
+    println!("Done!"); // Print "Done!" after the loop
+}
+```
+
+### Output
+
+```
+5
+4
+3
+2
+1
+Done!
+```
+
+### Test Your Code
+
+Compile and run your code using Cargo to see if it produces the expected output. If the output matches the expected result, then your implementation is correct! 🏆
+
+## Working With Data | enum (Enumeration)
+
+- Data that can be one of multiple different possibilities
+    - Each possibility is called a "variant"
+- Provides information about your program to the compiler
+    - More robust programs
+
+```rust
+enum Direction {
+    Left,
+    Right
+}
+
+fn main() {
+    let go = Direction::left;
+    match go {
+        Direction::Left => println!("Go Left"),
+        Direction::Right => println!("Go Right"),
+    }
+}
+```
+
+- **Define `Direction enum`:** This has variants `Left` and `Right`.
+- **Initialize go:** Set to `Direction::Left`.
+- **Match statement:** Checks if `go` is `Left` `(prints "Go Left")` or `Right (prints "Go Right")`.
+- **Output:** Because `go` is `Left`, it prints `"Go Left"`.
+
+> ♦️ Enums can only be one variant at a time <br />
+♦️ More robust programs when paired with match <br />
+♦️ Make program code easier to read <br />
+
+## Activity 7: Printing Color Names
+
+In this activity, you'll create a Rust program that prints the name of a color to the terminal using an enum and a matching function.
+
+### Your Task
+
+Your task is to define an enum called `Color` with variants for different color names. Then, create a function named `print_color` that takes a `Color` enum as a parameter and prints the corresponding color name to the terminal.
+
+### Steps
+
+- **Define the Enum:** Declare an enum named `Color` with variants `Red`, `Green`, `Blue`, and `Black`.
+- **Declare the Function:** Write a function named `print_color` that takes a `Color` enum as a parameter.
+- **Match Expression:** Inside the `print_color` function, use a match expression to determine which color name to print based on the variant.
+- **Call the Function:** In the `main` function, call the `print_color` function with a chosen color variant.
+
+```rust
+// Define an enum with color names as variants
+enum Color {
+    Red,
+    Green,
+    Blue,
+    Black,
+}
+
+// Define a function to print the color name
+fn print_color(color: Color) {
+    // Use a match expression to determine which color name to print
+    match color {
+        Color::Red => println!("Red"),
+        Color::Green => println!("Green"),
+        Color::Blue => println!("Blue"),
+        Color::Black => println!("Black"),
+    }
+}
+
+fn main() {
+    // Call the print_color function with a color variant
+    print_color(Color::Black);
+}
+```
+
+### Output
+
+```
+Black
+```
+
+### Test Your Code
+
+Compile and run your code using Cargo to verify that it produces the expected output. If the output matches the expected result, then your implementation is correct! 🏆
+
+
+## Working With Data | struct (Structure)
+
+- A type that contains multiple pieces of data
+    - All or nothing cannot have some pieces of data and not others
+- Each piece of data is called a "field"
+- Makes working with data easier
+    - Similar data can be grouped together
+
+```rust
+struct GroceryItem {
+    stock: i32,
+    price: f64,
+}
+
+fn main() {
+    let  oats = GroceryItem {
+        stock: 10,
+        price: 3.99,
+    };
+    println!("Stock: {:?}", oats.stock);
+    println!("Price: {:?}", oats.price);
+}
+```
+
+- We define a `struct` named `GroceryItem` to represent grocery items.
+- The `GroceryItem` struct has two fields: `stock` of type `i32` and `price` of type `f64`.
+- In the `main` function, we create an instance of the `GroceryItem` struct named `oats`.
+- We initialize the `oats` instance with a stock quantity of `10` and a price of `3.99`.
+- We then print the stock and price of the `oats` item using `println!` statements.
+
+> ♦️ Structs deal with multiple pieces of data <br />
+♦️ All fields must be present to create a struct <br />
+♦️ Fields can be accessed using a dot `(.)` <br />
+
+## Activity 7: Organizing Data with Structs and Enums
+
+In this activity, you'll practice using structs and enums in Rust to organize and represent data about different types of drinks.
+
+### Your Task
+
+Your task is to create a Rust program that prints the flavor and fluid ounces of various drinks.
+
+### Steps
+
+- **Define Enum for Drink Flavors:** Create an enum named `Flavor` to represent different flavors of drinks. Include variants for `Sweet`, `Fruity`, and `Spice`.
+- **Define Struct for Drink:** Create a struct named `Drink` to store information about a drink, including its `flavor` (using the `Flavor` enum) and `fluid_ounce`.
+- **Create a Function to Display Drink Details:** Implement a function named `display_drink` that takes a `Drink` as a parameter and prints out its flavor and fluid ounces. Use a match expression within this function to print the drink flavor based on the variant of the `Flavor` enum.
+- **Create Drink Instances:** In the `main` function, create at least two instances of `Drink`, each with its own flavor and fluid ounce information.
+- **Call the Display Function:** Call the `display_drink` function for each drink instance created in step 4 to print its flavor and fluid ounces.
+
+```rust
+// Define enum for drink flavors
+enum Flavor {
+    Sweet,
+    Fruity,
+    Spice,
+}
+
+// Define struct for drink
+struct Drink {
+    flavor: Flavor,
+    fluid_ounce: f64,
+}
+
+// Function to display drink details
+fn display_drink(drink: Drink) {
+    match drink.flavor {
+        Flavor::Sweet => println!("Flavor: Sweet"),
+        Flavor::Fruity => println!("Flavor: Fruity"),
+        Flavor::Spice => println!("Flavor: Spice"),
+    }
+    println!("Fluid Ounces: {:?}", drink.fluid_ounce);
+}
+
+fn main() {
+    // Create instances of Drink
+    let spice_drink = Drink {
+        flavor: Flavor::Spice,
+        fluid_ounce: 5.7,
+    };
+
+    let fruity_drink = Drink {
+        flavor: Flavor::Fruity,
+        fluid_ounce: 10.0,
+    };
+
+    // Display drink details
+    display_drink(spice_drink);
+    display_drink(fruity_drink);
+}
+```
+
+### Output
+
+```yaml
+Flavor: Spice
+Fluid Ounces: 5.7
+Flavor: Fruity
+Fluid Ounces: 10.0
+```
+
+### Test Your Code
+
+Compile and run your code using Cargo to ensure it produces the expected output. If the output matches the expected result, then your implementation is correct! 🏆
+
+
+## Working With Data | Tuples
+
+- A type of "record".
+- Store data anonymously.
+    - No need to name fields.
+- Useful to return pairs of data from functions.
+- Can be "destructured" easily into variables.
+
+```rust
+fn main() {
+    let x = (1, 2);
+    println!("{:?}, {:?}", x.0, x.1);
+
+    let (x, y) = (2, 3);
+    println!("{:?}, {:?}", x, y);
+
+    let (name, age) = ("Liviya", 18);
+    println!("User Name: {:?}", name);
+    println!("User Age: {:?}", age);
+}
+```
+
+- **Tuple Declaration**: We create a tuple `x` with values `1` and `2`.
+- **Printing Tuple Elements**: Print both elements of `x` using `println!`.
+- **Tuple Destructuring**: We create a new tuple `(x, y)` with values `2` and `3`.
+- **Printing Destructured Tuple**: Print both elements of `(x, y)`, which is `(2, 3)`.
+- **Tuple Destructuring with Different Types**: We create a tuple `(name, age)` with values `"Liviya"` and `18`.
+- **Printing Destructured Tuple with Different Types**: Print the values of `name` and `age`.
+
+
+> ♦️ Allow for anonymous data access <br />
+♦️ Useful when destructuring <br />
+♦️ Can contain any number of fields <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;♦️ Use struct when more than 2 or 3 fields <br />
+
+
+## Activity 9: Data Management using Tuples
+
+In this activity, you'll work with tuples to manage data representing coordinates.
+
+### Your Task
+
+Your task is to create a Rust program that prints whether the y-value of a Cartesian coordinate is greater than 5, less than 5, or equal to 5.
+
+### Steps
+
+- **Define a Function**: Create a function named `coordinate` that returns a tuple representing Cartesian coordinates. The function should return `(3, 7)`.
+- **Destructure the Tuple**: Inside the `main` function, destructure the return value of the `coordinate` function into two variables, `_x` and `y`.
+- **Use Conditional Statements**: Use an `if..else if..else` block to determine whether the `y` value is greater than 5, less than 5, or equal to 5. Print the appropriate message in each case.
+
+```rust
+// * Use a function that returns a tuple
+fn coordinate() -> (i32, i32) {
+    (3, 7)
+}
+
+fn main() {
+    // * Destructure the return value into two variables
+    let (_x, y) = coordinate();
+
+    // * Use an if..else if..else block to determine what to print
+    if y > 5 {
+        println!("Greater than 5");
+    } else if y < 5 {
+        println!("Less than 5");
+    } else {
+        println!("Equal to 5");
+    }
+}
+```
+
+### Output
+
+```
+Greater than 5
+```
+
+### Test Your Code
+
+Compile and run your code using Cargo to see if it produces the expected output. If the output matches the expected result, then your implementation is correct! 🏆
+
+## Fundamentals | Expressions
+
+- Rust is an expression-based language.
+    - Most things are evaluated and return some value.
+- Expression values coalesce to a single point.
+    - Can be used for nesting logic.
+
+```rust
+enum Access {
+    Admin,
+    Manager,
+    User,
+    Guest
+}
+
+fn main() {
+    // secret file: admin only
+    let access_level = Access::Guest;
+    let can_access_file = match access_level {
+        Access::Admin => true,
+        _ => false
+    }
+
+    println!("{:?}", can_access_file);
+}
+```
+
+- **Enum Declaration**: Define an enum named `Access` with variants `Admin`, `Manager`, `User`, and `Guest`.
+- **Main Function**: Declare the main function.
+- **Access Level**: Initialize a variable `access_level` with the value `Access::Guest`.
+- **Access Check**: Use a match expression to check the `access_level`.
+  - If the `access_level` is `Access::Admin`, we set `can_access_file` to `true`.
+  - Otherwise (for all other access levels), we set `can_access_file` to `false`.
+- **Print Result**: Print the value of `can_access_file` to the console.
+
+
+> ♦️ Expressions allow nested logic <br />
+♦️ if and match expressions can be nested <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;♦️ Best to not use more than two or three levels
+
+## Activity 10: Working with Expressions
+
+In this activity, you'll practice working with expressions in Rust to determine whether a value is greater than 100.
+
+### Your Task
+
+Your task is to create a Rust program that prints "its big" if a variable is greater than 100 and "its small" if the variable is less than or equal to 100.
+
+### Steps
+
+- **Define a Function**: Create a function named `print_message` that takes a boolean parameter `gt_100`. Inside this function, use a `match` expression to determine whether `gt_100` is `true` or `false`. Print "It's big" if `gt_100` is `true`, and "It's small" if `gt_100` is `false`.
+- **Evaluate the Expression**: In the `main` function, create a variable named `value` and set it to `100`. Then, create a boolean variable named `is_gt_100` and set it to the result of the expression `value > 100`. This expression evaluates to `true` if `value` is greater than 100 and `false` otherwise.
+- **Print the Message**: Call the `print_message` function and pass `is_gt_100` as an argument.
+
+```rust
+// * Use a match expression to determine which message
+//   to print
+fn print_message(gt_100: bool) {
+    match  gt_100 {
+        true => println!("It's big"),
+        false => println!("It's small")
+    }
+}
+
+fn main() {
+    // * Use a boolean variable set to the result of
+    //   an if..else expression to store whether the value
+    //   is > 100 or <= 100
+    let value = 100;
+    let is_gt_100 = value > 100; // shortcut instead of doing if..else
+
+    print_message(is_gt_100);
+}
+```
+
+### output
+
+```
+It's small
+```
+
+### Test Your Code
+
+Compile and run your code using Cargo to see if it produces the expected output. If the output matches the expected result, then your implementation is correct! 🏆

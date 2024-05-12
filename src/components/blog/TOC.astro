@@ -1,25 +1,50 @@
 ---
+// utils
+import { buildToc } from "@lib/generateToc"
+
 export type Props = {
 	pageHeadings: Array<{ depth: number; text: string; slug: string }>
 }
 
 const { pageHeadings } = Astro.props
+const headings = buildToc(pageHeadings)
 ---
 
 {
-	pageHeadings.length && pageHeadings.length > 3 && (
+	headings.length && headings.length > 3 && (
 		<div class="post__toc" id="toc">
 			<details>
 				<summary accesskey="c" title="(Alt + c)">
 					On this page
 				</summary>
+
 				<div class="inner">
 					<ul>
-						{pageHeadings.map((h) => {
+						{headings.map((heading) => {
 							return (
-								<li id="tocItem" aria-label={h.text}>
+								<li id="tocItem" aria-label={heading.text}>
 									{" "}
-									<a href={`#${h.slug}`}>{h.text}</a>
+									<a href={`#${heading.slug}`}>
+										{heading.text}
+									</a>
+									{heading.subheadings &&
+										heading.subheadings.length > 0 && (
+											<ul class="subheading">
+												{heading.subheadings.map(
+													(subheading) => (
+														<li>
+															<a
+																href={`#${subheading.slug}`}
+															>
+																{
+																	subheading.text
+																}
+															</a>
+														</li>
+													)
+												)}
+											</ul>
+										)}
 								</li>
 							)
 						})}
@@ -48,15 +73,14 @@ const { pageHeadings } = Astro.props
 			padding: 1rem 2rem;
 
 			ul {
-				// list-style: none;
-				list-style: disc;
+				list-style: none;
 				line-height: 1.8;
 				li {
 					a {
+						position: relative;
 						color: var(--title);
 						font-size: 18px;
 						word-break: break-word;
-						// text-decoration-color: var(--border-color);
 						&:hover {
 							text-decoration: underline;
 						}
@@ -64,45 +88,24 @@ const { pageHeadings } = Astro.props
 							color: var(--primary);
 							font-weight: 600;
 						}
+						&::before {
+							content: "";
+							border-color: rgba(0, 0, 0, 0) var(--primary);
+							border-style: solid;
+							border-width: 0.35em 0 0.35em 0.45em;
+							display: block;
+							height: 0;
+							width: 0;
+							position: absolute;
+							left: -1em;
+							top: .2em;
+						}
 					}
 				}
+			}
+			.subheading {
+				margin-left: 2rem;
 			}
 		}
 	}
 </style>
-
-<script>
-	const setCurrent: IntersectionObserverCallback = (entries) => {
-		// for (let entry of entries) {
-		// }
-		entries.forEach((entry) => {
-			const { id } = entry.target
-
-			const tocHeadingEl = document.querySelector(
-				`#tocItem a[href='#${id}']`
-			)
-
-			if (!tocHeadingEl) return
-
-			if (entry.isIntersecting) {
-				document
-					.querySelectorAll("#tocItem a")
-					.forEach((e) => e.classList.remove("active"))
-				tocHeadingEl.classList.add("active")
-			}
-		})
-	}
-
-	const observerOptions = {
-		threshold: 1,
-		rootMargin: "0px 0px -66%",
-	}
-
-	const headingObserver = new IntersectionObserver(
-		setCurrent,
-		observerOptions
-	)
-	document
-		.querySelectorAll(".blog-post-body__content :is(h1,h2,h3,h4)")
-		.forEach((heading) => headingObserver.observe(heading))
-</script>

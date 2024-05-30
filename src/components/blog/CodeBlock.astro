@@ -1,3 +1,7 @@
+---
+import { Files } from "lucide-astro"
+---
+
 <div class="codeEditor hidden">
 	<svg
 		fill="#0277BD"
@@ -47,6 +51,14 @@
 
 	<div data-clipboard-content class="breezeWindow__body">
 		<slot />
+	</div>
+
+	<div class="breezeWindow__footer">
+		<span class="language_label">Language name</span>
+		<button class="copy-to-clipboard">
+			<Files class="shrink-0" size={14} aria-hidden />
+			Copy to clipboard
+		</button>
 	</div>
 </div>
 
@@ -159,6 +171,46 @@
 
 			height: 100%;
 		}
+
+		.breezeWindow__footer {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			border-top: 1px solid var(--border-color);
+			color: var(--text);
+
+			padding: 30px 10px;
+			height: 30px;
+			border-bottom-right-radius: 2px;
+			border-bottom-left-radius: 2px;
+
+			button {
+				outline: none;
+				border: none;
+				transition: all 0.4s ease;
+
+				padding: 0.3rem 0.75rem;
+				font-weight: 500;
+				border-radius: 0.25rem;
+				// background-color: rgb(44 52 55 / 1);
+				border: 1px solid var(--border-color);
+				background-color: var(--secondary);
+				color: var(--title);
+
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				text-align: center;
+
+				cursor: pointer;
+
+				&:hover {
+					opacity: 0.7;
+				}
+			}
+		}
 	}
 </style>
 
@@ -214,7 +266,7 @@
 
 			if (!document.body.classList.contains("overflow-hidden")) {
 				document.body.classList.add("overflow-hidden")
-			}else {
+			} else {
 				document.body.classList.remove("overflow-hidden")
 			}
 

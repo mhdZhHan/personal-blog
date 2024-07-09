@@ -67,14 +67,20 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 				) && <meta property="og:image" content={ogImageUrl} />
 		}
 
+		<!-- Sitemap -->
+		<link rel="sitemap" href="/sitemap-index.xml" />
 		<!-- Canonical Link -->
-		<link rel="canonical" href={Astro.url.href} />
+		<link
+			href={String(new URL(Astro.url.pathname, Astro.site)).replace(
+				/\/+$/,
+				""
+			)}
+			rel="canonical"
+		/>
 		<!-- Alternate Language -->
 		<link rel="alternate" hreflang="en" href="https://www.mohammedsh.xyz" />
 		<!-- Favicon -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<!-- Sitemap -->
-		<link rel="sitemap" href="/sitemap-index.xml" />
 
 		<!-- javascript's -->
 		<script src="@scripts/theme.js"></script>

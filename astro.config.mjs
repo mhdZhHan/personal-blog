@@ -13,6 +13,9 @@ import { visit } from "unist-util-visit"
 // https://astro.build/config
 export default defineConfig({
 	site: "https://mohammedsh.xyz",
+	trailingSlash: "never",
+	output: "hybrid",
+	adapter: vercel({ webAnalytics: { enabled: true }, imageService: true }),
 
 	markdown: {
 		syntaxHighlight: false,
@@ -56,7 +59,4 @@ export default defineConfig({
 		,
 		db(),
 	],
-
-	output: "hybrid",
-	adapter: vercel({ webAnalytics: { enabled: true } }),
 })

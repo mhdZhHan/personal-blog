@@ -1,0 +1,87 @@
+---
+import Toast from "@components/common/Toast.astro"
+import { FilePenLine, Share2 } from "lucide-astro"
+---
+
+<>
+	<ul class="action-buttons">
+		<li title="Copy the link of this article">
+			<button id="copy" class="action-button">
+				<Share2 size={16} /> Share this article
+			</button>
+		</li>
+		<li>
+			<a
+				href={`https://github.com/mhdZhHan/personal-blog/tree/main/src/content${Astro.url.pathname}.mdx`}
+				class="action-link"
+				target="_blank"
+			>
+				Typo? Edit it here <FilePenLine size={16} />
+			</a>
+		</li>
+	</ul>
+
+	<Toast
+		Icon={Share2}
+		description="Link copied to clipboard."
+		idList="toast-share"
+	/>
+</>
+
+<style lang="scss">
+	.action-buttons {
+		margin-top: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		li {
+			list-style: none;
+			button,
+			a {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				background: inherit;
+				border: none;
+				outline: none;
+				gap: 0.25rem;
+
+				transition-property: color, background-color, border-color,
+					text-decoration-color, fill, stroke;
+				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+				transition-duration: 0.15s;
+				&:hover {
+					color: rgb(250 250 250 / 1);
+				}
+			}
+		}
+	}
+</style>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const copyButton = document.getElementById("copy")
+		const toastElement = document.getElementById("toast-share")
+
+		if (copyButton && toastElement) {
+			copyButton.addEventListener("click", function () {
+				const copyText = window.location.href
+
+				navigator.clipboard
+					.writeText(copyText)
+					.then(() => {
+						toastElement.classList.remove("hidden")
+						setTimeout(() => {
+							toastElement.classList.add("hidden")
+						}, 2500)
+					})
+					.catch((err) => {
+						console.error("Failed to copy text: ", err)
+					})
+			})
+		} else {
+			console.error("Copy button or toast element not found")
+		}
+	})
+</script>

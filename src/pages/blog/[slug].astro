@@ -19,6 +19,7 @@ import TOC from "@components/blog/TOC.astro"
 import LikeBlog from "@components/blog/LikeBlog.astro"
 import CodeBlock from "@components/blog/CodeBlock.astro"
 import PostComments from "@components/blog/PostComments.astro"
+import BlogFooter from "@components/blog/BlogFooter.astro"
 
 // utils
 import { nonDraftPosts, simplifyDate } from "@lib/index.js"
@@ -106,6 +107,11 @@ const {
 				</div>
 			</div>
 
+			<div class="post__footer">
+				<hr class="hr-line" />
+				<BlogFooter />
+			</div>
+
 			<div class="post__comments">
 				<PostComments />
 			</div>
@@ -172,7 +178,8 @@ const {
 		}
 	}
 
-	.post__comments {
+	.post__comments,
+	post__footer {
 		margin: 1.25rem auto;
 	}
 </style>

@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config"
+import { defineConfig, sharpImageService } from "astro/config"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
 import robotsTxt from "astro-robots-txt"
@@ -41,6 +41,9 @@ export default defineConfig({
 	trailingSlash: "never",
 	output: "hybrid",
 	adapter: vercel({ webAnalytics: { enabled: true }, imageService: true }),
+	image: {
+		service: sharpImageService(),
+	},
 
 	markdown: {
 		syntaxHighlight: false,

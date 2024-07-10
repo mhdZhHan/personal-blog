@@ -112,6 +112,7 @@ const currentPath = Astro.url.pathname
 				display: flex;
 				align-items: center;
 				gap: 0.7rem;
+				flex-wrap: wrap;
 
 				@media all and (max-width: 640px) {
 					justify-content: space-between;
@@ -147,6 +148,8 @@ const currentPath = Astro.url.pathname
 					border: none;
 					cursor: pointer;
 					background: none;
+
+					margin-left: auto;
 					#sun {
 						display: var(--sun_icon_visibility);
 					}

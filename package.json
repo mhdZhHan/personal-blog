@@ -30,7 +30,9 @@
 		"lucide-astro": "^0.363.0",
 		"mdast-util-to-string": "^4.0.0",
 		"reading-time": "^1.5.0",
+		"rehype-autolink-headings": "^7.1.0",
 		"rehype-pretty-code": "^0.13.1",
+		"rehype-slug": "^6.0.0",
 		"sass": "^1.72.0",
 		"shiki": "^1.2.2",
 		"unist-util-visit": "^5.0.0"

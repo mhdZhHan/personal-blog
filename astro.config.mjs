@@ -6,9 +6,34 @@ import vercel from "@astrojs/vercel/serverless"
 import db from "@astrojs/db"
 
 import rehypePrettyCode from "rehype-pretty-code"
+import rehypeSlug from "rehype-slug"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+
 import { toString } from "mdast-util-to-string"
 import readingTime from "reading-time"
 import { visit } from "unist-util-visit"
+
+const prettyCodeOptions = {
+	theme: {
+		dark: "vitesse-dark",
+		light: "vitesse-light",
+	},
+	keepBackground: false,
+}
+
+const autolinkHeadingsOptions = {
+	behavior: "prepend",
+	content: {
+		type: "text",
+		value: "#",
+	},
+	headingProperties: {
+		className: ["anchor"],
+	},
+	properties: {
+		className: ["anchor-link"],
+	},
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,16 +45,9 @@ export default defineConfig({
 	markdown: {
 		syntaxHighlight: false,
 		rehypePlugins: [
-			[
-				rehypePrettyCode,
-				{
-					theme: {
-						dark: "vitesse-dark",
-						light: "vitesse-light",
-					},
-					keepBackground: false,
-				},
-			],
+			rehypeSlug,
+			[rehypePrettyCode, prettyCodeOptions],
+			[rehypeAutolinkHeadings, autolinkHeadingsOptions],
 
 			() => (tree, vfile) => {
 				const data = vfile.data

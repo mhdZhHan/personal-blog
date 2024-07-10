@@ -5,7 +5,7 @@ import { ChevronRight } from "lucide-astro"
 <div class="cd">
 	<div class="wrapper">
 		<button id="changeDir" class="change-directory">
-			<ChevronRight size="16" />
+			<ChevronRight size="16" class="shrink-0" />
 			<span>cd ..</span>
 		</button>
 	</div>
@@ -19,7 +19,7 @@ import { ChevronRight } from "lucide-astro"
 	}
 	#changeDir {
 		display: flex;
-		align-items: baseline;
+		align-items: center;
 		gap: 0.25rem;
 
 		background: transparent;

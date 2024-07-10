@@ -16,13 +16,14 @@ import Layout from "@layouts/Layout.astro"
 
 // components
 import TOC from "@components/blog/TOC.astro"
-import LikeBlog from "@components/blog/LikeBlog.astro"
+// import LikeBlog from "@components/blog/LikeBlog.astro"
 import CodeBlock from "@components/blog/CodeBlock.astro"
 import PostComments from "@components/blog/PostComments.astro"
 import BlogFooter from "@components/blog/BlogFooter.astro"
+import PostPagination from "@components/blog/PostPagination.astro"
 
-// utils
-import { nonDraftPosts, simplifyDate } from "@lib/index.js"
+// lib
+import { simplifyDate } from "@lib/index.js"
 
 type Props = CollectionEntry<"blog">
 
@@ -110,9 +111,8 @@ const {
 			<div class="post__footer">
 				<hr class="hr-line" />
 				<BlogFooter />
-			</div>
-
-			<div class="post__comments">
+				<PostPagination {post} />
+				<hr class="hr-line" style="margin-bottom: 2.5rem;" />
 				<PostComments />
 			</div>
 		</div>
@@ -178,8 +178,7 @@ const {
 		}
 	}
 
-	.post__comments,
-	post__footer {
+	.post__footer {
 		margin: 1.25rem auto;
 	}
 </style>

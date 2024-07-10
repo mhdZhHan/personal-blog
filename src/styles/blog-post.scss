@@ -19,7 +19,7 @@ html[data-theme="dark"] {
 }
 
 .anchor-link {
-	color: rgb(212 212 216 / 1) !important;
+	color: var(--gray);
 	margin-right: .25rem;
 	opacity: .3;
 	font-weight: 500;

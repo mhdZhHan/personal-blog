@@ -31,7 +31,11 @@ import Popup from "@components/common/Popup.astro"
 						Icon={KeySquare}
 					/>
 
-					<button class="auth-btn" type="submit">Sign In</button>
+					<button
+						class="auth-btn"
+						type="submit"
+						aria-label="Sign in button">Sign In</button
+					>
 
 					<div class="separator-container">
 						<hr />
@@ -39,7 +43,11 @@ import Popup from "@components/common/Popup.astro"
 						<hr />
 					</div>
 
-					<button class="auth-btn github-btn" id="githubAuth">
+					<button
+						class="auth-btn github-btn"
+						id="githubAuth"
+						aria-label="Continue with github"
+					>
 						<Github />
 						continue with github
 					</button>

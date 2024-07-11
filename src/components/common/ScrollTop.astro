@@ -2,7 +2,7 @@
 import { ArrowUp } from "lucide-astro"
 ---
 
-<button id="scrollTop">
+<button id="scrollTop" aria-label="Scroll to top">
 	<ArrowUp size="16" />
 </button>
 
@@ -25,15 +25,15 @@ import { ArrowUp } from "lucide-astro"
 		background: transparent;
 		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-        opacity: 0;
-        pointer-events: none;
+		opacity: 0;
+		pointer-events: none;
 		&:hover {
 			background: var(--secondary);
 		}
 
 		&.show {
 			opacity: 1;
-            pointer-events: initial
+			pointer-events: initial;
 		}
 	}
 </style>

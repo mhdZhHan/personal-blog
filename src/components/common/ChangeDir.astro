@@ -4,7 +4,11 @@ import { ChevronRight } from "lucide-astro"
 
 <div class="cd">
 	<div class="wrapper">
-		<button id="changeDir" class="change-directory">
+		<button
+			id="changeDir"
+			class="change-directory"
+			aria-label="Go back to previous page"
+		>
 			<ChevronRight size="16" class="shrink-0" />
 			<span>cd ..</span>
 		</button>

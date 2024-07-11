@@ -47,14 +47,17 @@ const currentPath = Astro.url.pathname
 					>
 				</li>
 				<li>
-					<a
-						class={currentPath === "/🧪" ? "active" : ""}
-						href="/🧪">🧪</a
+					<a class={currentPath === "/🧪" ? "active" : ""} href="/🧪"
+						>🧪</a
 					>
 				</li>
 			</ul>
 
-			<button id="toggle_theme" class="toggle-theme">
+			<button
+				id="toggle_theme"
+				class="toggle-theme"
+				aria-label="Toggle theme"
+			>
 				<SunMoon size={22} id="sun" aria-hidden />
 				<MoonStar size={22} id="moon" aria-hidden />
 			</button>

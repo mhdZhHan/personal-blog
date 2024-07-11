@@ -13,7 +13,8 @@
 	},
 	"dependencies": {
 		"@astrojs/db": "^0.9.4",
-		"astro": "^4.9.3"
+		"astro": "^4.9.3",
+		"sharp": "^0.33.4"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "^2.2.1",

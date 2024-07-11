@@ -1,5 +1,5 @@
 ---
-// utils
+// lib
 import { buildToc } from "@lib/generateToc"
 
 export type Props = {
@@ -11,7 +11,7 @@ const headings = buildToc(pageHeadings)
 ---
 
 {
-	headings.length && headings.length > 3 && (
+	headings.length && headings.length > 3 ? (
 		<div class="post__toc" id="toc">
 			<details>
 				<summary accesskey="c" title="(Alt + c)">
@@ -52,6 +52,8 @@ const headings = buildToc(pageHeadings)
 				</div>
 			</details>
 		</div>
+	) : (
+		""
 	)
 }
 
@@ -98,7 +100,7 @@ const headings = buildToc(pageHeadings)
 							width: 0;
 							position: absolute;
 							left: -1em;
-							top: .2em;
+							top: 0.2em;
 						}
 					}
 				}

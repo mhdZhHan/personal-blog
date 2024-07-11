@@ -1,4 +1,6 @@
 ---
+import { ArrowRight } from "lucide-astro"
+
 const { t1, t2, url } = Astro.props
 ---
 
@@ -12,21 +14,7 @@ const { t1, t2, url } = Astro.props
 		<a href={url}>
 			View {t2 === "Posts" ? `All` : `More`}
 			{t2}
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				stroke-width="2"
-				width="14"
-				height="14"
-				stroke="currentColor"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				fill="none"
-				viewBox="0 0 24 24"
-				aria-hidden="true"
-			>
-				<path d="M5 12h14"></path>
-				<path d="m12 5 7 7-7 7"></path>
-			</svg>
+			<ArrowRight class="shrink-0" size={14} aria-hidden />
 		</a>
 	</div>
 </div>

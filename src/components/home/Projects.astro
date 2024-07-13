@@ -3,7 +3,7 @@ import ProjectCard from "../projects/ProjectCardHome.astro"
 import HeadTitle from "../common/HeadTitle.astro"
 
 import projects from "../../data/projects.json"
-const lastThreeProjects = projects.slice(0, 3)
+const lastThreeProjects = projects.slice(0, 2)
 ---
 
 <section id="projects">
@@ -18,8 +18,15 @@ const lastThreeProjects = projects.slice(0, 3)
 
 <style lang="scss">
 	.projects-container {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
+		// display: flex;
+		// flex-direction: column;
+		// gap: 1.5rem;
+
+		display: grid;
+		column-gap: 1.5rem;
+		row-gap: 1.5rem;
+		@media (min-width: 1024px) {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 </style>

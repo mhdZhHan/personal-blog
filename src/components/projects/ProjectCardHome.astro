@@ -1,128 +1,122 @@
 ---
+import { Book, Eye, GitFork, Star, ArrowUpRight } from "lucide-astro"
 const { name, description, tags, source_code_link, image } = Astro.props
 ---
 
-<li class="project-card">
-	<div class="project-card__content">
-		<div class="project-card__content__haed">
-			<a href="#" class="project-title">{name}</a>
-
-			<ul class="project-tags">
-				{
-					tags.map((tag) => (
-						<li class={tag}>
-							<a href="#">#{tag}</a>
-						</li>
-					))
-				}
-			</ul>
-		</div>
-
-		<div class="project-card__content__body">
-			<p>{description}</p>
-		</div>
+<div class="repo-card">
+	<div class="repo-header">
+		<Book size={12} class="icon" aria-hidden="true" />
+		<span class="repo-name">{name}</span>
 	</div>
 
-	<div class="project-links">
-		<a href={source_code_link} class="github" target="_blank">
-			<img src="/icons/github.png" alt="github" class="github" />
-		</a>
+	<div class="repo-content">
+		<p class="repo-description">{description}</p>
+
+		<hr class="hr-line" />
+
+		<div class="repo-stats">
+			<div class="stat-group">
+				<div class="stat">
+					<Star size={12} class="icon" />
+					<span>8</span>
+				</div>
+
+				<div class="stat">
+					<GitFork size={12} class="icon" />
+					<span>0</span>
+				</div>
+
+				<div class="stat">
+					<Eye size={12} class="icon" />
+					<span>9</span>
+				</div>
+			</div>
+
+			<div class="links">
+				<a href="https://github.com/mhdzhhan"
+					>Github <ArrowUpRight
+						size={12}
+						data-external-icon
+						aria-hidden
+					/></a
+				>
+				<a href="https://mohammedsh.xyz"
+					>Site <ArrowUpRight
+						size={12}
+						data-external-icon
+						aria-hidden
+					/></a
+				>
+			</div>
+		</div>
 	</div>
-</li>
+</div>
 
-<style lang="scss">
-	.project-card {
-		position: relative;
-		transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
-
-		display: flex;
-		align-items: center;
-		column-gap: 2rem;
-
-		padding: 1rem;
+<style>
+	.repo-card {
+		height: 100%;
 		border: 1px solid var(--border-color);
 		border-radius: 0.25rem;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+	.repo-header {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		border-bottom: 1px solid var(--border-color);
+		background-color: var(--secondary);
+		padding: 0.25rem 0.5rem;
+		border-top-left-radius: 0.25rem;
+		border-top-right-radius: 0.25rem;
+	}
+	.icon {
+		flex-shrink: 0;
+		color: var(--gray);
+	}
+	.repo-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 0.75rem;
+		color: var(--gray);
+	}
+	.repo-stats {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
+		line-height: 1.6;
+	}
+	.stat-group {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	.stat {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+	.links {
+		display: flex;
+		gap: 1rem;
+	}
+	a {
+		color: var(--title);
+		text-decoration: none;
 
-		background-color: transparent;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.25rem;
 
-		@media all and (max-width: 768px) {
-			flex-direction: column;
-		}
+		transition-property: color, background-color, border-color,
+			text-decoration-color, fill, stroke;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 0.2s;
 
 		&:hover {
-			transform: translateY(-5px);
-		}
-
-		.project-card__content {
-			.project-card__content__haed {
-				display: flex;
-				align-items: center;
-				flex-direction: row;
-				row-gap: 0.5rem;
-
-				@media all and (max-width: 768px) {
-					flex-direction: column;
-				}
-				.project-title {
-					display: block;
-					font-weight: 600;
-					font-size: 1.25rem;
-					line-height: 1.75rem;
-					color: var(--title);
-
-					&:hover {
-						color: var(--primary);
-					}
-				}
-
-				.project-tags {
-					display: flex;
-					gap: 0.5rem;
-					margin-left: 0.75rem;
-					li {
-						padding: 0.25rem 0.5rem;
-						border-radius: 0.2rem;
-						background-color: #454e56;
-						color: var(--title);
-						a {
-							display: block;
-							font-weight: 600;
-							font-size: 0.75rem;
-							line-height: 1rem;
-							text-transform: capitalize;
-							color: inherit;
-						}
-					}
-				}
-			}
-
-			.project-card__content__body {
-				p {
-					margin-top: 0.75rem;
-					color: var(--gray);
-				}
-			}
-		}
-
-		.project-links {
-			position: absolute;
-			right: 1rem;
-			top: 1rem;
-
-			display: flex;
-			align-items: center;
-			a {
-				display: block;
-				img {
-					display: block;
-					width: 1.5rem;
-					height: 1.5rem;
-					object-fit: contain;
-					&.github {
-						filter: invert(var(--dl-invert));
-					}
-				}
-			}
+			color: var(--primary);
 		}
 	}
 </style>

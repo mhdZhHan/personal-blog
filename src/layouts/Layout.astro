@@ -7,7 +7,7 @@ import Header from "@components/common/Header.astro"
 import Newsletter from "@components/common/Newsletter.astro"
 import Footer from "@components/common/Footer.astro"
 import ScrollTop from "@components/common/ScrollTop.astro"
-import Plum from "@components/common/Plum.astro"
+import ArtPlum from "@components/common/ArtPlum.astro"
 import ChangeDir from "@components/common/ChangeDir.astro"
 
 interface Props {
@@ -89,7 +89,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		<title>{title ? title : `Mohammed's blog`}</title>
 	</head>
 	<body>
-		<Plum />
+		<ArtPlum />
 		<Header />
 		<slot />
 		{Astro.url.pathname !== "/" && <ChangeDir />}

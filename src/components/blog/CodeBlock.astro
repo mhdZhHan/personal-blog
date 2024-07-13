@@ -28,7 +28,9 @@ if (Astro.slots.title) {
 	}
 
 	<div class="breezeWindow__body">
-		<slot />
+		<div class="breezeWindow__content">
+			<slot />
+		</div>
 
 		<div class="breezeWindow__copy-button">
 			<button
@@ -118,7 +120,7 @@ if (Astro.slots.title) {
 					background: inherit;
 					cursor: pointer;
 
-					padding: .5rem;
+					padding: 0.5rem;
 
 					display: flex;
 					align-items: center;
@@ -189,7 +191,7 @@ if (Astro.slots.title) {
 
 		codeBlocks.forEach((block) => {
 			const copyButton = block.querySelector("#id_copy")
-			const codeContent = block.querySelector(".breezeWindow__body")
+			const codeContent = block.querySelector(".breezeWindow__body .breezeWindow__content")
 			const tooltip = block.querySelector(".copy-tooltip")
 
 			if (copyButton && codeContent && tooltip) {

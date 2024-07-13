@@ -71,7 +71,7 @@ if (Astro.slots.title) {
 				height: 100%;
 				display: inline-flex;
 				align-items: center;
-				font-size: 0.9375rem;
+				font-size: 0.8375rem;
 
 				padding-top: 1rem;
 				padding-bottom: 1rem;
@@ -103,6 +103,9 @@ if (Astro.slots.title) {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			.breezeWindow__content {
+				font-size: 14px;
+			}
 			.breezeWindow__copy-button {
 				position: relative;
 				align-self: flex-start;
@@ -191,7 +194,9 @@ if (Astro.slots.title) {
 
 		codeBlocks.forEach((block) => {
 			const copyButton = block.querySelector("#id_copy")
-			const codeContent = block.querySelector(".breezeWindow__body .breezeWindow__content")
+			const codeContent = block.querySelector(
+				".breezeWindow__body .breezeWindow__content"
+			)
 			const tooltip = block.querySelector(".copy-tooltip")
 
 			if (copyButton && codeContent && tooltip) {

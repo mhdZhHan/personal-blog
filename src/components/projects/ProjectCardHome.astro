@@ -3,139 +3,126 @@ const { name, description, tags, source_code_link, image } = Astro.props
 ---
 
 <li class="project-card">
-    <div class="project-card__thumbnail-container">
-        {image ? (
-            <img src={image} alt="project-logo" loading="lazy" />
-        ): (
-            <img src="/images/code-dir.png" alt="project-logo" loading="lazy" />
-        )}
-    </div>
+	<div class="project-card__content">
+		<div class="project-card__content__haed">
+			<a href="#" class="project-title">{name}</a>
 
-    <div class="project-card__content">
-        <div class="project-card__content__haed">
-            <a href="#" class="project-title">{name}</a>
+			<ul class="project-tags">
+				{
+					tags.map((tag) => (
+						<li class={tag}>
+							<a href="#">#{tag}</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
 
-            <ul class="project-tags">
-                {tags.map((tag) => (
-                    <li class={tag}><a href="#">#{tag}</a></li>
-                ))}
-            </ul>
-        </div>
+		<div class="project-card__content__body">
+			<p>{description}</p>
+		</div>
+	</div>
 
-        <div class="project-card__content__body">
-            <p>{description}</p>
-        </div>
-    </div>
-
-    <div class="project-links">
-        <a href={source_code_link} class="github" target="_blank">
-            <img src="/icons/github_.png" alt="github" class="github" />
-        </a>
-    </div>
+	<div class="project-links">
+		<a href={source_code_link} class="github" target="_blank">
+			<img src="/icons/github_.png" alt="github" class="github" />
+		</a>
+	</div>
 </li>
 
 <style lang="scss">
-    .project-card {
-        position: relative;
-        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
+	.project-card {
+		position: relative;
+		transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1) 0s;
 
-        display: flex;
-        align-items: center;
-        column-gap: 2rem;
+		display: flex;
+		align-items: center;
+		column-gap: 2rem;
 
-        padding: 1rem;
-        border: 1px solid var(--border-color);
-        border-radius: 0.25rem;
+		padding: 1rem;
+		border: 1px solid var(--border-color);
+		border-radius: 0.25rem;
 
-        background-color: transparent;
+		background-color: transparent;
 
-        @media all and (max-width: 768px) {
-            flex-direction: column;
-        }
+		@media all and (max-width: 768px) {
+			flex-direction: column;
+		}
 
-        &:hover {
-            transform: translateY(-5px);
-        }
-        .project-card__thumbnail-container {
-            flex-shrink: 0;
-            img {
-                display: block;
-                width: 7rem;
-                height: 7rem;
-                object-fit: contain;
-            }
-        }
+		&:hover {
+			transform: translateY(-5px);
+		}
 
-        .project-card__content {
-            .project-card__content__haed {
-                display: flex;
-                align-items: center;
-                flex-direction: row;
-                row-gap: .5rem;
+		.project-card__content {
+			.project-card__content__haed {
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+				row-gap: 0.5rem;
 
-                @media all and (max-width: 768px) {
-                    flex-direction: column;
-                }
-                .project-title {
-                    display: block;
-                    font-weight: 600;
-                    font-size: 1.25rem;
-                    line-height: 1.75rem;
-                    color: var(--title);
+				@media all and (max-width: 768px) {
+					flex-direction: column;
+				}
+				.project-title {
+					display: block;
+					font-weight: 600;
+					font-size: 1.25rem;
+					line-height: 1.75rem;
+					color: var(--title);
 
-                    &:hover {
-                        color: var(--primary);
-                    }
-                }
+					&:hover {
+						color: var(--primary);
+					}
+				}
 
-                .project-tags {
-                    display: flex;
-                    gap: .5rem;
-                    margin-left: .75rem;
-                    li  {
-                        padding: .25rem .5rem;
-                        border-radius: 0.2rem;
-                        background-color: #454e56;
-                        color: var(--title);
-                        a {
-                            display: block;
-                            font-weight: 600;
-                            font-size: .75rem;
-                            line-height: 1rem;
-                            text-transform: capitalize;
-                            color: inherit;
-                        }
-                    }
-                }
-            }
+				.project-tags {
+					display: flex;
+					gap: 0.5rem;
+					margin-left: 0.75rem;
+					li {
+						padding: 0.25rem 0.5rem;
+						border-radius: 0.2rem;
+						background-color: #454e56;
+						color: var(--title);
+						a {
+							display: block;
+							font-weight: 600;
+							font-size: 0.75rem;
+							line-height: 1rem;
+							text-transform: capitalize;
+							color: inherit;
+						}
+					}
+				}
+			}
 
-            .project-card__content__body {
-                p {
-                    margin-top: .75rem;
-                    color: var(--gray);
-                }
-            }
-        }
+			.project-card__content__body {
+				p {
+					margin-top: 0.75rem;
+					color: var(--gray);
+				}
+			}
+		}
 
-        .project-links {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
+		.project-links {
+			position: absolute;
+			right: 1rem;
+			top: 1rem;
 
-            display: flex;
-            align-items: center;
-            a {
-                display: block;
-                img {
-                    display: block;
-                    width: 1.5rem;
-                    height: 1.5rem;
-                    object-fit: contain;
-                    &.github {
-                        filter: invert(var(--dl-invert));
-                    }
-                }
-            }
-        }
-    }
+			display: flex;
+			align-items: center;
+			a {
+				display: block;
+				img {
+					display: block;
+					width: 1.5rem;
+					height: 1.5rem;
+					object-fit: contain;
+					&.github {
+						filter: invert(var(--dl-invert));
+					}
+				}
+			}
+		}
+	}
 </style>

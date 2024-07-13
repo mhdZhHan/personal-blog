@@ -21,48 +21,48 @@ import { createContext, useContext, useState, useEffect } from "react"
 
 // Create a global context for managing user authentication state
 const StateContext = createContext({
-	userData: {},
-	setUserData: () => {},
-	updateUserData: () => {},
+  userData: {},
+  setUserData: () => { },
+  updateUserData: () => { },
 })
 
 // ContextProvider component encapsulates the user authentication state
 export const ContextProvider = ({ children }) => {
-	// Initialize user data state using local storage
-	const [userData, setUserData] = useState(
-		JSON.parse(localStorage.getItem("user_data"))
-	)
+  // Initialize user data state using local storage
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("user_data"))
+  )
 
-	// Function to update user data based on action type
-	const updateUserData = (action) => {
-		switch (action?.type) {
-			case "LOGOUT":
-				setUserData(null)
-				localStorage.removeItem("user_data")
-				break
-			case "LOGIN":
-				localStorage.setItem(
-					"user_data",
-					JSON.stringify(action?.payload)
-				)
-				setUserData(action?.payload)
-				break
-			default:
-				return
-		}
-	}
+  // Function to update user data based on action type
+  const updateUserData = (action) => {
+    switch (action?.type) {
+      case "LOGOUT":
+        setUserData(null)
+        localStorage.removeItem("user_data")
+        break
+      case "LOGIN":
+        localStorage.setItem(
+          "user_data",
+          JSON.stringify(action?.payload)
+        )
+        setUserData(action?.payload)
+        break
+      default:
+        return
+    }
+  }
 
-	// Fetch user data from local storage on component mount
-	useEffect(() => {
-		setUserData(JSON.parse(localStorage.getItem("user_data")))
-	}, [])
+  // Fetch user data from local storage on component mount
+  useEffect(() => {
+    setUserData(JSON.parse(localStorage.getItem("user_data")))
+  }, [])
 
-	// Provide the user authentication state to child components
-	return (
-		<StateContext.Provider value={{ userData, updateUserData }}>
-			{children}
-		</StateContext.Provider>
-	)
+  // Provide the user authentication state to child components
+  return (
+    <StateContext.Provider value={{ userData, updateUserData }}>
+      {children}
+    </StateContext.Provider>
+  )
 }
 
 // Custom hook to access the user authentication state
@@ -77,11 +77,11 @@ import Routes from "./routes/Routes"
 
 // Wrap the entire application with the ContextProvider to provide access to user authentication state
 const App = () => {
-	return (
-		<ContextProvider>
-			<Routes />
-		</ContextProvider>
-	)
+  return (
+    <ContextProvider>
+      <Routes />
+    </ContextProvider>
+  )
 }
 
 export default App
@@ -93,49 +93,49 @@ With our global context set up, we can easily manage user authentication state t
 
 ```jsx title="/src/AuthForm.jsx"
 const handleSubmit = (event) => {
-	event.preventDefault()
+  event.preventDefault()
 
-	// Determine API route based on form type
-	const apiRoute = type === "sign-in" ? "signin" : "signup"
+  // Determine API route based on form type
+  const apiRoute = type === "sign-in" ? "signin" : "signup"
 
-	/**
-	 * Extract form data
-	 * NOTE: Here, `idFormElement` is the id of the form (an alternative to using ref.current)
-	 */
-	const form = new FormData(idFormElement)
-	const formData = {}
+  /**
+   * Extract form data
+   * NOTE: Here, `idFormElement` is the id of the form (an alternative to using ref.current)
+   */
+  const form = new FormData(idFormElement)
+  const formData = {}
 
-	// Convert form data to object
-	for (const [key, value] of form.entries()) {
-		formData[key] = value
-	}
+  // Convert form data to object
+  for (const [key, value] of form.entries()) {
+    formData[key] = value
+  }
 
-	// Destructure form data
-	const { fullName, email, password } = formData
+  // Destructure form data
+  const { fullName, email, password } = formData
 
-	// Add your validations
-	if (fullName && fullName.length < 3) {
-		return toast.error("Full name must be at least 3 letters long")
-	}
+  // Add your validations
+  if (fullName && fullName.length < 3) {
+    return toast.error("Full name must be at least 3 letters long")
+  }
 
-	// Call the authentication function
-	userAuthThroughApi(apiRoute, formData)
+  // Call the authentication function
+  userAuthThroughApi(apiRoute, formData)
 }
 ```
 
 ```jsx title="/src/AuthForm.jsx" showLineNumbers{31} /updateUserData/#v /LOGIN/#i
 // Function to authenticate user through API
 const userAuthThroughApi = (apiRoute, formData) => {
-	axios
-		.post(`${import.meta.env.VITE_API_URL}/auth/${apiRoute}`, formData)
-		.then((response) => {
-			// Update user data in global context upon successful login
-			updateUserData({ type: "LOGIN", payload: response?.data?.user })
-		})
-		.catch((error) => {
-			// Display error message if login fails
-			toast.error(error?.response?.data?.message)
-		})
+  axios
+    .post(`${import.meta.env.VITE_API_URL}/auth/${apiRoute}`, formData)
+    .then((response) => {
+      // Update user data in global context upon successful login
+      updateUserData({ type: "LOGIN", payload: response?.data?.user })
+    })
+    .catch((error) => {
+      // Display error message if login fails
+      toast.error(error?.response?.data?.message)
+    })
 }
 ```
 
@@ -144,8 +144,8 @@ This function, `userAuthThroughApi`, handles user authentication by sending a PO
 ```jsx title="/src/Header.jsx" /updateUserData/#v /LOGOUT/#i
 // Function to sign out user
 const signOutUser = () => {
-	// Clear user data from global context and local storage
-	updateUserData({ type: "LOGOUT" })
+  // Clear user data from global context and local storage
+  updateUserData({ type: "LOGOUT" })
 }
 ```
 
@@ -161,16 +161,16 @@ import { Navigate } from "react-router-dom"
 import { useStateContext } from "../../contexts/GlobalContext"
 
 const Home = () => {
-	const { userData } = useStateContext()
+  const { userData } = useStateContext()
 
-	return !userData.access_token ? (
-		<Navigate to="/signin" />
-	) : (
-		<div className="container mx-auto">
-			<h1>Welcome to the Home Page!</h1>
-			{/* Add your home page content here */}
-		</div>
-	)
+  return !userData.access_token ? (
+    <Navigate to="/signin" />
+  ) : (
+    <div className="container mx-auto">
+      <h1>Welcome to the Home Page!</h1>
+      {/* Add your home page content here */}
+    </div>
+  )
 }
 
 export default Home

@@ -20,11 +20,11 @@ html[data-theme="dark"] {
 
 .anchor-link {
 	color: var(--gray) !important;
-	margin-right: .25rem;
-	opacity: .3;
+	margin-right: 0.25rem;
+	opacity: 0.3;
 	font-weight: 500;
 	text-decoration: none;
-	transition: opacity .15s cubic-bezier(.4,0,.2,1);
+	transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 	&:hover {
 		opacity: 1;
 	}
@@ -125,7 +125,8 @@ html[data-theme="dark"] {
 
 	code {
 		color: var(--primary);
-		font-family: "Ubuntu", sans-serif;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+			"Liberation Mono", "Courier New", monospace;
 		counter-reset: line;
 	}
 

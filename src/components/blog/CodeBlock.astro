@@ -1,4 +1,6 @@
 ---
+import { Copy } from "lucide-astro"
+
 import { getLanguageIcon } from "@lib/languageIcons"
 
 let language: string | undefined = undefined
@@ -27,6 +29,17 @@ if (Astro.slots.title) {
 
 	<div class="breezeWindow__body">
 		<slot />
+
+		<div class="breezeWindow__copy-button">
+			<button
+				id="id_copy"
+				title="Copy to clipboard"
+				aria-label="Copy to clipboard"
+			>
+				<Copy size={20} class="shrink-0" />
+			</button>
+			<span class="copy-tooltip">Copied!</span>
+		</div>
 	</div>
 </div>
 
@@ -56,7 +69,7 @@ if (Astro.slots.title) {
 				height: 100%;
 				display: inline-flex;
 				align-items: center;
-				font-size: .9375rem;
+				font-size: 0.9375rem;
 
 				padding-top: 1rem;
 				padding-bottom: 1rem;
@@ -85,6 +98,117 @@ if (Astro.slots.title) {
 			height: 100%;
 
 			background: var(--code-bg);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.breezeWindow__copy-button {
+				position: relative;
+				align-self: flex-start;
+
+				border: 1px solid var(--border-color);
+				border-radius: 0.2rem;
+
+				opacity: 0;
+				visibility: hidden;
+				transition:
+					opacity 0.2s ease,
+					visibility 0.2s ease;
+				button {
+					outline: none;
+					background: inherit;
+					cursor: pointer;
+
+					padding: .5rem;
+
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					opacity: 0.75;
+					transition-property: opacity, background, border-color;
+					transition-duration: 0.2s;
+					transition-timing-function: cubic-bezier(
+						0.25,
+						0.46,
+						0.45,
+						0.94
+					);
+
+					&:hover {
+						opacity: 1;
+						background-color: var(--secondary);
+					}
+				}
+			}
+
+			&:hover {
+				.breezeWindow__copy-button {
+					visibility: visible;
+					opacity: 1;
+				}
+			}
+
+			// tooltip
+			.copy-tooltip {
+				position: absolute;
+				right: calc(100% + 0.75rem);
+				top: 50%;
+				transform: translateY(-50%) scale(0.8);
+
+				border: 1px solid var(--border-color);
+				border-radius: 4px;
+				padding: 0.25rem 0.7rem;
+				color: var(--gray);
+
+				opacity: 0;
+				transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+				pointer-events: none;
+			}
+
+			.copy-tooltip::after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: 100%;
+				transform: translateY(-50%);
+				border: 0.4rem solid transparent;
+				border-left-color: var(--border-color);
+			}
+
+			.copy-tooltip.show {
+				opacity: 1;
+				transform: translateY(-50%) scale(1);
+			}
 		}
 	}
 </style>
+
+<script>
+	document.addEventListener("DOMContentLoaded", (event) => {
+		const codeBlocks = document.querySelectorAll(".breezeWindow")
+
+		codeBlocks.forEach((block) => {
+			const copyButton = block.querySelector("#id_copy")
+			const codeContent = block.querySelector(".breezeWindow__body")
+			const tooltip = block.querySelector(".copy-tooltip")
+
+			if (copyButton && codeContent && tooltip) {
+				copyButton.addEventListener("click", () => {
+					const code = codeContent.textContent || ""
+					navigator.clipboard
+						.writeText(code)
+						// Show tooltip
+						.then(() => {
+							tooltip.classList.add("show")
+							setTimeout(() => {
+								tooltip.classList.remove("show")
+							}, 2000)
+						})
+						.catch((err) => {
+							console.error("Failed to copy: ", err)
+						})
+				})
+			}
+		})
+	})
+</script>

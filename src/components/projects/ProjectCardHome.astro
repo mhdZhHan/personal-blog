@@ -110,11 +110,7 @@ const { name, description, tags, source_code_link, image } = Astro.props
 		justify-content: center;
 		gap: 0.25rem;
 
-		transition-property: color, background-color, border-color,
-			text-decoration-color, fill, stroke;
-		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-		transition-duration: 0.2s;
-
+		transition: all 0.2s ease-in;
 		&:hover {
 			color: var(--primary);
 		}

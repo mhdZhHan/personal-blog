@@ -3,7 +3,7 @@ import { Book, Eye, GitFork, Star, ArrowUpRight } from "lucide-astro"
 const { name, description, tags, source_code_link, image } = Astro.props
 ---
 
-<div class="repo-card">
+<li class="repo-card">
 	<div class="repo-header">
 		<Book size={12} class="icon" aria-hidden="true" />
 		<span class="repo-name">{name}</span>
@@ -50,7 +50,7 @@ const { name, description, tags, source_code_link, image } = Astro.props
 			</div>
 		</div>
 	</div>
-</div>
+</li>
 
 <style>
 	.repo-card {

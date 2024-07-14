@@ -5,10 +5,10 @@ const { t1, t2, url } = Astro.props
 ---
 
 <div class="head-title">
-	<h3 class="section-sub-title">
+	<h2 class="section-sub-title">
 		{t1}
 		<span>{t2}</span>
-	</h3>
+	</h2>
 
 	<div class="view-all">
 		<a href={url} aria-label={`View all ${t2}`}>
@@ -21,7 +21,7 @@ const { t1, t2, url } = Astro.props
 
 <style lang="scss">
 	.head-title {
-		h3 {
+		h2 {
 			margin-bottom: 0;
 			span {
 				color: transparent;

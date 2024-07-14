@@ -7,6 +7,7 @@ import {
 	getCollection,
 	type CollectionEntry,
 } from "astro:content"
+import { Image } from "astro:assets"
 // import { db, eq, Like } from "astro:db"
 
 import { Eye, Calendar, Clock4, User } from "lucide-astro"
@@ -100,7 +101,8 @@ const {
 
 			<div class="post__body">
 				<div class="post__banner">
-					<img src={image} alt={title} loading="lazy" />
+					<!-- <img src={image} alt={title} loading="lazy" /> -->
+					<Image src={image} alt={title} width={100} height={100} />
 				</div>
 
 				<div class="post__content">
@@ -166,6 +168,7 @@ const {
 				display: block;
 				object-fit: cover;
 				width: 100%;
+				height: 100%;
 				aspect-ratio: 2 / 1;
 
 				border: 1px solid var(--border-color);

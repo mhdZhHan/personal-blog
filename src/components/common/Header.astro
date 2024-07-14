@@ -1,5 +1,9 @@
 ---
+import { Image } from "astro:assets"
 import { SunMoon, MoonStar } from "lucide-astro"
+
+//assets
+import StarBoy from "../../assets/star-boy.svg"
 
 const currentPath = Astro.url.pathname
 ---
@@ -8,7 +12,10 @@ const currentPath = Astro.url.pathname
 	<div class="header__container">
 		<a class="header__logo" href="/">
 			<div class="logo-container">
-				<img src="/star-boy.svg" alt="star-boy" />
+				<Image
+					src={StarBoy}
+					alt="star-boy"
+				/>
 				Mohammed's Blog
 			</div>
 		</a>

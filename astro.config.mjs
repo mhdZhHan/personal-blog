@@ -1,4 +1,4 @@
-import { defineConfig, sharpImageService } from "astro/config"
+import { defineConfig, squooshImageService } from "astro/config"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
 import robotsTxt from "astro-robots-txt"
@@ -40,9 +40,9 @@ export default defineConfig({
 	site: "https://mohammedsh.xyz",
 	trailingSlash: "never",
 	output: "hybrid",
-	adapter: vercel({ webAnalytics: { enabled: true }, imageService: true }),
+	adapter: vercel({ webAnalytics: { enabled: true } }),
 	image: {
-		service: sharpImageService(),
+		service: squooshImageService(),
 	},
 
 	markdown: {

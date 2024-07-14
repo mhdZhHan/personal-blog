@@ -1,5 +1,9 @@
 ---
+import { Image } from "astro:assets"
 import { Twitter, Github, Linkedin, Instagram } from "lucide-astro"
+
+// assets
+import AvatarImg from "../../assets/avatar.svg"
 ---
 
 <section id="hero">
@@ -18,10 +22,7 @@ import { Twitter, Github, Linkedin, Instagram } from "lucide-astro"
 
 				<ul class="hero__social-medias">
 					<li>
-						<a
-							href="https://twitter.com/mhdZhHan"
-							target="_blank"
-						>
+						<a href="https://twitter.com/mhdZhHan" target="_blank">
 							<Twitter class="shrink-0" size={30} aria-hidden />
 						</a>
 					</li>
@@ -50,7 +51,8 @@ import { Twitter, Github, Linkedin, Instagram } from "lucide-astro"
 			</div>
 
 			<div class="hero__right">
-				<img src="/images/avatar.svg" alt="avatar" loading="lazy" />
+				<!-- <img src="/images/avatar.svg" alt="avatar" loading="lazy" /> -->
+				<Image src={AvatarImg} alt="avatar" />
 			</div>
 		</div>
 	</div>

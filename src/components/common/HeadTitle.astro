@@ -11,7 +11,7 @@ const { t1, t2, url } = Astro.props
 	</h3>
 
 	<div class="view-all">
-		<a href={url}>
+		<a href={url} aria-label={`View all ${t2}`}>
 			View {t2 === "Posts" ? `All` : `More`}
 			{t2}
 			<ArrowRight class="shrink-0" size={14} aria-hidden />

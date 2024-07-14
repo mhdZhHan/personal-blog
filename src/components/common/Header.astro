@@ -10,12 +10,9 @@ const currentPath = Astro.url.pathname
 
 <header class="header wrapper">
 	<div class="header__container">
-		<a class="header__logo" href="/">
+		<a class="header__logo" href="/" aria-label="Header logo">
 			<div class="logo-container">
-				<Image
-					src={StarBoy}
-					alt="star-boy"
-				/>
+				<Image src={StarBoy} alt="star-boy" />
 				Mohammed's Blog
 			</div>
 		</a>
@@ -23,37 +20,45 @@ const currentPath = Astro.url.pathname
 		<nav class="header__menu">
 			<ul>
 				<li>
-					<a class={currentPath === "/" ? "active" : ""} href="/"
-						>Root</a
+					<a
+						class={currentPath === "/" ? "active" : ""}
+						href="/"
+						aria-label="Home page">Root</a
 					>
 				</li>
 				<li>
 					<a
 						class={currentPath === "/blog" ? "active" : ""}
-						href="/blog">Blog</a
+						href="/blog"
+						aria-label="All blogs page">Blog</a
 					>
 				</li>
 				<li>
 					<a
 						class={currentPath === "/projects" ? "active" : ""}
-						href="/projects">Projects</a
+						href="/projects"
+						aria-label="Projects listing page">Projects</a
 					>
 				</li>
 				<li>
 					<a
 						class={currentPath === "/about" ? "active" : ""}
-						href="/about">About</a
+						href="/about"
+						aria-label="About page">About</a
 					>
 				</li>
 				<li>
 					<a
 						class={currentPath === "/donate" ? "active" : ""}
-						href="/donate">Donate</a
+						href="/donate"
+						aria-label="Donate page">Donate</a
 					>
 				</li>
 				<li>
-					<a class={currentPath === "/🧪" ? "active" : ""} href="/🧪"
-						>🧪</a
+					<a
+						class={currentPath === "/🧪" ? "active" : ""}
+						href="/🧪"
+						aria-label="My personal lab page">🧪</a
 					>
 				</li>
 			</ul>

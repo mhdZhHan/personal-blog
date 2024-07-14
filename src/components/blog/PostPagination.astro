@@ -25,6 +25,7 @@ const nextPost =
 			<a
 				href={`/blog/${prevPost.slug}`}
 				class="pagination-link pagination-prev"
+				aria-label={prevPost.data.title}
 			>
 				<p class="pagination-direction">
 					<ArrowLeft size={16} class="shrink-0" /> Previous post
@@ -39,6 +40,7 @@ const nextPost =
 			<a
 				href={`/blog/${nextPost.slug}`}
 				class="pagination-link pagination-next"
+				aria-label={nextPost.data.title}
 			>
 				<p class="pagination-direction">
 					Next post <ArrowRight size={16} class="shrink-0" />

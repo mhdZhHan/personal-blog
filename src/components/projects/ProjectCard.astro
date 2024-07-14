@@ -6,7 +6,7 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
 <li class="project-card">
 	<h1 class="project-card__title">
 		<Book slot="prefix" size={16} aria-hidden />
-		<a href="#">{name}</a>
+		<a href="#" aria-label={`Blog post about ${{ name }}`}>{name}</a>
 	</h1>
 
 	<p class="project-card__description">{description}</p>
@@ -14,14 +14,22 @@ const { name, description, tags, source_code_link, demo_link } = Astro.props
 	<nav class="project-card__links">
 		{
 			demo_link && (
-				<a href={demo_link} target="_blank">
+				<a
+					href={demo_link}
+					target="_blank"
+					aria-label={`${name} demo link`}
+				>
 					Live
 				</a>
 			)
 		}
 		{
 			source_code_link && (
-				<a href={source_code_link} target="_blank">
+				<a
+					href={source_code_link}
+					target="_blank"
+					aria-label={`${name} source code link`}
+				>
 					Source
 				</a>
 			)

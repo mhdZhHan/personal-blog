@@ -11,19 +11,19 @@ import { Rss } from "lucide-astro"
 
 			<ul class="nav">
 				<li class="authRoute">
-					<a href="/auth/login">Login</a>
+					<a href="/auth/login" aria-label="Login route">Login</a>
 				</li>
 				<li class="authRoute">
-					<a href="/auth/signup">Signup</a>
+					<a href="/auth/signup" aria-label="Sign up route">Signup</a>
 				</li>
 				<li class="userRoute">
-					<a href="/auth/user">Profile</a>
+					<a href="/auth/user" aria-label="User profile">Profile</a>
 				</li>
-				<li class="userRoute" id="logout">
+				<li class="userRoute" id="logout" aria-label="Option for logout">
 					<span>Logout</span>
 				</li>
 				<li class="rssRoute">
-					<a href="/rss.xml" class="rss-feed">
+					<a href="/rss.xml" class="rss-feed" aria-label="RSS feed of the site">
 						<Rss size="16" />
 					</a>
 				</li>

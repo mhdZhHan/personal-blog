@@ -22,9 +22,9 @@ const headings = buildToc(pageHeadings)
 					<ul>
 						{headings.map((heading) => {
 							return (
-								<li id="tocItem" aria-label={heading.text}>
+								<li id="tocItem">
 									{" "}
-									<a href={`#${heading.slug}`}>
+									<a href={`#${heading.slug}`} aria-label={heading.text}>
 										{heading.text}
 									</a>
 									{heading.subheadings &&
@@ -35,6 +35,7 @@ const headings = buildToc(pageHeadings)
 														<li>
 															<a
 																href={`#${subheading.slug}`}
+																aria-label={subheading.text}
 															>
 																{
 																	subheading.text

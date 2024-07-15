@@ -1,136 +1,131 @@
 ---
-import { Book } from "lucide-astro"
-const { name, description, tags, source_code_link, demo_link } = Astro.props
+import { Book, Eye, GitFork, Star, ArrowUpRight } from "lucide-astro"
+const { name, description, source_code_link, demo_link } = Astro.props
 ---
 
-<li class="project-card">
-	<h1 class="project-card__title">
-		<Book slot="prefix" size={16} aria-hidden />
-		<a href="#" aria-label={`Blog post about ${{ name }}`}>{name}</a>
-	</h1>
+<li class="repo-card">
+	<div class="repo-header">
+		<Book size={12} class="icon" aria-hidden="true" />
+		<span class="repo-name">{name}</span>
+	</div>
 
-	<p class="project-card__description">{description}</p>
+	<div class="repo-content">
+		<p class="repo-description">{description}</p>
 
-	<nav class="project-card__links">
-		{
-			demo_link && (
-				<a
-					href={demo_link}
-					target="_blank"
-					aria-label={`${name} demo link`}
-				>
-					Live
-				</a>
-			)
-		}
-		{
-			source_code_link && (
-				<a
-					href={source_code_link}
-					target="_blank"
-					aria-label={`${name} source code link`}
-				>
-					Source
-				</a>
-			)
-		}
-	</nav>
+		<hr class="hr-line" />
 
-	<ul class="project-card__tags">
-		{
-			tags.map((tag) => (
-				<li class="tag">
-					<span class={`label ${tag}`} />
-					<a>{tag}</a>
-				</li>
-			))
-		}
-	</ul>
+		<div class="repo-stats">
+			<div class="stat-group">
+				<div class="stat">
+					<Star size={12} class="icon" />
+					<span>8</span>
+				</div>
+
+				<div class="stat">
+					<GitFork size={12} class="icon" />
+					<span>0</span>
+				</div>
+
+				<div class="stat">
+					<Eye size={12} class="icon" />
+					<span>9</span>
+				</div>
+			</div>
+
+			{
+				source_code_link || demo_link ? (
+					<div class="links">
+						{source_code_link && (
+							<a href="https://github.com/mhdzhhan">
+								Code{" "}
+								<ArrowUpRight
+									size={12}
+									data-external-icon
+									aria-hidden
+								/>
+							</a>
+						)}
+
+						{demo_link && (
+							<a href="https://mohammedsh.xyz">
+								Live{" "}
+								<ArrowUpRight
+									size={12}
+									data-external-icon
+									aria-hidden
+								/>
+							</a>
+						)}
+					</div>
+				) : (
+					""
+				)
+			}
+		</div>
+	</div>
 </li>
 
-<style lang="scss">
-	.project-card {
+<style>
+	.repo-card {
+		height: 100%;
 		border: 1px solid var(--border-color);
 		border-radius: 0.25rem;
-		padding: 0.5rem;
+		box-shadow: var(--shadow);
+	}
+	.repo-header {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		border-bottom: 1px solid var(--border-color);
+		background-color: var(--secondary);
+		padding: 0.25rem 0.5rem;
+		border-top-left-radius: 0.25rem;
+		border-top-right-radius: 0.25rem;
+	}
+	.icon {
+		flex-shrink: 0;
 		color: var(--gray);
-
-		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-
+	}
+	.repo-content {
 		display: flex;
 		flex-direction: column;
+		gap: 0.75rem;
+		padding: 0.75rem;
+		color: var(--gray);
+	}
+	.repo-stats {
+		display: flex;
 		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
+		line-height: 1.6;
+	}
+	.stat-group {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	.stat {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+	.links {
+		display: flex;
+		gap: 1rem;
+	}
+	a {
+		color: var(--title);
+		text-decoration: none;
 
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.25rem;
+
+		transition: all 0.2s ease-in;
 		&:hover {
-			border-color: var(--primary);
-		}
-
-		.project-card__title {
-			display: flex;
-			align-items: center;
-			margin-bottom: 0.4rem;
-
-			a {
-				font-size: 1.1rem;
-				font-weight: 700;
-				color: var(--gray);
-				font-family: "8-bit_regular";
-				margin-left: 0.8rem;
-			}
-		}
-
-		.project-card__description {
-			font-size: 1rem;
-			margin-bottom: 0.2rem;
-		}
-
-		.project-card__links {
-			width: 100%;
-
-			display: flex;
-			justify-content: flex-end;
-			align-items: center;
-
-			margin-bottom: 0.4rem;
-			a {
-				display: block;
-				margin-right: 0;
-				padding: 0 0.7rem;
-				border: 3px solid transparent;
-
-				font-size: 0.9rem;
-				font-weight: 500;
-				color: var(--gray);
-				text-decoration: underline;
-				&:last-child {
-					margin-right: 0;
-				}
-			}
-		}
-
-		.project-card__tags {
-			display: flex;
-			align-items: center;
-			.tag {
-				margin-right: 0.9rem;
-
-				display: flex;
-				align-items: center;
-				span.label {
-					display: block;
-					width: 0.7rem;
-					height: 0.7rem;
-					border-radius: 50%;
-					margin-right: 0.6rem;
-					background-color: #531042;
-				}
-				a {
-					display: block;
-					font-size: 0.9rem;
-					font-weight: 400;
-					color: var(--gray);
-				}
-			}
+			color: var(--primary);
 		}
 	}
 </style>

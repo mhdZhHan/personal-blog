@@ -226,7 +226,6 @@ html[data-theme="dark"] {
 	table {
 		border-collapse: collapse;
 		margin: 25px 0;
-		min-width: 400px;
 		width: 100%;
 		border: 1px solid var(--border-color);
 		font-size: 19px;
@@ -248,7 +247,6 @@ html[data-theme="dark"] {
 		}
 		th,
 		td {
-			// padding: 12px 15px;
 			padding: 5px;
 			border-right: 1px solid var(--border-color);
 		}

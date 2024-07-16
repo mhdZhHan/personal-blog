@@ -19,11 +19,19 @@ import { Rss } from "lucide-astro"
 				<li class="userRoute">
 					<a href="/auth/user" aria-label="User profile">Profile</a>
 				</li>
-				<li class="userRoute" id="logout" aria-label="Option for logout">
+				<li
+					class="userRoute"
+					id="logout"
+					aria-label="Option for logout"
+				>
 					<span>Logout</span>
 				</li>
 				<li class="rssRoute">
-					<a href="/rss.xml" class="rss-feed" aria-label="RSS feed of the site">
+					<a
+						href="/rss.xml"
+						class="rss-feed"
+						aria-label="RSS feed of the site"
+					>
 						<Rss size="16" />
 					</a>
 				</li>
@@ -83,36 +91,3 @@ import { Rss } from "lucide-astro"
 		}
 	}
 </style>
-
-<script>
-	import { updateUserData, state } from "@lib/userState.ts"
-
-	window.addEventListener("DOMContentLoaded", () => {
-		const logoutBtn = document.querySelector<HTMLElement>("#logout")
-
-		const { access_token } = state.userData
-
-		if (access_token) {
-			const userRoutes =
-				document.querySelectorAll<HTMLElement>(".userRoute")
-
-			userRoutes.forEach((userRoute) => {
-				userRoute.style.display = "block"
-			})
-		} else {
-			const authRoutes =
-				document.querySelectorAll<HTMLElement>(".authRoute")
-
-			authRoutes.forEach((authRoute) => {
-				authRoute.style.display = "block"
-			})
-		}
-
-		// logout user
-		logoutBtn?.addEventListener("click", () => {
-			updateUserData({ type: "LOGOUT" })
-
-			window.location.reload()
-		})
-	})
-</script>

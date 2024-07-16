@@ -81,189 +81,193 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		<link rel="alternate" hreflang="en" href="https://www.mohammedsh.xyz" />
 		<!-- Favicon -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
 		<!-- javascript's -->
 		<script src="@scripts/theme.js"></script>
-		<script src="@lib/userState.ts"></script>
 
 		<title>{title ? title : `Mohammed's blog`}</title>
 	</head>
+
 	<body>
 		<ArtPlum />
 		<Header />
+
 		<slot />
+
 		{Astro.url.pathname !== "/" && <ChangeDir />}
+
 		<Newsletter />
 		<Footer />
 		<ScrollTop />
-	</body><style is:global lang="scss">
-		@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
-
-		:root {
-			--primary: #df2250;
-			--secondary: rgb(23 23 23 /1);
-			--tertiary: rgb(0 0 0 / 1);
-
-			--gradient-to: #f42547;
-			--gradient-stops: #b51c61, var(--gradient-to, rgb(14 165 233 / 0));
-			--text-gradient: linear-gradient(
-				to bottom right,
-				var(--gradient-stops)
-			);
-
-			--shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-		}
-
-		:root[data-theme="dark"] {
-			--secondary: rgb(23 23 23 /1);
-			--tertiary: rgb(0 0 0 / 1);
-			--selection-bg: hsl(240, 12%, 25%, 0.75);
-
-			--gray: rgb(155, 156, 157);
-			--title: rgb(163 163 163 / 1);
-			--text: rgb(115 115 115 / 1);
-
-			--border-color: #262626;
-
-			--sun_icon_visibility: block;
-			--mon_icon_visibility: none;
-			--dl-invert: 0;
-		}
-
-		:root[data-theme="cool"] {
-			--secondary: #f7e6d5;
-			--tertiary: hsl(35deg 100% 92%);
-			--selection-bg: hsl(240, 14%, 80%, 0.75);
-
-			--title: hsl(50deg 100% 0%);
-			--text: hsl(30deg 11% 35%);
-			--gray: rgb(0 0 0 / 1);
-
-			--border-color: hsl(35deg 70% 75%);
-
-			--sun_icon_visibility: none;
-			--mon_icon_visibility: block;
-			--dl-invert: 1;
-		}
-
-		*,
-		*::before,
-		*::after {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-
-		html {
-			scrollbar-gutter: stable;
-			overflow-x: hidden;
-
-			height: 100%;
-		}
-
-		::selection {
-			background-color: var(--selection-bg);
-		}
-
-		body {
-			color: var(--text);
-			background-color: var(--tertiary);
-			font-family: "Ubuntu", sans-serif;
-			line-height: 1.6;
-
-			height: 100%;
-			&.overflow-hidden {
-				overflow: hidden;
-			}
-		}
-
-		input,
-		textarea,
-		button {
-			font-family: inherit;
-			font-feature-settings: inherit;
-			font-variation-settings: inherit;
-			font-size: 100%;
-			font-weight: inherit;
-			line-height: inherit;
-			color: inherit;
-			border: 0;
-			outline: 0;
-		}
-
-		input:-webkit-autofill {
-			background: var(--tertiary);
-			color: inherit;
-		}
-
-		ul,
-		ol {
-			list-style: none;
-		}
-
-		a {
-			text-decoration: none;
-			color: var(--primary);
-		}
-
-		p {
-			line-height: 1.7;
-		}
-
-		.wrapper {
-			padding: 1.5rem 0.75rem;
-
-			max-width: 1024px;
-			margin: 0 auto;
-		}
-
-		.shrink-0 {
-			flex-shrink: 0;
-		}
-
-		.hidden {
-			display: none;
-		}
-
-		.hr-line {
-			border: 1px solid var(--border-color);
-		}
-
-		.separator {
-			border-radius: 0.25rem;
-			flex: 1 1 0%;
-			width: 100%;
-			height: 1px;
-			background-color: var(--secondary);
-		}
-
-		.section-title {
-			font-weight: 700;
-			font-size: 1.675rem;
-			line-height: 2.25rem;
-			color: var(--title);
-			font-family: "8-bit_bold";
-			span {
-				background-clip: text;
-				-webkit-background-clip: text;
-				color: transparent;
-				background: var(--text-gradient);
-			}
-		}
-
-		.section-sub-title {
-			font-weight: 700;
-			font-size: 1.3rem;
-			line-height: 2rem;
-			margin-bottom: 1.5rem;
-			color: var(--title);
-			font-family: "8-bit_bold";
-			span {
-				background-clip: text;
-				-webkit-background-clip: text;
-				color: transparent;
-				background: var(--text-gradient);
-			}
-		}
-	</style>
+	</body>
 </html>
+
+<style is:global lang="scss">
+	@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
+
+	:root {
+		--primary: #df2250;
+		--secondary: rgb(23 23 23 /1);
+		--tertiary: rgb(0 0 0 / 1);
+
+		--gradient-to: #f42547;
+		--gradient-stops: #b51c61, var(--gradient-to, rgb(14 165 233 / 0));
+		--text-gradient: linear-gradient(
+			to bottom right,
+			var(--gradient-stops)
+		);
+
+		--shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	:root[data-theme="dark"] {
+		--secondary: rgb(23 23 23 /1);
+		--tertiary: rgb(0 0 0 / 1);
+		--selection-bg: hsl(240, 12%, 25%, 0.75);
+
+		--gray: rgb(155, 156, 157);
+		--title: rgb(163 163 163 / 1);
+		--text: rgb(115 115 115 / 1);
+
+		--border-color: #262626;
+
+		--sun_icon_visibility: block;
+		--mon_icon_visibility: none;
+		--dl-invert: 0;
+	}
+
+	:root[data-theme="cool"] {
+		--secondary: #f7e6d5;
+		--tertiary: hsl(35deg 100% 92%);
+		--selection-bg: hsl(240, 14%, 80%, 0.75);
+
+		--title: hsl(50deg 100% 0%);
+		--text: hsl(30deg 11% 35%);
+		--gray: rgb(0 0 0 / 1);
+
+		--border-color: hsl(35deg 70% 75%);
+
+		--sun_icon_visibility: none;
+		--mon_icon_visibility: block;
+		--dl-invert: 1;
+	}
+
+	*,
+	*::before,
+	*::after {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html {
+		scrollbar-gutter: stable;
+		overflow-x: hidden;
+
+		height: 100%;
+	}
+
+	::selection {
+		background-color: var(--selection-bg);
+	}
+
+	body {
+		color: var(--text);
+		background-color: var(--tertiary);
+		font-family: "Ubuntu", sans-serif;
+		line-height: 1.6;
+
+		height: 100%;
+		&.overflow-hidden {
+			overflow: hidden;
+		}
+	}
+
+	input,
+	textarea,
+	button {
+		font-family: inherit;
+		font-feature-settings: inherit;
+		font-variation-settings: inherit;
+		font-size: 100%;
+		font-weight: inherit;
+		line-height: inherit;
+		color: inherit;
+		border: 0;
+		outline: 0;
+	}
+
+	input:-webkit-autofill {
+		background: var(--tertiary);
+		color: inherit;
+	}
+
+	ul,
+	ol {
+		list-style: none;
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--primary);
+	}
+
+	p {
+		line-height: 1.7;
+	}
+
+	.wrapper {
+		padding: 1.5rem 0.75rem;
+
+		max-width: 1024px;
+		margin: 0 auto;
+	}
+
+	.shrink-0 {
+		flex-shrink: 0;
+	}
+
+	.hidden {
+		display: none;
+	}
+
+	.hr-line {
+		border: 1px solid var(--border-color);
+	}
+
+	.separator {
+		border-radius: 0.25rem;
+		flex: 1 1 0%;
+		width: 100%;
+		height: 1px;
+		background-color: var(--secondary);
+	}
+
+	.section-title {
+		font-weight: 700;
+		font-size: 1.675rem;
+		line-height: 2.25rem;
+		color: var(--title);
+		font-family: "8-bit_bold";
+		span {
+			background-clip: text;
+			-webkit-background-clip: text;
+			color: transparent;
+			background: var(--text-gradient);
+		}
+	}
+
+	.section-sub-title {
+		font-weight: 700;
+		font-size: 1.3rem;
+		line-height: 2rem;
+		margin-bottom: 1.5rem;
+		color: var(--title);
+		font-family: "8-bit_bold";
+		span {
+			background-clip: text;
+			-webkit-background-clip: text;
+			color: transparent;
+			background: var(--text-gradient);
+		}
+	}
+</style>

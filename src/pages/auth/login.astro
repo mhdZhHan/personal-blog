@@ -4,8 +4,7 @@ import "@styles/auth.scss"
 import { Mail, KeySquare, Github } from "lucide-astro"
 
 import Layout from "@layouts/Layout.astro"
-import InputBox from "@components/common/InputBox.astro"
-import Popup from "@components/common/Popup.astro"
+import InputBox from "@components/form/InputBox.astro"
 ---
 
 <Layout title="Mohammed's blog | Login">
@@ -58,22 +57,6 @@ import Popup from "@components/common/Popup.astro"
 					</p>
 				</form>
 			</div>
-
-			<Popup />
 		</div>
 	</section>
 </Layout>
-
-<script>
-	import { state } from "@lib/userState.ts"
-
-	window.addEventListener("DOMContentLoaded", () => {
-		const { access_token } = state.userData
-
-		if (access_token) {
-			return (window.location.href = "/")
-		}
-	})
-</script>
-
-<script src="@scripts/auth.js"></script>

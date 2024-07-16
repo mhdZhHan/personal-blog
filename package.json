@@ -23,6 +23,7 @@
 		"@types/bcryptjs": "^2.4.6",
 		"astro-robots-txt": "^1.0.0",
 		"dompurify": "^3.0.11",
+		"firebase": "^10.12.3",
 		"lucide-astro": "^0.363.0",
 		"mdast-util-to-string": "^4.0.0",
 		"reading-time": "^1.5.0",

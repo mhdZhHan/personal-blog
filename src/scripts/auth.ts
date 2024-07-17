@@ -32,5 +32,6 @@ authForm?.addEventListener("submit", async (event) => {
 			}
 			return
 		}
+		window.location.reload()
 	}
 })

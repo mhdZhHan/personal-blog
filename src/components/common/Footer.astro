@@ -1,5 +1,7 @@
 ---
 import { Rss } from "lucide-astro"
+
+const { userEmail } = Astro.locals
 ---
 
 <footer>
@@ -10,22 +12,40 @@ import { Rss } from "lucide-astro"
 			</p>
 
 			<ul class="nav">
-				<li class="authRoute">
-					<a href="/auth/login" aria-label="Login route">Login</a>
-				</li>
-				<li class="authRoute">
-					<a href="/auth/signup" aria-label="Sign up route">Signup</a>
-				</li>
-				<li class="userRoute">
-					<a href="/auth/user" aria-label="User profile">Profile</a>
-				</li>
-				<li
-					class="userRoute"
-					id="logout"
-					aria-label="Option for logout"
-				>
-					<span>Logout</span>
-				</li>
+				{
+					!userEmail ? (
+						<>
+							<li class="authRoute">
+								<a href="/auth/login" aria-label="Login route">
+									Login
+								</a>
+							</li>
+							<li class="authRoute">
+								<a
+									href="/auth/signup"
+									aria-label="Sign up route"
+								>
+									Signup
+								</a>
+							</li>
+						</>
+					) : (
+						<>
+							<li class="userRoute">
+								<a href="/auth/user" aria-label="User profile">
+									Profile
+								</a>
+							</li>
+							<li
+								class="userRoute"
+								id="logout"
+								aria-label="Option for logout"
+							>
+								<span>Logout</span>
+							</li>
+						</>
+					)
+				}
 				<li class="rssRoute">
 					<a
 						href="/rss.xml"
@@ -65,10 +85,7 @@ import { Rss } from "lucide-astro"
 			gap: 0.5rem;
 
 			li {
-				display: none;
-				&.rssRoute {
-					display: block;
-				}
+				cursor: pointer;
 				a,
 				span {
 					display: block;
@@ -91,3 +108,22 @@ import { Rss } from "lucide-astro"
 		}
 	}
 </style>
+
+<script>
+	import { actions, isInputError } from "astro:actions"
+	const logoutBtn = document.querySelector("#logout") as HTMLLIElement
+
+	logoutBtn?.addEventListener("click", async (event) => {
+		const { error, data } = await actions.logoutAccount.safe()
+
+		if (error) {
+			// handle error (future)
+			console.log(error)
+			if (isInputError(error)) {
+				console.log(error.fields)
+			}
+			return
+		}
+		window.location.reload()
+	})
+</script>

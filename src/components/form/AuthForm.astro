@@ -32,6 +32,8 @@ const { type } = Astro.props
 			Icon={KeySquare}
 		/>
 
+		<input type="hidden" name="formType" value={type} />
+
 		<button class="auth-btn" type="submit" aria-label="Join us today"
 			>{type}</button
 		>

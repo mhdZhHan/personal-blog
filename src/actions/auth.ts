@@ -1,5 +1,8 @@
 import { defineAction, z } from "astro:actions"
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from "firebase/auth"
 
 import { auth } from "@firebase/config"
 
@@ -18,5 +21,23 @@ export const createAccount = defineAction({
 		 */
 
 		await createUserWithEmailAndPassword(auth, email, password)
+	},
+})
+
+export const loginAccount = defineAction({
+	accept: "form",
+	input: z.object({
+		email: z.string().email(),
+		password: z.string(),
+	}),
+
+	handler: async ({ email, password }) => {
+		await signInWithEmailAndPassword(auth, email, password)
+	},
+})
+
+export const logoutAccount = defineAction({
+	handler: async () => {
+		await auth.signOut()
 	},
 })

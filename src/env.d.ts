@@ -3,6 +3,12 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
+declare namespace App {
+	interface Locals {
+		userEmail: string | null
+	}
+}
+
 interface ImportMetaEnv {
 	readonly API_KEY: string
 	readonly AUTH_DOMAIN: string

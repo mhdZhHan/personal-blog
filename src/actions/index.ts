@@ -1,3 +1,3 @@
-import { createAccount } from "./createAccount"
+import { createAccount, loginAccount, logoutAccount } from "./auth"
 
-export const server = { createAccount }
+export const server = { createAccount, loginAccount, logoutAccount }

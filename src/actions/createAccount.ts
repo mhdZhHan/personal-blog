@@ -16,8 +16,7 @@ export const createAccount = defineAction({
 		 * pass `email1` & `password` to `createUserWithEmailAndPassword` function create
 		 * new account
 		 */
-		console.log("Hello", email, password)
-		
+
 		await createUserWithEmailAndPassword(auth, email, password)
 	},
 })

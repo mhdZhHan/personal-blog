@@ -70,17 +70,4 @@ const { type } = Astro.props
 	</form>
 </div>
 
-<script>
-	import { actions } from "astro:actions"
-	console.log("Hello")
-
-	const authForm = document.querySelector("#authForm") as HTMLFormElement
-
-	authForm?.addEventListener("submit", async (event) => {
-		event.preventDefault()
-		const formData = new FormData(authForm)
-		console.log(formData)
-		// passing the form data to createAccount action
-		await actions.createAccount(formData)
-	})
-</script>
+<script src="../../scripts/auth.ts"></script>

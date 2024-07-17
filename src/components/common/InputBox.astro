@@ -1,18 +1,18 @@
 ---
-const { disable, type, name, placeholder, id, Icon } = Astro.props
+import type { HTMLAttributes } from "astro/types"
+import type { LucideIconComponent } from "@types/LucideIcon.type"
+
+interface Props extends HTMLAttributes<"input"> {
+	Icon?: LucideIconComponent
+}
+
+const { Icon, ...props } = Astro.props
 ---
 
 <div class="input-container">
-	<input
-		class="input-box"
-		disabled={disable}
-		type={type}
-		name={name}
-		placeholder={placeholder}
-		id={id}
-	/>
+	<input {...props} class="input-box" />
 
-	<Icon size={17} class="input-icon" />
+	{Icon ? <Icon size={17} class="input-icon" /> : ""}
 </div>
 
 <style lang="scss">
@@ -25,7 +25,7 @@ const { disable, type, name, placeholder, id, Icon } = Astro.props
 			border-radius: 0.375rem;
 			border: 1px solid var(--border-color);
 			background-color: transparent;
-			padding: .8rem 1rem .8rem 3rem;
+			padding: 0.8rem 1rem 0.8rem 3rem;
 		}
 		.input-icon {
 			position: absolute;

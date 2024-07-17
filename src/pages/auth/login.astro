@@ -1,10 +1,8 @@
 ---
 import "@styles/auth.scss"
 
-import { Mail, KeySquare, Github } from "lucide-astro"
-
 import Layout from "@layouts/Layout.astro"
-import InputBox from "@components/form/InputBox.astro"
+import AuthForm from "@components/form/AuthForm.astro"
 ---
 
 <Layout title="Mohammed's blog | Login">
@@ -14,49 +12,7 @@ import InputBox from "@components/form/InputBox.astro"
 				<h1 class="auth__title">🤝 Welcome back</h1>
 			</div>
 
-			<div class="auth-container">
-				<form id="idLoginForm" action="" method="POST">
-					<InputBox
-						name="email"
-						type="email"
-						placeholder="Work email"
-						Icon={Mail}
-					/>
-
-					<InputBox
-						name="password"
-						type="password"
-						placeholder="Password"
-						Icon={KeySquare}
-					/>
-
-					<button
-						class="auth-btn"
-						type="submit"
-						aria-label="Sign in button">Sign In</button
-					>
-
-					<div class="separator-container">
-						<hr />
-						<p>or</p>
-						<hr />
-					</div>
-
-					<button
-						class="auth-btn github-btn"
-						id="githubAuth"
-						aria-label="Continue with github"
-					>
-						<Github />
-						continue with github
-					</button>
-
-					<p class="auth-info">
-						Don't have an account
-						<a href="/auth/signup">Join as today</a>
-					</p>
-				</form>
-			</div>
+			<AuthForm type="Sign In" client:load />
 		</div>
 	</section>
 </Layout>

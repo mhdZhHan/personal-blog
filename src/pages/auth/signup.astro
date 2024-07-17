@@ -1,70 +1,18 @@
 ---
 import "@styles/auth.scss"
 
-import { Mail, KeySquare, Github, User } from "lucide-astro"
-
 import Layout from "@layouts/Layout.astro"
-import InputBox from "@components/form/InputBox.astro"
+import AuthForm from "@components/form/AuthForm.astro"
 ---
 
-<Layout title="Mohammed's blog | Login">
+<Layout title="Mohammed's blog | Login" description="🤩 Join us today">
 	<section id="authSignup">
 		<div class="wrapper">
 			<div class="auth-head">
 				<h1 class="auth__title">🤩 Join us today</h1>
 			</div>
 
-			<div class="auth-container">
-				<form id="idSignupForm" method="POST">
-					<InputBox
-						name="fullName"
-						type="text"
-						placeholder="Full name"
-						Icon={User}
-					/>
-
-					<InputBox
-						name="email"
-						type="email"
-						placeholder="Work email"
-						Icon={Mail}
-					/>
-
-					<InputBox
-						name="password"
-						type="password"
-						placeholder="Password"
-						Icon={KeySquare}
-					/>
-
-					<button
-						class="auth-btn"
-						type="submit"
-						aria-label="Join us today">Sign Up</button
-					>
-
-					<div class="separator-container">
-						<hr />
-						<p>or</p>
-						<hr />
-					</div>
-
-					<button
-						type="button"
-						class="auth-btn github-btn"
-						id="githubAuth"
-						aria-label="Continue with github"
-					>
-						<Github />
-						continue with github
-					</button>
-
-					<p class="auth-info">
-						Already a member ?
-						<a href="/auth/login">Sign in here.</a>
-					</p>
-				</form>
-			</div>
+			<AuthForm type="Signup" client:load />
 		</div>
 	</section>
 </Layout>

@@ -10,8 +10,7 @@
 			"@firebase/*": ["src/firebase/*"],
 			"@styles/*": ["src/styles/*"],
 			"@scripts/*": ["src/scripts/*"],
-			"@api/*": ["src/pages/api/*"],
-			"@types/*": ["src/types/*"]
+			"@api/*": ["src/pages/api/*"]
 		}
 	},
 	// env.d.ts

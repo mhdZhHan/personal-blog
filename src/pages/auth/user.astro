@@ -9,6 +9,15 @@ import Button from "@components/common/Button.astro"
 			<div class="profile-container">
 				<div class="profile-details">
 					<div class="profile-section">
+						<h2>Your Bookmarks</h2>
+						<ul class="profile__list">
+							<li>Post Title 1</li>
+							<li>Post Title 2</li>
+							<li>Post Title 3</li>
+						</ul>
+					</div>
+
+					<div class="profile-section">
 						<h2>Liked Posts</h2>
 						<ul class="profile__list">
 							<li>Post Title 1</li>
@@ -33,9 +42,27 @@ import Button from "@components/common/Button.astro"
 					<p class="profile__email">liyana@example.com</p>
 
 					<div class="profile-actions">
-						<Button text="Logout" />
 						<Button text="Unsubscribe from Newsletter" />
+						<Button text="Logout" />
 						<Button text="Delete Account" />
+					</div>
+
+					<div class="profile-replies">
+						<h2>Comments Reply</h2>
+						<ul class="profile__replies">
+							<li>
+								Reply message Hello Liyana Thank you for your
+								comment 1
+							</li>
+							<li>
+								Reply message Hello Liyana Thank you for your
+								comment 2
+							</li>
+							<li>
+								Reply message Hello Liyana Thank you for your
+								comment 3
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -98,6 +125,28 @@ import Button from "@components/common/Button.astro"
 			justify-content: center;
 			gap: 1rem;
 		}
+
+		.profile-replies {
+			margin-top: 2rem;
+			width: 95%;
+			text-align: left;
+			h2 {
+				font-size: 1.5rem;
+				margin-bottom: 1rem;
+			}
+			.profile__replies {
+				list-style: none;
+				padding: 0;
+				li {
+					width: 100%;
+					border: 1px solid var(--border-color);
+					background-color: var(--secondary);
+					border-radius: 0.5rem;
+					margin-bottom: 0.5rem;
+					padding: 0.75rem;
+				}
+			}
+		}
 	}
 
 	.profile-details {
@@ -118,7 +167,7 @@ import Button from "@components/common/Button.astro"
 				padding: 0;
 
 				li {
-					background: #f9f9f9;
+					background: var(--secondary);
 					padding: 0.75rem;
 					margin-bottom: 0.5rem;
 					border-radius: 0.25rem;

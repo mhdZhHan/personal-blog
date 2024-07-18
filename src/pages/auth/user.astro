@@ -1,17 +1,129 @@
 ---
 import Layout from "@layouts/Layout.astro"
+import Button from "@components/common/Button.astro"
 ---
 
 <Layout title="Mohammed's blog | User Profile">
 	<section id="userProfile">
 		<div class="wrapper">
-			<div class="profile-head">
-				<h1 class="profile__title">Hay Liyana</h1>
-			</div>
-
 			<div class="profile-container">
-				<h2>This page is under construction</h2>
+				<div class="profile-details">
+					<div class="profile-section">
+						<h2>Liked Posts</h2>
+						<ul class="profile__list">
+							<li>Post Title 1</li>
+							<li>Post Title 2</li>
+							<li>Post Title 3</li>
+						</ul>
+					</div>
+
+					<div class="profile-section">
+						<h2>Commented Posts</h2>
+						<ul class="profile__list">
+							<li>Post Title 1</li>
+							<li>Post Title 2</li>
+							<li>Post Title 3</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="profile-head">
+					<div class="avatar" title="User Avatar"></div>
+					<h1 class="profile__title">Hay Liyana</h1>
+					<p class="profile__email">liyana@example.com</p>
+
+					<div class="profile-actions">
+						<Button text="Logout" />
+						<Button text="Unsubscribe from Newsletter" />
+						<Button text="Delete Account" />
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
 </Layout>
+
+<style lang="scss">
+	.profile-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: stretch;
+		flex-wrap: wrap;
+		gap: 2rem;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			flex-direction: column-reverse;
+		}
+	}
+
+	.profile-head {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		margin-bottom: 1rem;
+
+		border-left: 1px solid var(--border-color);
+
+		@media (max-width: 768px) {
+			border-left: 0;
+		}
+
+		.avatar {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, #ff7a18, #af002d 71%);
+			margin: 0 auto;
+		}
+
+		.profile__title {
+			font-size: 2rem;
+			color: var(--title);
+			margin: 1rem 0 0.5rem;
+		}
+
+		.profile__email {
+			color: var(--gray);
+			margin-bottom: 1rem;
+		}
+
+		.profile-actions {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			gap: 1rem;
+		}
+	}
+
+	.profile-details {
+		flex: 2;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		.profile-section {
+			margin-bottom: 2rem;
+
+			h2 {
+				font-size: 1.5rem;
+				margin-bottom: 1rem;
+			}
+
+			.profile__list {
+				list-style: none;
+				padding: 0;
+
+				li {
+					background: #f9f9f9;
+					padding: 0.75rem;
+					margin-bottom: 0.5rem;
+					border-radius: 0.25rem;
+				}
+			}
+		}
+	}
+</style>

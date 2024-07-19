@@ -25,32 +25,6 @@ const { routes, defaultActiveIndex = 0 } = Astro.props
 	</div>
 </div>
 
-<style>
-	.tab-buttons {
-		border-bottom: 1px solid var(--border-color);
-	}
-	.tab-button {
-		display: inline-block;
-		padding: 10px 20px;
-		border: none;
-		background: none;
-		cursor: pointer;
-		font-weight: bold;
-	}
-	.tab-button.active {
-		border-bottom: 2px solid var(--primary);
-	}
-	.tab-content {
-		margin-top: 1rem;
-	}
-	.tab-content > :global(*) {
-		display: none;
-	}
-	.tab-content > :global(*:first-child) {
-		display: block;
-	}
-</style>
-
 <script>
 	const tabButtons: NodeListOf<HTMLButtonElement> =
 		document.querySelectorAll(".tab-button")
@@ -75,3 +49,31 @@ const { routes, defaultActiveIndex = 0 } = Astro.props
 	// Initial active tab `0`
 	setActiveTab(0)
 </script>
+
+<style>
+	.tab-buttons {
+		border-bottom: 1px solid var(--border-color);
+	}
+	.tab-button {
+		display: inline-block;
+		padding: 0.4rem 1rem;
+		border: none;
+		background: none;
+		cursor: pointer;
+		font-weight: bold;
+		color: var(--text);
+	}
+	.tab-button.active {
+		border-bottom: 2px solid var(--primary);
+		color: var(--title);
+	}
+	.tab-content {
+		margin-top: 1rem;
+	}
+	.tab-content > :global(*) {
+		display: none;
+	}
+	.tab-content > :global(*:first-child) {
+		display: block;
+	}
+</style>

@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro"
-import Button from "@components/common/Button.astro"
+import Button from "@components/widgets/Button.astro"
+import TabNavigation from "@components/widgets/TabNavigation.astro"
 ---
 
 <Layout title="Mohammed's blog | User Profile">
@@ -8,32 +9,33 @@ import Button from "@components/common/Button.astro"
 		<div class="wrapper">
 			<div class="profile-container">
 				<div class="profile-details">
-					<div class="profile-section">
-						<h2>Your Bookmarks</h2>
-						<ul class="profile__list">
-							<li>Post Title 1</li>
-							<li>Post Title 2</li>
-							<li>Post Title 3</li>
-						</ul>
-					</div>
+					<TabNavigation
+						routes={["Bookmarks", "Liked Posts", "Commented Posts"]}
+					>
+						<div class="profile-section">
+							<ul class="profile__list">
+								<li>Post Bookmarked 1</li>
+								<li>Post Bookmarked 2</li>
+								<li>Post Bookmarked 3</li>
+							</ul>
+						</div>
 
-					<div class="profile-section">
-						<h2>Liked Posts</h2>
-						<ul class="profile__list">
-							<li>Post Title 1</li>
-							<li>Post Title 2</li>
-							<li>Post Title 3</li>
-						</ul>
-					</div>
+						<div class="profile-section">
+							<ul class="profile__list">
+								<li>Post Liked 1</li>
+								<li>Post Liked 2</li>
+								<li>Post Liked 3</li>
+							</ul>
+						</div>
 
-					<div class="profile-section">
-						<h2>Commented Posts</h2>
-						<ul class="profile__list">
-							<li>Post Title 1</li>
-							<li>Post Title 2</li>
-							<li>Post Title 3</li>
-						</ul>
-					</div>
+						<div class="profile-section">
+							<ul class="profile__list">
+								<li>Post Commented 1</li>
+								<li>Post Commented 2</li>
+								<li>Post Commented 3</li>
+							</ul>
+						</div>
+					</TabNavigation>
 				</div>
 
 				<div class="profile-head">
@@ -153,7 +155,7 @@ import Button from "@components/common/Button.astro"
 		flex: 2;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		// justify-content: center;
 		.profile-section {
 			margin-bottom: 2rem;
 

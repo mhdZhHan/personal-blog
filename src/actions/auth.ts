@@ -33,7 +33,7 @@ export const createAccount = defineAction({
 		 */
 
 		const user = await createUserWithEmailAndPassword(auth, email, password)
-		
+
 		// update the user with display name
 		await updateProfile(user.user, {
 			displayName: fullName,

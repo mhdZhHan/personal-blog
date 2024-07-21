@@ -2,6 +2,8 @@
 import "@styles/fonts.scss"
 import "@styles/tags.scss"
 
+import  SpeedInsights  from "@vercel/speed-insights/astro"
+
 // components
 import Header from "@components/common/Header.astro"
 import Newsletter from "@components/common/Newsletter.astro"
@@ -85,6 +87,8 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		<script src="@scripts/theme.js"></script>
 
 		<title>{title ? title : `Mohammed's blog`}</title>
+
+		<SpeedInsights />
 	</head>
 
 	<body>

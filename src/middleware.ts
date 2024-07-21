@@ -15,7 +15,11 @@ export const onRequest = defineMiddleware((context, next) => {
 	}
 
 	if (currentUser) {
-		context.locals.userEmail = currentUser.email
+		context.locals.user = {
+			email: currentUser.email,
+			fullName: currentUser.displayName,
+			userProfile: currentUser.photoURL,
+		}
 	}
 
 	if (

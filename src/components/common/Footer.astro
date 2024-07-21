@@ -1,7 +1,7 @@
 ---
 import { Rss } from "lucide-astro"
 
-const { userEmail } = Astro.locals
+const { user } = Astro.locals
 ---
 
 <footer>
@@ -13,7 +13,7 @@ const { userEmail } = Astro.locals
 
 			<ul class="nav">
 				{
-					!userEmail ? (
+					!user ? (
 						<>
 							<li class="authRoute">
 								<a href="/auth/login" aria-label="Login route">

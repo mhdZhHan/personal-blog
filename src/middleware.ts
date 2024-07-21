@@ -32,13 +32,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
 	const { pathname } = context.url
 
-	// if (
-	// 	!currentUser &&
-	// 	pathname === "/auth/user" &&
-	// 	context.request.method === "GET"
-	// ) {
-	// 	return context.redirect("/auth/login")
-	// }
+	if (
+		!currentUser &&
+		pathname === "/auth/user" &&
+		context.request.method === "GET"
+	) {
+		return context.redirect("/auth/login")
+	}
 
 	if (currentUser) {
 		context.locals.user = {

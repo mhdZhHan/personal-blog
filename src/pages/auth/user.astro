@@ -4,7 +4,7 @@ import Button from "@components/widgets/Button.astro"
 import TabNavigation from "@components/widgets/TabNavigation.astro"
 
 const { user } = Astro.locals
-const profileBg = user?.userProfile
+const profileBg = user?.photoURL
 ---
 
 <Layout title="Mohammed's blog | User Profile">
@@ -48,7 +48,7 @@ const profileBg = user?.userProfile
 
 					<div class="profile-actions">
 						<Button text="Unsubscribe from Newsletter" />
-						<Button text="Logout" />
+						<Button text="Logout" id="id_profileLogout" />
 						<Button text="Delete Account" />
 					</div>
 
@@ -75,7 +75,7 @@ const profileBg = user?.userProfile
 	</section>
 </Layout>
 
-<style lang="scss" define:vars={{profileBg}}>
+<style lang="scss" define:vars={{ profileBg }}>
 	.profile-container {
 		display: flex;
 		justify-content: space-between;
@@ -182,3 +182,12 @@ const profileBg = user?.userProfile
 		}
 	}
 </style>
+
+<script>
+	import { AccountLogout } from "@scripts/auth"
+	const logoutBtn = document.querySelector(
+		"#id_profileLogout"
+	) as HTMLLIElement
+
+	AccountLogout(logoutBtn)
+</script>

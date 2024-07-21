@@ -110,20 +110,8 @@ const { user } = Astro.locals
 </style>
 
 <script>
-	import { actions, isInputError } from "astro:actions"
+	import { AccountLogout } from "@scripts/auth"
 	const logoutBtn = document.querySelector("#logout") as HTMLLIElement
 
-	logoutBtn?.addEventListener("click", async (event) => {
-		const { error, data } = await actions.logoutAccount.safe()
-
-		if (error) {
-			// handle error (future)
-			console.log(error)
-			if (isInputError(error)) {
-				console.log(error.fields)
-			}
-			return
-		}
-		window.location.reload()
-	})
+	AccountLogout(logoutBtn)
 </script>

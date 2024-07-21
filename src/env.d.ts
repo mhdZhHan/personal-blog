@@ -8,7 +8,7 @@ declare namespace App {
 		user: {
 			fullName: string | null
 			email: string | null
-			userProfile: string | null
+			photoURL: string | null
 		}
 	}
 }

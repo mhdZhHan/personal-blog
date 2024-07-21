@@ -36,3 +36,20 @@ authForm?.addEventListener("submit", async (event) => {
 		window.location.href = "/auth/user"
 	}
 })
+
+export const AccountLogout = (logoutBtn: HTMLElement) => {
+	logoutBtn?.addEventListener("click", async (event) => {
+		const { error } = await actions.logoutAccount.safe()
+
+		if (error) {
+			// handle error (future)
+			console.log(error)
+			if (isInputError(error)) {
+				console.log(error.fields)
+			}
+			return
+		}
+
+		window.location.href = "/"
+	})
+}

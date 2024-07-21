@@ -1,8 +1,32 @@
 import { auth } from "@firebase/config"
 import { defineMiddleware } from "astro:middleware"
+import { onAuthStateChanged } from "firebase/auth"
 
-export const onRequest = defineMiddleware((context, next) => {
-	const currentUser = auth.currentUser
+import type { UserProfile } from "./types/UserProfile.type"
+
+const getCurrentUser = (): Promise<UserProfile | null> => {
+	return new Promise((resolve, reject) => {
+		onAuthStateChanged(
+			auth,
+			(user) => {
+				if (user) {
+					const userProfile: UserProfile = {
+						displayName: user.displayName,
+						email: user.email,
+						photoURL: user.photoURL,
+					}
+					resolve(userProfile)
+				} else {
+					resolve(null)
+				}
+			},
+			reject
+		)
+	})
+}
+
+export const onRequest = defineMiddleware(async (context, next) => {
+	const currentUser = await getCurrentUser()
 
 	const { pathname } = context.url
 
@@ -16,9 +40,9 @@ export const onRequest = defineMiddleware((context, next) => {
 
 	if (currentUser) {
 		context.locals.user = {
-			email: currentUser.email,
-			fullName: currentUser.displayName,
-			userProfile: currentUser.photoURL,
+			email: currentUser?.email,
+			fullName: currentUser?.displayName,
+			photoURL: currentUser?.photoURL,
 		}
 	}
 

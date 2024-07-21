@@ -11,12 +11,18 @@ const { type } = Astro.props
 
 <div class="auth-container">
 	<form id="authForm">
-		<!-- <InputBox
-			name="fullName"
-			type="text"
-			placeholder="Full name"
-			Icon={User}
-		/> -->
+		{
+			type === "Signup" ? (
+				<InputBox
+					name="fullName"
+					type="text"
+					placeholder="Full name"
+					Icon={User}
+				/>
+			) : (
+				""
+			)
+		}
 
 		<InputBox
 			name="email"

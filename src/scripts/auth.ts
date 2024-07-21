@@ -20,7 +20,7 @@ authForm?.addEventListener("submit", async (event) => {
 			return
 		}
 
-		window.location.reload()
+		window.location.href = "/auth/user"
 	} else if (formType === "Sign In") {
 		// login
 		const { error, data } = await actions.loginAccount.safe(formData)
@@ -32,6 +32,7 @@ authForm?.addEventListener("submit", async (event) => {
 			}
 			return
 		}
-		window.location.reload()
+
+		window.location.href = "/auth/user"
 	}
 })

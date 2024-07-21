@@ -28,6 +28,8 @@ const getCurrentUser = (): Promise<UserProfile | null> => {
 export const onRequest = defineMiddleware(async (context, next) => {
 	const currentUser = await getCurrentUser()
 
+	console.log("Hello", currentUser)
+
 	const { pathname } = context.url
 
 	if (

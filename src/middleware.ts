@@ -1,5 +1,3 @@
-export const prerender = false
-
 import { auth } from "@firebase/config"
 import { defineMiddleware } from "astro:middleware"
 import { onAuthStateChanged } from "firebase/auth"
@@ -29,8 +27,6 @@ const getCurrentUser = (): Promise<UserProfile | null> => {
 
 export const onRequest = defineMiddleware(async (context, next) => {
 	const currentUser = await getCurrentUser()
-
-	console.log("Hello", currentUser)
 
 	const { pathname } = context.url
 

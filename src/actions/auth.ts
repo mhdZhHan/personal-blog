@@ -41,7 +41,6 @@ export const createAccount = defineAction({
 		})
 
 		// create user in astro db
-		
 	},
 })
 

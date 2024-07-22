@@ -39,6 +39,9 @@ export const createAccount = defineAction({
 			displayName: fullName,
 			photoURL: generateRandomGradient(),
 		})
+
+		// create user in astro db
+		
 	},
 })
 

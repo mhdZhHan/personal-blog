@@ -15,13 +15,13 @@
   resolved "https://registry.yarnpkg.com/@astrojs/compiler/-/compiler-2.8.2.tgz#6bf2a2deb22776545b1229545bc2ade31527adae"
   integrity sha512-2v2N2oDnMH6+CX1Wn6f45Afa4tdkUMutdx8pJaokfaOYnAU+u6+UK7o7sXqydKro1cLwVmmOIJv6AqiXnAdLDA==
 
-"@astrojs/db@^0.11.7":
-  version "0.11.7"
-  resolved "https://registry.yarnpkg.com/@astrojs/db/-/db-0.11.7.tgz#ce1b0323b8221c415088230b999df50bcc35c98b"
-  integrity sha512-upJfu/GpW0AwFIIkWPmIzLRrXibmyKdtjUB+T/9FvuH25Bgk4ym62d87clh+0acBgGQw98mezSOtBCenWTAT0Q==
+"@astrojs/db@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/db/-/db-0.12.0.tgz#e89546f61a8a296f5179d60d662da150f09a3316"
+  integrity sha512-ZrHuH4sJcPE0liTG+mWc6tR7pLax4vKsDBH5hBSo3mWiGjg/jWvMhZsSclYGZ8gRi7+zUh4FDqgcBeiHVmYf6Q==
   dependencies:
     "@astrojs/studio" "0.1.1"
-    "@libsql/client" "^0.6.2"
+    "@libsql/client" "^0.7.0"
     async-listen "^3.0.1"
     ci-info "^4.0.0"
     deep-diff "^1.0.2"
@@ -1103,20 +1103,21 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@libsql/client@^0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@libsql/client/-/client-0.6.2.tgz#3a7b34549310b4e6c857d5128675ff538c341978"
-  integrity sha512-xRNfRLv/dOCbV4qd+M0baQwGmvuZpMd2wG2UAPs8XmcdaPvu5ErkcaeITkxlm3hDEJVabQM1cFhMBxsugWW9fQ==
+"@libsql/client@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@libsql/client/-/client-0.7.0.tgz#46f0518972f765e70fb199ddeeee0fb9c3a7b10d"
+  integrity sha512-1aLDtWzsErr68GZ640TVyOLkL/+lB2YK8cYvJIfiI7Mt+DEPB22Jkoz2QfBDg5PVGX/efeRHog2j/oVbUhxO8Q==
   dependencies:
-    "@libsql/core" "^0.6.2"
+    "@libsql/core" "^0.7.0"
     "@libsql/hrana-client" "^0.6.0"
     js-base64 "^3.7.5"
     libsql "^0.3.10"
+    promise-limit "^2.7.0"
 
-"@libsql/core@^0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@libsql/core/-/core-0.6.2.tgz#e489aa11a4ad39bde131c6b04e7a5071fde9aa8a"
-  integrity sha512-c2P4M+4u/4b2L02A0KjggO3UW51rGkhxr/7fzJO0fEAqsqrWGxuNj2YtRkina/oxfYvAof6xjp8RucNoIV/Odw==
+"@libsql/core@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@libsql/core/-/core-0.7.0.tgz#dacfa3527eed21f71825c8fb24ecf08007094218"
+  integrity sha512-hCYfXa0S4t9CJtxZIWacboylrcx94ZQO0dEngH4f0f/LHg6ymHSZiubbojAwD7tNy94ahICoGPjEi6aEIyhlcQ==
   dependencies:
     js-base64 "^3.7.5"
 
@@ -4036,6 +4037,11 @@ prismjs@^1.29.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.29.0.tgz#f113555a8fa9b57c35e637bba27509dcf802dd12"
   integrity sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==
+
+promise-limit@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/promise-limit/-/promise-limit-2.7.0.tgz#eb5737c33342a030eaeaecea9b3d3a93cb592b26"
+  integrity sha512-7nJ6v5lnJsXwGprnGXga4wx6d1POjvi5Qmf1ivTRxTjH4Z/9Czja/UCMLVmB9N93GeWOU93XaFaEt6jbuoagNw==
 
 prompts@^2.4.2:
   version "2.4.2"

@@ -1,3 +1,5 @@
+export const prerender = false
+
 import { auth } from "@firebase/config"
 import { defineMiddleware } from "astro:middleware"
 import { onAuthStateChanged } from "firebase/auth"

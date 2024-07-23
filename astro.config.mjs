@@ -39,7 +39,7 @@ const autolinkHeadingsOptions = {
 export default defineConfig({
 	site: "https://mohammedsh.xyz",
 	trailingSlash: "never",
-	output: "hybrid",
+	output: "server",
 	adapter: vercel({ webAnalytics: { enabled: true } }),
 	image: {
 		service: squooshImageService(),

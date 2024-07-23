@@ -29,6 +29,41 @@ export async function getCurrentUser(
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
-	console.log(context.cookies.get("session"))
+	const { request, url } = context
+	const { pathname } = url
+
+	// Retrieve the session cookie from request headers
+	const cookies = request.headers.get("Cookie")
+	const sessionCookie = cookies
+		?.split("; ")
+		.find((cookie) => cookie.startsWith("session="))
+		?.split("=")[1]
+
+	console.log(sessionCookie)
+
+	if (!sessionCookie) {
+		if (pathname === "/auth/user" && request.method === "GET") {
+			return context.redirect("/auth/login")
+		}
+	} else {
+		const currentUser = await getCurrentUser(sessionCookie)
+
+		if (currentUser) {
+			context.locals.user = {
+				email: currentUser.email,
+				fullName: currentUser.displayName,
+				photoURL: currentUser.photoURL,
+			}
+
+			if (pathname === "/auth/login" || pathname === "/auth/signup") {
+				return context.redirect("/")
+			}
+		} else {
+			if (pathname === "/auth/user" && request.method === "GET") {
+				return context.redirect("/auth/login")
+			}
+		}
+	}
+
 	return next()
 })

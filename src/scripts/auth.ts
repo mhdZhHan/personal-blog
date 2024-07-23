@@ -42,8 +42,11 @@ authForm?.addEventListener("submit", async (event) => {
 })
 
 export const AccountLogout = (logoutBtn: HTMLElement) => {
-	logoutBtn?.addEventListener("click", async (event) => {
+	logoutBtn?.addEventListener("click", async () => {
+		console.log("Hello")
 		const { error } = await actions.logoutAccount.safe()
+
+		console.log("Hello")
 
 		if (error) {
 			// handle error (future)

@@ -72,7 +72,7 @@ export const loginAccount = defineAction({
 			})
 
 			/**
-			 *  Set a cookie named "session" with the session cookie value,
+			 * Set a cookie named "session" with the session cookie value,
 			 * which will be used to maintain the user's login session.
 			 * The cookie is accessible across the entire site (path: "/").
 			 */
@@ -89,7 +89,7 @@ export const loginAccount = defineAction({
 })
 
 export const logoutAccount = defineAction({
-	handler: async (context) => {
+	handler: (_, context) => {
 		context.cookies.delete("session", { path: "/" })
 		return { status: true, message: "Logout successful" }
 	},

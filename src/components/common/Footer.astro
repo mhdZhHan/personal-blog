@@ -12,40 +12,34 @@ const { user } = Astro.locals
 			</p>
 
 			<ul class="nav">
-				{
-					!user ? (
-						<>
-							<li class="authRoute">
-								<a href="/auth/login" aria-label="Login route">
-									Login
-								</a>
-							</li>
-							<li class="authRoute">
-								<a
-									href="/auth/signup"
-									aria-label="Sign up route"
-								>
-									Signup
-								</a>
-							</li>
-						</>
-					) : (
-						<>
-							<li class="userRoute">
-								<a href="/auth/user" aria-label="User profile">
-									Profile
-								</a>
-							</li>
-							<li
-								class="userRoute"
-								id="logout"
-								aria-label="Option for logout"
-							>
-								<span>Logout</span>
-							</li>
-						</>
-					)
-				}
+				<>
+					<li class="authRoute">
+						<a href="/auth/login" aria-label="Login route">
+							Login
+						</a>
+					</li>
+					<li class="authRoute">
+						<a href="/auth/signup" aria-label="Sign up route">
+							Signup
+						</a>
+					</li>
+				</>
+
+				<>
+					<li class="userRoute hidden">
+						<a href="/auth/user" aria-label="User profile">
+							Profile
+						</a>
+					</li>
+					<li
+						class="userRoute hidden"
+						id="logout"
+						aria-label="Option for logout"
+					>
+						<span>Logout</span>
+					</li>
+				</>
+
 				<li class="rssRoute">
 					<a
 						href="/rss.xml"
@@ -114,4 +108,30 @@ const { user } = Astro.locals
 	const logoutBtn = document.querySelector("#logout") as HTMLLIElement
 
 	AccountLogout(logoutBtn)
+
+	/**
+	 * Showing and hiding the userRoutes and authRoutes based on the session cookie
+	 */
+	function getCookie(name: string): string | null {
+		const value = `; ${document.cookie}`
+		const parts = value.split(`; ${name}=`)
+		if (parts.length === 2) {
+			return parts.pop()?.split(";").shift() ?? null
+		}
+		return null
+	}
+
+	const sessionCookie = getCookie("session")
+
+	const authRoutes = document.querySelectorAll(".authRoute")
+	const userRoutes = document.querySelectorAll(".userRoute")
+
+	if (sessionCookie) {
+		userRoutes.forEach((userRoute) => {
+			userRoute.classList.remove("hidden")
+		})
+		authRoutes.forEach((authRoute) => {
+			authRoute.classList.add("hidden")
+		})
+	}
 </script>

@@ -9,7 +9,6 @@ authForm?.addEventListener("submit", async (event) => {
 
 	if (formType === "Signup") {
 		// passing the form data to createAccount action
-		console.log("Hello")
 		const { error, data } = await actions.createAccount.safe(formData)
 
 		if (error) {
@@ -22,8 +21,7 @@ authForm?.addEventListener("submit", async (event) => {
 		}
 
 		console.log("Hello: ", data)
-
-		// window.location.href = "/auth/user"
+		window.location.href = "/auth/user"
 	} else if (formType === "Sign In") {
 		// login
 		const { error, data } = await actions.loginAccount.safe(formData)
@@ -37,16 +35,13 @@ authForm?.addEventListener("submit", async (event) => {
 		}
 
 		console.log("Hello: ", data)
-		// window.location.href = "/auth/user"
+		window.location.href = "/auth/user"
 	}
 })
 
 export const AccountLogout = (logoutBtn: HTMLElement) => {
 	logoutBtn?.addEventListener("click", async () => {
-		console.log("Hello")
 		const { error } = await actions.logoutAccount.safe()
-
-		console.log("Hello")
 
 		if (error) {
 			// handle error (future)

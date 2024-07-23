@@ -6,7 +6,7 @@ const serviceAccount = {
 	type: "service_account",
 	project_id: import.meta.env.FIREBASE_PROJECT_ID,
 	private_key_id: import.meta.env.FIREBASE_PRIVATE_KEY_ID,
-	private_key: import.meta.env.FIREBASE_PRIVATE_KEY,
+	private_key: import.meta.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
 	client_email:
 		"firebase-adminsdk-ldvxz@my-personal-blog-f1a2b.iam.gserviceaccount.com",
 	client_id: "107969091410513032223",

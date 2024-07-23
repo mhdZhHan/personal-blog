@@ -10,7 +10,6 @@ const firebaseConfig = {
 	appId: import.meta.env.APP_ID,
 	measurementId: import.meta.env.MEASUREMENT_ID,
 }
-
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
 
 export const auth = getAuth(app)

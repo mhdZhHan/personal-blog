@@ -1,13 +1,10 @@
 import { defineAction, z } from "astro:actions"
-import {
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-	updateProfile,
-} from "firebase/auth"
 
-import { auth } from "@firebase/config"
+import { auth as adminAuth } from "@firebase/server"
+import { auth as clientAuth } from "@firebase/client"
+import { signInWithEmailAndPassword } from "firebase/auth"
 
-import { generateRandomGradient } from "@lib/randomGradient"
+// import { generateRandomGradient } from "@lib/randomGradient"
 
 export const createAccount = defineAction({
 	accept: "form",
@@ -25,22 +22,24 @@ export const createAccount = defineAction({
 		fullName: string
 		password: string
 	}) => {
-		/**
-		 * firebase function create an account
-		 * using email and password
-		 * pass `email1` & `password` to `createUserWithEmailAndPassword` function create
-		 * new account
-		 */
+		try {
+			await adminAuth.createUser({
+				email,
+				password,
+				displayName: fullName,
+				// photoURL: generateRandomGradient(),
+			})
+		} catch (error) {
+			return {
+				status: false,
+				message: error?.message,
+			}
+		}
 
-		const user = await createUserWithEmailAndPassword(auth, email, password)
-
-		// update the user with display name
-		await updateProfile(user.user, {
-			displayName: fullName,
-			photoURL: generateRandomGradient(),
-		})
-
-		// create user in astro db
+		return {
+			status: true,
+			message: "User created successfully",
+		}
 	},
 })
 
@@ -51,13 +50,47 @@ export const loginAccount = defineAction({
 		password: z.string(),
 	}),
 
-	handler: async ({ email, password }) => {
-		await signInWithEmailAndPassword(auth, email, password)
+	handler: async ({ email, password }, context) => {
+		try {
+			const user = await adminAuth.getUserByEmail(email)
+
+			if (!user) {
+				return { status: 401, message: "User not found" }
+			}
+
+			const userCredential = await signInWithEmailAndPassword(
+				clientAuth,
+				email,
+				password
+			)
+
+			const idToken = await userCredential.user.getIdToken()
+
+			const fiveDays = 60 * 60 * 24 * 5 * 1000
+			const sessionCookie = await adminAuth.createSessionCookie(idToken, {
+				expiresIn: fiveDays,
+			})
+
+			/**
+			 *  Set a cookie named "session" with the session cookie value,
+			 * which will be used to maintain the user's login session.
+			 * The cookie is accessible across the entire site (path: "/").
+			 */
+
+			context.cookies.set("session", sessionCookie, {
+				path: "/",
+			})
+
+			return { status: true, message: "Login successful" }
+		} catch (error) {
+			return { status: 401, message: error?.message }
+		}
 	},
 })
 
 export const logoutAccount = defineAction({
-	handler: async () => {
-		await auth.signOut()
+	handler: async (context) => {
+		context.cookies.delete("session", { path: "/" })
+		return { status: true, message: "Logout successful" }
 	},
 })

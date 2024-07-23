@@ -21,6 +21,10 @@ interface ImportMetaEnv {
 	readonly MESSAGING_SENDER_ID: string
 	readonly APP_ID: string
 	readonly MEASUREMENT_ID: string
+
+	readonly FIREBASE_PROJECT_ID: string
+	readonly FIREBASE_PRIVATE_KEY_ID: string
+	readonly FIREBASE_PRIVATE_KEY: string
 }
 
 interface ImportMeta {

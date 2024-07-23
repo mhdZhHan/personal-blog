@@ -1,57 +1,34 @@
-import { auth } from "@firebase/config"
 import { defineMiddleware } from "astro:middleware"
-import { onAuthStateChanged } from "firebase/auth"
+import { auth as adminAuth } from "@firebase/server"
 
 import type { UserProfile } from "./types/UserProfile.type"
 
-const getCurrentUser = (): Promise<UserProfile | null> => {
-	return new Promise((resolve, reject) => {
-		onAuthStateChanged(
-			auth,
-			(user) => {
-				if (user) {
-					const userProfile: UserProfile = {
-						displayName: user.displayName,
-						email: user.email,
-						photoURL: user.photoURL,
-					}
-					resolve(userProfile)
-				} else {
-					resolve(null)
-				}
-			},
-			reject
+export async function getCurrentUser(
+	sessionCookie: string
+): Promise<UserProfile | null> {
+	try {
+		// Verify the session cookie and get the decoded ID token
+		const decodedIdToken = await adminAuth.verifySessionCookie(
+			sessionCookie,
+			true
 		)
-	})
+
+		// Get the user from the decoded ID token
+		const userRecord = await adminAuth.getUser(decodedIdToken.uid)
+
+		// Create a user profile object
+		const userProfile: UserProfile = {
+			displayName: userRecord.displayName ?? null,
+			email: userRecord.email ?? null,
+			photoURL: userRecord.photoURL ?? null,
+		}
+		return userProfile
+	} catch (error) {
+		return null
+	}
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
-	const currentUser = await getCurrentUser()
-
-	const { pathname } = context.url
-
-	if (
-		!currentUser &&
-		pathname === "/auth/user" &&
-		context.request.method === "GET"
-	) {
-		return context.redirect("/auth/login")
-	}
-
-	if (currentUser) {
-		context.locals.user = {
-			email: currentUser?.email,
-			fullName: currentUser?.displayName,
-			photoURL: currentUser?.photoURL,
-		}
-	}
-
-	if (
-		currentUser &&
-		(pathname === "/auth/login" || pathname === "/auth/signup")
-	) {
-		return context.redirect("/")
-	}
-
+	console.log(context.cookies.get("session"))
 	return next()
 })

@@ -9,6 +9,7 @@ authForm?.addEventListener("submit", async (event) => {
 
 	if (formType === "Signup") {
 		// passing the form data to createAccount action
+		console.log("Hello")
 		const { error, data } = await actions.createAccount.safe(formData)
 
 		if (error) {
@@ -20,7 +21,9 @@ authForm?.addEventListener("submit", async (event) => {
 			return
 		}
 
-		window.location.href = "/auth/user"
+		console.log("Hello: ", data)
+
+		// window.location.href = "/auth/user"
 	} else if (formType === "Sign In") {
 		// login
 		const { error, data } = await actions.loginAccount.safe(formData)
@@ -33,7 +36,8 @@ authForm?.addEventListener("submit", async (event) => {
 			return
 		}
 
-		window.location.href = "/auth/user"
+		console.log("Hello: ", data)
+		// window.location.href = "/auth/user"
 	}
 })
 

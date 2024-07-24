@@ -3,9 +3,15 @@ export const prerender = false
 
 import Layout from "@layouts/Layout.astro"
 import Button from "@components/widgets/Button.astro"
-import TabNavigation from "@components/widgets/TabNavigation.astro"
+import InPageNav from "@components/widgets/InPageNav.astro"
 
-const { user } = Astro.locals
+const { user } = Astro.locals as {
+	user: {
+		fullName: string | null
+		email: string | null
+		photoURL: string | null
+	}
+}
 const profileBg = user?.photoURL
 ---
 
@@ -14,7 +20,7 @@ const profileBg = user?.photoURL
 		<div class="wrapper">
 			<div class="profile-container">
 				<div class="profile-details">
-					<TabNavigation
+					<InPageNav
 						routes={["Bookmarks", "Liked Posts", "Commented Posts"]}
 					>
 						<div class="profile-section">
@@ -40,7 +46,7 @@ const profileBg = user?.photoURL
 								<li>Post Commented 3</li>
 							</ul>
 						</div>
-					</TabNavigation>
+					</InPageNav>
 				</div>
 
 				<div class="profile-head">
@@ -110,8 +116,8 @@ const profileBg = user?.photoURL
 			width: 100px;
 			height: 100px;
 			border-radius: 50%;
-			background: linear-gradient(135deg, #ff7a18, #af002d 71%);
 			background: var(--profileBg);
+			background: linear-gradient(135deg, #ff7a18, #af002d 71%);
 			margin: 0 auto;
 		}
 
@@ -161,7 +167,8 @@ const profileBg = user?.photoURL
 		flex: 2;
 		display: flex;
 		flex-direction: column;
-		// justify-content: center;
+		max-width: 100%;
+		overflow-x: hidden;
 		.profile-section {
 			margin-bottom: 2rem;
 

@@ -51,8 +51,19 @@ const { routes, defaultActiveIndex = 0 } = Astro.props
 </script>
 
 <style>
+	.tabs-container {
+		width: 100%;
+	}
 	.tab-buttons {
 		border-bottom: 1px solid var(--border-color);
+
+		white-space: nowrap;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none; /* Firefox */
+	}
+	.tab-buttons::-webkit-scrollbar {
+		display: none;
 	}
 	.tab-button {
 		display: inline-block;

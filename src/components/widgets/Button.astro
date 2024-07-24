@@ -10,7 +10,7 @@ interface Props extends HTMLAttributes<"button"> {
 const { Icon, text, ...props } = Astro.props
 ---
 
-<button aria-label={`${text} button`} {...props}>
+<button aria-label={`${text} button`} {...props} class="no-tap-highlight">
 	<span class="button_text">{text}</span>
 	{Icon ? <Icon size={16} class="button_icon" /> : ""}
 </button>

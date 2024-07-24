@@ -2,7 +2,7 @@
 import "@styles/fonts.scss"
 import "@styles/tags.scss"
 
-import  SpeedInsights  from "@vercel/speed-insights/astro"
+import SpeedInsights from "@vercel/speed-insights/astro"
 
 // components
 import Header from "@components/common/Header.astro"
@@ -184,6 +184,15 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		&.overflow-hidden {
 			overflow: hidden;
 		}
+	}
+	.no-tap-highlight {
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	input,

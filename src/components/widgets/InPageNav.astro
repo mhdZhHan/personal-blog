@@ -12,7 +12,7 @@ const { routes, defaultActiveIndex = 0 } = Astro.props
 		{
 			routes.map((route, index) => (
 				<button
-					class={`tab-button ${index === defaultActiveIndex ? "active" : ""}`}
+					class={`tab-button ${index === defaultActiveIndex ? "active" : ""} no-tap-highlight`}
 					data-index={index}
 				>
 					{route}
@@ -24,31 +24,6 @@ const { routes, defaultActiveIndex = 0 } = Astro.props
 		<slot />
 	</div>
 </div>
-
-<script>
-	const tabButtons: NodeListOf<HTMLButtonElement> =
-		document.querySelectorAll(".tab-button")
-	const tabContents: NodeListOf<Element> =
-		document.querySelectorAll(".tab-content > *")
-
-	function setActiveTab(index: number): void {
-		tabButtons.forEach((button: HTMLButtonElement, i: number) => {
-			button.classList.toggle("active", i === index)
-		})
-
-		tabContents.forEach((content: Element, i: number) => {
-			;(content as HTMLElement).style.display =
-				i === index ? "block" : "none"
-		})
-	}
-
-	tabButtons.forEach((button: HTMLButtonElement, index: number) => {
-		button.addEventListener("click", () => setActiveTab(index))
-	})
-
-	// Initial active tab `0`
-	setActiveTab(0)
-</script>
 
 <style>
 	.tabs-container {
@@ -88,3 +63,28 @@ const { routes, defaultActiveIndex = 0 } = Astro.props
 		display: block;
 	}
 </style>
+
+<script>
+	const tabButtons: NodeListOf<HTMLButtonElement> =
+		document.querySelectorAll(".tab-button")
+	const tabContents: NodeListOf<Element> =
+		document.querySelectorAll(".tab-content > *")
+
+	function setActiveTab(index: number): void {
+		tabButtons.forEach((button: HTMLButtonElement, i: number) => {
+			button.classList.toggle("active", i === index)
+		})
+
+		tabContents.forEach((content: Element, i: number) => {
+			;(content as HTMLElement).style.display =
+				i === index ? "block" : "none"
+		})
+	}
+
+	tabButtons.forEach((button: HTMLButtonElement, index: number) => {
+		button.addEventListener("click", () => setActiveTab(index))
+	})
+
+	// Initial active tab `0`
+	setActiveTab(0)
+</script>

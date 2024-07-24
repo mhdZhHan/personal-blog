@@ -190,6 +190,10 @@ html[data-theme="dark"] {
 		}
 	}
 
+	strong {
+		color: var(--gray);
+	}
+
 	blockquote {
 		position: relative;
 		border-radius: 0.25rem;

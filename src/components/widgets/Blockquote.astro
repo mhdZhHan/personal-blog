@@ -2,7 +2,7 @@
 import { TriangleAlert, Check, Info, Ban, Lightbulb } from "lucide-astro"
 
 interface Props {
-	title: string
+	title?: string
 	type?: "warning" | "info" | "success" | "error"
 }
 
@@ -22,7 +22,7 @@ const IconComponent =
 		<i class="block-quote__icon">
 			<IconComponent size={18} />
 		</i>
-		<div class="block-quote__title">{title}</div>
+		{title ? <div class="block-quote__title">{title}</div> : ""}
 	</div>
 	<div class="block-quote-message">
 		<slot />

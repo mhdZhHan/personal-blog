@@ -9,6 +9,7 @@ export function getLanguageIcon(language?: string): string {
 		css: "/lang/cdd.svg",
 		cpp: "/lang/cpp.svg",
 		c: "/lang/c.svg",
+		astro: "/lang/astro.svg",
 	}
 
 	if (!language) {

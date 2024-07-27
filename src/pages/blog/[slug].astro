@@ -7,8 +7,7 @@ import {
 	getCollection,
 	type CollectionEntry,
 } from "astro:content"
-import { Image } from "astro:assets"
-// import { db, eq, Like } from "astro:db"
+import { Picture } from "astro:assets"
 
 import { Eye, Calendar, Clock4, User } from "lucide-astro"
 
@@ -17,7 +16,6 @@ import Layout from "@layouts/Layout.astro"
 
 // components
 import TOC from "@components/blog/TOC.astro"
-// import LikeBlog from "@components/blog/LikeBlog.astro"
 import CodeBlock from "@components/blog/CodeBlock.astro"
 import PostComments from "@components/blog/PostComments.astro"
 import BlogFooter from "@components/blog/BlogFooter.astro"
@@ -58,9 +56,6 @@ const {
 } = await post!.render()
 
 const publishDate = simplifyDate(pubDate).simplifiedDate
-
-// TODO Like data of the current post
-// const likes = await db.select().from(Like).where(eq(Like.post, slug))
 ---
 
 <Layout
@@ -97,8 +92,6 @@ const publishDate = simplifyDate(pubDate).simplifiedDate
 						<span data-post-views={slug}>000000</span>
 					</div>
 				</div>
-
-				<!-- {likes && <LikeBlog slug={slug} likes={likes[0]} />} -->
 			</div>
 
 			<TOC pageHeadings={headings} />
@@ -106,8 +99,9 @@ const publishDate = simplifyDate(pubDate).simplifiedDate
 			<div class="post__body">
 				<div class="post__banner">
 					<!-- <img src={image} alt={title} loading="lazy" /> -->
-					<Image
+					<Picture
 						src={image as string}
+						formats={["avif", "webp"]}
 						alt={title}
 						width={100}
 						height={100}

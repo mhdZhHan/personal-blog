@@ -20,72 +20,59 @@ interface Props {
 	pageUrl?: string
 }
 
-const { title, description, ogImageUrl, pageUrl } = Astro.props
+const {
+	title = "Mohammed's blog",
+	description = `Welcome to Mohammed's blog! Join me on a journey through the world of programming and technology. Discover coding tips, tutorials, and insights for developers of all levels. Stay updated with the latest trends and explore exciting projects. Let's embark on this tech adventure together! 🚀`,
+	ogImageUrl,
+	pageUrl = Astro.url.href,
+} = Astro.props
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, "")
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+	.toString()
+	.replace(/\/$/, "")
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<!-- Meta Tags -->
+		<!-- Primary Meta Tags -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<meta
-			name="description"
-			content={description
-				? description
-				: `Welcome to Mohammed's blog! Join me on a journey through the world of programming 
-				and technology. Discover coding tips, tutorials, and insights for developers of 
-				all levels. Stay updated with the latest trends and explore exciting projects. 
-				Let's embark on this tech adventure together! 🚀`}
-		/>
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content="Mohammed" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={siteUrl} />
+		<meta property="og:url" content={pageUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:alt" content={title} />
+		<meta property="og:image:width" content="1280" />
+		<meta property="og:image:height" content="675" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={pageUrl} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+
+		<!-- Keywords -->
 		<meta
 			name="keywords"
 			content="mohammed's blog, mohammedsh, mohammed shajahan, hello world, mhdzhhan, programming, linux, kde, tech, tips, tutorials, development, web development, app development, ai, ml"
 		/>
-		<meta name="author" content="Mohammed Shajahan" />
-		<meta name="generator" content={Astro.generator} />
 
-		<!-- Open Graph / Facebook, Twitter -->
-		<meta property="og:type" content="website" />
-		<meta name="og:site_name" content={Astro.site} />
-		<meta name="og:image:width" content="1280" />
-		<meta name="og:image:height" content="675" />
-		{
-			title && <meta property="og:title" content={title} /> && (
-					<meta name="twitter:title" content={title} />
-				) && <meta name="og:image:alt" content={title} />
-		}
-
-		{
-			description && (
-					<meta property="og:description" content={description} />
-				) && <meta name="twitter:description" content={description} />
-		}
-
-		{pageUrl && <meta property="og:url" content={pageUrl} />}
-
-		{
-			ogImageUrl && <meta name="twitter:card" content={ogImageUrl} /> && (
-					<meta name="twitter:image" content={ogImageUrl} />
-				) && <meta property="og:image" content={ogImageUrl} />
-		}
-
-		<!-- Sitemap -->
+		<!-- Links -->
+		<link rel="canonical" href={canonicalURL} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<!-- Canonical Link -->
-		<link
-			href={String(new URL(Astro.url.pathname, Astro.site)).replace(
-				/\/+$/,
-				""
-			)}
-			rel="canonical"
-		/>
-		<!-- Alternate Language -->
 		<link rel="alternate" hreflang="en" href="https://www.mohammedsh.xyz" />
-		<!-- Favicon -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-		<title>{title ? title : `Mohammed's blog`}</title>
 
 		<ViewTransitions />
 		<SpeedInsights />
@@ -137,7 +124,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 
 	initThemeManager()
 
-	document.addEventListener('astro:after-swap', initThemeManager)
+	document.addEventListener("astro:after-swap", initThemeManager)
 </script>
 
 <style is:global lang="scss">

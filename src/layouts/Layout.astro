@@ -3,6 +3,7 @@ import "@styles/fonts.scss"
 import "@styles/tags.scss"
 
 import SpeedInsights from "@vercel/speed-insights/astro"
+import { ViewTransitions } from "astro:transitions"
 
 // components
 import Header from "@components/common/Header.astro"
@@ -86,6 +87,7 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 
 		<title>{title ? title : `Mohammed's blog`}</title>
 
+		<ViewTransitions />
 		<SpeedInsights />
 	</head>
 
@@ -104,40 +106,38 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 </html>
 
 <script is:inline>
-	const storageKey = "theme-preference"
+	const STORAGE_KEY = "theme-preference"
+	const DARK_THEME = "dark"
+	const LIGHT_THEME = "cool"
 
-	const darkModeToggle = document.querySelector("#toggle_theme")
-
-	const getColorPreference = () => {
-		let preference = localStorage.getItem(storageKey)
-
-		if (!preference) {
-			preference = window.matchMedia("(prefers-color-scheme: dark)")
-				.matches
-				? "dark"
-				: "cool"
-		}
-
-		return preference
+	function getTheme() {
+		return (
+			localStorage.getItem(STORAGE_KEY) ||
+			(window.matchMedia("(prefers-color-scheme: dark)").matches
+				? DARK_THEME
+				: LIGHT_THEME)
+		)
 	}
 
-	const setPreference = (themeName) => {
-		localStorage.setItem(storageKey, themeName)
-
-		document.firstElementChild.setAttribute("data-theme", themeName)
+	function setTheme(theme) {
+		localStorage.setItem(STORAGE_KEY, theme)
+		document.documentElement.dataset.theme = theme
 	}
 
-	const togglePreference = () => {
-		setPreference(getColorPreference() === "dark" ? "cool" : "dark")
+	function toggleTheme() {
+		setTheme(getTheme() === DARK_THEME ? LIGHT_THEME : DARK_THEME)
 	}
 
-	;(() => {
-		const theme = getColorPreference()
+	function initThemeManager() {
+		setTheme(getTheme())
+		document
+			.getElementById("toggle_theme")
+			?.addEventListener("click", toggleTheme)
+	}
 
-		setPreference(theme)
-	})()
+	initThemeManager()
 
-	darkModeToggle.addEventListener("click", togglePreference)
+	document.addEventListener('astro:after-swap', initThemeManager)
 </script>
 
 <style is:global lang="scss">

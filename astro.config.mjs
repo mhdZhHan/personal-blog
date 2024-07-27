@@ -46,10 +46,6 @@ export default defineConfig({
 		devImageService: "sharp",
 	}),
 
-	// image: {
-	// 	service: squooshImageService(),
-	// },
-
 	markdown: {
 		syntaxHighlight: false,
 		rehypePlugins: [

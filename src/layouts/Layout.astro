@@ -83,8 +83,6 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 		<link rel="alternate" hreflang="en" href="https://www.mohammedsh.xyz" />
 		<!-- Favicon -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<!-- javascript's -->
-		<script src="@scripts/theme.js"></script>
 
 		<title>{title ? title : `Mohammed's blog`}</title>
 
@@ -105,13 +103,48 @@ const { title, description, ogImageUrl, pageUrl } = Astro.props
 	</body>
 </html>
 
+<script is:inline>
+	const storageKey = "theme-preference"
+
+	const darkModeToggle = document.querySelector("#toggle_theme")
+
+	const getColorPreference = () => {
+		let preference = localStorage.getItem(storageKey)
+
+		if (!preference) {
+			preference = window.matchMedia("(prefers-color-scheme: dark)")
+				.matches
+				? "dark"
+				: "cool"
+		}
+
+		return preference
+	}
+
+	const setPreference = (themeName) => {
+		localStorage.setItem(storageKey, themeName)
+
+		document.firstElementChild.setAttribute("data-theme", themeName)
+	}
+
+	const togglePreference = () => {
+		setPreference(getColorPreference() === "dark" ? "cool" : "dark")
+	}
+
+	;(() => {
+		const theme = getColorPreference()
+
+		setPreference(theme)
+	})()
+
+	darkModeToggle.addEventListener("click", togglePreference)
+</script>
+
 <style is:global lang="scss">
 	@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
 
 	:root {
 		--primary: #df2250;
-		--secondary: rgb(23 23 23 /1);
-		--tertiary: rgb(0 0 0 / 1);
 
 		--gradient-to: #f42547;
 		--gradient-stops: #b51c61, var(--gradient-to, rgb(14 165 233 / 0));

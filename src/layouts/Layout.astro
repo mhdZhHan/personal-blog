@@ -12,25 +12,37 @@ import Footer from "@components/common/Footer.astro"
 import ScrollTop from "@components/common/ScrollTop.astro"
 import ArtPlum from "@components/common/ArtPlum.astro"
 import ChangeDir from "@components/common/ChangeDir.astro"
+// util
+import SchemaOrg from "@components/utils/SchemaOrg.astro"
 
 interface Props {
 	title?: string
 	description?: string
-	ogImageUrl?: string
+	ogImageUrl?: string | null
 	pageUrl?: string
+	type?: "website" | "blog"
+	publishDate?: string
+	modifiedDate?: string
 }
 
 const {
 	title = "Mohammed's blog",
 	description = `Welcome to Mohammed's blog! Join me on a journey through the world of programming and technology. Discover coding tips, tutorials, and insights for developers of all levels. Stay updated with the latest trends and explore exciting projects. Let's embark on this tech adventure together! 🚀`,
-	ogImageUrl,
+	ogImageUrl = null,
 	pageUrl = Astro.url.href,
+
+	type = "website",
+	publishDate,
+	modifiedDate,
 } = Astro.props
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, "")
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 	.toString()
 	.replace(/\/$/, "")
+
+const fallbackOgImage = `/images/avatar.svg`
+const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`
 ---
 
 <!doctype html>
@@ -45,12 +57,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Open Graph / Facebook -->
+		<meta
+			property="og:type"
+			content={type === "blog" ? "article" : "website"}
+		/>
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content={siteUrl} />
 		<meta property="og:url" content={pageUrl} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image" content={finalOgImageUrl} />
 		<meta property="og:image:alt" content={title} />
 		<meta property="og:image:width" content="1280" />
 		<meta property="og:image:height" content="675" />
@@ -60,7 +76,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 		<meta name="twitter:url" content={pageUrl} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={ogImageUrl} />
+		<meta name="twitter:image" content={finalOgImageUrl} />
 
 		<!-- Keywords -->
 		<meta
@@ -73,6 +89,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<link rel="alternate" hreflang="en" href="https://www.mohammedsh.xyz" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<!-- JSON-LD Schema -->
+		<SchemaOrg
+			type={type}
+			title={title}
+			description={description}
+			pageUrl={pageUrl}
+			ogImageUrl={finalOgImageUrl}
+			publishDate={publishDate}
+			modifiedDate={modifiedDate}
+		/>
 
 		<ViewTransitions />
 		<SpeedInsights />

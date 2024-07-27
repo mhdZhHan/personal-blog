@@ -57,6 +57,8 @@ const {
 	headings,
 } = await post!.render()
 
+const publishDate = simplifyDate(pubDate).simplifiedDate
+
 // TODO Like data of the current post
 // const likes = await db.select().from(Like).where(eq(Like.post, slug))
 ---
@@ -65,6 +67,8 @@ const {
 	title={`Mohammed's blog | ${title}`}
 	description={description}
 	ogImageUrl={image}
+	publishDate={publishDate}
+	modifiedDate={publishDate}
 >
 	<section id="blog-post" class="post">
 		<div class="wrapper">
@@ -78,7 +82,7 @@ const {
 
 					<div class="post__date">
 						<Calendar class="shrink-0" size={14} aria-hidden />
-						<span>{simplifyDate(pubDate).simplifiedDate}</span>
+						<span>{publishDate}</span>
 					</div>
 
 					<div class="post__read">

@@ -39,23 +39,25 @@ import { ArrowUp } from "lucide-astro"
 </style>
 
 <script is:inline>
-	const scrollTopBtn = document.getElementById("scrollTop")
+	document.addEventListener("astro:page-load", () => {
+		const scrollTopBtn = document.getElementById("scrollTop")
 
-	window.addEventListener("scroll", () => {
-		let scrollTop =
-			document.documentElement.scrollTop || document.body.scrollTop
+		window.addEventListener("scroll", () => {
+			let scrollTop =
+				document.documentElement.scrollTop || document.body.scrollTop
 
-		if (scrollTop > 300) {
-			scrollTopBtn.classList.add("show")
-		} else {
-			scrollTopBtn.classList.remove("show")
-		}
-	})
+			if (scrollTop > 300) {
+				scrollTopBtn.classList.add("show")
+			} else {
+				scrollTopBtn.classList.remove("show")
+			}
+		})
 
-	scrollTopBtn.addEventListener("click", () => {
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
+		scrollTopBtn.addEventListener("click", () => {
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			})
 		})
 	})
 </script>

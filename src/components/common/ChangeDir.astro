@@ -58,10 +58,16 @@ import { ChevronRight } from "lucide-astro"
 	}
 </style>
 
-<script is:inline>
-	const changeDir = document.getElementById("changeDir")
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const changeDir = document.getElementById(
+			"changeDir"
+		) as HTMLButtonElement
 
-	changeDir.addEventListener("click", () => {
-		window.history.back()
+		if (changeDir) {
+			changeDir.addEventListener("click", () => {
+				window.history.back()
+			})
+		}
 	})
 </script>

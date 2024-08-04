@@ -1,0 +1,148 @@
+---
+title: Setting Up A Nodejs Express Project With Typescript
+draft: false
+pubDate: 2024-08-04
+description: "A robust Express.js starter template with TypeScript and MongoDB integration. Jumpstart your Node.js projects with a pre-configured setup, best practices, and essential features for building scalable web applications."
+author: "Mohammed"
+image: "/images/blogs/"
+tags: ["typescript", "node js", "express"]
+---
+
+In this blog post, I'll guide you through setting up a simple Node.js Express project using TypeScript. TypeScript adds type safety and modern JavaScript features to your Node.js applications, making your code more robust and maintainable.
+
+## Project Structure
+
+Here's the structure of the project:
+
+```go
+express-typescript-project/
+├── src/
+│   └── index.ts
+├── dist/
+├── node_modules/
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+└── nodemon.json
+```
+
+## 1. Initialize Your Project
+
+First, create a new directory for your project and navigate into it:
+
+```bash
+mkdir express-typescript-project
+cd express-typescript-project
+npm init -y
+```
+
+This creates a new directory, moves into it, and initializes a new Node.js project with default settings.
+
+## 2. Installing Dependencies
+
+Install Express and other necessary packages:
+
+```bash
+npm install express
+npm install --save-dev typescript @types/express @types/node ts-node nodemon
+```
+
+**Here's what each package does:**
+
+- `express`: The Express web framework
+- `typescript`: The TypeScript compiler
+- `@types/express` and `@types/node`: Type definitions for Express and Node.js
+- `ts-node`: Allows running TypeScript files directly
+- `nodemon`: Automatically restarts the server when files change
+
+## 3. Configure TypeScript
+
+Create a `tsconfig.json` file in your project root:
+
+```json
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}
+```
+This configuration tells TypeScript how to compile your code.
+
+## 4. Nodemon Configuration
+
+Create a `nodemon.json` file in your project root:
+
+```json
+{
+  "watch": ["src"],
+  "ext": "ts",
+  "exec": "ts-node src/index.ts"
+}
+```
+This configuration tells Nodemon to watch the src directory for changes in TypeScript files and restart the server using ts-node.
+
+## 5. Update package.json
+
+Update the "scripts" section in your `package.json`:
+
+```json
+"scripts": {
+  "start": "node dist/index.js",
+  "dev": "nodemon src/index.ts",
+  "build": "tsc"
+}
+```
+These scripts allow you to:
+
+`npm run dev`: Start the development server with hot reloading
+`npm run build`: Compile TypeScript to JavaScript
+`npm start`: Run the compiled JavaScript in production
+
+## 6. Add a `.gitignore` File
+
+To ignore unnecessary files, create a `.gitignore` file:
+
+```gitignore
+node_modules
+dist
+```
+
+## 7. Create Your Express App
+
+Create a file at `src/index.ts`:
+
+```ts title="src/indexedDB.ts"
+import express, { Express, Request, Response } from 'express';
+
+const app: Express = express();
+const port = 3000;
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello, TypeScript Express!');
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+This sets up a basic Express server with TypeScript types.
+
+## 8. Running Your Project
+
+- For development: `npm run dev`
+- This will start Nodemon, which will watch for changes and automatically restart your server.
+- For production: `npm run build` followed by `npm start`
+- This compiles your TypeScript code and then runs the compiled JavaScript.
+
+> For a complete starter template, you can check out my 📁 [`express-typescript-starter`](https://github.com/mhdZhHan/express-typescript-starter) repository on GitHub. It includes the basic setup and structure for building a scalable and maintainable Node.js application with Express, TypeScript, and MongoDB.
+
+## Conclusion
+
+You now have a solid foundation for building Express applications with TypeScript. This setup provides type safety, improved developer experience, and better code organization. The addition of Nodemon ensures a smooth development process with automatic restarting on file changes.
+
+Happy coding! 🚀

@@ -1,12 +1,24 @@
 import { simplifyDate } from "@lib/index"
 
+interface Post {
+	slug: string
+	image?: string
+	title: string
+	description: string
+	pubDate: string
+	readingTime: number
+	tags: string[]
+}
+
 document.addEventListener("astro:page-load", () => {
-	const executeSearch = async (search, activeTags) => {
+	const executeSearch = async (
+		search: string,
+		activeTags: string[]
+	): Promise<Post[]> => {
 		const searchQuery = search.toLowerCase().trim()
 
 		const response = await fetch("/api/blog/search.json")
-
-		const searchData = await response.json()
+		const searchData: Post[] = await response.json()
 
 		const filteredPosts = searchData.filter((post) => {
 			const isVisible =
@@ -26,33 +38,40 @@ document.addEventListener("astro:page-load", () => {
 		return filteredPosts
 	}
 
-	const searchFilter = document.querySelector("[data-post-filter-search]")
-	const tagsFilter = document.querySelector("[data-post-filter-tags]")
-	const staticPosts = document.querySelector("[data-static-posts]")
-	const searchedPosts = document.querySelector("[data-searched-posts]")
-	// const noPostsFound = document.querySelector("[data-no-posts-found]")
+	const searchFilter = document.querySelector(
+		"[data-post-filter-search]"
+	) as HTMLInputElement
+	const tagsFilter = document.querySelector(
+		"[data-post-filter-tags]"
+	) as HTMLElement
+	const staticPosts = document.querySelector(
+		"[data-static-posts]"
+	) as HTMLElement
+	const searchedPosts = document.querySelector(
+		"[data-searched-posts]"
+	) as HTMLElement
 
-	const activeTags = []
+	const activeTags: string[] = []
 
 	searchFilter.oninput = () => requestSearch()
 
 	tagsFilter.querySelectorAll("input").forEach((tag) => {
-		tag.onchange = () => {
-			if (tag.checked) {
-				activeTags.push(tag.value)
-			} else {
-				const index = activeTags.indexOf(tag.value)
-
-				if (index !== -1) {
-					activeTags.splice(index, 1)
+		if (tag instanceof HTMLInputElement) {
+			tag.onchange = () => {
+				if (tag.checked) {
+					activeTags.push(tag.value)
+				} else {
+					const index = activeTags.indexOf(tag.value)
+					if (index !== -1) {
+						activeTags.splice(index, 1)
+					}
 				}
+				requestSearch()
 			}
-
-			requestSearch()
 		}
 	})
 
-	async function requestSearch() {
+	async function requestSearch(): Promise<void> {
 		const payload = await executeSearch(
 			searchFilter.value,
 			Array.from(activeTags)
@@ -63,11 +82,9 @@ document.addEventListener("astro:page-load", () => {
 		if (payload.length) {
 			staticPosts.classList.add("hidden")
 			searchedPosts.classList.remove("hidden")
-			// noPostsFound.classList.add("hidden")
 		} else {
 			staticPosts.classList.remove("hidden")
 			searchedPosts.classList.add("hidden")
-			// noPostsFound.classList.remove("hidden")
 		}
 
 		payload.forEach((post) => {
@@ -77,13 +94,13 @@ document.addEventListener("astro:page-load", () => {
         <li class="post-card">
             <a href="/blog/${post.slug}" aria-label="${title}. ${description}">
                 ${
-					image &&
-					image !== "" &&
-					`
+					image && image !== ""
+						? `
                     <div class="post-card__thumbnail-container">
                         <img src="${image}" alt="${title}" />
                     </div>
                 `
+						: ""
 				}
 
                 <div class="post-card__body">

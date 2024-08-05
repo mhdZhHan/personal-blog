@@ -2,42 +2,15 @@
 import Layout from "@layouts/Layout.astro"
 import DemosCard from "@components/demos/DemosCard.astro"
 
-const demoData = [
-	{
-		title: "Hello, world!",
-		description:
-			"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio?",
-		date: "jul 5, 2024",
-	},
-	{
-		title: "Hello, world!",
-		description:
-			"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio?",
-		date: "jul 5, 2024",
-	},
-	{
-		title: "Hello, world!",
-		description:
-			"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio?",
-		date: "jul 5, 2024",
-	},
-	{
-		title: "Hello, world!",
-		description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit",
-		date: "jul 5, 2024",
-	},
-	{
-		title: "Hello, world!",
-		description:
-			"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio?",
-		date: "jul 5, 2024",
-	},
-]
+import { getCollection } from "astro:content"
+
+const demos = await getCollection("demos")
+demos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
 
 <Layout
-	title="Mohammed's Blog | Demos"
-	description="Mohammed's Personal Lab Explore Interactive Demos"
+	title="Mohammed's Blog | Project Demos"
+	description="Explore demos of my latest projects and experiments."
 >
 	<section id="demos">
 		<div class="wrapper">
@@ -55,15 +28,7 @@ const demoData = [
 
 			<div class="demos-container">
 				<ul class="demos__demos-list">
-					{
-						demoData.map((item) => (
-							<DemosCard
-								title={item.title}
-								description={item.description}
-								date={item.date}
-							/>
-						))
-					}
+					{demos.map((demo) => <DemosCard demo={demo} />)}
 				</ul>
 			</div>
 		</div>

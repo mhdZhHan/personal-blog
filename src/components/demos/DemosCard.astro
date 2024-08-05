@@ -1,21 +1,28 @@
 ---
 import { FolderGit2 } from "lucide-astro"
 
-const { title, description, date } = Astro.props
+// utils
+import { simplifyDate } from "@lib/index"
+
+const { demo } = Astro.props
+const { title, description, image, pubDate, tags, category } = demo.data
 ---
 
-<!-- aria-label="Demo card" -->
 <li class="demo-card">
 	<div class="meta">
 		<FolderGit2 size={32} />
-		<span class="tag-label">App</span>
+
+		<span class="category-label">{category}</span>
+
 		<small class="pubDate">
-			<time datetime="2024-08-27T00:00:00.000Z">{date}</time>
+			<time datetime={pubDate} aria-label={pubDate}
+				>{simplifyDate(pubDate).simplifiedDate}</time
+			>
 		</small>
 	</div>
 
 	<h3 class="title">
-		<a href="#">{title}</a>
+		<a href={`/🧪/${demo.slug}`} aria-label={title}>{title}</a>
 	</h3>
 
 	<p>
@@ -48,7 +55,7 @@ const { title, description, date } = Astro.props
 			align-items: center;
 		}
 
-		.tag-label {
+		.category-label {
 			border: 2px solid var(--border-color);
 			font-size: 15px;
 			font-size: 14;

@@ -14,12 +14,12 @@ const { user } = Astro.locals
 			<ul class="nav">
 				<>
 					<li class="authRoute">
-						<a href="/auth/login" aria-label="Login route">
+						<a href="/auth/login" aria-label="Login route" data-astro-reload>
 							Login
 						</a>
 					</li>
 					<li class="authRoute">
-						<a href="/auth/signup" aria-label="Sign up route">
+						<a href="/auth/signup" aria-label="Sign up route" data-astro-reload>
 							Signup
 						</a>
 					</li>
@@ -27,7 +27,7 @@ const { user } = Astro.locals
 
 				<>
 					<li class="userRoute hidden">
-						<a href="/auth/user" aria-label="User profile">
+						<a href="/auth/user" aria-label="User profile" data-astro-reload>
 							Profile
 						</a>
 					</li>

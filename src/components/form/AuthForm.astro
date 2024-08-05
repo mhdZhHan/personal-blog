@@ -10,7 +10,7 @@ const { type } = Astro.props
 ---
 
 <div class="auth-container">
-	<form id="authForm">
+	<form id="authForm" data-astro-reload>
 		{
 			type === "Signup" ? (
 				<InputBox

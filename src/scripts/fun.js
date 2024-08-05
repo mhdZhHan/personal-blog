@@ -1,4 +1,4 @@
-document.addEventListener("astro:page-load", () => {
+window.addEventListener("DOMContentLoaded", ()=> {
      console.log(`%c  
 
           888b     d888          888                                                         888 d8b              888888b.   888                   

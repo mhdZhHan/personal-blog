@@ -1,6 +1,38 @@
 ---
 import Layout from "@layouts/Layout.astro"
 import DemosCard from "@components/demos/DemosCard.astro"
+
+const demoData = [
+	{
+		title: "Hello, world!",
+		description:
+			"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio?",
+		date: "jul 5, 2024",
+	},
+	{
+		title: "Hello, world!",
+		description:
+			"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio?",
+		date: "jul 5, 2024",
+	},
+	{
+		title: "Hello, world!",
+		description:
+			"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio?",
+		date: "jul 5, 2024",
+	},
+	{
+		title: "Hello, world!",
+		description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit",
+		date: "jul 5, 2024",
+	},
+	{
+		title: "Hello, world!",
+		description:
+			"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta fuga, iusto libero excepturi neque dolorum et temporibus aspernatur quos odio?",
+		date: "jul 5, 2024",
+	},
+]
 ---
 
 <Layout
@@ -23,7 +55,15 @@ import DemosCard from "@components/demos/DemosCard.astro"
 
 			<div class="demos-container">
 				<ul class="demos__demos-list">
-					<!-- <DemosCard /> -->
+					{
+						demoData.map((item) => (
+							<DemosCard
+								title={item.title}
+								description={item.description}
+								date={item.date}
+							/>
+						))
+					}
 				</ul>
 			</div>
 		</div>
@@ -50,7 +90,16 @@ import DemosCard from "@components/demos/DemosCard.astro"
 	.demos-container {
 		margin-top: 2rem;
 		.demos__demos-list {
+			columns: 3;
+			gap: 1rem;
 
+			@media all and (max-width: 768px) {
+				columns: 2;
+			}
+
+			@media all and (max-width: 480px) {
+				columns: 1;
+			}
 		}
 	}
 </style>

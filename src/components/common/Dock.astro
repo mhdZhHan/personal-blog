@@ -138,7 +138,7 @@ const dockItems: (DockItem | { separator: true })[] = [
 </style>
 
 <script>
-	document.addEventListener("astro:page-load", () => {
+	window.addEventListener("DOMContentLoaded", () => {
 		// Select the dock and its items
 		const dock = document.querySelector(".dock") as HTMLElement
 		const dockItems = document.querySelectorAll(

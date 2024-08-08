@@ -1,6 +1,6 @@
 ---
-import LabLayout from "@layouts/LabLayout.astro"
-import DemosCard from "@components/lab/DemosCard.astro"
+import Layout from "@layouts/Layout.astro"
+import DemosCard from "@components/demos/DemosCard.astro"
 
 import { getCollection } from "astro:content"
 
@@ -8,18 +8,18 @@ const demos = await getCollection("demos")
 demos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
 
-<LabLayout
+<Layout
 	title="Mohammed's Blog | Project Demos"
 	description="Explore demos of my latest projects and experiments."
 >
-	<!-- <section id="demos">
+	<section id="demos">
 		<div class="wrapper">
 			<div class="demos-head">
 				<h1 class="demos__title">🧪 Personal Laboratory</h1>
-				<p class="demos__sub-title">
+				<!-- <p class="demos__sub-title">
 					🔬 Where code molecules collide, sparking creativity and
 					innovation.
-				</p>
+				</p> -->
 				<p class="demos__sub-title">
 					Explore this space, where my coding experiments come to
 					life.
@@ -32,8 +32,8 @@ demos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 				</ul>
 			</div>
 		</div>
-	</section> -->
-</LabLayout>
+	</section>
+</Layout>
 
 <style lang="scss">
 	.demos-head {

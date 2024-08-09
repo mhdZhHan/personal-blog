@@ -1,0 +1,69 @@
+---
+import ControlsLeft from "./ControlsLeft.astro"
+import ControlsRight from "./ControlsRight.astro"
+---
+
+<div class="controls">
+	<div class="progress-area">
+		<div class="progress-bar">
+			<span></span>
+		</div>
+	</div>
+
+	<div class="controls-list">
+		<ControlsLeft />
+		<ControlsRight />
+	</div>
+</div>
+
+<style lang="scss">
+	.controls {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 3;
+		height: 50px;
+		width: 100%;
+
+		background: rgb(0 0 0 / 71%);
+		box-shadow: 0 0 40px 10px rgba(0 0 0 / 25%);
+		transform: translateY(0);
+		.progress-area {
+			width: 100%;
+			height: 5px;
+			margin: auto;
+
+			background: #fff;
+			cursor: pointer;
+			.progress-bar {
+				position: relative;
+				width: 50%;
+				background-color: var(--primary);
+				height: inherit;
+				border-radius: inherit;
+				cursor: pointer;
+				&::before {
+					content: "";
+					position: absolute;
+					right: -5px;
+					top: 50%;
+					transform: translateY(-50%);
+
+					width: 14px;
+					height: 14px;
+					border-radius: 50%;
+					background-color: var(--primary);
+				}
+			}
+		}
+
+		.controls-list {
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: space-between;
+			width: 97%;
+			height: 46px;
+			margin: 0 auto;
+		}
+	}
+</style>

@@ -1,0 +1,159 @@
+---
+import { FastForward, Pause, Play, Rewind, Volume2 } from "lucide-astro"
+---
+
+<div class="controls-left">
+	<span class="icon">
+		<Rewind size={26} class="fast-rewind" />
+	</span>
+	<span class="icon">
+		<Play size={26} class="play" />
+	</span>
+	<span class="icon">
+		<FastForward size={26} class="fast-forward" />
+	</span>
+	<span class="icon">
+		<Volume2 size={26} class="volume" />
+		<input type="range" min="0" max="100" id="volumeRange" />
+	</span>
+
+	<div class="timer">
+		<span class="current">0:00</span> / <span class="duration">0:00</span>
+	</div>
+</div>
+
+<style lang="scss">
+	svg,
+	.icon {
+		user-select: none;
+		-webkit-user-select: none;
+		cursor: pointer;
+		color: #fff;
+	}
+
+	.controls-left {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.icon {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+
+			margin-left: 8px;
+			margin-right: 5px;
+
+			@media (max-width: 400px) {
+				margin-left: 5px;
+				margin-right: 5px;
+				font-size: 24px;
+			}
+
+			.fast-rewind:active {
+				transition: 0.2s;
+				transform: scale(0.5);
+				color: #333;
+			}
+			.fast-forward:active {
+				transition: 0.2s;
+				transform: scale(0.5);
+				color: #333;
+			}
+
+			#volumeRange {
+				-webkit-appearance: none;
+				appearance: none;
+				outline: none;
+				border: none;
+
+				height: 3px;
+				width: 0;
+				background: #fff;
+				color: #fff;
+				transition: 0.4s;
+
+				@media (max-width: 400px) {
+					display: none;
+				}
+				&::-webkit-slider-thumb {
+					-webkit-appearance: none;
+					appearance: none;
+					border: none;
+					outline: none;
+
+					width: 12px;
+					height: 12px;
+					border-radius: 50%;
+					background: #fff;
+					color: #fff;
+
+					transition: 0.3s;
+					opacity: 0;
+                    cursor: pointer;
+				}
+				&::-moz-range-thumb {
+					-moz-appearance: none;
+					appearance: none;
+					border: none;
+					outline: none;
+					width: 12px;
+					height: 12px;
+					border-radius: 50%;
+					background: #fff;
+					color: #fff;
+					transition: 0.3s;
+					opacity: 0;
+                    cursor: pointer;
+				}
+				&::-moz-thumb {
+					-moz-appearance: none;
+					appearance: none;
+					border: none;
+					outline: none;
+					width: 12px;
+					height: 12px;
+					border-radius: 50%;
+					background: #fff;
+					color: #fff;
+					transition: 0.3s;
+					opacity: 0;
+                    cursor: pointer;
+				}
+			}
+		}
+
+		.icon:hover #volumeRange {
+			display: inline-block;
+			width: 60px;
+		}
+
+		.icon:hover #volumeRange::-webkit-slider-thumb {
+			opacity: 1;
+			pointer-events: auto;
+			transition: 0.5s;
+		}
+
+		.icon:hover #volumeRange::-moz-range-thumb {
+			opacity: 1;
+			pointer-events: auto;
+			transition: 0.5s;
+		}
+
+		.icon:hover #volumeRange::-ms-thumb {
+			opacity: 1;
+			pointer-events: auto;
+			transition: 0.5s;
+		}
+
+		.timer {
+			display: inline-block;
+			margin-left: 5px;
+			font-size: 14px;
+			text-align: center;
+			white-space: nowrap;
+			color: #fff;
+		}
+	}
+</style>

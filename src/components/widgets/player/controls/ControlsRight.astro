@@ -1,0 +1,112 @@
+---
+import {
+	Maximize2,
+	Pause,
+	PictureInPicture2,
+	Play,
+	Settings,
+} from "lucide-astro"
+---
+
+<div class="controls-right">
+	<span class="icon auto-play">
+		<div class="icon-wrapper">
+			<Pause size={14} class="pause-icon" />
+			<Play size={14} class="play-icon" />
+		</div>
+	</span>
+
+	<span class="icon">
+		<Settings class="settings-btn" size={24} />
+	</span>
+
+	<span class="icon picture-in-picture">
+		<PictureInPicture2 size={26} />
+	</span>
+
+	<span class="icon">
+		<Maximize2 class="full-screen" size={24} />
+	</span>
+</div>
+
+<style lang="scss">
+	svg,
+	.icon {
+		user-select: none;
+		-webkit-user-select: none;
+		cursor: pointer;
+		color: #fff;
+	}
+
+	.controls-right {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.icon {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+
+			margin-left: 8px;
+			margin-right: 5px;
+
+			@media (max-width: 400px) {
+				margin-left: 5px;
+				margin-right: 5px;
+				font-size: 24px;
+			}
+
+			&.picture-in-picture {
+				@media (max-width: 400px) {
+					display: none;
+				}
+			}
+		}
+
+		// auto-play toggle button
+		.auto-play {
+			width: 30px;
+			height: 10px;
+			border-radius: 20px;
+			position: relative;
+			margin-right: 8px !important;
+			background: #b6b6b6;
+			.icon-wrapper {
+				position: absolute;
+				left: -5px;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 17px;
+				height: 17px;
+				background: #727272;
+				border-radius: 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				cursor: pointer;
+				// js is better
+				.play-icon {
+					display: none;
+				}
+				&.active {
+					left: 15px;
+					.play-icon {
+						display: inline-block;
+					}
+					.pause-icon {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.settings-btn {
+			transition: 0.3s;
+			& .active {
+				transform: rotate(45deg);
+			}
+		}
+	}
+</style>

@@ -1,11 +1,11 @@
 ---
-import TestVideo from "../../assets/test.mp4"
+import TestVideo from "../../../assets/test.mp4"
 import Controls from "./controls/Controls.astro"
 import Settings from "./settings/Settings.astro"
 ---
 
 <div class="container">
-	<div id="videoPlayer">
+	<div id="videoPlayer" transition:name="media-player" transition:persist>
 		<video src={TestVideo} id="mainVideo"></video>
 
 		<div class="progressAreaTime"></div>

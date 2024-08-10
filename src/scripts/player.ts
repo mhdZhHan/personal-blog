@@ -68,12 +68,127 @@ document.addEventListener("astro:page-load", () => {
 	// ======== SETTINGS ========
 	const settings = videoPlayer.querySelector("#settings") as HTMLDivElement
 	const playback = videoPlayer.querySelector(".playback") as HTMLDivElement
-	// ============================================
 
-	function playVideo() {
-		playIcon.classList.toggle("hidden")
-		pauseIcon.classList.toggle("hidden")
+	/**
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 */
+
+	// ANCHOR ========== CONSTANTS =======================================
+
+	const SKIP_TIME = 10
+	const TOTAL_VIDEO_DURATION = mainVideo.duration
+
+	// ANCHOR ========== UTIL FUNCTIONS =======================================
+
+	// Utility function to format the time in mm:ss
+	function formatTime(seconds) {
+		const minutes = Math.floor(seconds / 60)
+		const remainingSeconds = Math.floor(seconds % 60)
+		return `${minutes}:${
+			remainingSeconds < 10 ? "0" : ""
+		}${remainingSeconds}`
 	}
 
-	playPauseButton.addEventListener("click", playVideo)
+	// ANCHOR ========== CORE FUNCTIONS =======================================
+
+	// Control video play and pause
+	function palyPauseVideo() {
+		if (mainVideo.paused) {
+			mainVideo.play()
+
+			playIcon.classList.add("hidden")
+			pauseIcon.classList.remove("hidden")
+		} else {
+			mainVideo.pause()
+
+			playIcon.classList.remove("hidden")
+			pauseIcon.classList.add("hidden")
+		}
+	}
+
+	// Load video duration and setting total video duration
+	function updateVideoDuration() {
+		totalDuration.textContent = formatTime(TOTAL_VIDEO_DURATION)
+	}
+
+	/**
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 */
+
+	// ANCHOR ========== EVENT LISTENERS ====================================
+
+	// Check if the metadata is already loaded (this way may because of `astro:page-load`)
+	if (mainVideo.readyState >= 1) {
+		// HAVE_METADATA (1)
+		updateVideoDuration()
+	} else {
+		// Add event listener to handle when metadata is loaded
+		mainVideo.addEventListener("loadedmetadata", updateVideoDuration)
+	}
+
+	// Prevent default controls
+	videoPlayer.addEventListener("contextmenu", (evt) => {
+		evt.preventDefault()
+	})
+
+	// Video playing and pausing
+	playPauseButton.addEventListener("click", palyPauseVideo)
+
+	// Fast Rewind
+	fastRewindButton.addEventListener("click", () => {
+		mainVideo.currentTime = Math.max(mainVideo.currentTime - SKIP_TIME, 0)
+	})
+
+	// Fast Forward
+	fastForwardButton.addEventListener("click", () => {
+		mainVideo.currentTime = Math.min(
+			mainVideo.currentTime + SKIP_TIME,
+			mainVideo.duration
+		)
+	})
+
+	/**
+	 * Updates the current playback time and adjusts the progress bar width
+	 * based on the current time of the video.
+	 */
+	mainVideo.addEventListener("timeupdate", () => {
+		let currentTime = mainVideo.currentTime
+		currentDuration.textContent = formatTime(currentTime)
+
+		let progressWidth = (currentTime / TOTAL_VIDEO_DURATION) * 100
+		progressBar.style.width = `${progressWidth}%`
+	})
+
+	/**
+	 * ANCHOR ========== SEEK VIDEO ON CLICK ===================================
+	 *
+	 * Allows users to seek to a specific time in the video by clicking on the
+	 * progress area. This listener calculates the click position relative to the
+	 * width of the progress area and adjusts the video playback time accordingly.
+	 *
+	 * ========================================================================
+	 */
+	progressArea.addEventListener("click", (evt) => {
+		const progressAreaWidth = progressArea.clientWidth
+		const clickOffSetX = evt.offsetX
+
+		mainVideo.currentTime =
+			(clickOffSetX / progressAreaWidth) * TOTAL_VIDEO_DURATION
+	})
+
+	/**
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 */
 })

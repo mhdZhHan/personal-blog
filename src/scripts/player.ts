@@ -67,7 +67,9 @@ document.addEventListener("astro:page-load", () => {
 
 	// ======== SETTINGS ========
 	const settings = videoPlayer.querySelector("#settings") as HTMLDivElement
-	const playback = videoPlayer.querySelector(".playback") as HTMLDivElement
+	const playbackSettings = videoPlayer.querySelector(
+		".playback"
+	) as HTMLDivElement
 
 	/**
 	 * ********************************************************************
@@ -183,6 +185,33 @@ document.addEventListener("astro:page-load", () => {
 		}
 	}
 
+	// Adjust playback speed (playback setting)
+	function setPlaybackSpeed(
+		videoElement: HTMLVideoElement,
+		playbackContainer: HTMLElement
+	) {
+		const speedOptions =
+			playbackContainer.querySelectorAll("li[data-speed]")
+
+		speedOptions.forEach((option) => {
+			option.addEventListener("click", () => {
+				const selectedSpeed = parseFloat(
+					option.getAttribute("data-speed") || "1"
+				)
+
+				// Set the playback speed of the video element
+				videoElement.playbackRate = selectedSpeed
+
+				// Remove 'active-speed' attribute from all options
+				speedOptions.forEach((opt) =>
+					opt.removeAttribute("active-speed")
+				)
+
+				// Add 'active-speed' attribute to the clicked option
+				option.setAttribute("active-speed", "true")
+			})
+		})
+	}
 	/**
 	 * ********************************************************************
 	 * ********************************************************************
@@ -397,22 +426,21 @@ document.addEventListener("astro:page-load", () => {
 	)
 	// ==========================================================================
 
-	// ANCHOR ======================= OPEN SETTINGS =============================
+	// ANCHOR ======================= SETTINGS ==================================
+	// Open settings menu
 	settingsButton.addEventListener("click", () => {
 		const isSettingsOpened =
-			settingsButton.getAttribute("aria-settings-opened") === "false"
+			settingsButton.getAttribute("aria-settings-opened") === "true"
 
-		if (isSettingsOpened) {
-			settings.setAttribute(
-				"aria-settings-opened",
-				(!isSettingsOpened).toString()
-			)
-			settingsButton.setAttribute(
-				"aria-settings-opened",
-				(!isSettingsOpened).toString()
-			)
-		}
+		const newSettingsState = (!isSettingsOpened).toString()
+		settings.setAttribute("aria-settings-opened", newSettingsState)
+		settingsButton.setAttribute("aria-settings-opened", newSettingsState)
 	})
+
+	// Enable playback settings
+	if (mainVideo && playbackSettings) {
+		setPlaybackSpeed(mainVideo, playbackSettings)
+	}
 	// ==========================================================================
 
 	/**

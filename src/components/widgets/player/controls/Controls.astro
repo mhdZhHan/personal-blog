@@ -3,7 +3,7 @@ import ControlsLeft from "./ControlsLeft.astro"
 import ControlsRight from "./ControlsRight.astro"
 ---
 
-<div class="controls">
+<div class="controls" aria-controls-active>
 	<div class="progress-area">
 		<div class="progress-bar">
 			<span></span>
@@ -27,7 +27,10 @@ import ControlsRight from "./ControlsRight.astro"
 
 		background: rgba(0, 0, 0, 0.459);
 		box-shadow: 0 0 40px 10px rgba(0 0 0 / 25%);
-		transform: translateY(0);
+		transform: translateY(180%);
+		&[aria-controls-active] {
+			transform: translateY(0);
+		}
 		.progress-area {
 			width: 98%;
 			height: 5px;

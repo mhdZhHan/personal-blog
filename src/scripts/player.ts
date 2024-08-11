@@ -102,6 +102,18 @@ document.addEventListener("astro:page-load", () => {
 
 	// ANCHOR ========== CORE FUNCTIONS =======================================
 
+	let hideTimeout: number
+	const showControls = () => {
+		clearTimeout(hideTimeout)
+		controls.setAttribute("aria-controls-active", "true")
+	}
+
+	const hideControls = () => {
+		hideTimeout = window.setTimeout(() => {
+			controls.removeAttribute("aria-controls-active")
+		}, 2000)
+	}
+
 	// Control video play and pause
 	function palyPauseVideo() {
 		if (mainVideo.paused) {
@@ -441,6 +453,11 @@ document.addEventListener("astro:page-load", () => {
 	if (mainVideo && playbackSettings) {
 		setPlaybackSpeed(mainVideo, playbackSettings)
 	}
+	// ==========================================================================
+
+	// ANCHOR ======================= SHOW/HIDE CONTROLS ========================
+	videoPlayer.addEventListener("mouseover", showControls)
+	videoPlayer.addEventListener("mouseleave", hideControls)
 	// ==========================================================================
 
 	/**

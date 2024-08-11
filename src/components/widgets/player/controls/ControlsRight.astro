@@ -10,7 +10,7 @@ import {
 
 <div class="controls-right">
 	<span class="icon">
-		<button class="auto-play-toggle">
+		<button class="auto-play-toggle" title="Autoplay is off" aria-checked="false">
 			<span class="toggle-slide">
 				<Pause size={14} class="pause-icon" />
 				<Play size={14} class="play-icon" />
@@ -91,34 +91,41 @@ import {
 
 		// auto-play toggle button
 		.auto-play-toggle {
-			width: 30px;
-			height: 10px;
+			width: 28px;
+			height: 14px;
 			border-radius: 20px;
 			position: relative;
 			margin-right: 8px !important;
 			background: #b6b6b6;
+			// transition: background-color 0.3s ease;
+
 			.toggle-slide {
 				position: absolute;
-				left: -5px;
+				left: -4px;
 				top: 50%;
 				transform: translateY(-50%);
-				width: 17px;
-				height: 17px;
+				width: 18px;
+				height: 18px;
 				background: #727272;
 				border-radius: 50%;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				cursor: pointer;
-				// js is better
+				transition: all 0.08s cubic-bezier(0.4, 0, 1, 1);
+
 				.play-icon {
 					display: none;
 				}
-				&.active {
-					left: 15px;
+			}
+
+			&[aria-checked="true"] {
+				.toggle-slide {
+					left: 14px;
 					.play-icon {
 						display: inline-block;
 					}
+
 					.pause-icon {
 						display: none;
 					}

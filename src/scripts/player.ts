@@ -50,7 +50,7 @@ document.addEventListener("astro:page-load", () => {
 
 	// ======== RIGHT CONTROLS ========
 	// toggle
-	const autoPlay = videoPlayer.querySelector(
+	const autoPlayButton = videoPlayer.querySelector(
 		".auto-play-toggle"
 	) as HTMLButtonElement
 	// buttons
@@ -59,7 +59,7 @@ document.addEventListener("astro:page-load", () => {
 	) as HTMLButtonElement
 	const pictureInPictureButton = videoPlayer.querySelector(
 		".picture-in-picture"
-	)
+	) as HTMLButtonElement
 	const fullScreenButton = videoPlayer.querySelector(
 		".full-screen"
 	) as HTMLButtonElement
@@ -202,6 +202,11 @@ document.addEventListener("astro:page-load", () => {
 
 	// ANCHOR ========== EVENT LISTENERS ====================================
 
+	// Prevent default controls
+	videoPlayer.addEventListener("contextmenu", (evt) => {
+		evt.preventDefault()
+	})
+
 	// Check if the metadata is already loaded (this way may because of `astro:page-load`)
 	if (mainVideo.readyState >= 1) {
 		// HAVE_METADATA (1)
@@ -210,20 +215,6 @@ document.addEventListener("astro:page-load", () => {
 		// Add event listener to handle when metadata is loaded
 		mainVideo.addEventListener("loadedmetadata", updateVideoDuration)
 	}
-
-	// Prevent default controls
-	videoPlayer.addEventListener("contextmenu", (evt) => {
-		evt.preventDefault()
-	})
-
-	// Video playing and pausing
-	playPauseButton.addEventListener("click", palyPauseVideo)
-
-	// Fast Rewind
-	fastRewindButton.addEventListener("click", fastRewind)
-
-	// Fast Forward
-	fastForwardButton.addEventListener("click", fastForward)
 
 	/**
 	 * Updates the current playback time and adjusts the progress bar width
@@ -236,6 +227,21 @@ document.addEventListener("astro:page-load", () => {
 		let progressWidth = (currentTime / TOTAL_VIDEO_DURATION) * 100
 		progressBar.style.width = `${progressWidth}%`
 	})
+
+	mainVideo.addEventListener("ended", () => {
+		if (autoPlayButton.getAttribute("aria-checked") === "true") {
+			palyPauseVideo()
+		}
+	})
+
+	// Video playing and pausing
+	playPauseButton.addEventListener("click", palyPauseVideo)
+
+	// Fast Rewind
+	fastRewindButton.addEventListener("click", fastRewind)
+
+	// Fast Forward
+	fastForwardButton.addEventListener("click", fastForward)
 
 	/**
 	 * ANCHOR ========== SEEK VIDEO ON CLICK ===================================
@@ -287,8 +293,7 @@ document.addEventListener("astro:page-load", () => {
 		progressAreaTime.style.display = "none"
 	})
 
-	// ===========================VOLUME========================================
-
+	// ANCHOR ======================= VOLUME ===================================
 	// Volume range input change
 	volumeRange.addEventListener("input", () => {
 		setVolume(parseFloat(volumeRange.value) / 100)
@@ -307,6 +312,49 @@ document.addEventListener("astro:page-load", () => {
 
 	// Initialize volume on page load
 	setVolume(VOLUME_HIGH)
+	// ==========================================================================
+
+	// ANCHOR ======================= AUTO PLAY TOGGLE ==========================
+	autoPlayButton.addEventListener("click", () => {
+		const isChecked = autoPlayButton.getAttribute("aria-checked") === "true"
+
+		autoPlayButton.setAttribute("aria-checked", (!isChecked).toString())
+
+		if (!isChecked) {
+			autoPlayButton.title = "Autoplay is on"
+		} else {
+			autoPlayButton.title = "Autoplay is off"
+		}
+	})
+	// ==========================================================================
+
+	// ANCHOR ======================= PICTURE IN PICTURE ========================
+	pictureInPictureButton.addEventListener("click", async () => {
+		try {
+			// Detect if the user is using Firefox
+			if (navigator.userAgent.toLowerCase().includes("firefox")) {
+				alert(
+					"To use Picture-in-Picture in Firefox, hover over the video and click the Picture-in-Picture button."
+				)
+			} else if (
+				document.pictureInPictureEnabled &&
+				mainVideo instanceof HTMLVideoElement
+			) {
+				// For other browsers that support the method
+				await mainVideo.requestPictureInPicture()
+			} else {
+				console.log(
+					"Picture-in-Picture is not supported by this browser."
+				)
+			}
+		} catch (error) {
+			console.error("Failed to enter Picture-in-Picture mode:", error)
+		}
+	})
+
+	// ==========================================================================
+
+	// ANCHOR ======================= FULL SCREEN ========================
 
 	// ==========================================================================
 

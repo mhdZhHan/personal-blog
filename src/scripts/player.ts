@@ -1,5 +1,3 @@
-import { FastForward } from "lucide-astro"
-
 document.addEventListener("astro:page-load", () => {
 	const videoPlayer = document.querySelector("#videoPlayer") as HTMLDivElement
 
@@ -225,7 +223,7 @@ document.addEventListener("astro:page-load", () => {
 	fastRewindButton.addEventListener("click", fastRewind)
 
 	// Fast Forward
-	fastForwardButton.addEventListener("click", FastForward)
+	fastForwardButton.addEventListener("click", fastForward)
 
 	/**
 	 * Updates the current playback time and adjusts the progress bar width

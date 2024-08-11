@@ -22,18 +22,21 @@ import ControlsRight from "./ControlsRight.astro"
 		bottom: 0;
 		left: 0;
 		z-index: 3;
-		height: 50px;
+		height: auto;
 		width: 100%;
 
-		background: rgb(0 0 0 / 71%);
+		background: rgba(0, 0, 0, 0.459);
 		box-shadow: 0 0 40px 10px rgba(0 0 0 / 25%);
 		transform: translateY(0);
 		.progress-area {
-			width: 100%;
+			width: 98%;
 			height: 5px;
-			margin: auto;
+			margin-top: 10px;
+			margin-bottom: 0;
+			margin-left: auto;
+			margin-right: auto;
 
-			background: #fff;
+			background: #33454F;
 			cursor: pointer;
 			.progress-bar {
 				position: relative;
@@ -45,7 +48,8 @@ import ControlsRight from "./ControlsRight.astro"
 				&::before {
 					content: "";
 					position: absolute;
-					right: -5px;
+					// right: -5px;
+					right: -13px;
 					top: 50%;
 					transform: translateY(-50%);
 
@@ -53,6 +57,14 @@ import ControlsRight from "./ControlsRight.astro"
 					height: 14px;
 					border-radius: 50%;
 					background-color: var(--primary);
+					opacity: 0;
+					transition: opacity 0.3s ease;
+				}
+			}
+
+			&:hover {
+				.progress-bar::before {
+					opacity: 1;
 				}
 			}
 		}
@@ -62,7 +74,7 @@ import ControlsRight from "./ControlsRight.astro"
 			flex-wrap: nowrap;
 			justify-content: space-between;
 			width: 97%;
-			height: 46px;
+			padding: 10px 0;
 			margin: 0 auto;
 		}
 	}

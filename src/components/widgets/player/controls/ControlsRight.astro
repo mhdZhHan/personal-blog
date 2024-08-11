@@ -25,7 +25,7 @@ import {
 
 	<span class="icon">
 		<button class="settings-btn">
-			<Settings size={22} />
+			<Settings size={22} class="settings-icon" />
 		</button>
 	</span>
 
@@ -156,7 +156,7 @@ import {
 
 		.settings-btn {
 			transition: 0.3s;
-			& .active {
+			&::focus {
 				transform: rotate(45deg);
 			}
 		}

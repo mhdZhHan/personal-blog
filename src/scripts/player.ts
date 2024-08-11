@@ -1,3 +1,5 @@
+import { FastForward } from "lucide-astro"
+
 document.addEventListener("astro:page-load", () => {
 	const videoPlayer = document.querySelector("#videoPlayer") as HTMLDivElement
 
@@ -80,7 +82,12 @@ document.addEventListener("astro:page-load", () => {
 	// ANCHOR ========== CONSTANTS =======================================
 
 	const SKIP_TIME = 10
+
 	const TOTAL_VIDEO_DURATION = mainVideo.duration
+
+	const VOLUME_HIGH = 1 // full volume
+	const VOLUME_LOW = 0.3
+	const VOLUME_MUTED = 0
 
 	// ANCHOR ========== UTIL FUNCTIONS =======================================
 
@@ -110,10 +117,86 @@ document.addEventListener("astro:page-load", () => {
 		}
 	}
 
+	// Function to handle fast rewind
+	function fastRewind() {
+		mainVideo.currentTime = Math.max(mainVideo.currentTime - SKIP_TIME, 0)
+	}
+
+	// Function to handle fast forward
+	function fastForward() {
+		mainVideo.currentTime = Math.min(
+			mainVideo.currentTime + SKIP_TIME,
+			mainVideo.duration
+		)
+	}
+
 	// Load video duration and setting total video duration
 	function updateVideoDuration() {
 		totalDuration.textContent = formatTime(TOTAL_VIDEO_DURATION)
 	}
+
+	function updateVolumeIcon(volume: number) {
+		if (volume === VOLUME_MUTED) {
+			volumeButton.dataset.volumeLevel = "muted"
+		} else if (volume <= VOLUME_LOW) {
+			volumeButton.dataset.volumeLevel = "low"
+		} else {
+			volumeButton.dataset.volumeLevel = "high"
+		}
+	}
+
+	// Function to set the volume level
+	function setVolume(level: number) {
+		mainVideo.volume = level
+		updateVolumeIcon(level)
+	}
+
+	/**
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 * ********************************************************************
+	 */
+
+	// ANCHOR ========== KEYBOARD EVENTS ===================================
+	function handleKeyBoardEvents(event: KeyboardEvent) {
+		if (event.target == document.body) return
+
+		if (event.key === " " || event.key === "Spacebar") {
+			event.preventDefault()
+		}
+
+		switch (event.key) {
+			case " ":
+			case "k":
+				palyPauseVideo()
+				break
+			case "ArrowLeft": // Fast rewind
+			case "j":
+				fastRewind()
+				break
+			case "ArrowRight": // Fast forward
+			case "l":
+				fastForward()
+				break
+			case "m": // Mute/unmute
+				volumeButton.click()
+				break
+			case "ArrowUp": // Increase volume
+				const newVolumeUp = Math.min(mainVideo.volume + 0.1, 1)
+				setVolume(newVolumeUp)
+				volumeRange.value = (newVolumeUp * 100).toString()
+				break
+			case "ArrowDown": // Decrease volume
+				const newVolumeDown = Math.max(mainVideo.volume - 0.1, 0)
+				setVolume(newVolumeDown)
+				volumeRange.value = (newVolumeDown * 100).toString()
+				break
+		}
+	}
+
+	document.addEventListener("keydown", handleKeyBoardEvents)
 
 	/**
 	 * ********************************************************************
@@ -143,17 +226,10 @@ document.addEventListener("astro:page-load", () => {
 	playPauseButton.addEventListener("click", palyPauseVideo)
 
 	// Fast Rewind
-	fastRewindButton.addEventListener("click", () => {
-		mainVideo.currentTime = Math.max(mainVideo.currentTime - SKIP_TIME, 0)
-	})
+	fastRewindButton.addEventListener("click", fastRewind)
 
 	// Fast Forward
-	fastForwardButton.addEventListener("click", () => {
-		mainVideo.currentTime = Math.min(
-			mainVideo.currentTime + SKIP_TIME,
-			mainVideo.duration
-		)
-	})
+	fastForwardButton.addEventListener("click", FastForward)
 
 	/**
 	 * Updates the current playback time and adjusts the progress bar width
@@ -183,6 +259,29 @@ document.addEventListener("astro:page-load", () => {
 		mainVideo.currentTime =
 			(clickOffSetX / progressAreaWidth) * TOTAL_VIDEO_DURATION
 	})
+
+	// ===========================VOLUME========================================
+
+	// Volume range input change
+	volumeRange.addEventListener("input", () => {
+		setVolume(parseFloat(volumeRange.value) / 100)
+	})
+
+	// Volume button click (toggle mute/unmute)
+	volumeButton.addEventListener("click", () => {
+		if (mainVideo.volume === VOLUME_MUTED) {
+			setVolume(VOLUME_HIGH)
+			volumeRange.value = (VOLUME_HIGH * 100).toString()
+		} else {
+			setVolume(VOLUME_MUTED)
+			volumeRange.value = "0"
+		}
+	})
+
+	// Initialize volume on page load
+	setVolume(VOLUME_HIGH)
+
+	// ==========================================================================
 
 	/**
 	 * ********************************************************************

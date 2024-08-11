@@ -1,5 +1,13 @@
 ---
-import { FastForward, Pause, Play, Rewind, Volume2 } from "lucide-astro"
+import {
+	FastForward,
+	Pause,
+	Play,
+	Rewind,
+	Volume1,
+	Volume2,
+	VolumeX,
+} from "lucide-astro"
 ---
 
 <div class="controls-left">
@@ -23,8 +31,10 @@ import { FastForward, Pause, Play, Rewind, Volume2 } from "lucide-astro"
 	</span>
 
 	<span class="icon">
-		<button class="volume">
-			<Volume2 size={24} />
+		<button class="volume" data-volume-level="high">
+			<Volume2 size={24} class="high" />
+			<VolumeX size={24} class="muted" />
+			<Volume1 size={24} class="low" />
 		</button>
 
 		<input type="range" min="0" max="100" id="volumeRange" />
@@ -91,6 +101,26 @@ import { FastForward, Pause, Play, Rewind, Volume2 } from "lucide-astro"
 				transform: scale(1.2);
 				opacity: 0.7;
 				color: #333;
+			}
+
+			.volume {
+				.high,
+				.low,
+				.muted {
+					display: none;
+				}
+
+				&[data-volume-level="high"] .high {
+					display: block;
+				}
+
+				&[data-volume-level="low"] .low {
+					display: block;
+				}
+
+				&[data-volume-level="muted"] .muted {
+					display: block;
+				}
 			}
 
 			#volumeRange {

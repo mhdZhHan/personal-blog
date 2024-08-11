@@ -254,6 +254,39 @@ document.addEventListener("astro:page-load", () => {
 			(clickOffSetX / progressAreaWidth) * TOTAL_VIDEO_DURATION
 	})
 
+	/*
+	 * ANCHOR ========== DISPLAY PROGRESS TIME ON MOUSE MOVE  ====================
+	 *
+	 * - Calculates the current time based on the cursor position relative to the progress area.
+	 * - Updates the displayed time and adjusts the position of the time indicator.
+	 * - The display is shown while the cursor is within the progress area.
+	 *
+	 * ========================================================================
+	 */
+	progressArea.addEventListener("mousemove", (evt) => {
+		const progressAreaWidth = (evt.currentTarget as HTMLElement).clientWidth
+		const offsetX =
+			evt.clientX -
+			(evt.currentTarget as HTMLElement).getBoundingClientRect().left
+
+		// Calculate the progress time based on the offset
+		const percentage = offsetX / progressAreaWidth
+		const progressTime = mainVideo.duration * percentage
+
+		// Format the progress time in mm:ss
+		const formattedTime = formatTime(progressTime)
+
+		progressAreaTime.textContent = formattedTime
+
+		progressAreaTime.style.setProperty("--x", `${offsetX}px`)
+		progressAreaTime.style.display = "block"
+	})
+
+	// HIDE PROGRESS TIME ON MOUSE LEAVE
+	progressArea.addEventListener("mouseleave", (evt) => {
+		progressAreaTime.style.display = "none"
+	})
+
 	// ===========================VOLUME========================================
 
 	// Volume range input change

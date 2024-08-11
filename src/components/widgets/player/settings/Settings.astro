@@ -2,7 +2,7 @@
 import PlaybackSettings from "./PlaybackSettings.astro"
 ---
 
-<div id="settings">
+<div id="settings" aria-settings-opened="false">
 	<PlaybackSettings />
 </div>
 
@@ -19,6 +19,10 @@ import PlaybackSettings from "./PlaybackSettings.astro"
 		color: #fff;
 
 		z-index: 5;
+
+		[aria-settings-opened="true"] {
+			display: block;
+		}
 
 		&::-webkit-scrollbar {
 			width: 4px;

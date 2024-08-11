@@ -24,7 +24,7 @@ import {
 	</span>
 
 	<span class="icon">
-		<button class="settings-btn">
+		<button class="settings-btn" aria-settings-opened="false">
 			<Settings size={22} class="settings-icon" />
 		</button>
 	</span>
@@ -156,7 +156,7 @@ import {
 
 		.settings-btn {
 			transition: 0.3s;
-			&::focus {
+			&[aria-settings-opened="true"] {
 				transform: rotate(45deg);
 			}
 		}

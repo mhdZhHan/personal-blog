@@ -391,10 +391,28 @@ document.addEventListener("astro:page-load", () => {
 
 	// ==========================================================================
 
-	// ANCHOR ======================= FULL SCREEN ========================
+	// ANCHOR ======================= FULL SCREEN ===============================
 	fullScreenButton.addEventListener("click", () =>
 		toggleFullScreen(videoPlayer)
 	)
+	// ==========================================================================
+
+	// ANCHOR ======================= OPEN SETTINGS =============================
+	settingsButton.addEventListener("click", () => {
+		const isSettingsOpened =
+			settingsButton.getAttribute("aria-settings-opened") === "false"
+
+		if (isSettingsOpened) {
+			settings.setAttribute(
+				"aria-settings-opened",
+				(!isSettingsOpened).toString()
+			)
+			settingsButton.setAttribute(
+				"aria-settings-opened",
+				(!isSettingsOpened).toString()
+			)
+		}
+	})
 	// ==========================================================================
 
 	/**

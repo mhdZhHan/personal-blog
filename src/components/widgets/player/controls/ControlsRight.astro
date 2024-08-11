@@ -1,6 +1,7 @@
 ---
 import {
 	Maximize2,
+	Minimize2,
 	Pause,
 	PictureInPicture2,
 	Play,
@@ -10,7 +11,11 @@ import {
 
 <div class="controls-right">
 	<span class="icon">
-		<button class="auto-play-toggle" title="Autoplay is off" aria-checked="false">
+		<button
+			class="auto-play-toggle"
+			title="Autoplay is off"
+			aria-checked="false"
+		>
 			<span class="toggle-slide">
 				<Pause size={14} class="pause-icon" />
 				<Play size={14} class="play-icon" />
@@ -31,8 +36,9 @@ import {
 	</span>
 
 	<span class="icon">
-		<button class="full-screen">
-			<Maximize2 size={22} />
+		<button class="full-screen" aria-maximized="false">
+			<Maximize2 size={22} class="max-icon" />
+			<Minimize2 size={22} class="min-icon" />
 		</button>
 	</span>
 </div>
@@ -84,6 +90,21 @@ import {
 
 			&.picture {
 				@media (max-width: 400px) {
+					display: none;
+				}
+			}
+		}
+
+		.full-screen {
+			.max-icon {
+				display: none;
+			}
+			&[aria-maximized="false"] {
+				.max-icon {
+					display: inline-block;
+				}
+
+				.min-icon {
 					display: none;
 				}
 			}

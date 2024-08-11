@@ -149,6 +149,40 @@ document.addEventListener("astro:page-load", () => {
 		updateVolumeIcon(level)
 	}
 
+	// Function to toggle fullscreen
+	function toggleFullScreen(element: HTMLElement) {
+		const isFullScreen =
+			autoPlayButton.getAttribute("aria-maximized") === "false"
+
+		if (!isFullScreen && !document.fullscreenElement) {
+			// If not in full-screen, request full-screen
+			if (element.requestFullscreen) {
+				element.requestFullscreen()
+			} else if ((element as any).mozRequestFullScreen) {
+				;(element as any).mozRequestFullScreen()
+			} else if ((element as any).webkitRequestFullscreen) {
+				;(element as any).webkitRequestFullscreen()
+			} else if ((element as any).msRequestFullscreen) {
+				;(element as any).msRequestFullscreen()
+			}
+
+			fullScreenButton.setAttribute("aria-maximized", "true")
+		} else {
+			// If already in full-screen, exit full-screen mode
+			if (document.exitFullscreen) {
+				document.exitFullscreen()
+			} else if ((document as any).mozCancelFullScreen) {
+				;(document as any).mozCancelFullScreen()
+			} else if ((document as any).webkitExitFullscreen) {
+				;(document as any).webkitExitFullscreen()
+			} else if ((document as any).msExitFullscreen) {
+				;(document as any).msExitFullscreen()
+			}
+
+			fullScreenButton.setAttribute("aria-maximized", "false")
+		}
+	}
+
 	/**
 	 * ********************************************************************
 	 * ********************************************************************
@@ -186,6 +220,9 @@ document.addEventListener("astro:page-load", () => {
 				const newVolumeDown = Math.max(mainVideo.volume - 0.1, 0)
 				setVolume(newVolumeDown)
 				volumeRange.value = (newVolumeDown * 100).toString()
+				break
+			case "f": // Toggle fullscreen
+				toggleFullScreen(videoPlayer)
 				break
 		}
 	}
@@ -355,7 +392,9 @@ document.addEventListener("astro:page-load", () => {
 	// ==========================================================================
 
 	// ANCHOR ======================= FULL SCREEN ========================
-
+	fullScreenButton.addEventListener("click", () =>
+		toggleFullScreen(videoPlayer)
+	)
 	// ==========================================================================
 
 	/**

@@ -163,10 +163,6 @@ document.addEventListener("astro:page-load", () => {
 	function handleKeyBoardEvents(event: KeyboardEvent) {
 		if (event.target == document.body) return
 
-		if (event.key === " " || event.key === "Spacebar") {
-			event.preventDefault()
-		}
-
 		switch (event.key) {
 			case " ":
 			case "k":

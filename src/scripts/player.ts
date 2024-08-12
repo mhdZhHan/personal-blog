@@ -14,6 +14,9 @@ document.addEventListener("astro:page-load", () => {
 	const progressBar = videoPlayer.querySelector(
 		".progress-bar"
 	) as HTMLDivElement
+	const bufferedBar = videoPlayer.querySelector(
+		".buffered-progress-bar"
+	) as HTMLDivElement
 
 	// ======== LEFT CONTROLS ========
 	// buttons
@@ -101,6 +104,20 @@ document.addEventListener("astro:page-load", () => {
 	}
 
 	// ANCHOR ========== CORE FUNCTIONS =======================================
+
+	// Function to update the buffered progress bar
+	function updateBufferedProgress() {
+		if (mainVideo.buffered.length > 0) {
+			const buffered = mainVideo.buffered
+			const bufferedEnd = buffered.end(buffered.length - 1)
+			const totalDuration = mainVideo.duration
+			const bufferedWidth = (bufferedEnd / totalDuration) * 100
+			bufferedBar.style.width = `${bufferedWidth}%`
+		}
+	}
+
+	// Initial call to set buffered progress
+	updateBufferedProgress()
 
 	let hideTimeout: number
 	const showControls = () => {
@@ -285,6 +302,9 @@ document.addEventListener("astro:page-load", () => {
 		evt.preventDefault()
 	})
 
+	// Add event listener to update the buffered progress bar
+	mainVideo.addEventListener("progress", updateBufferedProgress)
+
 	// Check if the metadata is already loaded (this way may because of `astro:page-load`)
 	if (mainVideo.readyState >= 1) {
 		// HAVE_METADATA (1)
@@ -456,8 +476,8 @@ document.addEventListener("astro:page-load", () => {
 	// ==========================================================================
 
 	// ANCHOR ======================= SHOW/HIDE CONTROLS ========================
-	videoPlayer.addEventListener("mouseover", showControls)
-	videoPlayer.addEventListener("mouseleave", hideControls)
+	// videoPlayer.addEventListener("mouseover", showControls)
+	// videoPlayer.addEventListener("mouseleave", hideControls)
 	// ==========================================================================
 
 	/**

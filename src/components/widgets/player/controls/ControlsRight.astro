@@ -6,6 +6,8 @@ import {
 	PictureInPicture2,
 	Play,
 	Settings,
+	CaptionsOff,
+	Captions,
 } from "lucide-astro"
 ---
 
@@ -20,6 +22,12 @@ import {
 				<Pause size={14} class="pause-icon" />
 				<Play size={14} class="play-icon" />
 			</span>
+		</button>
+	</span>
+
+	<span class="icon">
+		<button class="caption-btn" aria-caption-opened="false">
+			<Captions size={22} class="settings-icon" />
 		</button>
 	</span>
 

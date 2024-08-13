@@ -3,6 +3,7 @@ import Layout from "@layouts/Layout.astro"
 import DemosCard from "@components/demos/DemosCard.astro"
 
 import { getCollection } from "astro:content"
+import VideoPlayer from "@components/widgets/player/VideoPlayer.astro"
 
 const demos = await getCollection("demos")
 demos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -31,6 +32,8 @@ demos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 					{demos.map((demo) => <DemosCard demo={demo} />)}
 				</ul>
 			</div>
+
+			<VideoPlayer />
 		</div>
 	</section>
 </Layout>

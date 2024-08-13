@@ -1,0 +1,64 @@
+---
+import TestVideo from "../../../assets/test.mp4"
+import Controls from "./controls/Controls.astro"
+import Settings from "./settings/Settings.astro"
+---
+
+<div class="container">
+	<div id="videoPlayer" aria-paused="true" transition:name="media-player" transition:persist>
+		<video src={TestVideo} id="mainVideo"></video>
+
+		<div class="progressAreaTime"></div>
+
+		<Controls />
+
+		<Settings />
+	</div>
+</div>
+
+<style lang="scss">
+	.container {
+		margin-top: 30px;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+	#videoPlayer {
+		position: relative;
+		// width: 100%;
+		width: 700px;
+		height: 100%;
+
+		overflow: hidden;
+		border-radius: 5px;
+		box-shadow: 0 0 5px rgba(255, 255, 255, 0.24);
+		#mainVideo {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			outline: none;
+		}
+
+		.progressAreaTime {
+			--x: 7px;
+			position: absolute;
+			bottom: 60px;
+			left: var(--x);
+			padding: 4px 8px;
+			color: #fff;
+			font-size: 14px;
+			background: #000;
+			border-radius: 5px;
+			z-index: 1;
+			display: none;
+		}
+	}
+</style>
+
+<script src="../../../scripts/player.ts"></script>

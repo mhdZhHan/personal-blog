@@ -3,7 +3,7 @@ import ControlsLeft from "./ControlsLeft.astro"
 import ControlsRight from "./ControlsRight.astro"
 ---
 
-<div class="controls" aria-controls-active>
+<div class="controls" aria-controls-active="true">
 	<div class="progress-area">
 		<div class="progress-bar">
 			<span></span>
@@ -36,6 +36,8 @@ import ControlsRight from "./ControlsRight.astro"
 		align-items: center;
 		justify-content: center;
 		gap: 15px;
+
+		transition: transform 0.5s ease;
 		&[aria-controls-active] {
 			transform: translateY(0);
 		}

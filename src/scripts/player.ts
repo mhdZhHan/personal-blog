@@ -119,13 +119,15 @@ document.addEventListener("astro:page-load", () => {
 	// Initial call to set buffered progress
 	updateBufferedProgress()
 
+	// Show controls menu
 	let hideTimeout: number
-	const showControls = () => {
+	function showControls() {
 		clearTimeout(hideTimeout)
 		controls.setAttribute("aria-controls-active", "true")
 	}
 
-	const hideControls = () => {
+	// Hide controls menu
+	function hideControls() {
 		hideTimeout = window.setTimeout(() => {
 			controls.removeAttribute("aria-controls-active")
 		}, 2000)
@@ -133,17 +135,7 @@ document.addEventListener("astro:page-load", () => {
 
 	// Control video play and pause
 	function palyPauseVideo() {
-		if (mainVideo.paused) {
-			mainVideo.play()
-
-			playIcon.classList.add("hidden")
-			pauseIcon.classList.remove("hidden")
-		} else {
-			mainVideo.pause()
-
-			playIcon.classList.remove("hidden")
-			pauseIcon.classList.add("hidden")
-		}
+		mainVideo.paused ? mainVideo.play() : mainVideo.pause()
 	}
 
 	// Function to handle fast rewind
@@ -251,10 +243,14 @@ document.addEventListener("astro:page-load", () => {
 
 	// ANCHOR ========== KEYBOARD EVENTS ===================================
 	function handleKeyBoardEvents(event: KeyboardEvent) {
+		const tagName = document.activeElement?.tagName.toLowerCase()
+
 		if (event.target == document.body) return
+		if (tagName === "input") return
 
 		switch (event.key) {
 			case " ":
+				if (tagName === "button") return
 			case "k":
 				palyPauseVideo()
 				break
@@ -334,6 +330,22 @@ document.addEventListener("astro:page-load", () => {
 
 	// Video playing and pausing
 	playPauseButton.addEventListener("click", palyPauseVideo)
+
+	mainVideo.addEventListener("play", () => {
+		videoPlayer.setAttribute("aria-paused", "false")
+
+		playIcon.classList.add("hidden")
+		pauseIcon.classList.remove("hidden")
+		hideControls()
+	})
+
+	mainVideo.addEventListener("pause", () => {
+		videoPlayer.setAttribute("aria-paused", "true")
+
+		playIcon.classList.remove("hidden")
+		pauseIcon.classList.add("hidden")
+		showControls()
+	})
 
 	// Fast Rewind
 	fastRewindButton.addEventListener("click", fastRewind)
@@ -476,8 +488,13 @@ document.addEventListener("astro:page-load", () => {
 	// ==========================================================================
 
 	// ANCHOR ======================= SHOW/HIDE CONTROLS ========================
-	// videoPlayer.addEventListener("mouseover", showControls)
-	// videoPlayer.addEventListener("mouseleave", hideControls)
+	videoPlayer.addEventListener("mouseover", showControls)
+	videoPlayer.addEventListener("mouseleave", () => {
+		const isPaused = videoPlayer.getAttribute("aria-paused") === "true"
+		const isSettingsOpened =
+			settingsButton.getAttribute("aria-settings-opened") === "true"
+		if (!isPaused && !isSettingsOpened) hideControls()
+	})
 	// ==========================================================================
 
 	/**

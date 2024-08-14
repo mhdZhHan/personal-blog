@@ -98,6 +98,17 @@ function initializeVideoPlayer() {
 	}
 
 	// SECTION Core Functions
+	function setTimelinePosition(evt) {
+		const progressAreaWidth = progressArea.clientWidth
+		const clickOffsetX = evt.offsetX
+		const newTime =
+			(clickOffsetX / progressAreaWidth) * TOTAL_VIDEO_DURATION
+
+		mainVideo.currentTime = newTime
+		const progressWidth = (newTime / TOTAL_VIDEO_DURATION) * 100
+		progressBar.style.width = `${progressWidth}%`
+	}
+
 	function updateBufferedProgress() {
 		if (mainVideo.buffered.length > 0) {
 			const buffered = mainVideo.buffered
@@ -326,15 +337,25 @@ function initializeVideoPlayer() {
 	// ======================= PROGRESS AND SEEKING ==========================
 
 	/**
-	 * Allows users to seek to a specific time in the video by clicking on the
-	 * progress area. This listener calculates the click position relative to the
-	 * width of the progress area and adjusts the video playback time accordingly.
+	 * Enables users to seek a specific time in the video by clicking or dragging on the
+	 * progress area. The event listeners handle pointer down, move, and up events to
+	 * calculate the click position relative to the width of the progress area and adjust
+	 * the video playback time accordingly. The progress bar is updated in real-time as the
+	 * user drags along the progress area.
 	 */
-	progressArea.addEventListener("click", (evt) => {
-		const progressAreaWidth = progressArea.clientWidth
-		const clickOffSetX = evt.offsetX
-		mainVideo.currentTime =
-			(clickOffSetX / progressAreaWidth) * TOTAL_VIDEO_DURATION
+
+	progressArea.addEventListener("pointerdown", (e) => {
+		progressArea.setPointerCapture(e.pointerId)
+		setTimelinePosition(e)
+
+		const onPointerMove = (e: PointerEvent) => setTimelinePosition(e)
+		const onPointerUp = () => {
+			progressArea.removeEventListener("pointermove", onPointerMove)
+			progressArea.removeEventListener("pointerup", onPointerUp)
+		}
+
+		progressArea.addEventListener("pointermove", onPointerMove)
+		progressArea.addEventListener("pointerup", onPointerUp)
 	})
 
 	/**

@@ -1,11 +1,16 @@
-<div id="captions">
-	<div class="caption">
-		<span>Select Subtitle</span>
+---
+import { ChevronLeft } from "lucide-astro"
+---
 
-		<ul class="captionList">
-			<li aria-caption-enabled="true">OFF</li>
-			<li>English</li>
-			<li>Turkish</li>
-		</ul>
+<div class="captions" aria-label="captionSettings" hidden>
+	<div class="settings-head">
+		<ChevronLeft />
+		<span>Select Subtitle</span>
 	</div>
+	
+	<ul class="captionList">
+		<li data-active="true">OFF</li>
+		<li>English</li>
+		<li>Turkish</li>
+	</ul>
 </div>

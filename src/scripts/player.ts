@@ -69,6 +69,18 @@ function initializeVideoPlayer() {
 		".full-screen"
 	) as HTMLButtonElement
 
+	// SECTION Settings Elements
+	const settings = videoPlayer.querySelector("#settings") as HTMLDivElement
+	const indexSection = settings.querySelector(".index") as HTMLDivElement
+	const indexItems = settings.querySelectorAll(
+		".index ul li"
+	) as NodeListOf<HTMLLIElement>
+	const settingsSections = {
+		captionSettings: settings.querySelector(".captions") as HTMLDivElement,
+		playbackSettings: settings.querySelector(".playback") as HTMLDivElement,
+		qualitySettings: settings.querySelector(".quality") as HTMLDivElement,
+	}
+
 	// SECTION Other Elements
 	const playIcon = videoPlayer.querySelector(".play") as SVGAElement
 	const pauseIcon = videoPlayer.querySelector(".pause") as SVGAElement
@@ -81,10 +93,6 @@ function initializeVideoPlayer() {
 	const currentDuration = videoPlayer.querySelector(
 		".current"
 	) as HTMLSpanElement
-	const settings = videoPlayer.querySelector("#settings") as HTMLDivElement
-	const playbackSettings = videoPlayer.querySelector(
-		".playback"
-	) as HTMLDivElement
 
 	const TOTAL_VIDEO_DURATION = mainVideo.duration
 
@@ -194,6 +202,26 @@ function initializeVideoPlayer() {
 		}
 	}
 
+	// Hide all settings initially
+	function hideAllSettings() {
+		Object.values(settingsSections).forEach((section) => {
+			section.setAttribute("hidden", "true")
+		})
+	}
+
+	// Show the selected setting
+	function showSetting(setting) {
+		if (!settingsSections[setting]) {
+			console.error(
+				`Setting "${setting}" does not exist in settingsSections`
+			)
+			return
+		}
+		hideAllSettings()
+		indexSection.setAttribute("hidden", "true")
+		settingsSections[setting].removeAttribute("hidden")
+	}
+
 	function setPlaybackSpeed(
 		videoElement: HTMLVideoElement,
 		playbackContainer: HTMLElement
@@ -208,12 +236,13 @@ function initializeVideoPlayer() {
 				)
 				videoElement.playbackRate = selectedSpeed
 				speedOptions.forEach((opt) =>
-					opt.removeAttribute("active-speed")
+					opt.removeAttribute("data-active")
 				)
-				option.setAttribute("active-speed", "true")
+				option.setAttribute("data-active", "true")
 			})
 		})
 	}
+	// SECTION END Core Functions
 
 	// TODO generateSnapshots() (Future implementation)
 	// let tempVideo = document.createElement("video") as HTMLVideoElement
@@ -276,6 +305,7 @@ function initializeVideoPlayer() {
 				break
 		}
 	}
+	// SECTION END Keyboard Event Handler
 
 	// SECTION Event Listeners
 	// ======================= GENERAL LISTENERS ==========================
@@ -461,9 +491,28 @@ function initializeVideoPlayer() {
 		settingsButton.setAttribute("aria-settings-opened", newSettingsState)
 	})
 
+	// Event listener for index items
+	indexItems.forEach((item) => {
+		item.addEventListener("click", () => {
+			const setting = item.getAttribute("aria-label")
+			showSetting(setting)
+		})
+	})
+
+	// Event listener for back buttons in each settings section
+	Object.values(settingsSections).forEach((section) => {
+		const backButton = section.querySelector(
+			".settings-head svg"
+		) as SVGAElement
+		backButton.addEventListener("click", () => {
+			hideAllSettings()
+			indexSection.removeAttribute("hidden") // Show index
+		})
+	})
+
 	// Enable Playback Settings
-	if (mainVideo && playbackSettings) {
-		setPlaybackSpeed(mainVideo, playbackSettings)
+	if (mainVideo && settingsSections.playbackSettings) {
+		setPlaybackSpeed(mainVideo, settingsSections.playbackSettings)
 	}
 
 	// ======================= CONTROL VISIBILITY ==========================

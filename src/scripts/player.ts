@@ -7,7 +7,7 @@
  */
 
 // TODO Future
-import { generateSnapshots } from "./snapshotsGenerator"
+// import { generateSnapshots } from "./snapshotsGenerator"
 
 // SECTION Constants
 const SKIP_TIME = 10

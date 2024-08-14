@@ -87,17 +87,58 @@
 			background: #33454f;
 			cursor: pointer;
 
-			.progressAreaTime {
-				--x: 7px;
+			// .progressAreaSnapshot {
+			// 	position: absolute;
+			// 	bottom: 25px;
+			// 	transform: translateX(-50%);
+			// 	width: 165px;
+			// 	height: 90px;
+			// 	background: #fff;
+			// 	border: 2px solid #fff;
+			// 	border-radius: 3px;
+			// 	display: none;
+			// }
+
+			// .progressAreaTime {
+			// 	position: absolute;
+			// 	bottom: 25px;
+			// 	left: var(--x);
+			// 	padding: 4px 8px;
+			// 	color: #fff;
+			// 	font-size: 14px;
+			// 	background: #000;
+			// 	border-radius: 5px;
+			// 	z-index: 1;
+			// 	display: none;
+			// }
+
+			.progressAreaTime,
+			.progressAreaSnapshot {
 				position: absolute;
+				bottom: 100%;
+				transform: translateX(-50%);
+				pointer-events: none;
+			}
+
+			.progressAreaTime {
 				bottom: 25px;
-				left: var(--x);
-				padding: 4px 8px;
-				color: #fff;
-				font-size: 14px;
-				background: #000;
-				border-radius: 5px;
-				z-index: 1;
+				background: rgba(0, 0, 0, 0.7);
+				color: white;
+				padding: 2px 5px;
+				border-radius: 3px;
+				font-size: 12px;
+
+				display: none;
+			}
+
+			.progressAreaSnapshot {
+				width: 165px;
+				height: 90px;
+				background: #fff;
+				border: 2px solid #fff;
+				border-radius: 3px;
+				bottom: calc(100% + 10px);
+
 				display: none;
 			}
 

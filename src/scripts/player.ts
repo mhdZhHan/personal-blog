@@ -6,6 +6,9 @@
  * playback speed adjustment, and keyboard shortcuts.
  */
 
+// TODO Future
+import { generateSnapshots } from "./snapshotsGenerator"
+
 // SECTION Constants
 const SKIP_TIME = 10
 const VOLUME_HIGH = 1
@@ -22,6 +25,9 @@ function initializeVideoPlayer() {
 	) as HTMLVideoElement
 	const progressAreaTime = videoPlayer.querySelector(
 		".progressAreaTime"
+	) as HTMLDivElement
+	const progressAreaSnapshot = videoPlayer.querySelector(
+		".progressAreaSnapshot"
 	) as HTMLDivElement
 	const controls = videoPlayer.querySelector(".controls") as HTMLDivElement
 	const progressArea = videoPlayer.querySelector(
@@ -195,6 +201,28 @@ function initializeVideoPlayer() {
 		})
 	}
 
+	// TODO generateSnapshots() (Future implementation)
+	// let tempVideo = document.createElement("video") as HTMLVideoElement
+	// tempVideo.src = mainVideo.querySelector("source")?.src as string
+
+	// tempVideo.preload = "metadata"
+	// tempVideo.width = 500
+	// tempVideo.height = 300
+	// tempVideo.controls = true
+
+	// tempVideo.addEventListener("loadedmetadata", async () => {
+	// 	console.log("Video metadata loaded")
+
+	// 	// Wait for a short period to ensure video is ready
+	// 	await new Promise((resolve) => setTimeout(resolve, 1000))
+
+	// 	generateSnapshots(tempVideo, 158, 90, 5, 5, (progress) => {
+	// 		console.log(`Progress: ${progress.toFixed(2)}%`)
+	// 	}).then((snapshots) => {
+	// 		console.log("snapshots generated:", snapshots)
+	// 	})
+	// })
+
 	// SECTION Keyboard Event Handler
 	function handleKeyBoardEvents(event: KeyboardEvent) {
 		const tagName = document.activeElement?.tagName.toLowerCase()
@@ -305,28 +333,41 @@ function initializeVideoPlayer() {
 	 * - The display is shown while the cursor is within the progress area.
 	 */
 	progressArea.addEventListener("mousemove", (evt) => {
-		const progressAreaWidth = (evt.currentTarget as HTMLElement).clientWidth
-		const offsetX =
-			evt.clientX -
-			(evt.currentTarget as HTMLElement).getBoundingClientRect().left
-		let percentage = offsetX / progressAreaWidth
-		let progressTime = mainVideo.duration * percentage
-		progressTime = Math.max(0, Math.min(progressTime, mainVideo.duration))
+		const progressAreaWidth = progressArea.clientWidth
+		const offsetX = evt.clientX - progressArea.getBoundingClientRect().left
+		const percentage = offsetX / progressAreaWidth
+		const progressTime = Math.max(
+			0,
+			Math.min(mainVideo.duration * percentage, mainVideo.duration)
+		)
+
+		// Update time tooltip
 		const formattedTime = formatTime(progressTime)
 		progressAreaTime.textContent = formattedTime
-		let tooltipX = Math.max(offsetX, progressAreaTime.clientWidth / 2)
-		tooltipX = Math.min(
-			tooltipX,
-			progressAreaWidth - progressAreaTime.clientWidth / 2
-		)
-		progressAreaTime.style.left = `${
-			tooltipX - progressAreaTime.clientWidth / 2
-		}px`
+
+		// Position time tooltip
+		const timeTooltipWidth = progressAreaTime.offsetWidth
+		let tooltipX = Math.max(offsetX, timeTooltipWidth / 2)
+		tooltipX = Math.min(tooltipX, progressAreaWidth - timeTooltipWidth / 2)
+		progressAreaTime.style.left = `${tooltipX}px`
+		progressAreaTime.style.transform = "translateX(-50%)"
 		progressAreaTime.style.display = "block"
+
+		// TODO Position snapshot preview
+		// const snapshotWidth = progressAreaSnapshot.offsetWidth
+		// let snapshotX = Math.max(offsetX, snapshotWidth / 2)
+		// snapshotX = Math.min(snapshotX, progressAreaWidth - snapshotWidth / 2)
+		// progressAreaSnapshot.style.left = `${snapshotX}px`
+		// progressAreaSnapshot.style.transform = "translateX(-50%)"
+		// progressAreaSnapshot.style.display = "block"
+
+		// Update snapshot image
+		// updateSnapshotImage(progressTime)
 	})
 
 	progressArea.addEventListener("mouseleave", () => {
 		progressAreaTime.style.display = "none"
+		progressAreaSnapshot.style.display = "none"
 	})
 
 	// ======================= VOLUME CONTROL ==========================

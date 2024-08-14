@@ -1,4 +1,5 @@
 ---
+import "@styles/player.scss"
 import Controls from "./controls/Controls.astro"
 import Settings from "./settings/Settings.astro"
 import CaptionSettings from "./settings/CaptionSettings.astro"
@@ -57,52 +58,6 @@ import TRSub from "../../../assets/test-sub-tr.vtt"
 		position: relative;
 		width: 100%;
 		height: 100%;
-	}
-
-	#videoPlayer {
-		position: relative;
-		// width: 100%;
-		width: 700px;
-		height: 100%;
-
-		overflow: hidden;
-		border-radius: 5px;
-		box-shadow: 0 0 5px rgba(255, 255, 255, 0.24);
-		#mainVideo {
-			position: relative;
-			width: 100%;
-			height: 100%;
-			outline: none;
-		}
-
-		.progressAreaTime {
-			--x: 7px;
-			position: absolute;
-			bottom: 60px;
-			left: var(--x);
-			padding: 4px 8px;
-			color: #fff;
-			font-size: 14px;
-			background: #000;
-			border-radius: 5px;
-			z-index: 1;
-			display: none;
-		}
-
-		.sub-text {
-			position: absolute;
-			left: 50%;
-			bottom: 0;
-			width: 90%;
-			max-width: 90%;
-			transform: translate(-50%, -50%);
-			text-align: center;
-			user-select: none;
-			transition: bottom 0.3s;
-			&[aria-caption-active="true"] {
-				bottom: 10%;
-			}
-		}
 	}
 </style>
 

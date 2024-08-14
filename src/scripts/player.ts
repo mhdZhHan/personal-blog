@@ -6,7 +6,7 @@
  * playback speed adjustment, and keyboard shortcuts.
  */
 
-// ANCHOR Constants
+// SECTION Constants
 const SKIP_TIME = 10
 const VOLUME_HIGH = 1
 const VOLUME_LOW = 0.3
@@ -15,7 +15,7 @@ const VOLUME_MUTED = 0
 document.addEventListener("astro:page-load", initializeVideoPlayer)
 
 function initializeVideoPlayer() {
-	// ANCHOR Element Selection
+	// SECTION Element Selection
 	const videoPlayer = document.querySelector("#videoPlayer") as HTMLDivElement
 	const mainVideo = videoPlayer.querySelector(
 		"#mainVideo"
@@ -34,7 +34,7 @@ function initializeVideoPlayer() {
 		".buffered-progress-bar"
 	) as HTMLDivElement
 
-	// ANCHOR  Control Buttons
+	// SECTION  Control Buttons
 	const fastRewindButton = videoPlayer.querySelector(
 		".fast-rewind"
 	) as HTMLButtonElement
@@ -60,7 +60,7 @@ function initializeVideoPlayer() {
 		".full-screen"
 	) as HTMLButtonElement
 
-	// ANCHOR Other Elements
+	// SECTION Other Elements
 	const playIcon = videoPlayer.querySelector(".play") as SVGAElement
 	const pauseIcon = videoPlayer.querySelector(".pause") as SVGAElement
 	const volumeRange = videoPlayer.querySelector(
@@ -79,7 +79,7 @@ function initializeVideoPlayer() {
 
 	const TOTAL_VIDEO_DURATION = mainVideo.duration
 
-	// ANCHOR Utility Functions
+	// SECTION Utility Functions
 	function formatTime(seconds: number): string {
 		const minutes = Math.floor(seconds / 60)
 		const remainingSeconds = Math.floor(seconds % 60)
@@ -88,7 +88,7 @@ function initializeVideoPlayer() {
 		}${remainingSeconds}`
 	}
 
-	// ANCHOR Core Functions
+	// SECTION Core Functions
 	function updateBufferedProgress() {
 		if (mainVideo.buffered.length > 0) {
 			const buffered = mainVideo.buffered
@@ -195,7 +195,7 @@ function initializeVideoPlayer() {
 		})
 	}
 
-	// ANCHOR Keyboard Event Handler
+	// SECTION Keyboard Event Handler
 	function handleKeyBoardEvents(event: KeyboardEvent) {
 		const tagName = document.activeElement?.tagName.toLowerCase()
 
@@ -235,11 +235,12 @@ function initializeVideoPlayer() {
 		}
 	}
 
-	// ANCHOR Event Listeners
+	// SECTION Event Listeners
 	// ======================= GENERAL LISTENERS ==========================
 	videoPlayer.addEventListener("contextmenu", (evt) => evt.preventDefault())
 	mainVideo.addEventListener("progress", updateBufferedProgress)
 
+	/* Check if the metadata is already loaded (this way may because of `astro:page-load`) */
 	if (mainVideo.readyState >= 1) {
 		updateVideoDuration()
 	} else {
@@ -247,6 +248,11 @@ function initializeVideoPlayer() {
 	}
 
 	// ======================= PLAYBACK CONTROL ==========================
+
+	/**
+	 * Updates the current playback time and adjusts the progress bar width
+	 * based on the current time of the video.
+	 */
 	mainVideo.addEventListener("timeupdate", () => {
 		let currentTime = mainVideo.currentTime
 		currentDuration.textContent = formatTime(currentTime)
@@ -280,6 +286,12 @@ function initializeVideoPlayer() {
 	fastForwardButton.addEventListener("click", fastForward)
 
 	// ======================= PROGRESS AND SEEKING ==========================
+
+	/**
+	 * Allows users to seek to a specific time in the video by clicking on the
+	 * progress area. This listener calculates the click position relative to the
+	 * width of the progress area and adjusts the video playback time accordingly.
+	 */
 	progressArea.addEventListener("click", (evt) => {
 		const progressAreaWidth = progressArea.clientWidth
 		const clickOffSetX = evt.offsetX
@@ -287,6 +299,11 @@ function initializeVideoPlayer() {
 			(clickOffSetX / progressAreaWidth) * TOTAL_VIDEO_DURATION
 	})
 
+	/**
+	 * - Calculates the current time based on the cursor position relative to the progress area.
+	 * - Updates the displayed time and adjusts the position of the time indicator.
+	 * - The display is shown while the cursor is within the progress area.
+	 */
 	progressArea.addEventListener("mousemove", (evt) => {
 		const progressAreaWidth = (evt.currentTarget as HTMLElement).clientWidth
 		const offsetX =

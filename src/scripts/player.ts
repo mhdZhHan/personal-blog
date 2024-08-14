@@ -39,6 +39,9 @@ function initializeVideoPlayer() {
 	const bufferedBar = videoPlayer.querySelector(
 		".buffered-progress-bar"
 	) as HTMLDivElement
+	const loadingSpinner = videoPlayer.querySelector(
+		".loading-spinner"
+	) as HTMLDivElement
 
 	// SECTION  Control Buttons
 	const fastRewindButton = videoPlayer.querySelector(
@@ -276,6 +279,13 @@ function initializeVideoPlayer() {
 	}
 
 	// ======================= PLAYBACK CONTROL ==========================
+
+	mainVideo.addEventListener("waiting", () => {
+		loadingSpinner.style.display = "block"
+	})
+	mainVideo.addEventListener("canplay", () => {
+		loadingSpinner.style.display = "none"
+	})
 
 	/**
 	 * Updates the current playback time and adjusts the progress bar width

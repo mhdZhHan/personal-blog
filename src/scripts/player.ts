@@ -1,6 +1,22 @@
-document.addEventListener("astro:page-load", () => {
-	const videoPlayer = document.querySelector("#videoPlayer") as HTMLDivElement
+/**
+ * Custom Video Player
+ *
+ * This module implements a feature-rich video player with custom controls,
+ * including play/pause, volume control, seeking, fullscreen, picture-in-picture,
+ * playback speed adjustment, and keyboard shortcuts.
+ */
 
+// ANCHOR Constants
+const SKIP_TIME = 10
+const VOLUME_HIGH = 1
+const VOLUME_LOW = 0.3
+const VOLUME_MUTED = 0
+
+document.addEventListener("astro:page-load", initializeVideoPlayer)
+
+function initializeVideoPlayer() {
+	// ANCHOR Element Selection
+	const videoPlayer = document.querySelector("#videoPlayer") as HTMLDivElement
 	const mainVideo = videoPlayer.querySelector(
 		"#mainVideo"
 	) as HTMLVideoElement
@@ -18,45 +34,22 @@ document.addEventListener("astro:page-load", () => {
 		".buffered-progress-bar"
 	) as HTMLDivElement
 
-	// ======== LEFT CONTROLS ========
-	// buttons
+	// ANCHOR  Control Buttons
 	const fastRewindButton = videoPlayer.querySelector(
 		".fast-rewind"
 	) as HTMLButtonElement
 	const playPauseButton = videoPlayer.querySelector(
 		".play-pause"
 	) as HTMLButtonElement
-
-	const playIcon = videoPlayer.querySelector(".play") as SVGAElement
-	const pauseIcon = videoPlayer.querySelector(".pause") as SVGAElement
-
 	const fastForwardButton = videoPlayer.querySelector(
 		".fast-forward"
 	) as HTMLButtonElement
 	const volumeButton = videoPlayer.querySelector(
 		".volume"
 	) as HTMLButtonElement
-
-	// volume range
-	const volumeRange = videoPlayer.querySelector(
-		"#volumeRange"
-	) as HTMLInputElement
-
-	// duration text
-	const totalDuration = videoPlayer.querySelector(
-		".duration"
-	) as HTMLSpanElement
-	const currentDuration = videoPlayer.querySelector(
-		".current"
-	) as HTMLSpanElement
-	// ============================================
-
-	// ======== RIGHT CONTROLS ========
-	// toggle
 	const autoPlayButton = videoPlayer.querySelector(
 		".auto-play-toggle"
 	) as HTMLButtonElement
-	// buttons
 	const settingsButton = videoPlayer.querySelector(
 		".settings-btn"
 	) as HTMLButtonElement
@@ -66,36 +59,28 @@ document.addEventListener("astro:page-load", () => {
 	const fullScreenButton = videoPlayer.querySelector(
 		".full-screen"
 	) as HTMLButtonElement
-	// ============================================
 
-	// ======== SETTINGS ========
+	// ANCHOR Other Elements
+	const playIcon = videoPlayer.querySelector(".play") as SVGAElement
+	const pauseIcon = videoPlayer.querySelector(".pause") as SVGAElement
+	const volumeRange = videoPlayer.querySelector(
+		"#volumeRange"
+	) as HTMLInputElement
+	const totalDuration = videoPlayer.querySelector(
+		".duration"
+	) as HTMLSpanElement
+	const currentDuration = videoPlayer.querySelector(
+		".current"
+	) as HTMLSpanElement
 	const settings = videoPlayer.querySelector("#settings") as HTMLDivElement
 	const playbackSettings = videoPlayer.querySelector(
 		".playback"
 	) as HTMLDivElement
 
-	/**
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 */
-
-	// ANCHOR ========== CONSTANTS =======================================
-
-	const SKIP_TIME = 10
-
 	const TOTAL_VIDEO_DURATION = mainVideo.duration
 
-	const VOLUME_HIGH = 1 // full volume
-	const VOLUME_LOW = 0.3
-	const VOLUME_MUTED = 0
-
-	// ANCHOR ========== UTIL FUNCTIONS =======================================
-
-	// Utility function to format the time in mm:ss
-	function formatTime(seconds) {
+	// ANCHOR Utility Functions
+	function formatTime(seconds: number): string {
 		const minutes = Math.floor(seconds / 60)
 		const remainingSeconds = Math.floor(seconds % 60)
 		return `${minutes}:${
@@ -103,9 +88,7 @@ document.addEventListener("astro:page-load", () => {
 		}${remainingSeconds}`
 	}
 
-	// ANCHOR ========== CORE FUNCTIONS =======================================
-
-	// Function to update the buffered progress bar
+	// ANCHOR Core Functions
 	function updateBufferedProgress() {
 		if (mainVideo.buffered.length > 0) {
 			const buffered = mainVideo.buffered
@@ -116,34 +99,26 @@ document.addEventListener("astro:page-load", () => {
 		}
 	}
 
-	// Initial call to set buffered progress
-	updateBufferedProgress()
-
-	// Show controls menu
 	let hideTimeout: number
 	function showControls() {
 		clearTimeout(hideTimeout)
 		controls.setAttribute("aria-controls-active", "true")
 	}
 
-	// Hide controls menu
 	function hideControls() {
 		hideTimeout = window.setTimeout(() => {
 			controls.removeAttribute("aria-controls-active")
 		}, 2000)
 	}
 
-	// Control video play and pause
-	function palyPauseVideo() {
+	function playPauseVideo() {
 		mainVideo.paused ? mainVideo.play() : mainVideo.pause()
 	}
 
-	// Function to handle fast rewind
 	function fastRewind() {
 		mainVideo.currentTime = Math.max(mainVideo.currentTime - SKIP_TIME, 0)
 	}
 
-	// Function to handle fast forward
 	function fastForward() {
 		mainVideo.currentTime = Math.min(
 			mainVideo.currentTime + SKIP_TIME,
@@ -151,7 +126,6 @@ document.addEventListener("astro:page-load", () => {
 		)
 	}
 
-	// Load video duration and setting total video duration
 	function updateVideoDuration() {
 		totalDuration.textContent = formatTime(TOTAL_VIDEO_DURATION)
 	}
@@ -166,19 +140,16 @@ document.addEventListener("astro:page-load", () => {
 		}
 	}
 
-	// Function to set the volume level
 	function setVolume(level: number) {
 		mainVideo.volume = level
 		updateVolumeIcon(level)
 	}
 
-	// Function to toggle fullscreen
 	function toggleFullScreen(element: HTMLElement) {
 		const isFullScreen =
-			autoPlayButton.getAttribute("aria-maximized") === "false"
+			fullScreenButton.getAttribute("aria-maximized") === "true"
 
 		if (!isFullScreen && !document.fullscreenElement) {
-			// If not in full-screen, request full-screen
 			if (element.requestFullscreen) {
 				element.requestFullscreen()
 			} else if ((element as any).mozRequestFullScreen) {
@@ -188,10 +159,8 @@ document.addEventListener("astro:page-load", () => {
 			} else if ((element as any).msRequestFullscreen) {
 				;(element as any).msRequestFullscreen()
 			}
-
 			fullScreenButton.setAttribute("aria-maximized", "true")
 		} else {
-			// If already in full-screen, exit full-screen mode
 			if (document.exitFullscreen) {
 				document.exitFullscreen()
 			} else if ((document as any).mozCancelFullScreen) {
@@ -201,12 +170,10 @@ document.addEventListener("astro:page-load", () => {
 			} else if ((document as any).msExitFullscreen) {
 				;(document as any).msExitFullscreen()
 			}
-
 			fullScreenButton.setAttribute("aria-maximized", "false")
 		}
 	}
 
-	// Adjust playback speed (playback setting)
 	function setPlaybackSpeed(
 		videoElement: HTMLVideoElement,
 		playbackContainer: HTMLElement
@@ -219,29 +186,16 @@ document.addEventListener("astro:page-load", () => {
 				const selectedSpeed = parseFloat(
 					option.getAttribute("data-speed") || "1"
 				)
-
-				// Set the playback speed of the video element
 				videoElement.playbackRate = selectedSpeed
-
-				// Remove 'active-speed' attribute from all options
 				speedOptions.forEach((opt) =>
 					opt.removeAttribute("active-speed")
 				)
-
-				// Add 'active-speed' attribute to the clicked option
 				option.setAttribute("active-speed", "true")
 			})
 		})
 	}
-	/**
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 */
 
-	// ANCHOR ========== KEYBOARD EVENTS ===================================
+	// ANCHOR Keyboard Event Handler
 	function handleKeyBoardEvents(event: KeyboardEvent) {
 		const tagName = document.activeElement?.tagName.toLowerCase()
 
@@ -252,88 +206,64 @@ document.addEventListener("astro:page-load", () => {
 			case " ":
 				if (tagName === "button") return
 			case "k":
-				palyPauseVideo()
+				playPauseVideo()
 				break
-			case "ArrowLeft": // Fast rewind
+			case "ArrowLeft":
 			case "j":
 				fastRewind()
 				break
-			case "ArrowRight": // Fast forward
+			case "ArrowRight":
 			case "l":
 				fastForward()
 				break
-			case "m": // Mute/unmute
+			case "m":
 				volumeButton.click()
 				break
-			case "ArrowUp": // Increase volume
+			case "ArrowUp":
 				const newVolumeUp = Math.min(mainVideo.volume + 0.1, 1)
 				setVolume(newVolumeUp)
 				volumeRange.value = (newVolumeUp * 100).toString()
 				break
-			case "ArrowDown": // Decrease volume
+			case "ArrowDown":
 				const newVolumeDown = Math.max(mainVideo.volume - 0.1, 0)
 				setVolume(newVolumeDown)
 				volumeRange.value = (newVolumeDown * 100).toString()
 				break
-			case "f": // Toggle fullscreen
+			case "f":
 				toggleFullScreen(videoPlayer)
 				break
 		}
 	}
 
-	document.addEventListener("keydown", handleKeyBoardEvents)
-
-	/**
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 */
-
-	// ANCHOR ========== EVENT LISTENERS ====================================
-
-	// Prevent default controls
-	videoPlayer.addEventListener("contextmenu", (evt) => {
-		evt.preventDefault()
-	})
-
-	// Add event listener to update the buffered progress bar
+	// ANCHOR Event Listeners
+	// ======================= GENERAL LISTENERS ==========================
+	videoPlayer.addEventListener("contextmenu", (evt) => evt.preventDefault())
 	mainVideo.addEventListener("progress", updateBufferedProgress)
 
-	// Check if the metadata is already loaded (this way may because of `astro:page-load`)
 	if (mainVideo.readyState >= 1) {
-		// HAVE_METADATA (1)
 		updateVideoDuration()
 	} else {
-		// Add event listener to handle when metadata is loaded
 		mainVideo.addEventListener("loadedmetadata", updateVideoDuration)
 	}
 
-	/**
-	 * Updates the current playback time and adjusts the progress bar width
-	 * based on the current time of the video.
-	 */
+	// ======================= PLAYBACK CONTROL ==========================
 	mainVideo.addEventListener("timeupdate", () => {
 		let currentTime = mainVideo.currentTime
 		currentDuration.textContent = formatTime(currentTime)
-
 		let progressWidth = (currentTime / TOTAL_VIDEO_DURATION) * 100
 		progressBar.style.width = `${progressWidth}%`
 	})
 
 	mainVideo.addEventListener("ended", () => {
 		if (autoPlayButton.getAttribute("aria-checked") === "true") {
-			palyPauseVideo()
+			playPauseVideo()
 		}
 	})
 
-	// Video playing and pausing
-	playPauseButton.addEventListener("click", palyPauseVideo)
+	playPauseButton.addEventListener("click", playPauseVideo)
 
 	mainVideo.addEventListener("play", () => {
 		videoPlayer.setAttribute("aria-paused", "false")
-
 		playIcon.classList.add("hidden")
 		pauseIcon.classList.remove("hidden")
 		hideControls()
@@ -341,75 +271,52 @@ document.addEventListener("astro:page-load", () => {
 
 	mainVideo.addEventListener("pause", () => {
 		videoPlayer.setAttribute("aria-paused", "true")
-
 		playIcon.classList.remove("hidden")
 		pauseIcon.classList.add("hidden")
 		showControls()
 	})
 
-	// Fast Rewind
 	fastRewindButton.addEventListener("click", fastRewind)
-
-	// Fast Forward
 	fastForwardButton.addEventListener("click", fastForward)
 
-	/**
-	 * ANCHOR ========== SEEK VIDEO ON CLICK ===================================
-	 *
-	 * Allows users to seek to a specific time in the video by clicking on the
-	 * progress area. This listener calculates the click position relative to the
-	 * width of the progress area and adjusts the video playback time accordingly.
-	 *
-	 * ========================================================================
-	 */
+	// ======================= PROGRESS AND SEEKING ==========================
 	progressArea.addEventListener("click", (evt) => {
 		const progressAreaWidth = progressArea.clientWidth
 		const clickOffSetX = evt.offsetX
-
 		mainVideo.currentTime =
 			(clickOffSetX / progressAreaWidth) * TOTAL_VIDEO_DURATION
 	})
 
-	/*
-	 * ANCHOR ========== DISPLAY PROGRESS TIME ON MOUSE MOVE  ====================
-	 *
-	 * - Calculates the current time based on the cursor position relative to the progress area.
-	 * - Updates the displayed time and adjusts the position of the time indicator.
-	 * - The display is shown while the cursor is within the progress area.
-	 *
-	 * ========================================================================
-	 */
 	progressArea.addEventListener("mousemove", (evt) => {
 		const progressAreaWidth = (evt.currentTarget as HTMLElement).clientWidth
 		const offsetX =
 			evt.clientX -
 			(evt.currentTarget as HTMLElement).getBoundingClientRect().left
-
-		// Calculate the progress time based on the offset
-		const percentage = offsetX / progressAreaWidth
-		const progressTime = mainVideo.duration * percentage
-
-		// Format the progress time in mm:ss
+		let percentage = offsetX / progressAreaWidth
+		let progressTime = mainVideo.duration * percentage
+		progressTime = Math.max(0, Math.min(progressTime, mainVideo.duration))
 		const formattedTime = formatTime(progressTime)
-
 		progressAreaTime.textContent = formattedTime
-
-		progressAreaTime.style.setProperty("--x", `${offsetX}px`)
+		let tooltipX = Math.max(offsetX, progressAreaTime.clientWidth / 2)
+		tooltipX = Math.min(
+			tooltipX,
+			progressAreaWidth - progressAreaTime.clientWidth / 2
+		)
+		progressAreaTime.style.left = `${
+			tooltipX - progressAreaTime.clientWidth / 2
+		}px`
 		progressAreaTime.style.display = "block"
 	})
 
-	// HIDE PROGRESS TIME ON MOUSE LEAVE
-	progressArea.addEventListener("mouseleave", (evt) => {
+	progressArea.addEventListener("mouseleave", () => {
 		progressAreaTime.style.display = "none"
 	})
 
-	// ANCHOR ======================= VOLUME ===================================
-	// Volume range input change
+	// ======================= VOLUME CONTROL ==========================
 	volumeRange.addEventListener("input", () => {
 		setVolume(parseFloat(volumeRange.value) / 100)
 	})
 
-	// Volume button click (toggle mute/unmute)
 	volumeButton.addEventListener("click", () => {
 		if (mainVideo.volume === VOLUME_MUTED) {
 			setVolume(VOLUME_HIGH)
@@ -420,28 +327,18 @@ document.addEventListener("astro:page-load", () => {
 		}
 	})
 
-	// Initialize volume on page load
 	setVolume(VOLUME_HIGH)
-	// ==========================================================================
 
-	// ANCHOR ======================= AUTO PLAY TOGGLE ==========================
+	// ======================= AUTOPLAY TOGGLE ==========================
 	autoPlayButton.addEventListener("click", () => {
 		const isChecked = autoPlayButton.getAttribute("aria-checked") === "true"
-
 		autoPlayButton.setAttribute("aria-checked", (!isChecked).toString())
-
-		if (!isChecked) {
-			autoPlayButton.title = "Autoplay is on"
-		} else {
-			autoPlayButton.title = "Autoplay is off"
-		}
+		autoPlayButton.title = isChecked ? "Autoplay is off" : "Autoplay is on"
 	})
-	// ==========================================================================
 
-	// ANCHOR ======================= PICTURE IN PICTURE ========================
+	// ======================= PICTURE-IN-PICTURE ==========================
 	pictureInPictureButton.addEventListener("click", async () => {
 		try {
-			// Detect if the user is using Firefox
 			if (navigator.userAgent.toLowerCase().includes("firefox")) {
 				alert(
 					"To use Picture-in-Picture in Firefox, hover over the video and click the Picture-in-Picture button."
@@ -450,7 +347,6 @@ document.addEventListener("astro:page-load", () => {
 				document.pictureInPictureEnabled &&
 				mainVideo instanceof HTMLVideoElement
 			) {
-				// For other browsers that support the method
 				await mainVideo.requestPictureInPicture()
 			} else {
 				console.log(
@@ -462,32 +358,26 @@ document.addEventListener("astro:page-load", () => {
 		}
 	})
 
-	// ==========================================================================
-
-	// ANCHOR ======================= FULL SCREEN ===============================
+	// ======================= FULLSCREEN CONTROL ==========================
 	fullScreenButton.addEventListener("click", () =>
 		toggleFullScreen(videoPlayer)
 	)
-	// ==========================================================================
 
-	// ANCHOR ======================= SETTINGS ==================================
-	// Open settings menu
+	// ======================= SETTINGS CONTROL ==========================
 	settingsButton.addEventListener("click", () => {
 		const isSettingsOpened =
 			settingsButton.getAttribute("aria-settings-opened") === "true"
-
 		const newSettingsState = (!isSettingsOpened).toString()
 		settings.setAttribute("aria-settings-opened", newSettingsState)
 		settingsButton.setAttribute("aria-settings-opened", newSettingsState)
 	})
 
-	// Enable playback settings
+	// Enable Playback Settings
 	if (mainVideo && playbackSettings) {
 		setPlaybackSpeed(mainVideo, playbackSettings)
 	}
-	// ==========================================================================
 
-	// ANCHOR ======================= SHOW/HIDE CONTROLS ========================
+	// ======================= CONTROL VISIBILITY ==========================
 	videoPlayer.addEventListener("mouseover", showControls)
 	videoPlayer.addEventListener("mouseleave", () => {
 		const isPaused = videoPlayer.getAttribute("aria-paused") === "true"
@@ -495,13 +385,7 @@ document.addEventListener("astro:page-load", () => {
 			settingsButton.getAttribute("aria-settings-opened") === "true"
 		if (!isPaused && !isSettingsOpened) hideControls()
 	})
-	// ==========================================================================
 
-	/**
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 * ********************************************************************
-	 */
-})
+	// ======================= KEYBOARD CONTROLS ==========================
+	document.addEventListener("keydown", handleKeyBoardEvents)
+}

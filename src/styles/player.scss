@@ -39,20 +39,6 @@
 		outline: none;
 	}
 
-	.progressAreaTime {
-		--x: 7px;
-		position: absolute;
-		bottom: 60px;
-		left: var(--x);
-		padding: 4px 8px;
-		color: #fff;
-		font-size: 14px;
-		background: #000;
-		border-radius: 5px;
-		z-index: 1;
-		display: none;
-	}
-
 	.sub-text {
 		position: absolute;
 		left: 50%;
@@ -100,6 +86,21 @@
 
 			background: #33454f;
 			cursor: pointer;
+
+			.progressAreaTime {
+				--x: 7px;
+				position: absolute;
+				bottom: 25px;
+				left: var(--x);
+				padding: 4px 8px;
+				color: #fff;
+				font-size: 14px;
+				background: #000;
+				border-radius: 5px;
+				z-index: 1;
+				display: none;
+			}
+
 			.progress-bar {
 				position: relative;
 				width: 0;

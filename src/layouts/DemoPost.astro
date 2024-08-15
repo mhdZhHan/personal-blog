@@ -1,4 +1,5 @@
 ---
+import VideoPlayer from "@components/widgets/player/VideoPlayer.astro"
 import Layout from "./Layout.astro"
 
 const {
@@ -17,58 +18,11 @@ const {
 	<main class="wrapper">
 		<article>
 			<h1 class="section-title">{title}</h1>
-			<div class="demo-meta">
-				<time datetime={pubDate.toISOString()}
-					>{pubDate.toLocaleDateString()}</time
-				>
-				{
-					updatedDate && (
-						<div>
-							Last updated on{" "}
-							<time datetime={updatedDate.toISOString()}>
-								{updatedDate.toLocaleDateString()}
-							</time>
-						</div>
-					)
-				}
-			</div>
-			{
-				tags && (
-					<ul class="tags">
-						{tags.map((tag) => (
-							<li class="tag">{tag}</li>
-						))}
-					</ul>
-				)
-			}
-			{image && <img src={image} alt={title} class="demo-image" />}
-			<div class="demo-links">
-				{
-					liveDemo && (
-						<a
-							href={liveDemo}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="demo-button"
-						>
-							Live Demo
-						</a>
-					)
-				}
-				{
-					sourceCode && (
-						<a
-							href={sourceCode}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="demo-button"
-						>
-							Source Code
-						</a>
-					)
-				}
-			</div>
 			<div class="demo-content">
+				<div class="demo">
+					<VideoPlayer />
+				</div>
+
 				<slot />
 			</div>
 		</article>
@@ -76,57 +30,12 @@ const {
 </Layout>
 
 <style>
-	.demo-meta {
-		margin-bottom: 1rem;
-		color: var(--text);
-	}
-
-	.demo-image {
-		width: 100%;
-		max-height: 400px;
-		object-fit: cover;
-		border-radius: 8px;
-		margin-bottom: 1rem;
-	}
-
-	.tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		list-style-type: none;
-		padding: 0;
-		margin-bottom: 1rem;
-	}
-
-	.tag {
-		background-color: var(--primary);
-		color: white;
-		padding: 0.2rem 0.5rem;
-		border-radius: 4px;
-		font-size: 0.8rem;
-	}
-
-	.demo-links {
-		display: flex;
-		gap: 1rem;
-		margin-bottom: 2rem;
-	}
-
-	.demo-button {
-		display: inline-block;
-		padding: 0.5rem 1rem;
-		background-color: var(--primary);
-		color: white;
-		text-decoration: none;
-		border-radius: 4px;
-		transition: background-color 0.2s ease-in-out;
-	}
-
-	.demo-button:hover {
-		background-color: var(--gradient-to);
-	}
-
 	.demo-content {
 		line-height: 1.6;
+		margin-top: 20px;
+	}
+
+	.demo {
+		margin: 20px 0;
 	}
 </style>

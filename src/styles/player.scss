@@ -1,7 +1,6 @@
 #videoPlayer {
 	position: relative;
-	// width: 100%;
-	width: 700px;
+	width: 100%;
 	height: 100%;
 
 	overflow: hidden;
@@ -283,9 +282,10 @@
 						color: #fff;
 						transition: 0.4s;
 
-						@media (max-width: 400px) {
+						@media (max-width: 522px) {
 							display: none;
 						}
+						
 						&::-webkit-slider-thumb {
 							-webkit-appearance: none;
 							appearance: none;
@@ -336,6 +336,10 @@
 				.icon:hover #volumeRange {
 					display: inline-block;
 					width: 60px;
+
+					@media (max-width: 522px) {
+						display: none;
+					}
 				}
 
 				.icon:hover #volumeRange::-webkit-slider-thumb {
@@ -418,6 +422,10 @@
 					margin-right: 8px !important;
 					background: #b6b6b6;
 					// transition: background-color 0.3s ease;
+
+					@media all and (max-width: 522px) {
+						display: none;
+					}
 
 					.toggle-slide {
 						position: absolute;

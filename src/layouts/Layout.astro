@@ -101,10 +101,10 @@ const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`
 			modifiedDate={modifiedDate}
 		/>
 
-		<ViewTransitions />
-		<SpeedInsights />
-
 		<script src="../scripts/fun.ts"></script>
+
+		<SpeedInsights />
+		<ViewTransitions />
 	</head>
 
 	<body>
@@ -121,7 +121,7 @@ const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`
 	</body>
 </html>
 
-<script>
+<script is:inline>
 	const STORAGE_KEY = "theme-preference"
 	const DARK_THEME = "dark"
 	const LIGHT_THEME = "cool"
@@ -157,7 +157,7 @@ const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`
 </script>
 
 <style is:global lang="scss">
-	@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
+	// @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
 
 	:root {
 		--primary: #df2250;
@@ -189,6 +189,8 @@ const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`
 		--sun_icon_visibility: block;
 		--mon_icon_visibility: none;
 		--dl-invert: 0;
+
+		color-scheme: dark;
 	}
 
 	:root[data-theme="cool"] {
@@ -205,6 +207,8 @@ const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`
 		--sun_icon_visibility: none;
 		--mon_icon_visibility: block;
 		--dl-invert: 1;
+
+		color-scheme: light;
 	}
 
 	*,

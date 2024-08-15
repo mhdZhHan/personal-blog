@@ -190,7 +190,7 @@ if (Astro.slots.title) {
 </style>
 
 <script>
-	document.addEventListener("DOMContentLoaded", (event) => {
+	document.addEventListener("astro:page-load", (event) => {
 		const codeBlocks = document.querySelectorAll(".breezeWindow")
 
 		codeBlocks.forEach((block) => {

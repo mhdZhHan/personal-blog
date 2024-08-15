@@ -2,7 +2,6 @@
 import "@styles/player.scss"
 import Controls from "./controls/Controls.astro"
 import Settings from "./settings/Settings.astro"
-import CaptionSettings from "./settings/CaptionSettings.astro"
 
 // assets
 import TestVideo from "../../../assets/test.mp4"
@@ -14,7 +13,6 @@ import TRSub from "../../../assets/test-sub-tr.vtt"
 	<div
 		id="videoPlayer"
 		aria-paused="true"
-		transition:name="media-player"
 		transition:persist
 	>
 		<video preload="metadata" id="mainVideo">

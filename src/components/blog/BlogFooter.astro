@@ -72,7 +72,7 @@ import { FilePenLine, Share2 } from "lucide-astro"
 </style>
 
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
+	document.addEventListener("astro:page-load", () => {
 		const copyButton = document.getElementById("copy")
 		const toastElement = document.getElementById("toast-share")
 

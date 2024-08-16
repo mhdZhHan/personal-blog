@@ -38,13 +38,13 @@ const { posts } = Astro.props
 				</h3>
 			</div>
 
-			<ul class="posts-container">
+			<div class="posts-container">
 				{
 					posts.map((post) => (
 						<PostCard {...post.data} url={post.slug} post={post} />
 					))
 				}
-			</ul>
+			</div>
 		</div>
 	</section>
 </Layout>

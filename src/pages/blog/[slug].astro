@@ -65,19 +65,24 @@ const publishDate = simplifyDate(pubDate).simplifiedDate
 	publishDate={publishDate}
 	modifiedDate={publishDate}
 >
-	<section id="blog-post" class="post">
+	<article itemscope id="blog-post" class="post">
 		<div class="wrapper">
 			<div class="post__head">
-				<h1 class="post__title">{title}</h1>
+				<h1 itemprop="headline" class="post__title">{title}</h1>
 				<div class="post__meta">
-					<div class="post__author">
+					<div itemprop="author" class="post__author">
 						<User class="shrink-0" size={14} aria-hidden />
-						<span>Mohammed</span>
+						<span itemprop="name">Mohammed</span>
 					</div>
 
 					<div class="post__date">
 						<Calendar class="shrink-0" size={14} aria-hidden />
-						<span>{publishDate}</span>
+						<time
+							datetime={publishDate}
+							itemprop="datePublished"
+							class="post-date">{publishDate}</time
+						>
+						<meta itemprop="dateModified" content={publishDate} />
 					</div>
 
 					<div class="post__read">
@@ -108,7 +113,7 @@ const publishDate = simplifyDate(pubDate).simplifiedDate
 					/>
 				</div>
 
-				<div class="post__content">
+				<div class="post__content" itemprop="articleBody">
 					<Content components={{ figure: CodeBlock }} />
 				</div>
 			</div>
@@ -121,7 +126,7 @@ const publishDate = simplifyDate(pubDate).simplifiedDate
 				<PostComments />
 			</div>
 		</div>
-	</section>
+	</article>
 </Layout>
 
 <style lang="scss">

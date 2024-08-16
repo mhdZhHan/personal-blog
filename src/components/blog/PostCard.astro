@@ -12,7 +12,7 @@ const pubDate_ = simplifyDate(pubDate)
 const { remarkPluginFrontmatter } = await post.render()
 ---
 
-<li class="post-card">
+<article class="post-card">
 	<a href={`/blog/${url}`} aria-label={`${title}. ${description}`}>
 		{
 			image && (
@@ -31,6 +31,8 @@ const { remarkPluginFrontmatter } = await post.render()
 			</p>
 
 			<div class="white-space"></div>
+			
+			<hr class="post-card__border" />
 
 			<div class="meta">
 				<div class="date">
@@ -45,4 +47,4 @@ const { remarkPluginFrontmatter } = await post.render()
 			</div>
 		</div>
 	</a>
-</li>
+</article>

@@ -63,15 +63,15 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 				<p>No posts matched the search criteria.</p>
 			</div> -->
 
-			<ul class="blog-posts hidden" data-searched-posts></ul>
+			<div class="blog-posts hidden" data-searched-posts></div>
 
-			<ul class="blog-posts" data-static-posts>
+			<div class="blog-posts" data-static-posts>
 				{
 					page.data.map((post) => (
 						<PostCard {...post.data} url={post.slug} post={post} />
 					))
 				}
-			</ul>
+			</div>
 
 			<div class="blogs-footer">
 				<Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />

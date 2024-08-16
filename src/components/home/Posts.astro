@@ -9,13 +9,13 @@ const { posts } = Astro.props
 	<div class="wrapper">
 		<HeadTitle t1="Recent" t2="Posts" url="/blog" />
 
-		<ul class="posts-container">
+		<div class="posts-container">
 			{
 				posts.map((post) => (
 					<PostCard {...post.data} url={post.slug} post={post} />
 				))
 			}
-		</ul>
+		</div>
 	</div>
 </section>
 

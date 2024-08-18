@@ -88,6 +88,7 @@ const dockItems: (DockItem | { separator: true })[] = [
 		left: 50%;
 		transform: translateX(-50%);
 		animation: dockSlideUp 0.5s ease-out forwards;
+		z-index: 5;
 	}
 
 	.dock {
@@ -120,9 +121,9 @@ const dockItems: (DockItem | { separator: true })[] = [
 
 	.tooltip {
 		position: absolute;
-		top: -35px;
+		top: -25px;
 		background: rgba(0, 0, 0, 0.8);
-		color: white;
+		color: #fff;
 		padding: 4px 8px;
 		border-radius: 4px;
 		font-size: 12px;
@@ -130,6 +131,7 @@ const dockItems: (DockItem | { separator: true })[] = [
 		transition: opacity 0.3s ease;
 		pointer-events: none;
 		white-space: nowrap;
+		scale: .6;
 	}
 
 	.dock-item:hover .tooltip {

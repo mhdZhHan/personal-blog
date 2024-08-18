@@ -31,6 +31,50 @@ const { title, description, image, pubDate, tags, category, liveDemo } =
 	</p>
 </li>
 
+<li class="demo-card">
+	<div class="meta">
+		<FolderGit2 size={32} />
+
+		<span class="category-label">{category}</span>
+
+		<small class="pubDate">
+			<time datetime={pubDate} aria-label={pubDate}
+				>{simplifyDate(pubDate).simplifiedDate}</time
+			>
+		</small>
+	</div>
+
+	<h3 class="title">
+		<a href={`/🧪/${demo.slug}`} aria-label={title}>{title}</a>
+	</h3>
+
+	<p>
+		{description}
+	</p>
+</li>
+
+<li class="demo-card">
+	<div class="meta">
+		<FolderGit2 size={32} />
+
+		<span class="category-label">{category}</span>
+
+		<small class="pubDate">
+			<time datetime={pubDate} aria-label={pubDate}
+				>{simplifyDate(pubDate).simplifiedDate}</time
+			>
+		</small>
+	</div>
+
+	<h3 class="title">
+		<a href={`/🧪/${demo.slug}`} aria-label={title}>{title}</a>
+	</h3>
+
+	<p>
+		{description}
+	</p>
+</li>
+
 <style lang="scss">
 	.demo-card {
 		padding: 1rem;

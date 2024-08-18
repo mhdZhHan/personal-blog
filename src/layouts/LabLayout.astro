@@ -62,9 +62,7 @@
 			</div>
 		</main>
 
-		<div class="dock">
-			<!-- Add your dock icons here -->
-		</div>
+		<div class="dock"></div>
 	</body>
 </html>
 
@@ -233,12 +231,15 @@
 			z-index: 2;
 
 			padding-top: 3rem;
-			max-width: 1200px;
+			max-width: 1100px;
 
-			margin: 0 auto;
+			margin-inline: auto;
+
+			@media all and (max-width: 1205px) {
+				padding: 0.1em 1em;
+			}
 
 			.head {
-				// width: 100%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -250,7 +251,7 @@
 					line-height: 1.375;
 					max-width: 48rem;
 					text-align: center;
-					margin-bottom: 2rem;
+					margin-bottom: .6rem;
 				}
 			}
 		}
@@ -270,15 +271,9 @@
 		max-width: 100%;
 	}
 
-	/* Media Queries for Responsiveness */
 	@media screen and (max-width: 768px) {
 		body {
 			font-size: 14px;
-		}
-
-		.top-bar {
-			flex-direction: column;
-			align-items: flex-start;
 		}
 
 		.status-icons {

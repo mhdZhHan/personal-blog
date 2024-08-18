@@ -1,5 +1,6 @@
 ---
-import Layout from "@layouts/Layout.astro"
+// import Layout from "@layouts/Layout.astro"
+import LabLayout from "@layouts/LabLayout.astro"
 import DemosCard from "@components/demos/DemosCard.astro"
 
 import { getCollection } from "astro:content"
@@ -8,50 +9,18 @@ const demos = await getCollection("demos")
 demos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
 
-<Layout
+<LabLayout
 	title="Mohammed's Blog | Project Demos"
 	description="Explore demos of my latest projects and experiments."
 >
-	<section id="demos">
-		<div class="wrapper">
-			<div class="demos-head">
-				<h1 class="demos__title">🧪 Personal Laboratory</h1>
-				<!-- <p class="demos__sub-title">
-					🔬 Where code molecules collide, sparking creativity and
-					innovation.
-				</p> -->
-				<p class="demos__sub-title">
-					Explore this space, where my coding experiments come to
-					life.
-				</p>
-			</div>
-
-			<div class="demos-container">
-				<ul class="demos__demos-list">
-					{demos.map((demo) => <DemosCard demo={demo} />)}
-				</ul>
-			</div>
-		</div>
-	</section>
-</Layout>
+	<div class="demos-container">
+		<ul class="demos__demos-list">
+			{demos.map((demo) => <DemosCard demo={demo} />)}
+		</ul>
+	</div>
+</LabLayout>
 
 <style lang="scss">
-	.demos-head {
-		width: 100%;
-		text-align: center;
-		margin-bottom: 1.5rem;
-		.demos__title {
-			font-size: 1.875rem;
-			line-height: 2.25rem;
-			font-weight: 700;
-			font-family: "8-bit_bold";
-		}
-		.demos__sub-title {
-			margin-top: 0.75rem;
-			color: var(--gray);
-		}
-	}
-
 	.demos-container {
 		margin-top: 2rem;
 		.demos__demos-list {

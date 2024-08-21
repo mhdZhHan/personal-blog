@@ -181,14 +181,14 @@ const publishDate = simplifyDate(pubDate).simplifiedDate
 </style>
 
 <script define:vars={{ slug }}>
-	fetch("/api/blog/postViews", {
-		method: "PUT",
-		body: JSON.stringify({ slug }),
-	})
-		.then(async (res) => {
+	document.addEventListener("astro:page-load", () => {
+		fetch("/api/blog/postViews", {
+			method: "PUT",
+			body: JSON.stringify({ slug }),
+		}).then(async (res) => {
 			const el = document.querySelector(`[data-post-views="${slug}"]`)
 			if (el)
 				el.textContent = (await res.text())?.toString().padStart(6, "0")
 		})
-		.catch((error) => console.log("Hello", error))
+	})
 </script>

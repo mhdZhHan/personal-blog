@@ -1,0 +1,201 @@
+---
+title: Ultimate Guide To Setting Up Zsh With Oh My Zsh And Powerlevel10k For A Stunning Terminal
+draft: false
+pubDate: 2024-08-21
+description: "Transform your terminal with Zsh, Oh My Zsh, and PowerLevel10k! This beginner-friendly guide walks you through the installation and setup process, adding style and efficiency to your command line experience."
+author: "Mohammed"
+image: "/images/blogs/"
+tags: ["zsh", "oh-my-zsh", "terminal", "linux"]
+---
+import InPageNav from "@components/widgets/InPageNav.astro"
+
+Are you tired of the same old boring terminal? Ready to give it a fresh, stylish upgrade? Well, you're in the right place! In this guide, we're going to set up Zsh with Oh My Zsh and PowerLevel10k to turn your terminal into something amazing. Whether you're a coding pro or just getting started, this setup will make your terminal not only look cool but also super efficient. Let's dive in and transform your terminal experience!
+
+### Installation Guide
+
+Ready to make your terminal awesome? We’re going to install Zsh and then add Oh My Zsh to make it colorful, smart, and fun to use. Let's get started!
+
+### 1. Install Zsh
+
+First, we need to install Zsh. Don’t worry, it’s easy!
+
+<InPageNav
+    routes={["macOS", "Ubuntu/Debian", "Fedora", "Arch"]}
+>
+```bash
+# Install Homebrew (if you haven’t already)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Update Zsh to the latest version
+brew install zsh
+```
+```bash
+sudo apt update
+sudo apt install zsh
+```
+```bash
+sudo dnf install zsh
+```
+```bash
+sudo pacman -S zsh
+```
+</InPageNav>
+
+### 2. Set Zsh as Your Default Shell
+
+Now that Zsh is installed, let’s make it your default shell. This way, you’ll start using it every time you open a terminal:
+
+```bash
+chsh -s $(which zsh)
+```
+
+### 3. Install Oh My Zsh
+
+Finally, we’ll install (Oh My Zsh)[], which will make your terminal look amazing and give you tons of cool features:
+
+
+<InPageNav
+    routes={["Install oh-my-zsh via curl", "Install oh-my-zsh via wget"]}
+>
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+</InPageNav>
+
+### 4. Install PowerLevel10k
+
+Now that you’ve got Oh My Zsh set up, it’s time to make your terminal look even cooler with (PowerLevel10k)[https://github.com/romkatv/powerlevel10k], a theme that adds some serious style and functionality.
+
+To install PowerLevel10k, just run the following command:
+
+```zsh
+git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+```
+
+### 5. Install the Meslo Nerd Font
+
+Before activating `PowerLevel10k`, you'll need to install the Meslo Nerd Font. This font ensures that all the special icons and symbols in PowerLevel10k display correctly. Here's how to install it on different operating systems:
+
+<InPageNav
+    routes={["macOS", "Ubuntu/Debian & Fedora", "Arch"]}
+>
+```bash
+brew tap homebrew/cask-fonts
+brew install --cask font-meslo-lg-nerd-font
+```
+```bash
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+mkdir -p ~/.local/share/fonts
+mv 'MesloLGS NF Regular.ttf' ~/.local/share/fonts/
+fc-cache -f -v
+```
+```bash
+sudo dnf install zsh
+```
+```bash
+yay -S nerd-fonts-meslo
+```
+</InPageNav>
+
+Once the font is installed, go to your terminal's settings and change the font to `MesloLGS NF`.
+
+
+### 6. Activate PowerLevel10k
+
+After installing, let’s activate the theme:
+
+1. **Open your** `.zshrc` file in your favorite text editor:
+
+```zsh
+nano ~/.zshrc
+```
+
+2. **Find the line** that says `ZSH_THEME="robbyrussell"` and replace `"robbyrussell"` with `"powerlevel10k/powerlevel10k"`. It should look like this:
+
+```zsh
+ZSH_THEME="powerlevel10k/powerlevel10k"
+```
+
+3. ***Save the file** and exit the editor (`CTRL + O` to save, then `CTRL + X` to exit).
+
+4. Apply the changes by restarting your terminal or running:
+
+```zsh
+source ~/.zshrc
+```
+
+### 7. Configure PowerLevel10k
+When you restart your terminal after activating PowerLevel10k, the configuration wizard should start automatically. This wizard will guide you through customizing the appearance and features of your terminal prompt, allowing you to choose different styles, icons, and layouts.
+
+If the configuration wizard doesn't start automatically, don't worry! You can manually start it by running the following command:
+
+```zsh
+p10k configure
+```
+
+This command will launch the configuration wizard, letting you set up or tweak your PowerLevel10k theme as you like.
+
+> Remember, you can run `p10k configure` anytime if you want to reconfigure your setup later.
+
+
+### 8. Setting Up Plugins (Optional but Highly Recommended)
+
+To make your terminal even more powerful, you can install some useful plugins. Here’s how you can do it:
+
+1. **Autosuggestions Plugin**
+This plugin suggests commands as you type, based on your history and completions.
+```zsh
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+```
+
+2. **Syntax Highlighting Plugins**
+These plugins highlight command syntax in your terminal:
+
+- ***zsh-syntax-highlighting:***
+  ```zsh
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+  ```
+
+- ***zsh-fast-syntax-highlighting:***
+  ```zsh
+  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
+  ```
+
+3. **Autocomplete Plugin**
+
+This plugin improves tab completion, making it more efficient.
+
+```zsh
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
+```
+
+4. **Enabling the Plugins**
+Now that you’ve installed the plugins, you need to enable them:
+
+- Open your `.zshrc` file:
+- Find the line that says plugins=(git).
+- Replace that line with:
+```zsh title=".zshrc"
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
+```
+
+### Note on zsh-autosuggestions Plugin
+Some users experience an issue with ghost text appearing when they paste something into the terminal and then move to the end of the command using the arrow keys. This happens because the autosuggestions plugin might conflict with the pasted text.
+
+To fix this issue, add the following line to your `.zshrc` file:
+
+```zsh title=".zshrc"
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
+```
+
+Make sure to place this line after the following in your `.zshrc` file:
+
+![Alt text](/images/blogs/oh-my-zsh.png "ZSH_AUTOSUGGEST_CLEAR_WIDGETS")
+ 
+This will help prevent any conflicts with the `zsh-autosuggestions` plugin when pasting commands into your terminal.
+
+🎉 That’s it! You’ve now transformed your terminal into a powerful, colorful, and super supportive workspace with Oh My Zsh and PowerLevel10k. Your terminal should be looking sharp and performing like a champ. Don’t forget to explore more plugins to keep enhancing your setup.
+
+Happy coding, and see you next time! 👋

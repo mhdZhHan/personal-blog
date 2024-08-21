@@ -18,13 +18,20 @@ import { GET as getTotalViews } from "@api/blog/postViews"
 
 export async function getStaticPaths({ paginate }) {
 	const posts = await getCollection("blog")
-	const nonDraftPosts_: CollectionEntry<"blog">["data"] = nonDraftPosts(posts)
-	const sortedPosts = sortByDate(nonDraftPosts_)
+	const activePosts: CollectionEntry<"blog">["data"] = nonDraftPosts(posts)
+	const sortedPosts = sortByDate(activePosts)
 
-	return paginate(sortedPosts, { pageSize: 6 })
+	const totalPosts = sortedPosts.length
+
+	return paginate(sortedPosts, {
+		pageSize: 6,
+		props: {
+			totalPosts,
+		},
+	})
 }
 
-const { page } = Astro.props as any
+const { page, totalPosts } = Astro.props as any
 
 const tags = [...new Set(page.data.flatMap((post) => post.data.tags))].sort()
 
@@ -50,7 +57,7 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 					<div class="data">
 						<span class="views">{totalViews} Views</span>
 						<Dot class="shrink-0" size={14} aria-hidden />
-						<span>{page.data.length} Posts</span>
+						<span>{totalPosts} Posts</span>
 					</div>
 				</div>
 

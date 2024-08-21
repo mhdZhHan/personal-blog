@@ -29,6 +29,13 @@ const { routes, defaultActiveIndex = 0 } = Astro.props
 	.tabs-container {
 		width: 100%;
 	}
+	.tabs-container .tab-content > * {
+		display: none;
+	}
+
+	.tabs-container .tab-content > *:first-child {
+		display: block;
+	}
 	.tab-buttons {
 		border-bottom: 1px solid var(--border-color);
 
@@ -64,27 +71,64 @@ const { routes, defaultActiveIndex = 0 } = Astro.props
 	}
 </style>
 
-<script>
-	const tabButtons: NodeListOf<HTMLButtonElement> =
-		document.querySelectorAll(".tab-button")
-	const tabContents: NodeListOf<Element> =
-		document.querySelectorAll(".tab-content > *")
+<!-- <script>
+	document.addEventListener("astro:page-load", () => {
+		const tabButtons: NodeListOf<HTMLButtonElement> =
+			document.querySelectorAll(".tab-button")
+		const tabContents: NodeListOf<Element> =
+			document.querySelectorAll(".tab-content > *")
 
-	function setActiveTab(index: number): void {
-		tabButtons.forEach((button: HTMLButtonElement, i: number) => {
-			button.classList.toggle("active", i === index)
+		function setActiveTab(index: number): void {
+			tabButtons.forEach((button: HTMLButtonElement, i: number) => {
+				button.classList.toggle("active", i === index)
+			})
+
+			tabContents.forEach((content: Element, i: number) => {
+				;(content as HTMLElement).style.display =
+					i === index ? "block" : "none"
+			})
+		}
+
+		tabButtons.forEach((button: HTMLButtonElement, index: number) => {
+			button.addEventListener("click", () => setActiveTab(index))
 		})
 
-		tabContents.forEach((content: Element, i: number) => {
-			;(content as HTMLElement).style.display =
-				i === index ? "block" : "none"
-		})
-	}
-
-	tabButtons.forEach((button: HTMLButtonElement, index: number) => {
-		button.addEventListener("click", () => setActiveTab(index))
+		// Initial active tab `0`
+		setActiveTab(0)
 	})
+</script> -->
 
-	// Initial active tab `0`
-	setActiveTab(0)
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const navContainers =
+			document.querySelectorAll<HTMLElement>(".tabs-container")
+
+		navContainers.forEach((container) => {
+			const tabButtons =
+				container.querySelectorAll<HTMLButtonElement>(".tab-button")
+			const tabContents =
+				container.querySelectorAll<HTMLElement>(".tab-content > *")
+
+			function setActiveTab(index: number) {
+				tabButtons.forEach((button, i) => {
+					if (i === index) {
+						button.classList.add("active")
+					} else {
+						button.classList.remove("active")
+					}
+				})
+
+				tabContents.forEach((content, i) => {
+					content.style.display = i === index ? "block" : "none"
+				})
+			}
+
+			tabButtons.forEach((button, index) => {
+				button.addEventListener("click", () => setActiveTab(index))
+			})
+
+			// Initialize with the default active tab
+			setActiveTab(0)
+		})
+	})
 </script>

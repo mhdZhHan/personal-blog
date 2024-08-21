@@ -4,7 +4,7 @@ draft: false
 pubDate: 2024-08-21
 description: "Transform your terminal with Zsh, Oh My Zsh, and PowerLevel10k! This beginner-friendly guide walks you through the installation and setup process, adding style and efficiency to your command line experience."
 author: "Mohammed"
-image: "/images/blogs/"
+image: "/images/blogs/person-using-retro-computer.jpg"
 tags: ["zsh", "oh-my-zsh", "terminal", "linux"]
 ---
 import InPageNav from "@components/widgets/InPageNav.astro"
@@ -32,9 +32,11 @@ brew install zsh
 sudo apt update
 sudo apt install zsh
 ```
+
 ```bash
 sudo dnf install zsh
 ```
+
 ```bash
 sudo pacman -S zsh
 ```
@@ -52,13 +54,13 @@ chsh -s $(which zsh)
 
 Finally, we’ll install (Oh My Zsh)[], which will make your terminal look amazing and give you tons of cool features:
 
-
 <InPageNav
     routes={["Install oh-my-zsh via curl", "Install oh-my-zsh via wget"]}
 >
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
+
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
@@ -85,17 +87,16 @@ Before activating `PowerLevel10k`, you'll need to install the Meslo Nerd Font. T
 brew tap homebrew/cask-fonts
 brew install --cask font-meslo-lg-nerd-font
 ```
+
 ```bash
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 mkdir -p ~/.local/share/fonts
 mv 'MesloLGS NF Regular.ttf' ~/.local/share/fonts/
 fc-cache -f -v
 ```
+
 ```bash
-sudo dnf install zsh
-```
-```bash
-yay -S nerd-fonts-meslo
+yay -S ttf-meslo-nerd-font-powerlevel10k
 ```
 </InPageNav>
 
@@ -118,7 +119,7 @@ nano ~/.zshrc
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
 
-3. ***Save the file** and exit the editor (`CTRL + O` to save, then `CTRL + X` to exit).
+3. **Save the file** and exit the editor (`CTRL + O` to save, then `CTRL + X` to exit).
 
 4. Apply the changes by restarting your terminal or running:
 
@@ -144,13 +145,13 @@ This command will launch the configuration wizard, letting you set up or tweak y
 
 To make your terminal even more powerful, you can install some useful plugins. Here’s how you can do it:
 
-1. **Autosuggestions Plugin**
+**1. Autosuggestions Plugin**
 This plugin suggests commands as you type, based on your history and completions.
 ```zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 ```
 
-2. **Syntax Highlighting Plugins**
+**2. Syntax Highlighting Plugins**
 These plugins highlight command syntax in your terminal:
 
 - ***zsh-syntax-highlighting:***
@@ -163,7 +164,7 @@ These plugins highlight command syntax in your terminal:
   git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
   ```
 
-3. **Autocomplete Plugin**
+**3. Autocomplete Plugin**
 
 This plugin improves tab completion, making it more efficient.
 
@@ -171,7 +172,7 @@ This plugin improves tab completion, making it more efficient.
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
 ```
 
-4. **Enabling the Plugins**
+**4. Enabling the Plugins**
 Now that you’ve installed the plugins, you need to enable them:
 
 - Open your `.zshrc` file:
@@ -192,7 +193,7 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
 Make sure to place this line after the following in your `.zshrc` file:
 
-![Alt text](/images/blogs/oh-my-zsh.png "ZSH_AUTOSUGGEST_CLEAR_WIDGETS")
+![help image](/images/blogs/oh-my-zsh.png)
  
 This will help prevent any conflicts with the `zsh-autosuggestions` plugin when pasting commands into your terminal.
 

@@ -13,7 +13,7 @@ import Layout from "@layouts/Layout.astro"
 // components
 import TOC from "@components/blog/TOC.astro"
 import CodeBlock from "@components/blog/CodeBlock.astro"
-import PostComments from "@components/blog/PostComments.astro"
+import Giscus from "@components/blog/Giscus.astro"
 import BlogFooter from "@components/blog/BlogFooter.astro"
 import PostPagination from "@components/blog/PostPagination.astro"
 
@@ -109,7 +109,7 @@ const publishDate = simplifyDate(pubDate).simplifiedDate
 				<BlogFooter />
 				<PostPagination {post} />
 				<hr class="hr-line" style="margin-bottom: 2.5rem;" />
-				<PostComments />
+				<Giscus />
 			</div>
 		</div>
 	</article>

@@ -33,7 +33,28 @@ export async function getStaticPaths({ paginate }) {
 
 const { page, totalPosts } = Astro.props as any
 
-const tags = [...new Set(page.data.flatMap((post) => post.data.tags))].sort()
+// const tags = [...new Set(page.data.flatMap((post) => post.data.tags))].sort()
+// console.log("Tags", tags)
+
+// Populate the top 10 most frequent tags
+const tagFrequencyMap = new Map<string, number>()
+
+page.data.forEach((post) => {
+	post.data.tags.forEach((tag) => {
+		if (tagFrequencyMap.has(tag)) {
+			tagFrequencyMap.set(tag, tagFrequencyMap.get(tag)! + 1)
+		} else {
+			tagFrequencyMap.set(tag, 1)
+		}
+	})
+})
+
+const sortedTags = Array.from(tagFrequencyMap.entries()).sort(
+	(a, b) => b[1] - a[1]
+)
+const top10Tags = sortedTags.slice(0, 15).map(([tag]) => tag)
+
+// console.log("Top 10 Tags", top10Tags)
 
 // @ts-ignore
 const totalViews = await getTotalViews(Astro).then((res) => res.text())
@@ -61,7 +82,7 @@ const totalViews = await getTotalViews(Astro).then((res) => res.text())
 					</div>
 				</div>
 
-				<SearchBox tags={tags} />
+				<SearchBox tags={top10Tags} />
 			</div>
 
 			<!-- <div class="no-posts hidden" data-no-posts-found>

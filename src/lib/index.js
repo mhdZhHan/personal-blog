@@ -38,33 +38,33 @@ export const simplifyDate = (date) => {
 	return { simplifiedDate, simplifiedTime }
 }
 
-export function markdownToPlainText(markdownContent) {
-	// Remove headings
-	markdownContent = markdownContent.replace(/^#+\s+(.*)$/gm, "$1\n")
+// export function markdownToPlainText(markdownContent) {
+// 	// Remove headings
+// 	markdownContent = markdownContent.replace(/^#+\s+(.*)$/gm, "$1\n")
 
-	// Remove bold and italic markers
-	markdownContent = markdownContent.replace(
-		/\*\*(.*?)\*\*|__(.*?)__/g,
-		"$1$2"
-	)
-	markdownContent = markdownContent.replace(/\*(.*?)\*|_(.*?)_/g, "$1$2")
+// 	// Remove bold and italic markers
+// 	markdownContent = markdownContent.replace(
+// 		/\*\*(.*?)\*\*|__(.*?)__/g,
+// 		"$1$2"
+// 	)
+// 	markdownContent = markdownContent.replace(/\*(.*?)\*|_(.*?)_/g, "$1$2")
 
-	// Remove code blocks and inline code
-	markdownContent = markdownContent.replace(/```.*?```/gs, "")
-	markdownContent = markdownContent.replace(/`([^`]+)`/g, "$1")
+// 	// Remove code blocks and inline code
+// 	markdownContent = markdownContent.replace(/```.*?```/gs, "")
+// 	markdownContent = markdownContent.replace(/`([^`]+)`/g, "$1")
 
-	// Remove unordered and ordered list markers
-	markdownContent = markdownContent.replace(/^\s*[-*+]\s+(.*)$/gm, "$1\n")
-	markdownContent = markdownContent.replace(/^\s*\d+\.\s+(.*)$/gm, "$1\n")
+// 	// Remove unordered and ordered list markers
+// 	markdownContent = markdownContent.replace(/^\s*[-*+]\s+(.*)$/gm, "$1\n")
+// 	markdownContent = markdownContent.replace(/^\s*\d+\.\s+(.*)$/gm, "$1\n")
 
-	// Remove blockquote
-	markdownContent = markdownContent.replace(/^\s*>.*$/gm, "")
+// 	// Remove blockquote
+// 	markdownContent = markdownContent.replace(/^\s*>.*$/gm, "")
 
-	// Remove horizontal rules
-	markdownContent = markdownContent.replace(/^\s*[-*_]{3,}\s*$/gm, "")
+// 	// Remove horizontal rules
+// 	markdownContent = markdownContent.replace(/^\s*[-*_]{3,}\s*$/gm, "")
 
-	return markdownContent.trim()
-}
+// 	return markdownContent.trim()
+// }
 
 export const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 

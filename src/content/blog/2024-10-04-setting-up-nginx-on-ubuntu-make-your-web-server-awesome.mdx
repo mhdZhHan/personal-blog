@@ -1,0 +1,107 @@
+---
+title: Setting Up Nginx On Ubuntu Make Your Web Server Awesome
+draft: false
+pubDate: 2024-10-04
+description: "Learn how to set up Nginx on Ubuntu in easy steps! This beginner-friendly guide uses simple English and fun emojis to help you create your very own website. Get ready to become a web wizard! 🧙‍♂️✨"
+author: "Mohammed"
+image: "/images/blogs/nginx-setup-ubuntu-fun.jpg"
+tags: [""VPS,"nginx", "ubuntu","DevOps"]
+---
+
+# Setting Up Nginx on Ubuntu: Make Your Web Server Awesome! 🚀
+
+Hey there, web explorer! 👋 You've got Nginx installed, and now it's time to make it shine. Let's set up Nginx on Ubuntu and get your website ready for the world! 🌍
+
+## Step 1: Create a New Home for Your Website 🏠
+
+First, we'll make a special file for your website:
+
+```bash
+sudo vim /etc/nginx/sites-available/default
+```
+
+This opens a file where we'll tell Nginx how to show your website. Cool, right?
+
+Now, let's put some magic words in this file:
+
+```nginx
+server {
+    listen 80;  # This is like your website's front door
+    server_name localhost;  # What we call your website
+    root /var/www/html;  # Where your website files live
+    index index.html index.htm;  # The main pages of your site
+    location / {
+        try_files $uri $uri/ =404;  # If a page is missing, show an error
+    }
+}
+```
+
+Don't worry if it looks confusing. It's just telling Nginx where to find your website stuff! 😊
+
+## Step 2: Make a Comfy Spot for Your Website Files 📁
+
+Now, let's create a cozy place for your website to live:
+
+```bash
+sudo mkdir -p /var/www/html
+sudo chown -R $USER:$USER /var/www/html
+sudo chmod -R 755 /var/www/html
+```
+
+We just made a new folder and made sure you can put files in it. It's like building a house for your website! 🏗️
+
+## Step 3: Write Your First Web Page 📝
+
+Time to create your first webpage:
+
+```bash
+cd /var/www/html
+touch index.html
+sudo vim index.html
+```
+
+Now, let's put some simple stuff in your new web page:
+
+```html
+<html>
+<head>
+    <title>Welcome to My Cool Site</title>
+</head>
+<body>
+    <h1>Hello, World! My site is awesome! 😎</h1>
+</body>
+</html>
+```
+
+Woohoo! You just made your first web page. You're basically a web wizard now! 🧙‍♂️
+
+## Step 4: Check If Everything's OK 🔍
+
+Let's make sure we didn't make any mistakes:
+
+```bash
+sudo nginx -t
+```
+
+If it says "OK" and "successful", give yourself a high five! ✋
+
+## Step 5: Show Your Website to the World 🎉
+
+Last step! Let's tell Nginx to use our new setup:
+
+```bash
+sudo systemctl reload nginx
+```
+
+And... tada! 🎭 Your website is now live on your computer!
+
+## You Did It! You're a Web Master! 🏆
+
+You just set up Nginx on Ubuntu! Your computer is now a real web server. How cool is that?
+
+To see your website, open a web browser on your computer and go to `http://localhost`. You should see your "Hello, World!" message.
+
+Remember, this is just the beginning. You can learn more and do even cooler things with Nginx. But for now, enjoy your awesome new web server! 🎈🎊
+
+Keep exploring and having fun with your web adventures! 🚀
+

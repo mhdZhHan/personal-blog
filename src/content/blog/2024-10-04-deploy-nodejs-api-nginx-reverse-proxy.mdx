@@ -1,0 +1,150 @@
+---
+title: "Deploy Node.js API and Set Up Nginx Reverse Proxy: Your Web Traffic Control Tower! 🚦"
+draft: false
+pubDate: 2024-10-04
+description: "Learn how to deploy a Node.js API and set up Nginx as a reverse proxy. This fun guide will show you how to create a simple Express app and configure Nginx to be your website's traffic controller. Perfect for aspiring web architects! 🏗️🌐"
+author: "Mohammed"
+image: "/images/blogs/robot-performing-fireman-work-instead-humans.jpg"
+tags: ["VPS", "Nginx", "DevOps", "deploy", "node", "reverse proxy"]
+---
+
+Hey there, web architects! 👋 Ready to build your own internet skyscraper? Let's deploy a Node.js API and set up Nginx as a reverse proxy. It's like creating your own web traffic control tower! 🏢
+
+## Part 1: Building Our Express Skyscraper 🏗️
+
+### Step 1: Get Your Building Materials (Install Node.js and npm) 🧱
+
+First, let's get our tools ready. Open your terminal and type:
+
+```bash
+sudo apt install nodejs npm
+```
+
+### Step 2: Create Your Construction Site 🚧
+
+Let's make a spot for our new building:
+
+```bash
+mkdir express-app
+cd express-app
+npm init -y
+```
+
+### Step 3: Gather More Supplies (Install Dependencies) 🛠️
+
+Time to get some special building blocks:
+
+```bash
+npm install express nodemon
+```
+
+### Step 4: Draw Up the Blueprints (Update package.json) 📝
+
+Open your `package.json` and make it look like this:
+
+```json
+{
+  "name": "express-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
+}
+```
+
+### Step 5: Build Your Express Elevator (Create index.js) 🛗
+
+Create a new file called `index.js` and add this code:
+
+```javascript
+import express from "express"
+
+const app = express()
+
+app.get("/api", (req, res) => {
+  return res.status(200).json({
+    message: "server working",
+  })
+})
+
+app.listen(5000, () => console.log("Server is running on 5000"))
+```
+
+### Step 6: Hire a Building Manager (Install PM2) 👷
+
+PM2 will keep our building running 24/7:
+
+```bash
+npm install -g pm2
+```
+
+### Step 7: Open for Business! 🎉
+
+Start your new skyscraper:
+
+```bash
+pm2 start "npm run dev"
+```
+
+## Part 2: Setting Up Your Traffic Control Tower (Nginx Reverse Proxy) 🗼
+
+### Step 1: Configure Your Control Tower 🔧
+
+Open your Nginx config file:
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+### Step 2: Program Your Traffic Controller 🚦
+
+Replace the content with this:
+
+```nginx
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+### Step 3: Test and Launch Your Control Tower 🚀
+
+Check if everything's okay:
+
+```bash
+sudo nginx -t
+```
+
+If it says "OK", let's start directing traffic:
+
+```bash
+sudo systemctl reload nginx
+```
+
+## You Did It! Your Web Skyscraper is Open for Business! 🎊
+
+Congratulations, web architect! You've just built a high-tech API skyscraper with its own traffic control tower. Now when someone visits `http://<your-server-ip>/api`, they'll get a warm welcome message:
+
+```json
+{ "message": "server working" }
+```
+
+Your Express app is now running behind Nginx, protected and ready to handle tons of visitors. Keep building and reaching for the (web) stars! 🌟🏙️

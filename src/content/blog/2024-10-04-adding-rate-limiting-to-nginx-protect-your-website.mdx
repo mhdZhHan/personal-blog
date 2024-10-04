@@ -1,0 +1,95 @@
+---
+title: Adding Rate Limiting To Nginx Protect Your Website
+draft: false
+pubDate: 2024-10-04
+description: "Learn how to add rate limiting to your Nginx server in simple steps! This beginner-friendly guide uses easy explanations and fun emojis to help you protect your website from too much traffic. Get ready to become a web traffic controller! 🚓🌐"
+author: "Mohammed"
+image: "/images/blogs/nginx-rate-limiting-fun.jpg"
+tags: ["VPS", "Nginx", "rate limiting", "DevOps"]
+---
+
+# Adding Rate Limiting to Nginx: Protect Your Website from Traffic Jams! 🚦
+
+Hey there, web wizards! 👋 Ready to learn a cool trick to keep your website running smoothly? Let's talk about rate limiting in Nginx. It's like having a traffic cop for your website! 🚓
+
+## What's Rate Limiting? 🤔
+
+Imagine your website is a popular ice cream shop. 🍦 Rate limiting is like having a rule that says, "Only 2 people can enter the shop every second." This keeps your shop from getting too crowded. On websites, it stops any one computer from sending too many requests and slowing things down.
+
+## Let's Set Up Rate Limiting! 🛠️
+
+### Step 1: Open the Main Nginx File 📂
+
+First, we need to open a special Nginx file:
+
+```bash
+sudo nano /etc/nginx/nginx.conf
+```
+
+This is like opening up the rule book for your website's traffic cop.
+
+### Step 2: Add the Rate Limiting Rule 📝
+
+Now, let's add a new rule. Find the part that says `http {` and add this line right after it:
+
+```nginx
+http {
+    limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s;
+    # ... other stuff might be here ...
+}
+```
+
+Don't worry if it looks confusing! Here's what it means:
+- We're creating a zone called "mylimit" 🏷️
+- It can remember about 160,000 visitors 🧑‍🤝‍🧑
+- Each visitor is allowed 2 requests per second ⏱️
+
+### Step 3: Use the Rule in Your Website 🎯
+
+Now, let's tell your website to use this rule. Open your website's config file:
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+Find the part that looks like this and add our new rule:
+
+```nginx
+server {
+    # ... other stuff might be here ...
+    location / {
+        limit_req zone=mylimit burst=20 nodelay;
+        try_files $uri $uri/ =404;
+    }
+    # ... more stuff might be here ...
+}
+```
+
+This tells your website:
+- Use the "mylimit" rule we made earlier 🎫
+- Allow short bursts of up to 20 extra requests 💨
+- If there are too many requests, say "no" right away 🛑
+
+### Step 4: Check If Everything's OK 🔍
+
+Let's make sure we didn't make any mistakes:
+
+```bash
+sudo nginx -t
+```
+
+If it says "OK" and "successful", you did great! 🌟
+
+### Step 5: Restart Nginx 🔄
+
+Finally, let's tell Nginx to use our new rules:
+
+```bash
+sudo systemctl reload nginx
+```
+
+## You Did It! Your Website is Now Protected! 🛡️
+
+Congratulations! You've just added rate limiting to your Nginx server. Now your website can handle traffic much better, just like a well-organized ice cream shop! 🍦🎉
+
+Remember, this is just one way to protect your website. There's always more to learn in the world of web servers. Keep exploring and have fun with your super-powered Nginx! 🚀

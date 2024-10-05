@@ -1,0 +1,88 @@
+---
+title: Connecting Remote Servers Dolphin File Manager 🐬💻
+draft: false
+pubDate: 2024-10-05
+description: "Learn how to effortlessly connect to remote servers using Dolphin file manager. Discover two simple methods, create shortcuts, and streamline your file management process with this fun and easy guide.
+"
+author: "Mohammed"
+image: "/images/blogs/3d-beautiful-dolphin.jpg"
+tags: ["ssh-config", "remote-server", "dolphin", "kde", "linux"]
+---
+
+Hey there, digital explorers! 👋 Ready to make remote file management a splash? Let's dive into the ocean of possibilities with Dolphin file manager! 🌊
+
+## What's the Big Deal? 🤔
+
+Imagine you've got servers floating in the cloud ☁️, but you're tired of using clunky command-line tools to manage your files. Enter Dolphin – the friendly file manager that'll make you flip with joy! 🐬
+
+## Two Fin-tastic Ways to Connect 🏊‍♂️
+
+### The Quick Dive: Just Add Water (and an SFTP URL) 🏄‍♂️
+
+1. Open up Dolphin (no wet suit required! 😉)
+2. In the address bar, type your SFTP URL, but hold on! For AWS EC2, it's not that simple. 🛑
+
+   If you try something like:
+   ```bash
+   sftp://ubuntu@ec2-3-81-34-220.compute-1.amazonaws.com
+   ```
+   You'll likely see an `"authentication failed"` error. Don't worry, we've got a life preserver! 🦺
+
+3. For AWS EC2 instances, you'll need to use the SSH config method (our "Smooth Swim"). But fear not, it's just as easy once set up!
+
+### The Smooth Swim: Configure Once, Connect Anywhere 🧜‍♂️
+
+1. Create a config file in your `~/.ssh/` directory (if it doesn't exist already)
+2. Add these lines to the file:
+   ```bash
+   Host my-cool-server
+       HostName your-server-address
+       User your-username
+       IdentityFile ~/.ssh/your-key.pem
+   ```
+   ![config](/images/blogs/cool-server-ssh-config.png)
+3. Set the correct permissions for your key file:
+   ```bash
+   chmod 400 ~/.ssh/your_key_file
+   ```
+4. In Dolphin, just type `sftp://my-cool-server` in the address bar
+   ![cool server in dolphin](/images/blogs/ssh-cool-server-dolphin.png)
+5. Hit Enter and glide right in! 🏄‍♂️
+
+**Note:** The `IdentityFile` line might vary depending on your setup:
+- For AWS EC2, it's typically `~/.ssh/your-key.pem`
+- For many VPS providers, it might be `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`
+- Some setups might not need this line at all if you're using password authentication
+
+Always check with your hosting provider or system administrator for the correct authentication method! 🔐
+
+> **Pro Tip:** 🧠 If you're using a `.pem` file (common with AWS) and forgot to set permissions, you might see an error like `"WARNING: UNPROTECTED PRIVATE KEY FILE!"` Don't panic! Just run the chmod 400 command on your key file, and you'll be back in business.
+
+> **Bonus Trick:** 🎩✨ With this config, you can also connect via terminal:
+Just type `ssh my-cool-server` and you're in! It's like magic, but geekier! 🧙‍♂️
+
+## Why It's Fin-tastic 🦈
+
+- No need to remember long, weird server addresses 🤯
+- Your secret identity (SSH key) is automatically used 🕵️‍♂️
+- It's faster than a dolphin swimming for its favorite fish! 🐠💨
+- Works in both Dolphin AND terminal - double the fun! 🎉
+
+## Make It Even Easier: One-Click Wonder 😎
+
+Want to access your server with just one click? Here's a pro tip:
+
+1. Right-click in Dolphin's sidebar
+2. Choose "Add Network Folder"
+3. Pick "Secure shell (ssh)"
+4. Name it something cool (like "My Awesome Server" 😎)
+5. Fill in the details (use `my-cool-server` as Host if you used the Smooth Swim method)
+6. Click "Save and Connect"
+
+Boom! 💥 Now you've got a shortcut that'll take you to your server faster than you can say "Ecco the Dolphin"!
+
+## Wrap It Up 🎁
+
+So there you have it, folks! With Dolphin file manager and a sprinkle of SSH config magic, connecting to any remote server is no longer a whale of a task. It's more like a delightful swim in a digital ocean! 🌊🏄‍♂️
+
+Happy file managing, and may your connections always be as smooth as a dolphin's skin! 🐬✨

@@ -105,6 +105,15 @@ if (Astro.slots.title) {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+
+			// new bg
+			background-color: var(--tertiary);
+			background-image: radial-gradient(
+				circle farthest-corner at 0% 0%,
+				#fff3,
+				#ffffff1a
+			);
+			backdrop-filter: blur(160px);
 			.breezeWindow__content {
 				font-size: 14px;
 			}
@@ -170,6 +179,10 @@ if (Astro.slots.title) {
 				opacity: 0;
 				transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 				pointer-events: none;
+
+				// new bg
+				background-color: var(--tertiary);
+				background-image: linear-gradient(95deg, #fff3, #ffffff0d);
 			}
 
 			.copy-tooltip::after {

@@ -77,10 +77,19 @@ const { name, description, source_code_link, demo_link } = Astro.props
 		align-items: center;
 		gap: 0.5rem;
 		border-bottom: 1px solid var(--border-color);
-		background-color: var(--secondary);
+		/* background-color: var(--secondary); */
 		padding: 0.25rem 0.5rem;
 		border-top-left-radius: 0.25rem;
 		border-top-right-radius: 0.25rem;
+
+		background-color: #var(--tertiary);
+		background-image: linear-gradient(
+			95deg,
+			#fff3,
+			#ffffff0d
+		);
+		/* box-shadow: inset 0 0 0 1px #ffffff1a; */
+		backdrop-filter: blur(160px);
 	}
 	.icon {
 		flex-shrink: 0;

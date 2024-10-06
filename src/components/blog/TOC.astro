@@ -24,8 +24,11 @@ const headings = buildToc(pageHeadings)
 							return (
 								<li id="tocItem">
 									{" "}
-									<a href={`#${heading.slug}`} aria-label={heading.text}>
-										{heading.text}
+									<a
+										href={`#${heading.slug}`}
+										aria-label={heading.text}
+									>
+										{heading.text.replace("#", "")}
 									</a>
 									{heading.subheadings &&
 										heading.subheadings.length > 0 && (
@@ -35,11 +38,14 @@ const headings = buildToc(pageHeadings)
 														<li>
 															<a
 																href={`#${subheading.slug}`}
-																aria-label={subheading.text}
-															>
-																{
+																aria-label={
 																	subheading.text
 																}
+															>
+																{subheading.text.replace(
+																	"#",
+																	""
+																)}
 															</a>
 														</li>
 													)
@@ -62,9 +68,18 @@ const headings = buildToc(pageHeadings)
 	#toc {
 		padding: 0.6rem;
 		margin: 2.5rem 0.2rem;
-		background: var(--tertiary);
+		// background: var(--tertiary);
 		border: 1px solid var(--border-color);
 		border-radius: 0.4rem;
+
+		// new bg (test)
+		background-color: var(--tertiary);
+		background-image: radial-gradient(
+			circle farthest-corner at 0% 0%,
+			#fff3,
+			#ffffff1a
+		);
+		backdrop-filter: blur(160px);
 
 		summary {
 			cursor: zoom-out;
@@ -74,6 +89,10 @@ const headings = buildToc(pageHeadings)
 		.inner {
 			margin: 0 2rem;
 			padding: 1rem 2rem;
+
+			@media all and (max-width: 640px) {
+				margin: 0;
+			}
 
 			ul {
 				list-style: none;

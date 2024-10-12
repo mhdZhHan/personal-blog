@@ -36,7 +36,7 @@ const { name, description, source_code_link, demo_link } = Astro.props
 				source_code_link || demo_link ? (
 					<div class="links">
 						{source_code_link && (
-							<a href="https://github.com/mhdzhhan">
+							<a href={source_code_link} target="_blank">
 								Code{" "}
 								<ArrowUpRight
 									size={12}
@@ -47,7 +47,7 @@ const { name, description, source_code_link, demo_link } = Astro.props
 						)}
 
 						{demo_link && (
-							<a href="https://mohammedsh.xyz">
+							<a href={demo_link}>
 								Live{" "}
 								<ArrowUpRight
 									size={12}

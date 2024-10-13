@@ -219,6 +219,7 @@ const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
+		scrollbar-gutter: stable both;
 	}
 
 	html {
@@ -226,6 +227,9 @@ const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`
 		overflow-x: hidden;
 
 		height: 100%;
+
+		scrollbar-width: thin;
+		scrollbar-color: hsl(0, 0%, 20%) transparent;
 	}
 
 	::selection {

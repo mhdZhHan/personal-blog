@@ -1,7 +1,9 @@
 export function getLanguageIcon(language?: string): string {
 	const icons: Record<string, string> = {
 		js: "/lang/js.svg",
+		javascript: "/lang/js.svg",
 		ts: "/lang/ts.svg",
+		typescript: "/lang/ts.svg",
 		jsx: "/lang/jsx.svg",
 		tsx: "/lang/tsx.svg",
 		python: "/lang/py.svg",
@@ -10,6 +12,7 @@ export function getLanguageIcon(language?: string): string {
 		cpp: "/lang/cpp.svg",
 		c: "/lang/c.svg",
 		astro: "/lang/astro.svg",
+		sh: "/lang/shell.svg",
 	}
 
 	if (!language) {

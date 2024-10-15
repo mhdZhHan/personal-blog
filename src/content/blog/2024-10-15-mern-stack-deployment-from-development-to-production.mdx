@@ -1,0 +1,290 @@
+---
+title: "🚀 MERN Stack Deployment: From Development to Production"
+draft: false
+pubDate: 2024-10-15
+description: "A comprehensive guide to setting up and deploying a MERN stack application for both development and production environments."
+author: "Mohammed"
+image: "/images/blogs/truck-with-mern-payload.png"
+tags: ["MERN", "MongoDB", "express", "react", "node.js", "deployment", "DevOps"]
+---
+
+Hey there, awesome developers! 👋 Today, we're diving into the world of MERN stack deployment. Whether you're a coding newbie or a seasoned pro, this guide will walk you through setting up your project for both development and production. Let's get started! 
+
+## 1. 🏗️ Project Setup
+
+Our MERN (MongoDB, Express, React, Node.js) stack project has two main parts:
+
+- 📂 `server`: This is where our backend lives.
+- 📂 `client`: Home to our React frontend.
+
+Here's the correct project structure:
+
+```bash
+my-mern-app/
+├── server/
+│   └── server.js
+├── client/
+│   ├── src/
+│   ├── package.json
+│   └── vite.config.js
+├── package.json
+└── .env
+```
+
+Note that we have a `package.json` file in the root of the project and another one in the `client` directory. This setup allows us to manage dependencies and scripts for both the server and client from the project root.
+
+## 2. 🛠️ Development Environment
+
+In development, we run our backend and frontend separately. This setup allows for hot reloading and easier debugging.
+
+### Backend (Express Server)
+
+In `server/server.js`:
+
+```js title="server/server.js"
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello from the server! 👋' });
+});
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT} 🚀`));
+```
+
+### Frontend (React with Vite)
+
+In `client/vite.config.js`:
+
+```javascript title="client/vite.config.js"
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:5000',
+    },
+  },
+});
+```
+
+This config sets up a proxy, so when your React app makes a request to `/api`, it's forwarded to your Express server. It's like having a tiny mailman for your development setup! 📮
+
+### Root package.json
+
+In the root `package.json`, add these scripts:
+
+```json title="package.json"
+{
+  "scripts": {
+    "dev": "nodemon server/server.js",
+    "start": "node server/server.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+  }
+}
+```
+
+These scripts allow you to:
+- Run the server in development mode with hot reloading (`npm run dev`)
+- Start the server in production mode (`npm start`)
+- Build the entire project, including installing dependencies and building the client (`npm run build`)
+
+## 3. 🌐 Production Environment
+
+Here's where the magic happens! In production, we serve everything from a single domain. No need for separate deployments for API and client. It's like a one-stop-shop for your app! 🏪
+
+Update your `server/server.js`:
+
+```javascript title="server/server.js"
+const express = require('express');
+const path = require('path');
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(express.json());
+
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello from the server! 👋' });
+});
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+  });
+}
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT} 🚀`));
+```
+
+This setup serves your React app and handles all routes in production. It's like a smart butler for your app! 🧐🍽️
+
+## 4. 🪄 The Magical Deploy Script
+
+Before we dive into the deploy script, you need to create it in your project. You have two options:
+
+1. Create a new file named `deploy.sh` in the root of your project and copy the script content into it.
+
+2. Or, you can download the script directly using curl:
+
+```bash
+curl -o deploy.sh https://gist.githubusercontent.com/mhdZhHan/5a18d763a92b8ad8eb08f9a74cc7625a/raw/be7448bbbfd0992f82673386a868d25b4cecbbb9/deploy.sh
+```
+
+After downloading or creating the file, make sure to make it executable:
+
+```bash
+chmod +x deploy.sh
+```
+
+Now, let's look at our deploy script. It's like a Swiss Army knife for your deployment! 🇨🇭🔪
+
+```bash title="deploy.sh"
+#!/bin/bash
+
+# 🎭 Ask for the star of our show
+echo "What's your domain name, superstar? (e.g., example.com):"
+read DOMAIN_NAME
+
+# 🔧 Update and install our toolkit
+echo "Time to upgrade our toolbox! 🧰"
+sudo apt update -y && sudo apt upgrade -y
+sudo apt install -y nginx certbot python3-certbot-nginx curl software-properties-common
+
+# 🌱 Plant the Node.js seed
+echo "Planting the Node.js tree! 🌳"
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+sudo npm install pm2 -g
+
+# 🔑 Secret keeper (.env file handler)
+setup_env() {
+    echo "Let's set up our secret codes! 🕵️‍♀️"
+    local env_file=".env"
+    local default_vars=("MONGODB_URL" "JWT_SECRET" "NODE_ENV" "PORT")
+    
+    if [ -f "$env_file" ]; then
+        echo "Existing .env file found. Updating values..."
+        source "$env_file"
+    else
+        echo "Creating new .env file..."
+    fi
+    
+    for var in "${default_vars[@]}"; do
+        read -p "Enter $var (current: ${!var}): " new_value
+        if [ ! -z "$new_value" ]; then
+            eval "$var='$new_value'"
+        fi
+    done
+    
+    # Prompt for additional variables
+    while true; do
+        read -p "Add another environment variable? (y/n): " add_more
+        if [[ $add_more != "y" ]]; then
+            break
+        fi
+        read -p "Enter variable name: " var_name
+        read -p "Enter variable value: " var_value
+        eval "$var_name='$var_value'"
+    done
+    
+    # Write to .env file
+    > "$env_file"
+    for var in $(compgen -v); do
+        if [[ ! "$var" =~ ^(BASH|HOSTNAME|HOME|PWD|SHELL|USER|_).*$ ]]; then
+            echo "$var=\"${!var}\"" >> "$env_file"
+        fi
+    done
+    
+    echo ".env file updated successfully. 🎉"
+}
+
+# Call the setup_env function
+setup_env
+
+# 🏗️ Building our masterpiece
+echo "Time to build our Lego set! 🧱"
+npm install
+npm run build
+
+# 🚦 Traffic director (Nginx setup)
+setup_nginx() {
+    echo "Setting up our traffic signs for $DOMAIN_NAME 🚦"
+    local config_path="/etc/nginx/sites-available/$DOMAIN_NAME"
+    
+    if [ -f "$config_path" ]; then
+        echo "Nginx configuration for $DOMAIN_NAME already exists. Updating..."
+        sudo rm "$config_path"
+    fi
+    
+    sudo tee "$config_path" > /dev/null <<EOF
+server {
+    listen 80;
+    server_name $DOMAIN_NAME;
+
+    location / {
+        proxy_pass http://localhost:$PORT;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host \$host;
+        proxy_cache_bypass \$http_upgrade;
+    }
+}
+EOF
+    
+    sudo ln -sf "$config_path" "/etc/nginx/sites-enabled/"
+    sudo nginx -t && sudo systemctl reload nginx
+    
+    echo "Nginx configured for $DOMAIN_NAME 🚦"
+}
+
+# Call the setup_nginx function
+setup_nginx
+
+# 🔒 Security guard (SSL setup)
+echo "Calling our security team! 🛡️"
+sudo certbot --nginx -d "$DOMAIN_NAME"
+
+# Start the app with PM2
+echo "Launching our rocket! 🚀"
+pm2 start npm --name "$DOMAIN_NAME" -- start
+
+# 🧱 Firewall (the bouncer at our app's nightclub)
+echo "Setting up the velvet rope 🔥🧱"
+sudo ufw allow 'Nginx Full'
+sudo ufw --force enable
+
+echo "🎉 Woohoo! Your app is now live at https://$DOMAIN_NAME 🎉"
+```
+
+This script does it all:
+- Sets up your environment variables 🔐
+- Installs necessary software 🧰
+- Builds your app 🏗️
+- Configures Nginx as a reverse proxy 🚦
+- Sets up SSL for secure connections 🔒
+- Configures the firewall 🧱
+
+## 5. 🧩 Putting It All Together
+
+Here's how to use this setup:
+
+1. In development:
+   - Run your Express server: `npm run dev` (from the project root)
+   - Run your React app: `cd client && npm run dev`
+   - Your app is now running on two ports, but the proxy makes it feel like one!
+
+2. For production:
+   - Push your code to your server
+   - Run the deploy script: `./deploy.sh`
+   - Watch as your app magically comes to life on a single domain! ✨
+
+And there you have it! You've just learned how to set up and deploy a MERN stack application like a pro. 🏆
+
+Remember, deployment might seem tricky at first, but with practice, you'll be deploying apps in your sleep (though we don't recommend coding while sleeping 😴).
+
+Happy coding, and may your servers always be up and your bugs be few! 🚀🐞

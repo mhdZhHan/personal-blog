@@ -16,8 +16,12 @@ export function getLanguageIcon(language?: string, filename?: string): string {
 		vite: "/lang/vite.svg",
 	}
 
-	if (filename?.includes("vite")) {
+	if (filename?.includes("vite.config.js")) {
 		return "/lang/vite.svg"
+	}
+
+	if (filename?.includes("package.json")) {
+		return "/lang/node.svg"
 	}
 
 	if (!language) {

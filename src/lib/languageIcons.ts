@@ -1,4 +1,4 @@
-export function getLanguageIcon(language?: string): string {
+export function getLanguageIcon(language?: string, filename?: string): string {
 	const icons: Record<string, string> = {
 		js: "/lang/js.svg",
 		javascript: "/lang/js.svg",
@@ -13,6 +13,11 @@ export function getLanguageIcon(language?: string): string {
 		c: "/lang/c.svg",
 		astro: "/lang/astro.svg",
 		sh: "/lang/shell.svg",
+		vite: "/lang/vite.svg",
+	}
+
+	if (filename?.includes("vite")) {
+		return "/lang/vite.svg"
 	}
 
 	if (!language) {

@@ -4,10 +4,20 @@ import { Copy } from "lucide-astro"
 import { getLanguageIcon } from "@lib/languageIcons"
 
 let language: string | undefined = undefined
+let filename: string | undefined = undefined
 
 if (Astro.slots.title) {
 	const titleSlot = await Astro.slots.render("title")
-	language = titleSlot.match(/language="([^"]+)"/)?.[1] ?? "unknown"
+	// language = titleSlot.match(/language="([^"]+)"/)?.[1] ?? "unknown"
+
+	// Use a regular expression to extract the filename from the titleSlot string
+	const match = titleSlot.match(/>([^<]+)<\/div>/)
+	if (match) {
+		filename = match[1].trim() // Get the captured group and trim whitespace
+	}
+
+	// Extract the extension from the filename
+	language = filename?.split(".").pop()?.toLowerCase()
 }
 ---
 
@@ -17,11 +27,11 @@ if (Astro.slots.title) {
 			<div class="breezeWindow__header">
 				<span class="title">
 					<img
-						src={getLanguageIcon(language)}
+						src={getLanguageIcon(language, filename)}
 						alt="lang"
 						class="language-icon"
 					/>
-					<slot name="title" />
+					{/* <slot name="title" /> */}
 				</span>
 			</div>
 		)

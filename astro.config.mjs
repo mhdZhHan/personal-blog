@@ -81,7 +81,17 @@ export default defineConfig({
 		db(),
 	],
 
-	experimental: {
-		actions: true,
+	// experimental: {
+	// 	actions: true,
+	// },
+
+	vite: {
+		css: {
+			preprocessorOptions: {
+				scss: {
+					api: "modern-compiler",
+				},
+			},
+		},
 	},
 })

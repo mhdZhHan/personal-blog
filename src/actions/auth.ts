@@ -1,4 +1,5 @@
-import { defineAction, z } from "astro:actions"
+import { defineAction } from "astro:actions"
+import { z } from "astro:schema"
 
 import { auth as adminAuth } from "@firebase/server"
 import { auth as clientAuth } from "@firebase/client"

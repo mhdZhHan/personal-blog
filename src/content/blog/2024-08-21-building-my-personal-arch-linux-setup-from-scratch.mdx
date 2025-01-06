@@ -33,6 +33,23 @@ git config --global user.name "Mohammed"
 git config --global user.email "hello@example.com"
 ```
 
+## Installing Essential Utilities
+
+To enhance the functionality of my system and prepare it for daily use, I installed some essential utilities. These tools cover power management, file viewing, and compatibility with various file systems. Here's the command to install them:
+
+```bash
+sudo pacman -S power-profiles-daemon ntfs-3g exfatprogs linux-headers
+```
+
+### What Do These Packages Do?
+
+- **Power Profiles Daemon**: A utility to manage power profiles for better energy efficiency or performance.
+- **NTFS-3G**: A driver for full read and write support for NTFS file systems, commonly used in Windows.
+- **exfatprogs**: Utilities for handling exFAT file systems, often used in USB drives and SD cards.
+- **Linux Headers**: Required for building kernel modules, such as drivers for specific hardware.
+
+> With these tools, my system is equipped to handle a wide range of tasks, from multimedia playback to file compatibility and power optimization.
+
 ## Installing Yay: The AUR Helper
 To easily manage and install AUR (Arch User Repository) packages, I decided to install `yay`, a handy AUR helper. But before jumping into that, I created a special directory for all my development tools—my secret stash, if you will.
 

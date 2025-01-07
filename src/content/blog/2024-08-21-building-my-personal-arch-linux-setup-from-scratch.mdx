@@ -50,6 +50,41 @@ sudo pacman -S power-profiles-daemon ntfs-3g exfatprogs linux-headers
 
 > With these tools, my system is equipped to handle a wide range of tasks, from multimedia playback to file compatibility and power optimization.
 
+## Enable and Configure the Firewall
+
+Securing a system with a properly configured firewall is a critical step in maintaining its safety. This guide explains how to set up UFW (Uncomplicated Firewall) on Arch Linux efficiently.
+
+### Install and Enable UFW
+
+1. Install UFW using **pacman**:
+   ```bash
+   sudo pacman -S ufw
+   ```
+
+2. Enable and start UFW to ensure it activates on boot:
+   ```bash
+   sudo systemctl enable ufw.service
+   sudo systemctl start ufw.service
+   ```
+
+### Recommended Firewall Rules
+
+Apply the following rules to balance security and functionality:
+
+```bash
+sudo ufw limit 22/tcp            # Limit SSH attempts to prevent brute force
+sudo ufw allow 80/tcp            # Allow HTTP traffic
+sudo ufw allow 443/tcp           # Allow HTTPS traffic
+sudo ufw default deny incoming   # Block all incoming traffic by default
+sudo ufw default allow outgoing  # Allow all outgoing traffic
+sudo ufw enable                  # Enable the firewall
+```
+
+To check the status and rules:
+```bash
+sudo ufw status
+```
+
 ## Installing Yay: The AUR Helper
 To easily manage and install AUR (Arch User Repository) packages, I decided to install `yay`, a handy AUR helper. But before jumping into that, I created a special directory for all my development tools—my secret stash, if you will.
 

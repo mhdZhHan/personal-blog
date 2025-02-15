@@ -1,17 +1,17 @@
-mohammedsh.xyz
-==============
+# mohammedsh.xyz
+================
+Welcome to my Personal Blog repository! Powered by Astro, this blog is my little corner of the web to document my journey in programming, tech, and open-source adventures. Think of it as my `/home` on the internet—fast, modern, and always evolving!
 
-Welcome to my Personal Blog repository! This blog is built using Astro, a modern static site generator for building fast websites with Javascript. It serves as my platform for sharing my journey in programming and technology, as well as showcasing some of my top projects.
+# Overview
+==========
+- Blog Engine: Astro (JavaScript) - https://docs.astro.build
+- Initial Development: 2020 (Hugo) - https://gohugo.io/
+- Migration to Astro: 2023
 
-Overview
-========
-- **Blog Engine**: [Astro (JavaScript)](https://docs.astro.build)
-- **Initial Development**: [2020 (Hugo)](https://gohugo.io/)
-- **Migration to Astro**: 2023
+# Technologies used
+===================
+- Built with Astro - https://docs.astro.build
+- Hosted with Vercel - https://vercel.com/docs
+- Styled with SCSS - https://sass-lang.com/
 
-Technologies used
-=================
-
-- Built with [Astro](https://docs.astro.build).
-- Hosted with [Vercel](https://vercel.com/docs).
-- Styled with [SCSS](https://sass-lang.com/).
+`🌐 Hosted in My Mind, Served to the Web!`

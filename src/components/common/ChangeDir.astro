@@ -8,6 +8,7 @@ import { ChevronRight } from "lucide-astro"
 			id="changeDir"
 			class="change-directory"
 			aria-label="Go back to previous page"
+			onclick="window.history.back()"
 		>
 			<ChevronRight size="16" class="shrink-0" />
 			<span>cd ..</span>
@@ -57,17 +58,3 @@ import { ChevronRight } from "lucide-astro"
 		}
 	}
 </style>
-
-<script>
-	document.addEventListener("astro:page-load", () => {
-		const changeDir = document.getElementById(
-			"changeDir"
-		) as HTMLButtonElement
-
-		if (changeDir) {
-			changeDir.addEventListener("click", () => {
-				window.history.back()
-			})
-		}
-	})
-</script>

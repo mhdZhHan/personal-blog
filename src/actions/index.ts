@@ -1,3 +1,3 @@
-import { createAccount, loginAccount, logoutAccount } from "./auth"
+import { createAccount, loginAccount, logoutAccount } from "./auth";
 
-export const server = { createAccount, loginAccount, logoutAccount }
+export const server = { createAccount, loginAccount, logoutAccount };

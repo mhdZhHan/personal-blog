@@ -1,9 +1,10 @@
 ---
+import "../styles/global.css";
 import "@styles/fonts.scss";
 import "@styles/tags.scss";
 
 import SpeedInsights from "@vercel/speed-insights/astro";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from 'astro:transitions';
 
 // components
 import Header from "@components/common/Header.astro";
@@ -104,7 +105,7 @@ const finalOgImageUrl = `${siteUrl}/${ogImageUrl || fallbackOgImage}`;
     <script src="../scripts/fun.ts"></script>
 
     <SpeedInsights />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
 
   <body>

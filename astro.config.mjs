@@ -1,17 +1,24 @@
 import { defineConfig } from "astro/config";
+import vercel from "@astrojs/vercel";
+
+// plugins
 import mdx from "@astrojs/mdx";
+import db from "@astrojs/db";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
-import vercel from "@astrojs/vercel";
-import db from "@astrojs/db";
+import react from "@astrojs/react";
 
+// markdown plugins
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
-import { toString } from "mdast-util-to-string";
+// utils
 import readingTime from "reading-time";
+import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
+
+import tailwindcss from "@tailwindcss/vite";
 
 const prettyCodeOptions = {
   theme: {
@@ -44,6 +51,9 @@ export default defineConfig({
   output: "static",
   adapter: vercel({
     webAnalytics: { enabled: true },
+    isr: {
+      expiration: 60 * 60 * 24,
+    },
     imageService: true,
     devImageService: "sharp",
   }),
@@ -76,6 +86,7 @@ export default defineConfig({
       policy: [{ userAgent: "*", disallow: ["/404"] }],
     }),
     db(),
+    react(),
   ],
 
   // experimental: {
@@ -90,5 +101,7 @@ export default defineConfig({
         },
       },
     },
+
+    plugins: [tailwindcss()],
   },
 });

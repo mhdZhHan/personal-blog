@@ -9,13 +9,13 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write \"**/*.{astro,ts,js,tsx,jsx,md,scss,mjs}\"",
-
     "remote:dev": "astro dev --remote",
     "new": "node scripts/createMdx.js"
   },
   "dependencies": {
     "@astrojs/db": "^0.14.3",
     "astro": "^4.16.9",
+    "drizzle-orm": "^0.39.3",
     "firebase": "^11.0.1",
     "firebase-admin": "^12.7.0"
   },
@@ -28,6 +28,7 @@
     "@vercel/speed-insights": "^1.0.14",
     "astro-robots-txt": "^1.0.0",
     "dompurify": "^3.1.7",
+    "drizzle-kit": "^0.30.4",
     "lucide-astro": "^0.454.0",
     "mdast-util-to-string": "^4.0.0",
     "prettier": "^3.5.2",

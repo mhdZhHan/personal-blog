@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import db from "@astrojs/db";
 
 import rehypePrettyCode from "rehype-pretty-code";
@@ -19,6 +19,8 @@ const prettyCodeOptions = {
     light: "vitesse-light",
   },
   keepBackground: false,
+  defaultLang: "plaintext",
+  filters: [],
 };
 
 const autolinkHeadingsOptions = {
@@ -39,7 +41,7 @@ const autolinkHeadingsOptions = {
 export default defineConfig({
   site: "https://mohammedsh.xyz",
   trailingSlash: "never",
-  output: "hybrid",
+  output: "static",
   adapter: vercel({
     webAnalytics: { enabled: true },
     imageService: true,
@@ -73,7 +75,6 @@ export default defineConfig({
     robotsTxt({
       policy: [{ userAgent: "*", disallow: ["/404"] }],
     }),
-    ,
     db(),
   ],
 

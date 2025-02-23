@@ -10,15 +10,40 @@ import Posts from "@components/home/Posts.astro";
 // utils
 import { sortByDate, nonDraftPosts } from "@lib/index";
 
+// Graph
+// import GraphView from "@components/tsx/Graph";
+// import { generateGraphData, getGraphWithDepth } from "@lib/graph-data";
+
 // getting blogs
 const posts = await getCollection("blog");
 const nonDraftPosts_: CollectionEntry<"blog">[] = nonDraftPosts(posts);
 const sortedPosts = sortByDate(nonDraftPosts_);
 const lastThreePosts = sortedPosts.slice(0, 3);
+
+// const graphData = generateGraphData(lastThreePosts);
+// const localGraphData = getGraphWithDepth(graphData, currentSlug, 1);
+// const globalGraphData = getGraphWithDepth(graphData, currentSlug, -1);
+
+// const options = {
+//   drag: true,
+//   zoom: true,
+//   depth: 1,
+//   scale: 1.1,
+//   repelForce: 0.5,
+//   centerForce: 0.3,
+//   linkDistance: 30,
+//   fontSize: 0.6,
+//   opacityScale: 1,
+//   showTags: true,
+//   removeTags: [],
+//   focusOnHover: false,
+// };
 ---
 
 <Layout title="Mohammed's blog">
   <Hero />
   <Projects />
   <Posts posts={lastThreePosts} />
+
+  <!-- <GraphView client:load data={graphData} options={options} /> -->
 </Layout>
